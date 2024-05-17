@@ -1,7 +1,7 @@
 # Thanks
 
 These people helped me with Schimpfolino:
- - **Elise Lindner** . finding funny words
+ - **Elise Lindner** - finding funny words.
   
 Used ressources:  
   
