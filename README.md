@@ -1,6 +1,7 @@
 # Schimpfolino
 
 Who doesn't like to be insulted? Schimpfolino is a gadget that always has a saying ready. Small, handy, energy-saving. And completely useless.  
+This repo will be finished soon, stay tuned.  
 
 What's new?  
 **17.05.2024** Opened the new repository. Welcome!  
