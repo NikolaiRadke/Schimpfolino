@@ -4,5 +4,5 @@ Who doesn't like to be insulted? Schimpfolino is a gadget that always has a sayi
 
 What's new?  
 **17.05.2024** Opened the new repository. Welcome!  
--- More news? See the [newsblog](https://github.com/NikolaiRadke/Schimpfolino/tree/master/NEWS.md).   
+-- More news? See the [newsblog](https://github.com/NikolaiRadke/Schimpfolino/tree/main/NEWS.md).   
 
