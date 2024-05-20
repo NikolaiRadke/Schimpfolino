@@ -277,7 +277,7 @@ void SSD1306_Mini::printChar( char ch ){
     TinyWireM.send( data[2] );
     TinyWireM.send( data[3] );
     TinyWireM.send( data[4] );
-    TinyWireM.send( 0x00 );
+    if (chars < 19) TinyWireM.send( 0x00 );
       
     TinyWireM.endTransmission();
   

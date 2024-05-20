@@ -33,7 +33,7 @@
 
 // Variables
 uint8_t  gender;                                 // Gender of the swearword
-uint8_t  chars = 0;                              // Number of charakters in the word
+uint8_t  chars = 0;                              // Number of charakters in the word | Gobal
 uint16_t number, seed;                           // Random seed and helping variable
 uint16_t address[5];                             // Wordlists adresses array
 uint32_t counter;                                // Timer begin for sleep timeout
@@ -154,8 +154,11 @@ void get_swearword(uint16_t address) {           // Fetch characters from eeprom
 }
 
 void write_swearword(uint8_t line) {             // Write centered word
-  uint8_t x = ((128 - ((chars + 1) * 7)) / 2);   // Calculate centering    
-  if (chars >17) x = 0;                          // Set x to 0 if word too long
+  uint8_t x;
+  if (chars < 19)                                // Calculate centering
+    x = (128 - (chars * 7)) / 2;                 // for shorter words
+  else
+    x = (128 - (chars * 6)) / 2;                 // or for very long words
   oled.cursorTo(x, 1 * line * 10);               // Set cursor to selected line
   for (x=0; x<chars; x++)                        // Print the characters
     oled.printChar(wordbuffer[x]);               // from buffer
