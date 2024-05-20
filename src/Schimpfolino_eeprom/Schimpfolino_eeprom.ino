@@ -4,7 +4,7 @@
     Sketch for the insulting gadget | Only with additional 24LCXX EEPROM
     For ATtiny45/85 - set to 8 Mhz set to 8 Mhz and remember to flash your bootloader first!
 
-    Flash usage: 3.550 (IDE 2.3.2 | AVR 1.8.6 | ATtiny 1.0.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.574 (IDE 2.3.2 | AVR 1.8.6 | ATtiny 1.0.2 | Linux X86_64 | ATtiny85)
     Power:       5mA (idle) | 9μA (sleep)
 
     Umlaute in EEPROM file have to be converted (UTF-8):
