@@ -18,7 +18,7 @@
 
 #define eeprom  0x50                             // 24LC256 address
 
-uint16_t address = 10;                            // Starting adress
+uint16_t address = 10;                           // Starting adress
 uint16_t words = 0;
 uint8_t  low, c;                                 // Helping variables
 uint8_t  file = 0;
@@ -41,9 +41,9 @@ void loop() {
   if (c == 33) {
     words = (address - 10) / 10;
     delay(10);
-    write_byte(0 + file, words / 255);                // Write high byte of batch number
+    write_byte(0 + file, words / 255);           // Write high byte of batch number
     delay(10);
-    write_byte(1 + file, words % 255);                // Write low byte of batch number
+    write_byte(1 + file, words % 255);           // Write low byte of batch number
     delay(10);
     Serial.print("File ");
     Serial.print(1 + file / 2);

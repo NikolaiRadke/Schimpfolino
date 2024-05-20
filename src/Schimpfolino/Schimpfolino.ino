@@ -1,8 +1,8 @@
 /*  Schimpfolino V1.0 05.05.2024 - Nikolai Radke
     https://www.monstermaker.de
 
-    Sketch for the insulting gadget
-    For ATtiny85 - set to 8 Mhz | With or without additional 24LCXX EEPROM
+    Sketch for the insulting gadget | With or without additional 24LCXX EEPROM
+    For ATtiny85 only - set to 8 Mhz set to 8 Mhz and remember to flash your bootloader first!
 
     Flash usage: 8.104 (IDE 2.3.2 | AVR 1.8.6 | ATtiny 1.0.2 | Linux X86_64 | ATtiny85)
     Power:       5mA (idle) | 7μA (sleep) | 9μA (sleep, with EEPROM)
@@ -143,7 +143,7 @@ int main(void) {
 void write_swearword(uint16_t address) {
   char c;
   uint16_t i;
-  for (i = address; i < address + 10; i ++) {    // Read ten chard         
+  for (i = address; i < address + 10; i ++) {    // Read ten chars        
     if (eeprom) c = read_eeprom(i);              // from EEPROM
     else c = pgm_read_byte(&field[i]);           // Or from wordlist
     if (c != 32) {                               // Check for space
