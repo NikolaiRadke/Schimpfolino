@@ -1,10 +1,10 @@
-/*  Schimpfolino V1.0 20.05.2024 - Nikolai Radke
+/*  Schimpfolino V1.0 22.05.2024 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | Only with additional 24LCXX EEPROM
     For ATtiny45/85 - set to 8 Mhz set to 8 Mhz and remember to flash your bootloader first!
 
-    Flash usage: 3.574 (IDE 2.3.2 | AVR 1.8.6 | ATtiny 1.0.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.588 (IDE 2.3.2 | AVR 1.8.6 | ATtiny 1.0.2 | Linux X86_64 | ATtiny85)
     Power:       5mA (idle) | 9μA (sleep)
 
     Umlaute in EEPROM file have to be converted (UTF-8):
@@ -37,7 +37,6 @@ uint8_t  chars = 0;                              // Number of charakters in the 
 uint16_t number, seed;                           // Random seed and helping variable
 uint16_t address[5];                             // Wordlists adresses array
 uint32_t counter;                                // Timer begin for sleep timeout
-bool     eeprom = false;                         // EEPROM used -> Auto detect
 char     wordbuffer[20];                         // Buffer for read words
 
 volatile bool wake = true;                       // Stay wake when button is pressed
@@ -106,20 +105,20 @@ int main(void) {
 
         // Second word first part
         gender = random(0, 3);                   // Set word gender
-        if (gender == 0) oled.printChar(49);     // If male, write "r"
-        if (gender == 2) oled.printChar(50);     // If neutrum, werite "s"
+        if (gender == 1) oled.printChar(49);     // If male, write "r"
+        if (gender == 2) oled.printChar(50);     // If neutrum, write "s"
         number = (random(address[0], address[1])); // Select second word
         get_swearword(number * 10 + 10);         // Read second word from eeprom
         
         // Second word second part
-        if (gender == 0)                         // Male
+        if (gender == 0)                         // Female
           number = (random(address[1], address[2])); // Select second part of second word
-        if (gender == 1)                         // Female
+        if (gender == 1)                         // Male
           number = (random(address[2], address[3])); // Select second part of second word
         if (gender == 2)                         // Neutrum
           number = (random(address[3], address[4])); // Select second part of second word
-        get_swearword(number * 10 + 10);       // Read second part of second word
-        write_swearword(2);                    // Write second word in second line
+        get_swearword(number * 10 + 10);         // Read second part of second word
+        write_swearword(2);                      // Write second word in second line
         
         // Wait for button or sleep
         delay(500);                              // Debounce button
@@ -139,7 +138,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from eeprom
   char c;
   uint16_t i;
   for (i = address; i < address + 10; i ++) {    // Read 10 characters        
-    c = read_eeprom(i);                          // Read c from eeprom
+    c = read_eeprom(i);                          // from eeprom
     if (c != 32) {                               // Check for space
       switch (c) {                               // Set german Umlaute   
         case 35: wordbuffer[chars] = 27; break;  // # -> ä
@@ -159,8 +158,9 @@ void write_swearword(uint8_t line) {             // Write centered word
     x = (128 - (chars * 7)) / 2;                 // for shorter words
   else
     x = (128 - (chars * 6)) / 2;                 // or for very long words
-  oled.cursorTo(x, 1 * line * 10);               // Set cursor to selected line
-  for (x=0; x<chars; x++)                        // Print the characters
+  if ((gender != 0) && (line == 1)) x -= 4;      // If not female, set first line half space left for gender char
+  oled.cursorTo(x, line * 10);                   // Set cursor to selected line
+  for (x = 0; x < chars; x ++)                   // Print the characters
     oled.printChar(wordbuffer[x]);               // from buffer
   chars = 0;                                     // Set number of character back to 0
 }
@@ -170,7 +170,7 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
   TinyWireM.write((uint16_t)(e_address >> 8));   // Send the MSB (Most Significant Byte) of the memory address
   TinyWireM.write((uint16_t)(e_address & 0xFF)); // Send the LSB (Least Significant Byte) of the memory address
   TinyWireM.endTransmission();                   // Close transmissiom
-  TinyWireM.requestFrom(0x50,1);                 // Request one byte
+  TinyWireM.requestFrom(0x50, 1);                // Request one byte
   return TinyWireM.read();                       // Read and return byte
 }
 

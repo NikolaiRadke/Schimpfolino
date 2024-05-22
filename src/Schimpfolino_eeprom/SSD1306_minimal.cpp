@@ -293,7 +293,6 @@ void SSD1306_Mini::printString( char * pText ){
   
 }
  
- 
 void SSD1306_Mini::drawImage( const unsigned char * img, unsigned char col, unsigned char row, unsigned char w, unsigned char h ){
   unsigned int i,k,data;
   
