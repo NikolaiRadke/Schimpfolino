@@ -1,4 +1,4 @@
-# Schimpfolino
+# ![Schimpfolino](http://www.nikolairadke.de/schimpfolino/schimpfolino_back.jpg)
 
 Who doesn't like to be insulted? Schimpfolino is a gadget that always has a saying ready. Small, handy, energy-saving. And completely useless.  
 This repo will be finished soon, stay tuned.  
