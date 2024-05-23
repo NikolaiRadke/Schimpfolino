@@ -22,7 +22,14 @@ The building wiki and the curse words are in German. You need english words? **C
 
 ### Prerequisites
 
-Exept for the tools and some time, you need the following hardware:
+Exept for the tools and some time, you need:
+* Arduino IDE 1.6.6 or higher
+* Serial terminal software like *Tera Term* (Windows) or *CuteCom* (Linux).
+* Arduino UNO/Nano/Whatever with USB cable
+* Some Dupont wires
+* A 10uF capacitor
+
+the following hardware:
 * Schimpfolino PCB 
 * ATtiny45/85
 * 24LC64 or larger EEPROM
