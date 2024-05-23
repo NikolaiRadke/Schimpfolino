@@ -4,7 +4,11 @@
 ### "Klappriger Blubberfetzen" "Nervendes Riesenungemach" "Windige Pupswindel"  
 
     
-Who doesn't like to be insulted? Schimpfolino is a gadget that always has a saying ready. Small, handy, energy-saving. And completely useless.  
+Who doesn't like to be insulted? Schimpfolino is a gadget that always has a saying ready. Small, handy, energy-saving. And completely useless. You need a PCB and some parts listed below.      
+
+*Huch, Englisch? Kann ich nicht. Schnell [hier hin](https://github.com/NikolaiRadke/Schimpfolino/wiki)*.  
+
+  
 This repo will be finished soon, stay tuned.  
 
 What's new?  
