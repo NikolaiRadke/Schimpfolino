@@ -2,7 +2,7 @@
 
 You need:  
 * Sketch **eeprom_writer.ino**.  
-* A serial terminal like *Tera Term* for Windows or *CuteCom* fo Linux.
+* A serial terminal like *Tera Term* (Windows) or *CuteCom* (Linux).
 
 1. Open the Schimpfolino writer sketch **eeprom_writer.ino** in the Arduino IDE and upload the sketch. 
 
