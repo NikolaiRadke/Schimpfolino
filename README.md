@@ -29,7 +29,7 @@ Exept for the tools and some time, you need:
 * Some Dupont wires
 * A 10uF capacitor
 
-the following hardware:
+And the following hardware:
 * Schimpfolino PCB 
 * ATtiny45/85
 * 24LC64 or larger EEPROM
