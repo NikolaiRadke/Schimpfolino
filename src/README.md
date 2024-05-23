@@ -47,8 +47,7 @@ Now you can flash your ATtiny with any sketch you want! But this time, we focus 
 ### Flashing Schimpfolino firmware
   
 1. Open sketch **Schimpfolino.ino** (of **Schimpfolino_noeeprom.ino**).
-2. Select ``` Sketch > Upload using programmer ``` (IDE 2.X) or
-   Press upload button (IDE 1.X) 
+2. Select ``` Sketch > Upload using programmer ``` (IDE 2.X) or press upload button (IDE 1.X) 
 4. DONE.  
 
 Now you can remove the microcontroller and plug it into the socket of your Schimpfolino.  
