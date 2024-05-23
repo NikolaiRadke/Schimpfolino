@@ -46,7 +46,7 @@ Schimpfolino/
 Root directory with some explanation files.  
 |
 ├── case/
-|   STL Files to 3D print a case
+|   STL Files to 3D print a case. Other kind of hulls will follow.
 |
 ├── schematics/
 |   The circuit diagram, PCB renderings and the KiCad source files.
