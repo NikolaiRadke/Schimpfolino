@@ -6,7 +6,7 @@
 
 # Compiling instructions for Schimpfolino
 
-In order to flash your ATtiny with the NOKOlino-sketch, you need the **Arduino-IDE** (1.6.6 or higher), with installed **ATtiny-support** and an **Arduino** connected to your microcontroller.
+In order to flash your ATtiny with the Schimpfolino sketch, you need the **Arduino-IDE** (1.6.6 or higher), with installed **ATtiny-support** and an **Arduino** connected to your microcontroller.
 
 ### Preparing the IDE  
  
@@ -42,7 +42,7 @@ In order to flash your ATtiny with the NOKOlino-sketch, you need the **Arduino-I
 6. Select ``` Tools > Port ``` for the matching port.  
 7. Start burning process with ``` Tools > Burn bootloader ```.  
 
-Now you can flash your ATtiny with any sketch you want! But this time, we focus on Nokolino.  
+Now you can flash your ATtiny with any sketch you want! But this time, we focus on Schimpfolino.   
 
 ### Flashing Schimpfolino firmware
   
