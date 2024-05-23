@@ -34,4 +34,35 @@ Exept for the tools and some time, you need the following hardware:
 
 ### Content
 
+```
+Schimpfolino/
+Root directory with some explanation files.  
+|
+├── case/
+|   STL Files to 3D print a case
+|
+├── schematics/
+|   The circuit diagram, PCB renderings and the KiCad source files.
+|   ├── gerber/
+|   |   The gerber files for the PCB.
+|   └── Schimpfolino_EEPROM_pretty/
+|       Footprints for KiCad
+|
+└── src/
+    Firmware and word files.
+    ├── eeprom/
+    |   All you need to flash your EEPROM.
+    |   ├── eeprom_writer/
+    |   |   Arduino sketch to write to your EEPROM
+    |   └── files/
+    |       The EEPROM content word lists-
+    ├── Schimpfolino/
+    |   Standard sketch with libraries.
+    └── Schimpfolino_nopeeprom/
+        Sketch for Schimpfolino without EEPROM.
+
+```
+### Let's get started!
+
+Ready? Great! Let's start here: [German wiki](https://github.com/NikolaiRadke/Schimpfolino/wiki).  
 
