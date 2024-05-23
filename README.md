@@ -49,11 +49,7 @@ Root directory with some explanation files.
 |   STL Files to 3D print a case. Other kind of hulls will follow.
 |
 ├── schematics/
-|   The circuit diagram, PCB renderings and the KiCad source files.
-|   ├── gerber/
-|   |   The gerber files for the PCB.
-|   └── Schimpfolino_EEPROM_pretty/
-|       Footprints for KiCad
+|   The circuit diagram, PCB renderings and gerber files.
 |
 └── src/
     Firmware and word files.
