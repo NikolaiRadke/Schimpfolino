@@ -158,7 +158,7 @@ void write_swearword(uint8_t line) {             // Write centered word
     x = (128 - (chars * 7)) / 2;                 // for shorter words
   else
     x = (128 - (chars * 6)) / 2;                 // or for very long words
-  if ((gender != 0) && (line == 1)) x -= 4;      // If not female, set first line half space left for gender char
+  if ((gender != 0) && (line == 1)) x -= 8;      // If not female, set first one Block left for gender char
   oled.cursorTo(x, line * 10);                   // Set cursor to selected line
   for (x = 0; x < chars; x ++)                   // Print the characters
     oled.printChar(wordbuffer[x]);               // from buffer

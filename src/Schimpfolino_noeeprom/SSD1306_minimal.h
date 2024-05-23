@@ -105,7 +105,7 @@
 #define Dummy_Byte_0x00                       0x00
 #define Dummy_Byte_0xFF                       0xFF
 
-extern uint8_t chars;  // Count chars in main sketch, used to shrink font witdh if too long
+
 
 // 
 class SSD1306_Mini {
