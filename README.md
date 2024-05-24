@@ -38,6 +38,7 @@ And the following hardware:
 * 2 Dip-8 sockets
 * Batteryholder
 * CR2032 battery
+* Double-sided adhesive pad
 
 ### Content
 
