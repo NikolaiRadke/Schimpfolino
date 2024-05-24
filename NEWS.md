@@ -1,6 +1,7 @@
 # Newsblog
 
 # 2024
+* **24.05.2024** New case Nokolino shaped case model.
 * **23.05.2024** Renamed source files. The main file with eeprom ist now Schimpfolino.ino.
 * **22.05.2024** Reworked EEPROM content structure and adjusted text centering. **1-0.220524**
 * **20.05.2024** schimpfolino_eeprom: Text is now centered. Version is **1.0.-200524**  
