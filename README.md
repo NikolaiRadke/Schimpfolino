@@ -1,4 +1,4 @@
-# ![Schimpfolino](http://www.nikolairadke.de/schimpfolino/schimpfolino_back.jpg)
+![Schimpfolino](http://www.nikolairadke.de/schimpfolino/schimpfolino_back.jpg)
 
   
 ### "Klappriger Blubberfetzen" "Nervendes Riesenungemach" "Windige Pupswindel"  
