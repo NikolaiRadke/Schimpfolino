@@ -4,13 +4,13 @@
 ### "Klappriger Blubberfetzen" "Nervendes Riesenungemach" "Windige Pupswindel"  
 
     
-Who doesn't like to be insulted? Schimpfolino is a gadget that always has a saying ready. Small, handy, energy-saving. And completely useless. You need a PCB and some parts listed below.      
+Who doesn't like to be insulted? Schimpfolino is a gadget that always has a saying ready. Small, handy, energy-saving. And completely useless. You need a PCB and some parts listed below. It es easy to build and long lasting for everyday use.      
 
 *Huch, Englisch? Kann ich nicht. Schnell [hier hin](https://github.com/NikolaiRadke/Schimpfolino/wiki)*.  
 
 ![Schimpfolino](https://www.nikolairadke.de/schimpfolino/schimpfolino_case.png)
   
-This repo will be finished soon, stay tuned.  
+Schimpfolino is a random curse word generator with **10.125.000** possible combinations. That should be enough for a while. It's suitable for children, maintenance-free and the battery lasts for years. And with the right case, it's a Monster, like the Nokolino shaped case below! Just press the button, receive an insult, after 10 seconds it turns off again. That's it. 
 
 What's new?  
 **17.05.2024** Opened the new repository. Welcome!  
