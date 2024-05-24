@@ -8,6 +8,7 @@ Who doesn't like to be insulted? Schimpfolino is a gadget that always has a sayi
 
 *Huch, Englisch? Kann ich nicht. Schnell [hier hin](https://github.com/NikolaiRadke/Schimpfolino/wiki)*.  
 
+![Schimpfolino](https://www.nikolairadke.de/schimpfolino/schimpfolino_case.png)
   
 This repo will be finished soon, stay tuned.  
 
