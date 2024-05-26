@@ -4,6 +4,9 @@ You need:
 * Sketch **eeprom_writer.ino**.  
 * A serial terminal like *Tera Term* (Windows) or *CuteCom* (Linux).
 
+### Connecting your Arduino with the EEPROM
+![EEPROM with Arduino](https://www.nikolairadke.de/schimpfolino/eeprom_verbinden.jpg)
+
 1. Open the Schimpfolino writer sketch **eeprom_writer.ino** in the Arduino IDE and upload the sketch. 
 
 2. Start your favorite serial terminal, set to **9600 Baud, 8-N-1** and a **10ms delay** after each character, no Linefeed (LF) oder Carrige Return (CR). 
