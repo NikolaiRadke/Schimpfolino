@@ -1,7 +1,8 @@
 # Setting up a serial connection and writing to EEPROM
 
 You need:  
-* Sketch **eeprom_writer.ino**.  
+* Sketch **eeprom_writer.ino**.
+* An Arduino Uno/Nano/Whatever
 * A serial terminal like *Tera Term* (Windows) or *CuteCom* (Linux).
 
 ### Connecting your Arduino with the EEPROM
@@ -19,6 +20,6 @@ You need:
   
 ## Structure of eepromX.txt files
 
-Each file contains a set of words. Each word has **10** characters, spaces are mandatory! Just write them one after another. The eeprom writing sketch will calculate their number and store both number an words into the eeprom.  
+Each file contains a set of words. Each word has **10** characters, spaces are mandatory! Just write them one after another. The EEPROM writing sketch will calculate their number and store both number and words into the EEPROM.  
 
 
