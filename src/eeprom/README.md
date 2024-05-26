@@ -21,7 +21,7 @@ You need:
 5. The Arduino will tell you through the serial terminal, what eeprom_writer is doing. Now upload the files **eeprom1.txt** to **eeprom5.txt**.
 6. Close the connection and remove the EEPROM.
   
-## Structure of eepromX.txt files
+## Structure of eeprom?.txt files
 
 Each file contains a set of words. Each word has **10** characters, spaces are mandatory! Just write them one after another. The EEPROM writing sketch will calculate their number and store both number and words into the EEPROM.  
 
