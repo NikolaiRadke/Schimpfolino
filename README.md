@@ -27,6 +27,7 @@ Exept for the tools and some time, you need:
 * Arduino IDE 1.6.6 or higher
 * Serial terminal software like *Tera Term* (Windows) or *CuteCom* (Linux).
 * Arduino UNO/Nano/Whatever with USB cable
+* A Breadboard
 * Some Dupont wires
 * A 10uF capacitor
 
