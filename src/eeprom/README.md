@@ -2,13 +2,13 @@
 
 You need:  
 * Sketch **eeprom_writer.ino**.
-* An Arduino Uno/Nano/Whatever
+* An Arduino Uno/Nano/Whatever.
 * A serial terminal like *Tera Term* (Windows) or *CuteCom* (Linux).
 
 ### Connecting your Arduino with the EEPROM
 
 1. Disconnect your Arduino.
-2. Connect your Arduino with the EEPROM as seen below.
+2. Connect your Arduino with the EEPROM as seen below. it is an **I2C** connection. If you want to use any other board connect **SDA** to **Pin 5** and **SCL** to **Pin 6**.
    
 ![EEPROM with Arduino](https://www.nikolairadke.de/schimpfolino/eeprom_verbinden.jpg)
 
