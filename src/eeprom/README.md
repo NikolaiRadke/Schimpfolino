@@ -8,16 +8,16 @@ You need:
 ### Connecting your Arduino with the EEPROM
 
 1. Disconnect your Arduino.
-2. Connect your Arduino with the EEPROM as seen below. it is an **I2C** connection. If you want to use any other board, connect **SDA** with **Pin 5** and **SCL** with **Pin 6**.
+2. Connect your Arduino with the EEPROM as seen below. It is an **I2C** connection. If you want to use any other board, connect **SDA** with **Pin 5** and **SCL** with **Pin 6**.
    
 ![EEPROM with Arduino](https://www.nikolairadke.de/schimpfolino/eeprom_verbinden.jpg)
 
 ### Flashing the content
 
-1. Connect the Arduino to your Computer.  
+1. Connect the Arduino to your computer.  
 2. Open the Schimpfolino writer sketch **eeprom_writer.ino** in the Arduino IDE and upload the sketch. 
 3. Start your favorite serial terminal, set to **9600 Baud, 8-N-1** and a **10ms delay** after each character, no Linefeed (LF) oder Carriage Return (CR). 
-4. Open the connection to the Port (COM? in Windows, see Device Manager or IDE | /dev/ttyACM0 for Arduino Uno or /dev/ttyUSB? other Arduinos for Linux)
+4. Open the connection to the port (COM? in Windows, see Device Manager or IDE | /dev/ttyACM0 for Arduino Uno or /dev/ttyUSB? other Arduinos for Linux)
 5. The Arduino will tell you through the serial terminal, what eeprom_writer is doing. Now upload the files **eeprom1.txt** to **eeprom5.txt**.
 6. Close the connection and remove the EEPROM.
   
