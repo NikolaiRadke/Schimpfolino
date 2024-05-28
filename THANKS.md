@@ -2,7 +2,7 @@
 
 These people helped me with Schimpfolino:
  - **Elise Lindner** - finding funny words.
- - **Elisabeth Seidl** - Graphics
+ - **Elisabeth Seidl** - graphics
   
 Used ressources:  
   
