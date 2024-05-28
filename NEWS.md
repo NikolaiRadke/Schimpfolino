@@ -1,7 +1,8 @@
 # Newsblog
 
 # 2024
-* **26.05.2024** Finished the last README files! The repository is ready to release.
+* **28.05.2024** Finished the german wiki! Schimpfolino is ready to release.
+* **26.05.2024** Finished the last README files! The repository is almost ready. 
 * **25.05.2024** The case cover fits perfectly!
 * **24.05.2024** New Nokolino shaped case model.
 * **23.05.2024** Renamed source files. The main file with eeprom ist now **Schimpfolino.ino**.
