@@ -1,8 +1,8 @@
 # Firmware and tools for Schimpfolino
 
-* **Schimpfolino** A sketch for use with EEPROM only. For ATtiny45/85.  
-* **Schimpfolino_noreeprom** A hybrid sketch for use with or without EEPROM with reduced internal word list. For ATtiny85 only.  
-* **eeprom** Files with EEPROM content and writing tool.  
+* **Schimpfolino**: a sketch for use with EEPROM only. For ATtiny45/85.  
+* **Schimpfolino_noreeprom**: a hybrid sketch for use with or without EEPROM with reduced internal word list. For ATtiny85 only.  
+* **eeprom**: files with EEPROM content and writing tool.  
 
 # Compiling instructions for Schimpfolino
 
