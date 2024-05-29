@@ -1,6 +1,7 @@
 # Newsblog
 
 # 2024
+* **29.05.2024** Schimpfolino got his first release!  
 * **28.05.2024** Finished the German wiki! Schimpfolino is ready to release.
 * **26.05.2024** Finished the last README files! The repository is almost ready. 
 * **25.05.2024** The case cover fits perfectly!
