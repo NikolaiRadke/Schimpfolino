@@ -17,7 +17,7 @@ You need:
 1. Connect the Arduino to your computer.  
 2. Open the Schimpfolino writer sketch **eeprom_writer.ino** in the Arduino IDE and upload the sketch. 
 3. Start your favorite serial terminal, set to **9600 Baud, 8-N-1** and a **10ms delay** after each character, no Linefeed (LF) oder Carriage Return (CR). 
-4. Open the connection to the port (COM? in Windows, see Device Manager or IDE | /dev/ttyACM0 for Arduino Uno or /dev/ttyUSB? other Arduinos for Linux)
+4. Open the connection to the port (COM? in Windows, see Device Manager or IDE | /dev/ttyACM0 for Arduino Uno or /dev/ttyUSB? other Arduinos in Linux)
 5. The Arduino will tell you through the serial terminal, what eeprom_writer is doing. Now upload the files **eeprom1.txt** to **eeprom5.txt**.
 6. Close the connection and remove the EEPROM.
   
