@@ -4,7 +4,7 @@
     Sketch for the insulting gadget | Only with additional 24LCXX EEPROM
     For ATtiny45/85 - set to 8 Mhz set to 8 Mhz and remember to flash your bootloader first!
 
-    Flash usage: 3.588 (IDE 2.3.2 | AVR 1.8.6 | ATtiny 1.0.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.590 (IDE 2.3.2 | ATtiny 1.0.2 | Linux X86_64 | ATtiny85)
     Power:       5mA (idle) | 9μA (sleep)
 
     Umlaute in EEPROM file have to be converted (UTF-8):
@@ -41,13 +41,13 @@ char     wordbuffer[20];                         // Buffer for read words
 
 volatile bool wake = true;                       // Stay wake when button is pressed
 
-SSD1306_Mini oled;                               // Set display
+SSD1306_Mini    oled;                            // Set display
 
 int main(void) {                                 
   init(); {                                      // Setup
     // Power saving
-    ACSR |= _BV(ACD);                            // Disable analog comparator - default?
-    ADCSRA &= ~_BV(ADEN);                        // Switch ADC off
+    ACSR = (1 << ACD);                           // Disable analog comparator
+    ADCSRA &= ~(1 << ADEN);                      // Switch ADC off
 
     // Port setup
     DDRB &= ~(1 << Button);                      // PB1 button INPUT
@@ -127,13 +127,14 @@ int main(void) {
       } 
 
       // Go to sleep after 10 seconds if button is not pressed before                           
-      oled.sendCommand(GOFi2cOLED_Display_Off_Cmd);// Display off
+      oled.sendCommand(GOFi2cOLED_Display_Off_Cmd); // Display off
       set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
       sleep_mode();                              // Good night, sleep until reset
     }
   }
 }
 
+// Functions
 void get_swearword(uint16_t address) {           // Fetch characters from eeprom
   char c;
   uint16_t i;
@@ -174,4 +175,4 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
   return TinyWireM.read();                       // Read and return byte
 }
 
-ISR(PCINT0_vect) {wake = true;}                  // Set wake flag if button is pressed
+ISR(PCINT0_vect) {wake = true;}                  // Interrupt routine. Set wake flag if button is pressed
