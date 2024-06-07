@@ -46,6 +46,15 @@ Technically, this process will flash no bootloader, the IDE just sets the fuses.
 
 Now you can flash your ATtiny with any sketch you want! But this time, we focus on Schimpfolino.   
 
+### Installing missing library
+
+Schimpfolino needs **TinyWireM** for **I2C** communication with display and EEPROM. But wait - doesn't ATTinyCore
+support I2C by the Wire-library? Yes, ist does, but it takes nearly 400 bytes flash and is much slower. We take TinyWireM.  
+
+1. Select ``` Sketch > Include Library > Manage Libraries ```
+2. Enter ``` TinyWireM ``` in the search field
+3. Search for ``` TinyWireM by Adafruit ``` and press ``` Install ```.  
+
 ### Flashing Schimpfolino firmware
   
 1. Open sketch **Schimpfolino.ino** (of **Schimpfolino_noeeprom.ino**).
