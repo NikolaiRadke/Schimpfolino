@@ -5,7 +5,7 @@
     For ATtiny45/85 - set to 8 Mhz | B.O.D disabled | No bootloader.
     Remember to flash the "bootloader" first!
 
-    Flash usage: 3.552 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.940 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       5mA (idle) | 7μA (sleep)
 
     Umlaute in EEPROM file have to be converted (UTF-8):
@@ -22,9 +22,8 @@
     7: D2  | PB2  SCL    - SCL | SSD1806
     8: VCC        VCC
 
-    Needs additional TinyWireM library - much faster and smaller than Wire.h
 */
-
+#include <Wire.h>
 #include <EEPROM.h>
 #include <avr/sleep.h>
 #include "SSD1306_minimal.h"                     // Modified library!
@@ -168,12 +167,12 @@ void write_swearword(uint8_t line) {             // Write centered word
 }
 
 uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
-  TinyWireM.beginTransmission(0x50);             // open transmission to I2C-address 0x50
-  TinyWireM.write((uint16_t)(e_address >> 8));   // Send the MSB (Most Significant Byte) of the memory address
-  TinyWireM.write((uint16_t)(e_address & 0xFF)); // Send the LSB (Least Significant Byte) of the memory address
-  TinyWireM.endTransmission();                   // Close transmissiom
-  TinyWireM.requestFrom(0x50, 1);                // Request one byte
-  return TinyWireM.read();                       // Read and return byte
+  Wire.beginTransmission(0x50);             // open transmission to I2C-address 0x50
+  Wire.write((uint16_t)(e_address >> 8));   // Send the MSB (Most Significant Byte) of the memory address
+  Wire.write((uint16_t)(e_address & 0xFF)); // Send the LSB (Least Significant Byte) of the memory address
+  Wire.endTransmission();                   // Close transmissiom
+  Wire.requestFrom(0x50, 1);                // Request one byte
+  return Wire.read();                       // Read and return byte
 }
 
 ISR(PCINT0_vect) {wake = true;}                  // Interrupt routine. Set wake flag if button is pressed
