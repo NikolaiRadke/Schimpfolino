@@ -8,7 +8,7 @@ These people helped me with Schimpfolino:
 Used ressources:  
   
 - **Arduino IDE 2.3.2** - [Arduino](http://www.arduino.cc)  
-- **ATtiny core 1.2** - [David A. Mellis](https://github.com/damellis)
+- **ATTinyCore** - [GitHub](https://github.com/SpenceKonde/ATTinyCore)
 - **TinyWireM library** - [GitHub](https://github.com/adafruit/TinyWireM)
 - **SD1306_nimimal library** - [GitHub](https://github.com/kirknorthrop/SSD1306_minimal)
 - **CuteCom 0.30.3** - [Sourceforge](https://cutecom.sourceforge.net/)
