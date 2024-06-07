@@ -1,7 +1,8 @@
 # Firmware and tools for Schimpfolino
 
-* **Schimpfolino**: a sketch for use with EEPROM only. For ATtiny45/85.  
-* **Schimpfolino_noreeprom**: a hybrid sketch for use with or without EEPROM with reduced internal word list. For ATtiny85 only.  
+* **Schimpfolino**: a sketch for use with EEPROM only. For ATtiny45/85. **Recommended**.
+* **Schimpfolino_wire**: Same funtion but 500 bytes bigger and without need for **TinyWireM**. Special nerd edition :-)  
+* **Schimpfolino_noreeprom**: a hybrid sketch for use with or without EEPROM with reduced internal word list. For **ATtiny85 only**.  
 * **eeprom**: files with EEPROM content and writing tool.  
 
 # Compiling instructions for Schimpfolino
@@ -53,13 +54,15 @@ support I2C by the Wire-library? Yes, ist does, but it takes nearly **500 bytes*
 
 1. Select ``` Sketch > Include Library > Manage Libraries ```
 2. Enter ``` TinyWireM ``` in the search field
-3. Search for ``` TinyWireM by Adafruit ``` and press ``` Install ```.  
+3. Search for ``` TinyWireM by Adafruit ``` and press ``` Install ```.
+
+*No way! I don't want additional stuff!* Okay, skip this step, choose **Schimpfolino_wire.ino** and go on further below.  
 
 ### Flashing Schimpfolino firmware
   
-1. Open sketch **Schimpfolino.ino** (of **Schimpfolino_noeeprom.ino**).
+1. Open **Schimpfolino.ino**, **Schimpfolino_noeeprom.ino** or **Schimpfolino_wire.ino**.
 2. Select ``` Sketch > Upload using programmer ``` (IDE 2.X) or press upload button (IDE 1.X) 
-4. DONE.  
+3. DONE.  
 
 Now you can remove the microcontroller and plug it into the socket of your Schimpfolino.  
 
