@@ -12,10 +12,10 @@ In order to flash your ATtiny with the Schimpfolino sketch, you need the **Ardui
  
 1. Open ``` File > Preferences ```.  
 2. Find the field ``` Additional Boards Manager URLs ```.  
-3. Enter ``` https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json ```.  
+3. Enter ``` http://drazzy.com/package_drazzy.com_index.json ```.  
 4. Press ``` OK ```.  
 5. Open ``` Tools > Board > Boards Manager ```.  
-6. Select ``` attiny by David A. Mellis ```.  
+6. Select ``` ATTinyCore by Spence Konde ```.  
 7. Press ``` Install ```.
 
 ### Peparing your Arduino  
@@ -38,11 +38,11 @@ Technically, the ATtiny has no bootloader, the IDE just sets the fuses.
   
 1. Connect your Arduino to your system again.  
 2. Select ``` Tools > Programmer > Arduino as ISP ```.  
-3. Select ``` Tools > Board > ATtiny25/45/85 ```.  
-4. Select ``` Tools > Processor > ATtiny85 ``` or ``` Tools > Processor > ATtiny45 ```.  
-5. Select ``` Tools > Clock > 8 MHz (internal) ```.  
-6. Select ``` Tools > Port ``` for the matching port.  
-7. Start burning process with ``` Tools > Burn bootloader ```.  
+3. Select ``` Tools > Board > ATTinyCore > ATtiny25/45/85 (No bootloader) ```.
+4. Select ``` Tools > Port ``` for the matching port.  
+5. Select ``` Tools > B.O.D. Level [...] > B.O.D. Disabled (saves power) ```.
+6. Select ``` Tools > Chip > ATtiny85 ``` or ``` Tools > Chip > ATtiny45 ```.  
+8. Start burning process with ``` Tools > Burn bootloader ```.  
 
 Now you can flash your ATtiny with any sketch you want! But this time, we focus on Schimpfolino.   
 
