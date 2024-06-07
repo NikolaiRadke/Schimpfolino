@@ -34,7 +34,7 @@ In order to flash your ATtiny with the Schimpfolino sketch, you need the **Ardui
   
 ### Burning an ATtiny bootloader  
   
-Technically, the ATtiny has no bootloader, the IDE just sets the fuses. 
+Technically, this process will flash no bootloader, the IDE just sets the fuses. 
   
 1. Connect your Arduino to your system again.  
 2. Select ``` Tools > Programmer > Arduino as ISP ```.  
