@@ -62,3 +62,12 @@ support I2C by the Wire-library? Yes, ist does, but it takes nearly 400 bytes fl
 4. DONE.  
 
 Now you can remove the microcontroller and plug it into the socket of your Schimpfolino.  
+
+## Hints for Linux users  
+
+With some Debain-based distributions like Ubuntu or Mint you might recieve an error while trying to upload your sketch to the ATtiny like
+avrdude: ser_open(): can't open device "/dev/ttyUSB0": Permission denied.
+This issue can be solved by adding your user to the dialout-group. Open a terminal and type
+sudo usermod -a -G dialout $USERNAME.
+Enter your password and restart. Now it should work.  
+
