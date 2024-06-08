@@ -15,7 +15,7 @@
                -- Reworked horrible formatting and spelling
                -- Removed unused code and reworked functions to save flash
                -- Modified for Wire.h instead of TinyWireM.h
-               
+
       CoPiino Electronics invests time and resources providing this open source code,
       please support CoPiino Electronics and open-source hardware by purchasing
       products from CoPiino Electronics!
@@ -107,7 +107,7 @@ unsigned char SSD1306_Mini::getFlash(const unsigned char * mem, unsigned int idx
 
 void SSD1306_Mini::commandMode() {
   TinyWireM.beginTransmission(SlaveAddress);     // Begin I2C transmission
-  TinyWireM.send(GOFi2cOLED_Command_Mode);	     // Set OLED Command mode
+  TinyWireM.send(GOFi2cOLED_Command_Mode);	     // Command mode
 }
 
 void SSD1306_Mini::dataMode() {
@@ -115,7 +115,7 @@ void SSD1306_Mini::dataMode() {
   TinyWireM.send(GOFi2cOLED_Data_Mode);          // Data mode
 }
 
-void SSD1306_Mini::sendCommand(unsigned char command) {
+void SSD1306_Mini::sendCommand(unsigned char command) { // Public funtion now to turn off display
   commandMode();
   TinyWireM.send(command);                       // Send command
   TinyWireM.endTransmission();    		           // End I2C communication

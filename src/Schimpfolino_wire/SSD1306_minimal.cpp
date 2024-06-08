@@ -104,17 +104,17 @@ unsigned char SSD1306_Mini::getFlash(const unsigned char * mem, unsigned int idx
   return data;
 }
 
-void SSD1306_Mini::commandMode() {               // Public funtion now to turn off display
-  Wire.beginTransmission(SlaveAddress); 
-  Wire.write(GOFi2cOLED_Command_Mode);      
+void SSD1306_Mini::commandMode() {               
+  Wire.beginTransmission(SlaveAddress);          // Begin I2C transmission
+  Wire.write(GOFi2cOLED_Command_Mode);           // Command mode
 }
 
 void SSD1306_Mini::dataMode() {
-  Wire.beginTransmission(SlaveAddress);
-  Wire.write(GOFi2cOLED_Data_Mode);       
+  Wire.beginTransmission(SlaveAddress);          // Begin I2C transmission
+  Wire.write(GOFi2cOLED_Data_Mode);              // Data mode
 }
 
-void SSD1306_Mini::sendCommand(unsigned char command) {
+void SSD1306_Mini::sendCommand(unsigned char command) { // Public funtion now to turn off display
   commandMode();
   Wire.write(command);                           // Send command
   Wire.endTransmission();    		                 // End I2C transmission
