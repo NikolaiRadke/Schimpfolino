@@ -36,7 +36,7 @@ And the following hardware:
 * ATtiny45/85
 * 24LC64 or larger EEPROM
 * 0,96" SSD1306 oled display
-* One button
+* Button
 * 2 Dip-8 sockets
 * Batteryholder
 * CR2032 battery
