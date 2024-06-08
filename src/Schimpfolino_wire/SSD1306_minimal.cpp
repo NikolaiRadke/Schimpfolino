@@ -98,30 +98,39 @@ const unsigned char BasicFont[] PROGMEM = {
   0x44, 0x64, 0x54, 0x4C, 0x44, // z 57
 };
 
+// Private functions
 unsigned char SSD1306_Mini::getFlash(const unsigned char * mem, unsigned int idx) {
   unsigned char data= pgm_read_byte(&(mem[idx]));
   return data;
 }
- 
+
+void SSD1306_Mini::commandMode() {               // Public funtion now to turn off display
+  Wire.beginTransmission(SlaveAddress); 
+  Wire.write(GOFi2cOLED_Command_Mode);      
+}
+
+void SSD1306_Mini::dataMode() {
+  Wire.beginTransmission(SlaveAddress);
+  Wire.write(GOFi2cOLED_Data_Mode);       
+}
+
 void SSD1306_Mini::sendCommand(unsigned char command) {
-  Wire.begin();                                  // Initialize I2C
-  Wire.beginTransmission(SlaveAddress);          // Begin I2C communication
-  Wire.write(GOFi2cOLED_Command_Mode);	         // Set OLED Command mode
+  commandMode();
   Wire.write(command);                           // Send command
-  Wire.endTransmission();    		                 // End I2C communication
+  Wire.endTransmission();    		                 // End I2C transmission
 }
 
 void SSD1306_Mini::sendData(unsigned char Data) {
-  Wire.begin();                                  // Initialize I2C
-  Wire.beginTransmission(SlaveAddress);          // Begin I2C transmission
-  Wire.write(GOFi2cOLED_Data_Mode);              // Data mode
+  dataMode();
   Wire.write(Data);                              // Send data
   Wire.endTransmission();                        // Stop I2C transmission
 }
 
+// Public functions
 void SSD1306_Mini::init(uint8_t address) {
   delay(5);	                                     // Wait for OLED hardware init
-  Wire.setClock(400000);                         // Fast mode
+  Wire.begin();                                  // Initialize I2C
+  Wire.setClock(400000L);                        // Fast mode
   sendCommand(GOFi2cOLED_Display_Off_Cmd);       // Display off
   sendCommand(Set_Multiplex_Ratio_Cmd);          // Multiplex ratio
   sendCommand(0x3F);                             // Duty = 1/64
@@ -156,28 +165,22 @@ void SSD1306_Mini::init(uint8_t address) {
 }
 
 void SSD1306_Mini::clipArea(unsigned char col, unsigned char row, unsigned char w, unsigned char h) {
-  Wire.begin();                   
-  Wire.beginTransmission(SlaveAddress); 
-  Wire.write(GOFi2cOLED_Command_Mode);           
+  commandMode();
   Wire.write(Set_Column_Address_Cmd);
   Wire.write(0);
   Wire.write(col);
   Wire.write(col+w-1);
   Wire.endTransmission();                 
-
-  Wire.begin();                   
-  Wire.beginTransmission(SlaveAddress); 
-  Wire.write(GOFi2cOLED_Command_Mode);      
+  commandMode();
   Wire.write(Set_Page_Address_Cmd);
   Wire.write(0);
   Wire.write(row); 
   Wire.write(row+h-1);
   Wire.endTransmission();               
-
 }
 
 void SSD1306_Mini::cursorTo(unsigned char col, unsigned char row) {
-  clipArea(col, row, 128-col, 8-row);
+  clipArea(col, row, 128-col, 8-row);            
 }
 
 void SSD1306_Mini::clear() {
@@ -186,8 +189,7 @@ void SSD1306_Mini::clear() {
   sendCommand(0x40 | 0x0);                       // Line #0   
   clipArea(0,0,128,8);
   for (uint16_t i=0; i<=((128*64/8)/16); i++) {
-    Wire.beginTransmission(SlaveAddress);        // Send a bunch of data in one xmission
-    Wire.write(GOFi2cOLED_Data_Mode);        
+    dataMode();
     for (uint8_t k=0;k<16;k++) 
       Wire.write( 0 );
     Wire.endTransmission();
@@ -202,8 +204,7 @@ void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
   data[2]= getFlash(BasicFont, i*5 + 2);
   data[3]= getFlash(BasicFont, i*5 + 3);
   data[4]= getFlash(BasicFont, i*5 + 4);    
-  Wire.beginTransmission(SlaveAddress);
-  Wire.write(GOFi2cOLED_Data_Mode);       
+  dataMode();
   Wire.write(0x00);
   Wire.write(data[0]);
   Wire.write(data[1]);
@@ -213,3 +214,4 @@ void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
   if (chars < 19) Wire.write( 0x00 );            // One row space when the line has enough room
   Wire.endTransmission();
 }
+

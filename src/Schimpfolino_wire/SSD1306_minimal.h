@@ -13,7 +13,7 @@
   Modified by: Kirk Northrop (github.com/kirknorthrop)
   Modified by: Nikolai Radke (www.monstermaker.de)
                -- Reworked horrible formatting and spelling
-               -- Removed unused code
+               -- Removed unused code and reworked functions to save flash
                -- Modified for Wire.h instead of TinyWireM.h
 
       CoPiino Electronics invests time and resources providing this open source code,
@@ -124,10 +124,13 @@ class SSD1306_Mini {
     // Print a single character
     void printChar(char ch);
 
-    //  private:
+    // Send a command - Schimpfolino needs to switch off the display
     void sendCommand(unsigned char command);
-    void sendData(unsigned char Data);
-    unsigned char getFlash( const unsigned char * mem, unsigned int idx  );
-};
 
+  private:
+    void commandMode();
+    void dataMode();
+    void sendData(unsigned char Data);
+    unsigned char getFlash(const unsigned char * mem, unsigned int idx);
+};
 #endif

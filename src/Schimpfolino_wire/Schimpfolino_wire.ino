@@ -1,12 +1,12 @@
 /*  
-    Schimpfolino V1.0 07.06.2024 - Nikolai Radke
+    Schimpfolino V1.0 08.06.2024 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | Only with additional 24LCXX EEPROM
     For ATtiny45/85 - set to 8 Mhz | B.O.D disabled | No bootloader
-    Remember to flash the "bootloader" first!
+    Remember to burn the "bootloader" first!
 
-    Flash usage: 4.052 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 4.018 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       5mA (idle) | 7μA (sleep)
 
     Umlaute in EEPROM file have to be converted (UTF-8):
@@ -18,9 +18,9 @@
     2: D3  | PB3  Free
     3: A2  | PB4  Free 
     4: GND |      GND
-    5: D0  | PB0  SDA    - SDA | SSD1806 
+    5: D0  | PB0  SDA    - SDA | SSD1306 
     6: D1  | PB1  Button - GND
-    7: D2  | PB2  SCL    - SCL | SSD1806
+    7: D2  | PB2  SCL    - SCL | SSD1306
     8: VCC |      VCC
 */
 
