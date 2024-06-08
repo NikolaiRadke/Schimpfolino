@@ -68,7 +68,7 @@ Root directory with some explanation files.
     ├── Schimpfolino_nopeeprom/
     |   Sketch for Schimpfolino without EEPROM.
     └── Schimpfolino_wire/
-        Sketch for nerds who pefer Wire.h instead od TinyWireM.h
+        Sketch for nerds who pefer Wire.h instead od TinyWireM.h.
 ```
 ### Let's get started!
 
