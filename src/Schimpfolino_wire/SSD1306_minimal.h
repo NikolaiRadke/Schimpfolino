@@ -12,7 +12,9 @@
   Modified by: CoPiino Electronics (http://copiino.cc)
   Modified by: Kirk Northrop (github.com/kirknorthrop)
   Modified by: Nikolai Radke (www.monstermaker.de)
-               -- reworked horrible formatting and spelling and removed unused code
+               -- Reworked horrible formatting and spelling
+               -- Removed unused code
+               -- Modified for Wire.h instead of TinyWireM.h
 
       CoPiino Electronics invests time and resources providing this open source code,
       please support CoPiino Electronics and open-source hardware by purchasing
@@ -34,8 +36,7 @@
 #define __SSD1306_MINIMAL_H__
 
 #include <Arduino.h>
-#include <TinyWireM.h>
-#include <USI_TWI_Master.h>
+#include <Wire.h>
 
 // Config
 #define SlaveAddress 0x3c
