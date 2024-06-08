@@ -16,4 +16,5 @@ Used ressources:
 - **Tinkercad** - [Tinkercad](https://www.tinkercad.com)
 - **Cura 5.7.1** - [UltiMaker](https://ultimaker.com/de/software/ultimaker-cura)
 - **Inkscape 1.1** - [Inkscape](https://inkscape.org)
-- **Gimp 2.10.32** - [Gimp](https://www.gimp.org) 
+- **Gimp 2.10.32** - [Gimp](https://www.gimp.org)
+- **Fritzing 0.9.6** - [Fritzing](https://fritzing.org/)
