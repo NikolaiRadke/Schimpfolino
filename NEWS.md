@@ -2,6 +2,8 @@
 
 # 2024
 
+* **07.06.2024** Added alternative firmware **Schimpfolino_wire** vwith version **1.0-070624**  
+* **07.06.2024** Updated **Schimpfolino** to **1.0-070624** with small libary cleanups.  
 * **07.06.2024** Switched to ATTinyCore. It's much more modern, builds smaller binaries and has tons of features.  
 * **29.05.2024** Schimpfolino got his first release!  
 * **28.05.2024** Finished the German wiki! Schimpfolino is ready to release.
