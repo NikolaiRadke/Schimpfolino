@@ -1,8 +1,8 @@
 # Firmware and tools for Schimpfolino
 
 * **Schimpfolino**: a sketch for use with EEPROM only. For ATtiny45/85. **Recommended**.
-* **Schimpfolino_wire**: Same funtion but 500 bytes bigger and without need for **TinyWireM**. Special nerd edition :-)  
-* **Schimpfolino_noreeprom**: a hybrid sketch for use with or without EEPROM with reduced internal word list. For **ATtiny85 only**.  
+* **Schimpfolino_noreeprom**: a hybrid sketch for use with or without EEPROM with reduced internal word list. For **ATtiny85 only**.
+  **WARNING:** Under construction.  
 * **eeprom**: files with EEPROM content and writing tool.  
 
 # Compiling instructions for Schimpfolino
@@ -47,20 +47,9 @@ Technically, this process will flash no bootloader, the IDE just sets the fuses.
 
 Now you can flash your ATtiny with any sketch you want! But this time, we focus on Schimpfolino.   
 
-### Installing missing library
-
-Schimpfolino needs **TinyWireM** for **I2C** communication with display and EEPROM. But wait - doesn't ATTinyCore
-support I2C by the Wire-library? Yes, ist does, but it takes nearly **500 bytes** flash memory! We take TinyWireM.  
-
-1. Select ``` Sketch > Include Library > Manage Libraries ```
-2. Enter ``` TinyWireM ``` in the search field
-3. Search for ``` TinyWireM by Adafruit ``` and press ``` Install ```.
-
-*No way! I don't want additional stuff!* Okay, skip this step, choose **Schimpfolino_wire.ino** and go on further below.  
-
 ### Flashing Schimpfolino firmware
   
-1. Open **Schimpfolino.ino**, **Schimpfolino_noeeprom.ino** or **Schimpfolino_wire.ino**.
+1. Open **Schimpfolino.ino**, **Schimpfolino_wire.ino**.
 2. Select ``` Sketch > Upload using programmer ``` (IDE 2.X) or press upload button (IDE 1.X) 
 3. DONE.  
 
