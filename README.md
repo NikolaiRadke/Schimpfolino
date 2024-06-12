@@ -65,11 +65,10 @@ Root directory with some explanation files.
     |
     ├── Schimpfolino/
     |   Standard sketch with libraries.
-    ├── Schimpfolino_nopeeprom/
-    |   Sketch for Schimpfolino without EEPROM.
-    └── Schimpfolino_wire/
-        Sketch for nerds who pefer Wire.h instead od TinyWireM.h.
+    └──  Schimpfolino_nopeeprom/
+         Sketch for Schimpfolino without EEPROM.
 ```
+
 ### Let's get started!
 
 Ready? Great! Let's start here: [German wiki](https://github.com/NikolaiRadke/Schimpfolino/wiki).  
