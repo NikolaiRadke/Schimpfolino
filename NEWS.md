@@ -2,7 +2,7 @@
 
 # 2024
 
-* **12.06.2024** Big SSD1306 rework. Version is now **1.0-12062**. 
+* **12.06.2024** Big SSD1306 rework. Version is now **1.0-120624**. 
 * **11.06.2024** **Schimpfolino_wire** is now ***Schimpfolino**. TinyWireM is not needed anymore.
 * **07.06.2024** Added alternative firmware **Schimpfolino_wire** vwith version **1.0-070624**  
 * **07.06.2024** Updated **Schimpfolino** to **1.0-070624** with small libary cleanups.  
