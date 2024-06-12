@@ -133,10 +133,13 @@ void SSD1306_Mini::init(uint8_t address) {
   _delay_ms(5);	                                 // Wait for OLED hardware init
   Wire.setClock(400000L);                        // Fast mode
   Wire.begin();                                  // Start I2C
-  sendCommand(0x20); 	                           // Set addressing mode
-  sendCommand(0x00);                              
   sendCommand(0xA8);                             // Set multiplex
   sendCommand(0x3F);                             // Height: 64 - 1
+  sendCommand(0x22);
+  sendCommand(0x00);
+  sendCommand(0x03);
+  sendCommand(0x20); 	                           // Set addressing mode
+  sendCommand(0x00);                             // Horizontal
   sendCommand(0x8D);                             // Set charge pump enable
   sendCommand(0x14);
   sendCommand(0xAF);                             // Display ON
@@ -149,32 +152,46 @@ void SSD1306_Mini::clipArea(unsigned char col, unsigned char row, unsigned char 
   Wire.write(0x21);                              // Set column start and end address
   Wire.write(0x00);
   Wire.write(col);
-  Wire.write(col + w - 1);
+  Wire.write(col+w-1);
   Wire.endTransmission();                 
   commandMode();
   Wire.write(0x22);                              // Set page start and end address
   Wire.write(0x00);
   Wire.write(row); 
-  Wire.write(row + h - 1);
+  Wire.write(row+h-1);
   Wire.endTransmission();               
 }
 
 void SSD1306_Mini::cursorTo(unsigned char col, unsigned char row) {
-  clipArea(col, row, 128-col, 8-row);            
+  //clipArea(col, row, 128-col, 8-row);            
+  commandMode();
+  Wire.write(0xB0 | (row & 0x07));  // set start page
+  Wire.write(col & 0x0F);           // set low nibble of start column
+  Wire.write(0x10 | (col >> 4));    // set high nibble of start column
+  Wire.endTransmission();
 }
 
 void SSD1306_Mini::clear() {
-  sendCommand(0x00 | 0x0);                       // Low col = 0
-  sendCommand(0x10 | 0x0);                       // Hi col = 0
-  sendCommand(0x40 | 0x0);                       // Line #0   
-  clipArea(0 , 0, 128, 8);
-  for (uint16_t i = 0; i <= 64; i ++) {
+  //sendCommand(0x00 | 0x0);                       // Low col = 0
+  //sendCommand(0x10 | 0x0);                       // Hi col = 0
+  //sendCommand(0x40 | 0x0);                       // Line #0   
+  //clipArea(0,0,128,8);
+  for (uint16_t i=0; i<=128; i++) {
     dataMode();
-    for (uint8_t k = 0; k < 16; k ++) 
+    for (uint8_t k=0 ; k<16; k++) 
       Wire.write(0x00);
     Wire.endTransmission();
   }
 }
+
+/*
+void SSD1306_Mini::clear() {
+  cursorTo(0, 0);                // set cursor at upper left corner
+  dataMode();
+  for(uint16_t i=512; i; i--) Wire.write(0x00); // clear the screen
+  Wire.endTransmission();                       // stop transmission
+}
+*/
 
 void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
   char data[5];
@@ -182,8 +199,8 @@ void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
   unsigned char i = ch;
   dataMode();
   Wire.write(0x00);                              // One empty space
-  for (a= 0; a < 5; a ++) {
-    data[a]= getFlash(BasicFont, i*5 + a);       // Only 5 rows needed.
+  for (a=0; a<5; a++) {
+    data[a]= getFlash(BasicFont, i*5 +a);        // Only 5 rows needed.
     Wire.write(data[a]);
   }
   if (chars < 19) Wire.write(0x00);              // One more row space when the line has enough room
