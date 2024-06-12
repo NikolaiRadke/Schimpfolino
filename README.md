@@ -65,8 +65,8 @@ Root directory with some explanation files.
     |
     ├── Schimpfolino/
     |   Standard sketch with libraries.
-    └──  Schimpfolino_nopeeprom/
-         Sketch for Schimpfolino without EEPROM.
+    └── Schimpfolino_nopeeprom/
+        Sketch for Schimpfolino without EEPROM.
 ```
 
 ### Let's get started!
