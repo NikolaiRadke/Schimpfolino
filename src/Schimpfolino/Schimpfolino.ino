@@ -157,9 +157,9 @@ void get_swearword(uint16_t address) {           // Fetch characters from eeprom
 void write_swearword(uint8_t line) {             // Write centered word
   uint8_t x;
   if (chars < 19)                                // Calculate centering
-    x = (120 - (chars * 6)) / 2;                 // for shorter words
+    x = (128 - (chars * 7)) / 2;                 // for shorter words
   else
-    x = (120 - (chars * 7)) / 2;                 // or for very long words
+    x = (128 - (chars * 6)) / 2;                 // or for very long words
   if ((gender != 0) && (line == 2)) x -= 4;      // If not female, set first one half block left for gender char
   oled.cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; x ++)                   // Print the characters
