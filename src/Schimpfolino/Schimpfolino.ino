@@ -1,12 +1,12 @@
 /*  
-    Schimpfolino V1.0 12.06.2024 - Nikolai Radke
+    Schimpfolino V1.0 13.06.2024 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | Only with additional 24LCXX EEPROM
     For ATtiny45/85 - set to 8 Mhz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" first!
 
-    Flash usage: 3.734 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.698 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       5mA (idle) | 7μA (sleep)
 
     Umlaute in EEPROM file have to be converted (UTF-8):
@@ -33,7 +33,6 @@
 // Hardware
 #define Button   PB1                             // Button address       
    
-
 // Variables
 uint8_t  gender;                                 // Gender of the swearword
 uint8_t  chars = 0;                              // Number of charakters in the word | Gobal
@@ -103,7 +102,7 @@ int main(void) {
         // First word
         number = (random(0, address[0]));        // Select first word
         get_swearword(number * 10 + 10);         // Read word from eeprom
-        write_swearword(1);                      // Write first word in the first line
+        write_swearword(2);                      // Write first word in the first line
 
         // Second word first part
         gender = random(0, 3);                   // Set word gender
@@ -120,7 +119,7 @@ int main(void) {
         if (gender == 2)                         // Neutrum
           number = (random(address[3], address[4])); // Select second part of second word
         get_swearword(number * 10 + 10);         // Read second part of second word
-        write_swearword(2);                      // Write second word in second line
+        write_swearword(4);                      // Write second word in second line
         
         // Wait for button or sleep
         _delay_ms(500);                              // Debounce button
@@ -158,11 +157,11 @@ void get_swearword(uint16_t address) {           // Fetch characters from eeprom
 void write_swearword(uint8_t line) {             // Write centered word
   uint8_t x;
   if (chars < 19)                                // Calculate centering
-    x = (128 - (chars * 7)) / 2;                 // for shorter words
+    x = (120 - (chars * 6)) / 2;                 // for shorter words
   else
-    x = (128 - (chars * 6)) / 2;                 // or for very long words
-  if ((gender != 0) && (line == 1)) x -= 8;      // If not female, set first one Block left for gender char
-  oled.cursorTo(x, line * 10);                   // Set cursor to selected line
+    x = (120 - (chars * 7)) / 2;                 // or for very long words
+  if ((gender != 0) && (line == 2)) x -= 4;      // If not female, set first one half block left for gender char
+  oled.cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; x ++)                   // Print the characters
     oled.printChar(wordbuffer[x]);               // from buffer
   chars = 0;                                     // Set number of character back to 0

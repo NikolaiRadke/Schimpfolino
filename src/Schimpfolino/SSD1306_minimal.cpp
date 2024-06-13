@@ -101,11 +101,6 @@ const unsigned char BasicFont[] PROGMEM = {
 };
 
 // Private functions
-unsigned char SSD1306_Mini::getFlash(const unsigned char * mem, unsigned int idx) {
-  unsigned char data= pgm_read_byte(&(mem[idx]));
-  return data;
-}
-
 void SSD1306_Mini::commandMode() {               
   Wire.beginTransmission(SlaveAddress);          // Begin I2C transmission
   Wire.write(0x80);                              // Command mode
@@ -160,33 +155,29 @@ void SSD1306_Mini::clipArea(unsigned char col, unsigned char row, unsigned char 
 }
 
 void SSD1306_Mini::cursorTo(unsigned char col, unsigned char row) {
-  clipArea(col, row, 128-col, 8-row);            
+  clipArea(col, row, 128 - col, 8 - row);            
 }
 
 void SSD1306_Mini::clear() {
+  uint8_t a, b;
   sendCommand(0x00 | 0x0);                       // Low col = 0
   sendCommand(0x10 | 0x0);                       // Hi col = 0
   sendCommand(0x40 | 0x0);                       // Line #0   
   clipArea(0 , 0, 128, 8);
-  for (uint16_t i = 0; i <= 64; i ++) {
+  for (a = 0; a <= 64; a ++) {
     dataMode();
-    for (uint8_t k = 0; k < 16; k ++) 
+    for (b = 0; b < 16;  b ++) 
       Wire.write(0x00);
     Wire.endTransmission();
   }
 }
 
 void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
-  char data[5];
   uint8_t a;
-  unsigned char i = ch;
   dataMode();
-  Wire.write(0x00);                              // One empty space
-  for (a= 0; a < 5; a ++) {
-    data[a]= getFlash(BasicFont, i*5 + a);       // Only 5 rows needed.
-    Wire.write(data[a]);
-  }
+  for (a=0; a<5; a++) 
+    Wire.write(pgm_read_byte(&BasicFont[ch * 5 + a]));
+  Wire.write(0x00);                              // One row space for better readabiltiy
   if (chars < 19) Wire.write(0x00);              // One more row space when the line has enough room
   Wire.endTransmission();
 }
-

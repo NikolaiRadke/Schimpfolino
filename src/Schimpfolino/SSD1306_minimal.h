@@ -68,6 +68,5 @@ class SSD1306_Mini {
     void commandMode();
     void dataMode();
     void sendData(unsigned char Data);
-    unsigned char getFlash(const unsigned char * mem, unsigned int idx);
 };
 #endif
