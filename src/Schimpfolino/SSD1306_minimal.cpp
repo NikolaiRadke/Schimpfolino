@@ -129,11 +129,13 @@ void SSD1306_Mini::init(uint8_t address) {
   Wire.setClock(400000L);                        // Fast mode
   Wire.begin();                                  // Start I2C
   sendCommand(0x20); 	                           // Set addressing mode
-  sendCommand(0x00);                              
+  sendCommand(0x00);                             // Horizontal mode
   sendCommand(0xA8);                             // Set multiplex
   sendCommand(0x3F);                             // Height: 64 - 1
-  sendCommand(0x8D);                             // Set charge pump enable
-  sendCommand(0x14);
+  sendCommand(0x81);                             // Set contrast
+  sendCommand(0xff);                             // Highest level
+  sendCommand(0x8D);                             // Set charge pump
+  sendCommand(0x14);                             // Enable
   sendCommand(0xAF);                             // Display ON
   sendCommand(0xA1);                             // Flip the screen
   sendCommand(0xC8);

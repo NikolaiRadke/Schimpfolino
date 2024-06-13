@@ -40,9 +40,10 @@
 #include <Wire.h>
 
 // Config
-#define SlaveAddress 0x3c
+#define SlaveAddress 0x3c                        // SSD1306 I2C adress
 
-extern uint8_t chars; // Schimpfolino: Count chars in main sketch, used to shrink font witdh if too long
+// Schimpfolino: Count chars in main sketch, used to shrink font witdh if too long
+extern uint8_t chars;                            
 
 class SSD1306_Mini {
   public:
