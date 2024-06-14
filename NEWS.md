@@ -2,6 +2,7 @@
 
 # 2024
 
+* **14.06.2024** Optimized code and finished **Schimpfolino_eeprom**. Both are **1.0-140624** now.
 * **13.06.2024** Added **TODO.md** - everyone needs a ToDo list!  
 * **13.06.2024** (Slighty) better text centering and higher display contrast. **1.0-130624**. 
 * **12.06.2024** Big SSD1306 rework. Version is now **1.0-120624**. 
