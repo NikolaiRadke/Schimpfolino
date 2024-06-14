@@ -48,7 +48,7 @@ extern uint8_t chars;
 class SSD1306_Mini {
   public:
     // Call this function once in "void setup()" to initiallize the display
-    void init(uint8_t address);
+    void init();
   
     // Reset clipArea to maximum and clear the display
     void clear();

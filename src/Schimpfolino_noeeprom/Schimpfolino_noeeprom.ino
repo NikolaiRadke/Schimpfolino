@@ -1,16 +1,17 @@
 /*  
-    Schimpfolino V1.0 05.05.2024 - Nikolai Radke
+    Schimpfolino V1.0 13.06.2024 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | With or without additional 24LCXX EEPROM
-    For ATtiny85 only - set to 8 Mhz set to 8 Mhz and remember to flash your bootloader first!
+    For ATtiny85 only - set to 8 Mhz | B.O.D disabled | No bootloader
+    Remember to burn the "bootloader" first!
 
-    Flash usage: 8.104 (IDE 2.3.2 | AVR 1.8.6 | ATtiny 1.0.2 | Linux X86_64 | ATtiny85)
-    Power:       5mA (idle) | 7μA (sleep) | 9μA (sleep, with EEPROM)
-    Wordlist:    4.800 (120 batches of 10 bytes * 4 arrays | 2 batches free)
+    Flash usage: 8.152 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Power:       5mA (idle) | 7μA (sleep)
 
-    Umlaute in wordlist and EEPROM file have to be converted (UTF-8):
-    ä -> # | ö -> $ | ü -> % | ß -> * | Captials are not supported. 
+    Umlaute have to be converted (UTF-8):
+    ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
+    Last charakter of a wordlist in EEPROM is '!'
 
     Wiring:
     1: RST | PB5  Free    
@@ -21,31 +22,38 @@
     6: D1  | PB1  Button - GND
     7: D2  | PB2  SCL    - SCL | SSD1306
     8: VCC |      VCC
-
-    Needs additional TinyWireM library!
 */
 
-#include <EEPROM.h>
-#include <avr/sleep.h>
+#include <Wire.h>                                // I2C communication with display and EEPROM
+#include <EEPROM.h>                              // Internal EEPROM saves random seed
+#include <avr/sleep.h>                           // Used for deep sleep
+#include <util/delay.h>
 #include "SSD1306_minimal.h"                     // Modified library!
 
 // Hardware
-#define Button   PB1                             // Button address          
+#define Button   PB1                             // Button address   
 
-// Wordlist arrays - a single arry can hold only 4kb | Used, if no EEPROM present
-const char data1[] PROGMEM = {"Dumpfe    Staubige  Miefende  Stinkende Gammlige  Hinkende  Winzige   Popelige  Nasse     Furzende  Rostige   Hohle     Siffige   Miese     Krumme    Klapprige Trockene  Haarige   Uralte    Grunzende SchreiendeMeckernde Nervende  Sabbernde Triefende Modrige   Lumpige   Lausige   Sinnlose  Olle      Unn$tige  Dampfende Ledrige   Einarmige Leere     L#stige   Heulende  Pickelige Faule     Ranzige   Tr%be     Dralle    Blanke    Gierige   Tranige   Wackelnde Torkelnde W%ste     Fischige  Beknackte Modrige   VerkorksteHeimliche L$chrige  Brockige  Plumpe    Tattrige  Ratternde SchmutzigeLiderlicheD$sige    Prollige  Fiese     Dr$ge     Muffige   M%ffelnde Peinliche N$rgelnde Fettige   Zahnlose  Freche    Sch#bige  Piefige   Gummige   Labbrige  Patzige   Pelzige   Reudige   Pekige    M%rbe     Harzige   Lahme     Mickrige  Br#sige   Zottelige Gelbliche Knorrige  Salzige   Schrille  Dusselige Windige   Grausige  Gr#sslicheGrobe     Spackige  Kauzige   Flachsige Fransige  Motzige   Kahle     Niedrige  Keifende  Nichtige  Dr$ge     Fade      Weinende  Sch#bige  N$rgelnde Hibbelige Plockige  Brennende D%rre     Kochende  Knarzende Faltige   SchlammigeBr$ckeligeRissige   Verkeimte Kantige   "};
-const char data2[] PROGMEM = {"Stampf    Wabbel    Pups      Schmalz   Schmier   Hack      Zement    Spuck     Stachel   Keller    Laber     Stock     Runzel    Schrumpf  Ekel      Schnodder Matsch    Wurm      Eiter     Speck     Mist      Klotz     W%rg      Lumpen    Schleim   Wurst     Doof      Brat      Schwamm   Kratz     Grotten   Kriech    Gift      Schlabber Reier     G$bel     Knatter   Kleb      Schmadder Grind     Labber    Luft      Massen    Schimmel  Mini      Ochsen    Problem   Quassel   Schnaps   Saft      Fummel    Friemel   Zappel    Tropf     Pluntsch  Sumpf     Hecken    Grab      Schwitz   Schnarch  Schleich  Schluff   Fl$ten    Holz      Kreisch   Dulli     Luschen   Gammel    Alt$l     R$chel    Glibber   Lach      Krach     Knick     Quetsch   Quatsch   Quietsch  Knautsch  T%mpel    Teich     Knatter   Sauf      Pipi      Struller  Gr#ten    Nasen     Pech      Leier     Reier     Bl$d      Schorf    Sabbel    Quengel   Bananen   Unsinns   Plunsch   Frust     Lotter    Fummel    Blubber   Wobbel    Vollbart  Lack      Klo       Moder     Knirsch   Zitter    Kalt      Schl%rf   Schnief   Klecker   Rumba     Schwurbel Schrabbel Schlauch  Schrumpel H%hner    Schlacker Brabbel   Krampf    "};
-const char data3[] PROGMEM = {"busch     fink      nagel     bammel    klopper   tentakel  br#gen    schlumpf  husten    ersatz    haufen    beutel    kn$del    r%ssel    hintern   eimer     pickel    stumpf    k#se      molch     kohl      gnubbel   sack      hansel    puller    alptraum  kasten    kopf      beutel    bewohner  kuchen    freund    nascher   opa       rotz      klumpen   peter     hansel    bengel    kollege   fleck     l$ffel    lurch     hobel     spaten    pudel     rettich   rinnstein unfall    lappen    k%bel     mops      pfosten   zwerg     pudding   nuckel    putzer    l%mmel    baron     mop       besen     feudel    br#gen    bolzen    pilz      stiefel   k$ter     gulli     pfropf    schrank   k$nig     pott      fass      rinnstein zinken    haken     witz      buckel    knecht    fan       schmand   klops     gauner    lulli     graupe    pimpf     kasper    spross    teufel    hammel    bock      schmodder pr%gel    spie*er   aal       groschen  geist     rochen    knochen   horst     quark     keks      zausel    iltis     jeck      honk      spargel   nippel    atze      muffel    greis     pin$kel   gehilfe   halunke   lauch     th$le     onkel     klecks    furunkel  auswurf   "};
-const char data4[] PROGMEM = {"birne     suppe     socke     bombe     boulette  schwarte  warze     beule     pest      pflaume   r%be      geige     ratte     krankheit wunde     oma       knolle    stulle    liese     brut      henne     zwiebel   bude      kiste     braut     leuchte   kr$te     nuss      spinne    grube     toilette  krake     pf%tze    backe     bimmel    klatsche  nudel     knolle    t%te      nase      made      tonne     krampe    b%rste    windel    semmel    haxe      gr#fin    schleuder zierde    kr#he     latte     niete     rassel    assel     torte     galle     latsche   schrulle  kanone    blase     pelle     trine     queen     zecke     praline   magt      pracht    fritte    so*e      larve     murmel    hexe      pampe     sirene    dr%se     klette    petze     brumme    glatze    qualle    natter    kralle    ziege     gr%tze    s%lze     nulpe     wampe     frikadelleflunder   trulla    zichte    uschi     kuh       pappe     hupe      tr$te     schabe    kanallie  scharte   rille     amsel     alge      l%cke     bremse    m%cke     b%rste    wanne     pocke     pl$rre    schabrackewuppe     kiste     tante     reuse     ratsche   pauke     fluppe    matrone   hummel    "};
+// Software
+#define Timeout  10000                           // 10 seconds before sleep
+
+// Wordlist arrays - a single array can hold only 4000 bytes | Used, if no EEPROM present | 5 x 90 words = 4500 bytes
+const char data1[] PROGMEM = {"Dumpfe    Staubige  Miefende  Stinkende Gammlige  Hinkende  Winzige   Popelige  Nasse     Furzende  Rostige   Hohle     Siffige   Miese     Krumme    Klapprige Trockene  Haarige   Uralte    Grunzende SchreiendeMeckernde Nervende  Sabbernde Triefende Modrige   Lumpige   Lausige   Sinnlose  Olle      Unn$tige  Dampfende Ledrige   Einarmige Leere     L#stige   Heulende  Pickelige Faule     Ranzige   Tr%be     Dralle    Blanke    Gierige   Tranige   Wackelnde Torkelnde W%ste     Fischige  Beknackte Modrige   VerkorksteHeimliche L$chrige  Brockige  Plumpe    Tattrige  Ratternde SchmutzigeLiderlicheD$sige    Prollige  Fiese     Dr$ge     Muffige   M%ffelnde Peinliche N$rgelnde Fettige   Zahnlose  Freche    Sch#bige  Piefige   Gummige   Labbrige  Patzige   Pelzige   Reudige   Pekige    M%rbe     Harzige   Lahme     Mickrige  Br#sige   Zottelige Gelbliche Knorrige  Salzige   Schrille  Dusselige "};
+const char data2[] PROGMEM = {"Stampf    Wabbel    Pups      Schmalz   Schmier   Hack      Zement    Spuck     Stachel   Keller    Laber     Stock     Runzel    Schrumpf  Ekel      Schnodder Matsch    Wurm      Eiter     Speck     Mist      Klotz     W%rg      Lumpen    Schleim   Wurst     Doof      Brat      Schwamm   Kratz     Grotten   Kriech    Gift      Schlabber Reier     G$bel     Knatter   Kleb      Schmadder Grind     Labber    Luft      Massen    Schimmel  Mini      Ochsen    Problem   Quassel   Schnaps   Saft      Fummel    Friemel   Zappel    Tropf     Pluntsch  Sumpf     Hecken    Grab      Schwitz   Schnarch  Schleich  Schluff   Fl$ten    Holz      Kreisch   Dulli     Luschen   Gammel    Alt$l     R$chel    Glibber   Lach      Krach     Knick     Quetsch   Quatsch   Quietsch  Knautsch  T%mpel    Teich     Knatter   Sauf      Pipi      Struller  Gr#ten    Nasen     Pech      Leier     Reier     Bl$d      "};
+const char data3[] PROGMEM = {"suppe     socke     bombe     boulette  schwarte  warze     beule     pest      pflaume   r%be      geige     ratte     krankheit wunde     oma       knolle    stulle    liese     brut      henne     zwiebel   bude      kiste     braut     leuchte   kr$te     nuss      spinne    grube     toilette  krake     pf%tze    backe     bratsche  klatsche  nudel     knolle    t%te      nase      made      tonne     krampe    b%rste    windel    semmel    haxe      gr#fin    schleuder zierde    kr#he     latte     niete     rassel    assel     torte     galle     latsche   schrulle  kanone    blase     pelle     trine     queen     zecke     praline   magt      pracht    fritte    so*e      larve     murmel    hexe      pampe     sirene    dr%se     klette    petze     brumme    glatze    qualle    natter    kralle    ziege     gr%tze    s%lze     nulpe     wampe     frikadelleflunder   trulla    "};
+const char data4[] PROGMEM = {"busch     fink      nagel     bammel    klopper   tentakel  br#gen    schlumpf  husten    ersatz    haufen    beutel    kn$del    r%ssel    hintern   eimer     pickel    stumpf    k#se      molch     kohl      gnubbel   sack      hansel    puller    alptraum  kasten    kopf      beutel    bewohner  kuchen    freund    nascher   opa       rotz      klumpen   peter     hansel    bengel    kollege   fleck     l$ffel    lurch     hobel     spaten    pudel     rettich   rinnstein unfall    lappen    k%bel     mops      pfosten   zwerg     pudding   nuckel    putzer    l%mmel    baron     mop       besen     feudel    br#gen    bolzen    pilz      stiefel   k$ter     gulli     pfropf    schrank   k$nig     pott      paddel    rinnstein zinken    haken     witz      buckel    knecht    fan       schmand   klops     gauner    lulli     graupe    pimpf     kasper    spross    teufel    hammel    "};
+const char data5[] PROGMEM = {"sekret    balg      blag      monster   gel$t     imitat    skelett   ding      unding    auge      brot      deo       insekt    bier      mus       ende      futter    gew#chs   produkt   ger$ll    bonbon    furunkel  paket     virus     desaster  st%ck     fass      zeug      ferkel    ei        gewitter  hormon    experimentgulasch   schnitzel fell      theater   schauspielbaby      spielzeug gel       donutloch gelee     gelumpe   zeug      schaf     molek%l   gew%rz    gespenst  gespinnst mittel    geschnetz organ     risotto   vieh      ges#*     gez%cht   ekzem     moped     ger%mpel  hirn      gef#*     wachstum  moloch    rinnsaal  gemenge   opossum   frettchen h#hnchen  plankton  untier    unget%m   gebr#u    fondue    beispiel  elend     leid      gift      verderben ungl%ck   drama     trauma    versagen  fiasko    dilemma   debakel   tabu      ger%cht   hindernis dingdong  "};
 
 // Variables
 char     *field;                                 // Pointer to one of the character arrays
 uint8_t  gender;                                 // Gender of the swearword
-uint16_t batches = 120;                          // Number of wordlist quadruple batches | 120 in Wordlist
+uint8_t  chars = 0;                              // Number of charakters in the word | Gobal
 uint16_t number, seed;                           // Random seed and helping variable
+uint16_t address[5] = {90, 90, 90, 90, 90};      // Wordlists addresses array - overwritten if EEPROM present
 uint32_t counter;                                // Timer begin for sleep timeout
-bool     wake = true;                            // Stay wake when button is pressed
+char     wordbuffer[20];                         // Buffer for read words
 bool     eeprom = false;                         // EEPROM used -> Auto detect
+
+volatile bool wake = true;                       // Stay wake when button is pressed
 
 SSD1306_Mini oled;                               // Set display
 
@@ -67,16 +75,25 @@ int main(void) {
 
     // Main routine - runs after waking up
     while(1) {
-      // Init Display
-      oled.init(0x3C);                           // Connect OLED via I2C
-      oled.startScreen();                        // Display on
+      // Init I2C
+      Wire.setClock(400000L);                    // Fast mode
+      Wire.begin();                              // Start I2C
 
-      // Look for EEPROM and count batches
-      TinyWireM.beginTransmission(0x50);         // Look for 24LCXX Eeprom at 0x50
-      if (TinyWireM.endTransmission() == 0) {    // 0x00 for used, 0xff for unused
-        eeprom = true;                           // if used, set eeprom flag
-        batches = read_eeprom(0) * 255;          // Calculate number batches:
-        batches += read_eeprom(1);               // First byte = High, second bye = low
+      // Init Display
+      oled.init();                               // Connect and start OLED via I2C
+
+      // Look for EEPROM and read wordlist addresses if available
+      Wire.beginTransmission(0x50);              // Look for 24LCXX EEPROM at 0x50
+      if (Wire.endTransmission() == 0) {         // 0x00 for used, 0xff for unused
+        eeprom = true;                           // if used, set EEPROM flag
+        gender = 0;                              // gender and seed are helping variables here
+        for (seed = 0; seed < 5; seed ++) {      // Read numbers of 4 wordlists
+          number = read_eeprom(0 + gender) * 255; // Calculate number: 
+          number += read_eeprom(1 + gender);     // First byte = High, second bye = low
+          if (number == 0) wake = false;         // Sleep if no EEPROM or no wordlist present
+          address[seed] = number;                // Write word numbers to array 
+          gender += 2;                           // Chance number address
+        }  
       }
 
       // Randomize number generator
@@ -102,70 +119,83 @@ int main(void) {
         counter = millis();                      // Set starting time
         oled.clear();                            // Clear display buffer
 
-        // Firt word
-        oled.cursorTo(0, 10);                    // Set cursor
-        gender = random(0, 2);                   // Set word gender
-        number = (random(0, batches) * 10);      // Select first word
-        if (eeprom) number += 2;
+        // First word
+        number = (random(0, address[0]));        // Select first word
         field = data1;                           // Vector to first array
-        write_swearword(number);                 // Write first word
+        get_swearword(number);                   // Read first word 
+        write_swearword(2);                      // Write first word
 
         // Second word first part
-        if (gender == 0) oled.printChar(49);     // If male, write "r"
-        oled.cursorTo(0, 20);                    // Next line
-        number = (random(0, batches) * 10);      // Select second word
-        if (eeprom) number += batches * 10;
+        seed = 0;                                // Set start address for array
+        gender = random(0, 3);                   // Set word gender
+        if (gender != 0) oled.printChar(48 + gender); // If male, write "r", if neutrum, write "s"
+        if (eeprom) seed = address[0];           // Set start adress for EEPROM
+        number = (random(seed, address[1]));     // Select second part of second word
         field = data2;                           // Vector to second array
-        write_swearword(number);                 // Write second word
+        get_swearword(number);                   // Read first part of second word 
         
         // Second word second part
-        number = (random(0, batches) * 10);      // Select second part of second word
-        if (eeprom) {
-          number += batches * 20 +2;
-          if (gender == 1) number += batches * 10;
-        }
-        field = ((gender == 0)? data3 : data4);  // Vector to male or female array
-        write_swearword(number);                 // Write second part
+        if (eeprom) seed = address[gender + 1];  // Set start adress for EEPROM
+        number = (random(seed, address[gender + 2])); // Select second part of second word
+        field = data3;                           // Female
+        if (gender == 1) field = data4;          // Male
+        if (gender == 2) field = data5;          // Neutrum
+        get_swearword(number);                   // Read second part of second word
+        write_swearword(4);                      // Write second word in second line
         
         // Wait for button or sleep
-        delay(500);                              // Debounce button
+        _delay_ms(500);                          // Debounce button
         wake = false;                            // Set to sleep
         while ((!wake) && (millis() - counter < 10000)); // Wait for button oder timeout
       } 
 
       // Go to sleep after 10 seconds if button is not pressed before                           
-      oled.sendCommand(GOFi2cOLED_Display_Off_Cmd);// Display off
+      oled.sendCommand(0xAE);                    // Display off and sleep
       set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
       sleep_mode();                              // Good night, sleep until reset
     }
   }
 }
 
-void write_swearword(uint16_t address) {
+// Functions
+void get_swearword(uint16_t address) {           // Fetch characters from EEPROM array
   char c;
   uint16_t i;
+  address *= 10;
   for (i = address; i < address + 10; i ++) {    // Read ten chars        
-    if (eeprom) c = read_eeprom(i);              // from EEPROM
-    else c = pgm_read_byte(&field[i]);           // Or from wordlist
+    c = pgm_read_byte(&field[i]);                // From wordlist
+    if (eeprom) c = read_eeprom(i + 10);         // or from EEPROM with address memory offset
     if (c != 32) {                               // Check for space
       switch (c) {                               // Print german Umlaute   
-        case 35: oled.printChar(27); break;      // # -> ä
-        case 36: oled.printChar(28); break;      // $ -> ö
-        case 37: oled.printChar(29); break;      // % -> ü
-        case 42: oled.printChar(30); break;      // * -> ß
-        default: oled.printChar(c - 65);         // Print non-empty character
+        case 35: wordbuffer[chars] = 27; break;  // # -> ä
+        case 36: wordbuffer[chars] = 28; break;  // $ -> ö
+        case 37: wordbuffer[chars] = 29; break;  // % -> ü
+        case 42: wordbuffer[chars] = 30; break;  // * -> ß
+        default: wordbuffer[chars] = c - 65;     // Set non-empty character
       }
+    chars ++;
     }
   } 
 }
 
-uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
-  TinyWireM.beginTransmission(0x50);             // open transmission to I2C-address 0x50
-  TinyWireM.write((uint16_t)(e_address >> 8));   // Send the MSB (Most Significant Byte) of the memory address
-  TinyWireM.write((uint16_t)(e_address & 0xFF)); // Send the LSB (Least Significant Byte) of the memory address
-  TinyWireM.endTransmission();                   // Close transmissiom
-  TinyWireM.requestFrom(0x50,1);                 // Request one byte
-  return TinyWireM.read();                       // Read and return byte
+void write_swearword(uint8_t line) {             // Write centered word
+  uint8_t x;
+  x = (128 - (chars * 7)) / 2;                   // Calculate centering
+  if (chars > 18)  x = (128 - (chars * 6)) / 2;  // or for very long words
+  if ((gender != 0) && (line == 2)) x -= 4;      // If not female, set first one half block left for gender char
+  oled.cursorTo(x, line);                        // Set cursor to selected line
+  for (x = 0; x < chars; x ++)                   // Print the characters
+    oled.printChar(wordbuffer[x]);               // from buffer
+  chars = 0;                                     // Set number of character back to 0
 }
 
-ISR(PCINT0_vect) {wake = true;}                  // Set wake flag if button is pressed
+uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
+  Wire.beginTransmission(0x50);                  // open transmission to I2C-address 0x50
+  Wire.write((uint16_t)(e_address >> 8));        // Send the MSB (Most Significant Byte) of the memory address
+  Wire.write((uint16_t)(e_address & 0xFF));      // Send the LSB (Least Significant Byte) of the memory address
+  Wire.endTransmission();                        // Close transmissiom
+  Wire.requestFrom(0x50,1);                      // Request one byte
+  return Wire.read();                            // Read and return byte
+}
+
+ISR(PCINT0_vect) {wake = true;}                  // Interrupt routine. Set wake flag if button is pressed

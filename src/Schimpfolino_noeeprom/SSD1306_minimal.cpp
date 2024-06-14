@@ -11,7 +11,11 @@
   Modified by: Jimbo.we (www.geekonfire.com)
   Modified by: CoPiino Electronics (http://copiino.cc)
   Modified by: Kirk Northrop (github.com/kirknorthrop)
-  Modified by: Nikolai Radke (www.monstermaker.de)
+  Modified by: Nikolai Radke (www.monstermaker.de) 
+               -- Reworked horrible formatting and spelling
+               -- Removed unused code
+               -- Modified for Wire.h instead of TinyWireM.h
+               -- Optimized Init-sequence and functions
 
       CoPiino Electronics invests time and resources providing this open source code,
       please support CoPiino Electronics and open-source hardware by purchasing
@@ -29,13 +33,25 @@
 	All text above must be included in any redistribution.
 */
 
-#include <TinyWireM.h>
-#include <USI_TWI_Master.h>
+#include <Wire.h>
+#include <util/delay.h>
 #include "SSD1306_minimal.h"
 
+#define InitLength 11                            // Number of Init commands
+
+const uint8_t InitSequence[] PROGMEM = {
+  0x20,             	                           // Set addressing mode
+  0x00,                                          // Horizontal mode
+  0xA8, 0x3F,                                    // Set multiplex. Height: 64 - 1
+  0x81,                                          // Set contrast
+  0xff,                                          // Highest level
+  0x8D, 0x14,                                    // Set charge pump
+  0xAF,                                          // Display ON
+  0xA1, 0xC8                                     // Flip the screen
+};
+
 // Reworked 5x8 font table with only used charakters
-const unsigned char  BasicFont[] PROGMEM = {
-  
+const unsigned char BasicFont[] PROGMEM = {
   0x7C, 0x12, 0x11, 0x12, 0x7C, // A 0
   0x7F, 0x49, 0x49, 0x49, 0x36, // B 1
   0x3E, 0x41, 0x41, 0x41, 0x22, // C 2
@@ -96,220 +112,78 @@ const unsigned char  BasicFont[] PROGMEM = {
   0x44, 0x64, 0x54, 0x4C, 0x44, // z 57
 };
 
-
-unsigned char SSD1306_Mini::getFlash( const unsigned char * mem, unsigned int idx  ){
-  unsigned char data= pgm_read_byte( &(mem[idx]) );
-  return data;
-
-}
- 
-void SSD1306_Mini::sendCommand(unsigned char command)
-{
-  TinyWireM.begin();                       //initialize I2C
-  TinyWireM.beginTransmission(SlaveAddress); // begin I2C communication
-
-  TinyWireM.send(GOFi2cOLED_Command_Mode);	     // Set OLED Command mode
-  TinyWireM.send(command);
-
-  TinyWireM.endTransmission();    		     // End I2C communication
+// Private functions
+void SSD1306_Mini::commandMode() {               
+  Wire.beginTransmission(SlaveAddress);          // Begin I2C transmission
+  Wire.write(0x80);                              // Command mode
 }
 
-void SSD1306_Mini::sendData(unsigned char Data)
-{
-  TinyWireM.begin();                    //initialize I2C
-  TinyWireM.beginTransmission(SlaveAddress); // begin I2C transmission
-  TinyWireM.send(GOFi2cOLED_Data_Mode);            // data mode
-  TinyWireM.send(Data);
-  TinyWireM.endTransmission();                    // stop I2C transmission
+void SSD1306_Mini::dataMode() {
+  Wire.beginTransmission(SlaveAddress);          // Begin I2C transmission
+  Wire.write(0x40);                              // Data mode
 }
 
-void SSD1306_Mini::init(uint8_t address)
-{
-  
- TinyWireM.begin();
- 
- delay(5);	//wait for OLED hardware init
-// constructor(128, 64);
- //SlaveAddress = address;
-
- sendCommand(GOFi2cOLED_Display_Off_Cmd);    /*display off*/
-
- sendCommand(Set_Multiplex_Ratio_Cmd);    /*multiplex ratio*/
- sendCommand(0x3F);    /*duty = 1/64*/
-
- sendCommand(Set_Display_Offset_Cmd);    /*set display offset*/
- sendCommand(0x00);
-
-
-    sendCommand(Set_Memory_Addressing_Mode_Cmd); 	//set addressing mode
-    sendCommand(HORIZONTAL_MODE); 			//set horizontal addressing mode
-
- sendCommand(0xB0); 			//set page address
- sendCommand(0x00); 	//set column lower address
- sendCommand(0x10); 	//set column higher address
-
-    
-
- sendCommand(0x40);    /*set display starconstructort line*/
-
- sendCommand(Set_Contrast_Cmd);    /*contract control*/
- sendCommand(0xcf);    /*128*/
-
- sendCommand(Segment_Remap_Cmd);    /*set segment remap*/
-
- sendCommand(COM_Output_Remap_Scan_Cmd);    /*Com scan direction*/
-
- sendCommand(GOFi2cOLED_Normal_Display_Cmd);    /*normal / reverse*/
-
- sendCommand(Set_Display_Clock_Divide_Ratio_Cmd);    /*set osc division*/
- sendCommand(0x80);
-
- sendCommand(Set_Precharge_Period_Cmd);    /*set pre-charge period*/
- sendCommand(0xf1);
-
- sendCommand(Set_COM_Pins_Hardware_Config_Cmd);    /*set COM pins*/
- sendCommand(0x12);
-
- sendCommand(Set_VCOMH_Deselect_Level_Cmd);    /*set vcomh*/
- sendCommand(0x30);
-
- sendCommand(Deactivate_Scroll_Cmd);
-
- sendCommand(Charge_Pump_Setting_Cmd);    /*set charge pump enable*/
- sendCommand(Charge_Pump_Enable_Cmd);
-
- sendCommand(GOFi2cOLED_Display_On_Cmd);    /*display ON*/
+void SSD1306_Mini::sendCommand(unsigned char command) { // Public funtcion now to turn off display
+  commandMode();
+  Wire.write(command);                           // Send command
+  Wire.endTransmission();    		                 // End I2C transmission
 }
 
-void SSD1306_Mini::clipArea(unsigned char col, unsigned char row, unsigned char w, unsigned char h){
-  
-  TinyWireM.begin();                    //initialize I2C
-  TinyWireM.beginTransmission(SlaveAddress); // begin I2C transmission
-  TinyWireM.send(GOFi2cOLED_Command_Mode);            // data mode
-  TinyWireM.send(Set_Column_Address_Cmd);
-  TinyWireM.send(0);
-
-  TinyWireM.send(col);
-  TinyWireM.send(col+w-1);
-
-  TinyWireM.endTransmission();                    // stop I2C transmission
-
-  TinyWireM.begin();                    //initialize I2C
-  TinyWireM.beginTransmission(SlaveAddress); // begin I2C transmission
-  TinyWireM.send(GOFi2cOLED_Command_Mode);            // data mode
-  TinyWireM.send(Set_Page_Address_Cmd);
-  TinyWireM.send(0);
-
-  TinyWireM.send(row); 
-  TinyWireM.send(row+h-1);
-
-  TinyWireM.endTransmission();                    // stop I2C transmission
-
+void SSD1306_Mini::sendData(unsigned char Data) {
+  dataMode();
+  Wire.write(Data);                              // Send data
+  Wire.endTransmission();                        // Stop I2C transmission
 }
 
-void SSD1306_Mini::cursorTo(unsigned char col, unsigned char row){
-  clipArea(col, row, 128-col, 8-row);
+// Public functions
+void SSD1306_Mini::init() {
+  uint8_t i;
+  _delay_ms(5);	                                 // Wait for OLED hardware init
+  commandMode();
+  for (i = 0; i < InitLength; i++)   
+    Wire.write(pgm_read_byte(&InitSequence[i]));
+  Wire.endTransmission();
 }
 
-void SSD1306_Mini::startScreen(){
-  
-  sendCommand(0x00 | 0x0);  // low col = 0
-  sendCommand(0x10 | 0x0);  // hi col = 0
-  sendCommand(0x40 | 0x0); // line #0
+void SSD1306_Mini::clipArea(unsigned char col, unsigned char row, unsigned char w, unsigned char h) {
+  commandMode();
+  Wire.write(0x21);                              // Set column start and end address
+  Wire.write(0x00);
+  Wire.write(col);
+  Wire.write(col + w - 1);
+  Wire.endTransmission();                 
+  commandMode();
+  Wire.write(0x22);                              // Set page start and end address
+  Wire.write(0x00);
+  Wire.write(row); 
+  Wire.write(row + h - 1);
+  Wire.endTransmission();               
+}
 
+void SSD1306_Mini::cursorTo(unsigned char col, unsigned char row) {
+  clipArea(col, row, 128 - col, 8 - row);            
 }
 
 void SSD1306_Mini::clear() {
-  
-  sendCommand(0x00 | 0x0);  // low col = 0
-  sendCommand(0x10 | 0x0);  // hi col = 0
-  sendCommand(0x40 | 0x0); // line #0
-    
-  clipArea(0,0,128,8);
-  
-    for (uint16_t i=0; i<=((128*64/8)/16); i++) 
-    {
-      // send a bunch of data in one xmission
-      TinyWireM.beginTransmission(SlaveAddress);
-      TinyWireM.send(GOFi2cOLED_Data_Mode);            // data mode
-      for (uint8_t k=0;k<16;k++){
-        TinyWireM.send( 0 );
-      }
-      TinyWireM.endTransmission();
-    }
-}
-
-
-void SSD1306_Mini::displayX(int off) {
-  sendCommand(0x00 | 0x0);  // low col = 0
-  sendCommand(0x10 | 0x0);  // hi col = 0
-  sendCommand(0x40 | 0x0); // line #0
-    
-    for (uint16_t i=0; i<=((128*64/8)/16); i++) 
-    {
-      // send a bunch of data in one xmission
-      TinyWireM.beginTransmission(SlaveAddress);
-      TinyWireM.send(GOFi2cOLED_Data_Mode);            // data mode
-      for (uint8_t k=0;k<16;k++){
-        TinyWireM.send((uint8_t) i*16 + k + off);
-      }
-      TinyWireM.endTransmission();
-    }
-}
-
-void SSD1306_Mini::printChar( char ch ){
-    
-    char data[5];
-    unsigned char i= ch;
-    
-    data[0]= getFlash(BasicFont, i*5 );
-    data[1]= getFlash(BasicFont, i*5 + 1);
-    data[2]= getFlash(BasicFont, i*5 + 2);
-    data[3]= getFlash(BasicFont, i*5 + 3);
-    data[4]= getFlash(BasicFont, i*5 + 4);    
-    
-    TinyWireM.beginTransmission(SlaveAddress);
-    TinyWireM.send(GOFi2cOLED_Data_Mode);            // data mode
-    
-    TinyWireM.send( 0x00 );
-    TinyWireM.send( data[0] );
-    TinyWireM.send( data[1] );
-    TinyWireM.send( data[2] );
-    TinyWireM.send( data[3] );
-    TinyWireM.send( data[4] );
-    TinyWireM.send( 0x00 );
-      
-    TinyWireM.endTransmission();
-  
-}
-
-void SSD1306_Mini::printString( char * pText ){
-  unsigned char i;
-  unsigned char len = strlen( pText );
-  
-  for (i=0;i<len;i++){
-     printChar( pText[i] ); 
+  uint8_t a, b;
+  sendCommand(0x00 | 0x0);                       // Low col = 0
+  sendCommand(0x10 | 0x0);                       // Hi col = 0
+  sendCommand(0x40 | 0x0);                       // Line #0   
+  clipArea(0 , 0, 128, 8);
+  for (a = 0; a <= 64; a ++) {
+    dataMode();
+    for (b = 0; b < 16;  b ++) 
+      Wire.write(0x00);
+    Wire.endTransmission();
   }
-  
-}
- 
- 
-void SSD1306_Mini::drawImage( const unsigned char * img, unsigned char col, unsigned char row, unsigned char w, unsigned char h ){
-  unsigned int i,k,data;
-  
-  clipArea( col, row, w, h);
-  
-  for (i=0;i< (w*h);i++){
-
-      data= getFlash( img, i);
-              
-      TinyWireM.beginTransmission(SlaveAddress);
-      TinyWireM.send(GOFi2cOLED_Data_Mode);            // data mode
-
-        TinyWireM.send((uint8_t) data );
-      TinyWireM.endTransmission();
-      
-  }
-  
 }
 
+void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
+  uint8_t a;
+  dataMode();
+  for (a=0; a<5; a++) 
+    Wire.write(pgm_read_byte(&BasicFont[ch * 5 + a]));
+  Wire.write(0x00);                              // One row space for better readabiltiy
+  if (chars < 19) Wire.write(0x00);              // One more row space when the line has enough room
+  Wire.endTransmission();
+}

@@ -37,9 +37,21 @@
 #include <util/delay.h>
 #include "SSD1306_minimal.h"
 
+#define InitLength 11                            // Number of Init commands
+
+const uint8_t InitSequence[] PROGMEM = {
+  0x20,             	                           // Set addressing mode
+  0x00,                                          // Horizontal mode
+  0xA8, 0x3F,                                    // Set multiplex. Height: 64 - 1
+  0x81,                                          // Set contrast
+  0xff,                                          // Highest level
+  0x8D, 0x14,                                    // Set charge pump
+  0xAF,                                          // Display ON
+  0xA1, 0xC8                                     // Flip the screen
+};
+
 // Reworked 5x8 font table with only used charakters
 const unsigned char BasicFont[] PROGMEM = {
-  
   0x7C, 0x12, 0x11, 0x12, 0x7C, // A 0
   0x7F, 0x49, 0x49, 0x49, 0x36, // B 1
   0x3E, 0x41, 0x41, 0x41, 0x22, // C 2
@@ -111,7 +123,7 @@ void SSD1306_Mini::dataMode() {
   Wire.write(0x40);                              // Data mode
 }
 
-void SSD1306_Mini::sendCommand(unsigned char command) { // Public funtion now to turn off display
+void SSD1306_Mini::sendCommand(unsigned char command) { // Public funtcion now to turn off display
   commandMode();
   Wire.write(command);                           // Send command
   Wire.endTransmission();    		                 // End I2C transmission
@@ -124,21 +136,13 @@ void SSD1306_Mini::sendData(unsigned char Data) {
 }
 
 // Public functions
-void SSD1306_Mini::init(uint8_t address) {
+void SSD1306_Mini::init() {
+  uint8_t i;
   _delay_ms(5);	                                 // Wait for OLED hardware init
-  Wire.setClock(400000L);                        // Fast mode
-  Wire.begin();                                  // Start I2C
-  sendCommand(0x20); 	                           // Set addressing mode
-  sendCommand(0x00);                             // Horizontal mode
-  sendCommand(0xA8);                             // Set multiplex
-  sendCommand(0x3F);                             // Height: 64 - 1
-  sendCommand(0x81);                             // Set contrast
-  sendCommand(0xff);                             // Highest level
-  sendCommand(0x8D);                             // Set charge pump
-  sendCommand(0x14);                             // Enable
-  sendCommand(0xAF);                             // Display ON
-  sendCommand(0xA1);                             // Flip the screen
-  sendCommand(0xC8);
+  commandMode();
+  for (i = 0; i < InitLength; i++)   
+    Wire.write(pgm_read_byte(&InitSequence[i]));
+  Wire.endTransmission();
 }
 
 void SSD1306_Mini::clipArea(unsigned char col, unsigned char row, unsigned char w, unsigned char h) {

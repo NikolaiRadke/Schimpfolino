@@ -6,10 +6,10 @@
     For ATtiny45/85 - set to 8 Mhz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" first!
 
-    Flash usage: 3.706 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.516 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       5mA (idle) | 7μA (sleep)
 
-    Umlaute in EEPROM file have to be converted (UTF-8):
+    Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
     Last charakter of a wordlist is '!'
 
@@ -32,6 +32,9 @@
 
 // Hardware
 #define Button   PB1                             // Button address       
+
+// Software
+#define Timeout  10000                           // 10 seconds before sleep
    
 // Variables
 uint8_t  gender;                                 // Gender of the swearword
@@ -63,11 +66,15 @@ int main(void) {
 
     // Main routine - runs after waking up
     while(1) {
+      // Init I2C
+      Wire.setClock(400000L);                    // Fast mode
+      Wire.begin();                              // Start I2C
+
       // Init Display
-      oled.init(0x3C);                           // Connect and start OLED via I2C
+      oled.init();                               // Connect and start OLED via I2C
 
       // Read wordlist addresses
-      gender = 0;
+      gender = 0;                                // gender and seed are helping variables here
       for (seed = 0; seed < 5; seed ++) {        // Read numbers of 4 wordlists
         number = read_eeprom(0 + gender) * 255;  // Calculate number: 
         number += read_eeprom(1 + gender);       // First byte = High, second bye = low
@@ -101,30 +108,24 @@ int main(void) {
 
         // First word
         number = (random(0, address[0]));        // Select first word
-        get_swearword(number * 10 + 10);         // Read word from eeprom
+        get_swearword(number);                   // Read word from EEPROM
         write_swearword(2);                      // Write first word in the first line
 
         // Second word first part
         gender = random(0, 3);                   // Set word gender
-        if (gender == 1) oled.printChar(49);     // If male, write "r"
-        if (gender == 2) oled.printChar(50);     // If neutrum, write "s"
+        if (gender != 0) oled.printChar(48 + gender); // If male, write "r", if neutrum, write "s"
         number = (random(address[0], address[1])); // Select second word
-        get_swearword(number * 10 + 10);         // Read second word from eeprom
+        get_swearword(number);                   // Read second word from EEPROM
         
         // Second word second part
-        if (gender == 0)                         // Female
-          number = (random(address[1], address[2])); // Select second part of second word
-        if (gender == 1)                         // Male
-          number = (random(address[2], address[3])); // Select second part of second word
-        if (gender == 2)                         // Neutrum
-          number = (random(address[3], address[4])); // Select second part of second word
-        get_swearword(number * 10 + 10);         // Read second part of second word
+        number = (random(address[gender + 1], address[gender + 2])); // Select second part of second word
+        get_swearword(number);                   // Read second part of second word
         write_swearword(4);                      // Write second word in second line
         
         // Wait for button or sleep
-        _delay_ms(500);                              // Debounce button
+        _delay_ms(500);                          // Debounce button
         wake = false;                            // Set to sleep
-        while ((!wake) && (millis() - counter < 10000)); // Wait for button oder timeout
+        while ((!wake) && (millis() - counter < Timeout)); // Wait for button oder timeout
       } 
 
       // Go to sleep after 10 seconds if button is not pressed before                           
@@ -136,11 +137,12 @@ int main(void) {
 }
 
 // Functions
-void get_swearword(uint16_t address) {           // Fetch characters from eeprom
+void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
   char c;
   uint16_t i;
+  address *= 10;
   for (i = address; i < address + 10; i ++) {    // Read 10 characters        
-    c = read_eeprom(i);                          // from eeprom
+    c = read_eeprom(i+10);                       // from EEPROM with address memory offset
     if (c != 32) {                               // Check for space
       switch (c) {                               // Set german Umlaute   
         case 35: wordbuffer[chars] = 27; break;  // # -> ä
@@ -156,10 +158,8 @@ void get_swearword(uint16_t address) {           // Fetch characters from eeprom
 
 void write_swearword(uint8_t line) {             // Write centered word
   uint8_t x;
-  if (chars < 19)                                // Calculate centering
-    x = (128 - (chars * 7)) / 2;                 // for shorter words
-  else
-    x = (128 - (chars * 6)) / 2;                 // or for very long words
+  x = (128 - (chars * 7)) / 2;                   // Calculate centering
+  if (chars > 18)  x = (128 - (chars * 6)) / 2;  // or for very long words
   if ((gender != 0) && (line == 2)) x -= 4;      // If not female, set first one half block left for gender char
   oled.cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; x ++)                   // Print the characters
