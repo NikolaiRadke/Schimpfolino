@@ -1,12 +1,12 @@
 /*  
-    Schimpfolino V1.0 13.06.2024 - Nikolai Radke
+    Schimpfolino V1.0 14.06.2024 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | With or without additional 24LCXX EEPROM
     For ATtiny85 only - set to 8 Mhz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" first!
 
-    Flash usage: 8.152 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 8.188 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       5mA (idle) | 7μA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -90,7 +90,6 @@ int main(void) {
         for (seed = 0; seed < 5; seed ++) {      // Read numbers of 4 wordlists
           number = read_eeprom(0 + gender) * 255; // Calculate number: 
           number += read_eeprom(1 + gender);     // First byte = High, second bye = low
-          if (number == 0) wake = false;         // Sleep if no EEPROM or no wordlist present
           address[seed] = number;                // Write word numbers to array 
           gender += 2;                           // Chance number address
         }  
