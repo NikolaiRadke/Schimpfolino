@@ -2,7 +2,6 @@
 
 * **Schimpfolino**: a sketch for use with EEPROM only. For ATtiny45/85. **Recommended**.
 * **Schimpfolino_noreeprom**: a hybrid sketch for use with or without EEPROM with reduced internal word list. For **ATtiny85 only**.
-  **WARNING:** Under construction.  
 * **eeprom/**: folder for files with EEPROM content and writing tool.  
 
 # Compiling instructions for Schimpfolino
