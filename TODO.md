@@ -6,4 +6,4 @@
 
 ## Done
 
-* Rewirting Schimpfolino-eeprom
+* Rewriting Schimpfolino-eeprom
