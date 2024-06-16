@@ -28,7 +28,7 @@ Each file contains a set of words. Each word has **10** characters, spaces are m
 German **Umlaute** must be converted and only small letters are possible:
 **ä** -> **#** | **ö** -> **$** | **ü** -> **%** | **ß** -> *  
 
-There is an (beta) editor **eeprom.html** in the files folder. You can easily add new words or generate a new eepromX.txt. Umlaute and the terminating ! are converted automatically.  
+There is an (beta) editor **eeprom.html** in the files folder. You can easily add new words or generate a new eepromX.txt. Umlaute will be converted and spaces and the terminating ! added automatically.  
 
 
 
