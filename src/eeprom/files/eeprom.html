@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schimpfolinos Hirnprogrammierer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #container {
+            margin-bottom: 20px;
+        }
+        .textfield {
+            margin-bottom: 5px;
+        }
+        .textfield input {
+            width: 100px;
+        }
+    </style>
+    <script>
+        function loadFileAsText(){
+            const fileToLoad = document.getElementById("fileToLoad").files[0];
+            const fileReader = new FileReader();
+            fileReader.onload = function(fileLoadedEvent){
+                const textLoaded = fileLoadedEvent.target.result;
+                let buffer = '';
+                let counter = 0;
+                for (let i = 0; i < textLoaded.length; i ++ ) {
+                    switch (textLoaded.charAt(i)) {
+                        case '#': buffer += 'ä'; break;
+                        case '$': buffer += 'ö'; break;
+                        case '%': buffer += 'ü'; break;
+                        case '*': buffer += 'ß'; break;
+                        default: buffer += textLoaded.charAt(i);  
+                    } 
+                    counter ++;                 
+                    if (counter == 10) {
+                        addTextField(buffer);
+                        buffer = '';
+                        counter = 0;
+                    }
+                }
+            }
+            fileReader.readAsText(fileToLoad, "UTF-8");
+        }
+        function addTextField(entry) {
+            const container = document.getElementById('container');
+            const div = document.createElement('div');
+            div.className = 'textfield';
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.maxLength = 10;
+            input.value = entry;
+            div.append(input);
+            container.append(div);
+        }
+        function saveTextFields() {
+            const container = document.getElementById('container');
+            const inputs = container.getElementsByTagName('input');
+            let content = '';
+            for (let input of inputs) {
+                let length = input.value.length;
+                let text = input.value;
+                for (let i = 0; i < length; i ++) {
+                    text = text.replace('ä', '#');
+                    text = text.replace('ö", "$');
+                    text = text.replace('ü', '%');
+                    text = text.replace('ß', '*');
+                }
+                if (length < 10) 
+                    for (let  i = 0; i < (10 - length); i ++) {               
+                        text += ' ';
+                    }
+                content += text;
+            }
+            content += '!';
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename.value;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</head>
+<body>
+    <h2>Schimpfolino EEPROM Tool</h2>
+    <div>
+    <input type="file" id="fileToLoad">
+    <button onclick="loadFileAsText()">Datei laden</button><br />
+    <br />
+    <div id="container"></div>
+    <button onclick="addTextField('')">Textfeld hinzufügen</button>
+    <select id="filename">
+        <option value="eeprom1.txt">eeprom1.txt</option>
+        <option value="eeprom2.txt">eeprom2.txt</option>
+        <option value="eeprom3.txt">eeprom3.txt</option>
+        <option value="eeprom4.txt">eeprom4.txt</option>
+        <option value="eeprom5.txt">eeprom5.txt</option>
+    </select>
+    <button onclick="saveTextFields()">Speichern</button>
+</body>
+</html>
