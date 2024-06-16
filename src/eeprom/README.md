@@ -25,8 +25,10 @@ You need:
 
 Each file contains a set of words. Each word has **10** characters, spaces are mandatory! Just write them one after another. The EEPROM writing sketch will calculate their number and store both number and words into the EEPROM. The last character of the file has to be a **!**.
 
-German Umlaute must be converted and only small letters are possible:
-**ä** -> **#** | **ö** -> **$** | **ü** -> **%** | **ß** -> *****  
+German **Umlaute** must be converted and only small letters are possible:
+**ä** -> **#** | **ö** -> **$** | **ü** -> **%** | **ß** -> *  
+
+There is an (beta) editor **eeprom.html** in the files folder. You can easily add new words or generate a new eepromX.txt. Umlaute and the terminating ! are converted automatically.  
 
 
 
