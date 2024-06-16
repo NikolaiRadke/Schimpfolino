@@ -26,7 +26,7 @@ You need:
 Each file contains a set of words. Each word has **10** characters, spaces are mandatory! Just write them one after another. The EEPROM writing sketch will calculate their number and store both number and words into the EEPROM. The last character of the file has to be a **!**.
 
 German Umlaute must be converted and only small letters are possible:
-**ä** -> **#** | **ö** -> **$** | **ü** -> **%** | **ß** -> ** * **  
+**ä** -> **#** | **ö** -> **$** | **ü** -> **%** | **ß** -> *****  
 
 
 
