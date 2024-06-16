@@ -59,9 +59,9 @@ Root directory with some explanation files.
     ├── eeprom/
     |   All you need to flash your EEPROM.
     |   ├── eeprom_writer/
-    |   |   Arduino sketch to write to your EEPROM
+    |   |   Arduino sketch to write to your EEPROM.
     |   └── files/
-    |       The EEPROM content word lists.
+    |       The EEPROM content word lists and the editor.
     |
     ├── Schimpfolino/
     |   Standard sketch with libraries.
