@@ -145,7 +145,7 @@ int main(void) {
         // Wait for button or sleep
         _delay_ms(500);                          // Debounce button
         wake = false;                            // Set to sleep
-        while ((!wake) && (millis() - counter < 10000)); // Wait for button oder timeout
+        while ((!wake) && (millis() - counter < Timeout)); // Wait for button oder timeout
       } 
 
       // Go to sleep after 10 seconds if button is not pressed before                           

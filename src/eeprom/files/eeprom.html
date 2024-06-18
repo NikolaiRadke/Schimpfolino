@@ -7,7 +7,34 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+        	padding: 0;
+            height: 100%;
+        	color: #000;
+            text-align: center;
+        }
+        .top {
+            background-color: #00c8c8;
+            height: 30px;
+            padding: 10px;
+            display: block;
+        }
+        .mitte {
+
+            position: absolute;
+            width: 100%;
+        	top: 50px;
+            bottom: 40px;
+            overflow: auto;
+            text-align: center;
+	    }
+        .unten {
+            position: absolute;
+            width: 100%;
+            bottom: 0px;
+            background-color: #00c8c8;
+            height: 30px;
+            padding: 10px;
         }
         #container {
             margin-bottom: 20px;
@@ -17,6 +44,22 @@
         }
         .textfield input {
             width: 100px;
+        }
+        .button {
+	        color: #000;
+        	border: 2px solid #d04040;
+        	background-color: #fff;
+        }
+        .button:hover {
+            background-color: #d0d0d0;
+        }
+        input[type=file]::file-selector-button {
+            color: #000;
+            border: 2px solid #d04040;
+            background-color: #fff;
+        }
+        input[type=file]::file-selector-button:hover {
+            background-color: #d0d0d0;
         }
     </style>
     <script>
@@ -55,6 +98,7 @@
             input.value = entry;
             div.append(input);
             container.append(div);
+            container.scrollTop = container.scrollHeight;
         }
         function saveTextFields() {
             const container = document.getElementById('container');
@@ -73,7 +117,7 @@
                     for (let  i = 0; i < (10 - length); i ++) {               
                         text += ' ';
                     }
-                content += text;
+                if (text !='          ') content += text;
             }
             content += '!';
             const blob = new Blob([content], { type: 'text/plain' });
@@ -89,20 +133,23 @@
     </script>
 </head>
 <body>
-    <h2>Schimpfolino EEPROM Tool</h2>
-    <div>
-    <input type="file" id="fileToLoad">
-    <button onclick="loadFileAsText()">Datei laden</button><br />
-    <br />
-    <div id="container"></div>
-    <button onclick="addTextField('')">Textfeld hinzufügen</button>
-    <select id="filename">
-        <option value="eeprom1.txt">eeprom1.txt</option>
-        <option value="eeprom2.txt">eeprom2.txt</option>
-        <option value="eeprom3.txt">eeprom3.txt</option>
-        <option value="eeprom4.txt">eeprom4.txt</option>
-        <option value="eeprom5.txt">eeprom5.txt</option>
-    </select>
-    <button onclick="saveTextFields()">Speichern</button>
+    <div class="top">    
+        <input class="button" type="file" id="fileToLoad" />
+        <button class="button" onclick="loadFileAsText()">Datei laden</button><br />
+    </div>
+    <div class="mitte" id="container">
+        <h1>Schimpfolinos Gehirn</h1>
+    </div>
+    <div class="unten">
+        <button class="button" onclick="addTextField('')">Textfeld hinzufügen</button>
+        <select class="button" id="filename">
+            <option value="eeprom1.txt">eeprom1.txt</option>
+            <option value="eeprom2.txt">eeprom2.txt</option>
+            <option value="eeprom3.txt">eeprom3.txt</option>
+            <option value="eeprom4.txt">eeprom4.txt</option>
+            <option value="eeprom5.txt">eeprom5.txt</option>
+        </select>
+        <button class="button" onclick="saveTextFields()">Speichern</button>
+    </div>
 </body>
 </html>
