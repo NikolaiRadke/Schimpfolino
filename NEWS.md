@@ -2,6 +2,7 @@
 
 # 2024
 
+* **18.06.2024** The **EEPROM Editor** has been improved.  
 * **16.06.2024** An **Editor** for the word list files was added.  
 * **14.06.2024** Optimized code and finished **Schimpfolino_noeeprom**. Both are **1.0-140624** now.
 * **13.06.2024** Added **TODO.md** - everyone needs a ToDo list!  
