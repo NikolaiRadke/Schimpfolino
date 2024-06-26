@@ -31,10 +31,10 @@
 #include "SSD1306_minimal.h"                     // Modified library!
 
 // Hardware
-#define Button   PB1                             // Button address       
+#define  Button   PB1                            // Button address       
 
 // Software
-#define Timeout  10000                           // 10 seconds before sleep
+#define  Timeout  10000                          // 10 seconds before sleep
    
 // Variables
 uint8_t  gender;                                 // Gender of the swearword
@@ -42,11 +42,11 @@ uint8_t  chars = 0;                              // Number of charakters in the 
 uint16_t number, seed;                           // Random seed and helping variable
 uint16_t address[5];                             // Wordlists addresses array
 uint32_t counter;                                // Timer begin for sleep timeout
-char     wordbuffer[20];                         // Buffer for read words
+char     wordbuffer[20];                         // Buffer for reading words
 
 volatile bool wake = true;                       // Stay wake when button is pressed
 
-SSD1306_Mini    oled;                            // Set display
+SSD1306_Mini  oled;                            // Set display
 
 int main(void) {                                 
   init(); {                                      // Setup
