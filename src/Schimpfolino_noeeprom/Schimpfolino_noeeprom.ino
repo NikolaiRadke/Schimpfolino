@@ -104,7 +104,7 @@ int main(void) {
         eeprom_write_word(number, 0);            // Write seed 0
       }
       seed = eeprom_read_word(number);           // Read seed
-      if (seed > 900) {                          // After 900 write-cyles move to another address
+      if (seed > 999) {                          // After 1000 write-cyles move to another address
         seed = 0;                                // to keep the EEPROM alive
         number += 2;                             // 2 places, adress is a word
         eeprom_write_word(0, number);            // Write address of seed
