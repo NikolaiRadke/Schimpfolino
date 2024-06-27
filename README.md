@@ -37,7 +37,7 @@ And the following hardware:
 * 24LC64 or larger EEPROM
 * 0,96" SSD1306 oled display
 * Button
-* 2 Dip-8 sockets
+* 2 Dip8 sockets
 * Batteryholder
 * CR2032 battery
 * Double-sided adhesive pad
