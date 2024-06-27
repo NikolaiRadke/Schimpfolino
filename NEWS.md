@@ -11,7 +11,7 @@
 * **13.06.2024** (Slighty) better text centering and higher display contrast. **1.0-130624**. 
 * **12.06.2024** Big SSD1306 rework. Version is now **1.0-120624**. 
 * **11.06.2024** **Schimpfolino_wire** is now ***Schimpfolino**. TinyWireM is not needed anymore.
-* **07.06.2024** Added alternative firmware **Schimpfolino_wire** vwith version **1.0-070624**  
+* **07.06.2024** Added alternative firmware **Schimpfolino_wire** with version **1.0-070624**  
 * **07.06.2024** Updated **Schimpfolino** to **1.0-070624** with small libary cleanups.  
 * **07.06.2024** Switched to ATTinyCore. It's much more modern, builds smaller binaries and has tons of features.  
 * **29.05.2024** Schimpfolino got his first release!  
