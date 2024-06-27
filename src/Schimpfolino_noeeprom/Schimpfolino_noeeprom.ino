@@ -36,7 +36,7 @@
 // Software
 #define Timeout  10000                           // 10 seconds before sleep
 
-// Wordlist arrays - a single array can hold only 4000 bytes | Used, if no EEPROM present | 5 x 90 words = 4500 bytes
+//Wordlist arrays - a single array can hold only 4000 bytes | Used, if no EEPROM present | 5 x 90 words = 4500 bytes
 const char data1[] PROGMEM = {"Dumpfe    Staubige  Miefende  Stinkende Gammlige  Hinkende  Winzige   Popelige  Nasse     Furzende  Rostige   Hohle     Siffige   Miese     Krumme    Klapprige Trockene  Haarige   Uralte    Grunzende SchreiendeMeckernde Nervende  Sabbernde Triefende Modrige   Lumpige   Lausige   Sinnlose  Olle      Unn$tige  Dampfende Ledrige   Einarmige Leere     L#stige   Heulende  Pickelige Faule     Ranzige   Tr%be     Dralle    Blanke    Gierige   Tranige   Wackelnde Torkelnde W%ste     Fischige  Beknackte Modrige   VerkorksteHeimliche L$chrige  Brockige  Plumpe    Tattrige  Ratternde SchmutzigeLiderlicheD$sige    Prollige  Fiese     Dr$ge     Muffige   M%ffelnde Peinliche N$rgelnde Fettige   Zahnlose  Freche    Sch#bige  Piefige   Gummige   Labbrige  Patzige   Pelzige   Reudige   Pekige    M%rbe     Harzige   Lahme     Mickrige  Br#sige   Zottelige Gelbliche Knorrige  Salzige   Schrille  Dusselige "};
 const char data2[] PROGMEM = {"Stampf    Wabbel    Pups      Schmalz   Schmier   Hack      Zement    Spuck     Stachel   Keller    Laber     Stock     Runzel    Schrumpf  Ekel      Schnodder Matsch    Wurm      Eiter     Speck     Mist      Klotz     W%rg      Lumpen    Schleim   Wurst     Doof      Brat      Schwamm   Kratz     Grotten   Kriech    Gift      Schlabber Reier     G$bel     Knatter   Kleb      Schmadder Grind     Labber    Luft      Massen    Schimmel  Mini      Ochsen    Problem   Quassel   Schnaps   Saft      Fummel    Friemel   Zappel    Tropf     Pluntsch  Sumpf     Hecken    Grab      Schwitz   Schnarch  Schleich  Schluff   Fl$ten    Holz      Kreisch   Dulli     Luschen   Gammel    Alt$l     R$chel    Glibber   Lach      Krach     Knick     Quetsch   Quatsch   Quietsch  Knautsch  T%mpel    Teich     Knatter   Sauf      Pipi      Struller  Gr#ten    Nasen     Pech      Leier     Reier     Bl$d      "};
 const char data3[] PROGMEM = {"suppe     socke     bombe     boulette  schwarte  warze     beule     pest      pflaume   r%be      geige     ratte     krankheit wunde     oma       knolle    stulle    liese     brut      henne     zwiebel   bude      kiste     braut     leuchte   kr$te     nuss      spinne    grube     toilette  krake     pf%tze    backe     bratsche  klatsche  nudel     knolle    t%te      nase      made      tonne     krampe    b%rste    windel    semmel    haxe      gr#fin    schleuder zierde    kr#he     latte     niete     rassel    assel     torte     galle     latsche   schrulle  kanone    blase     pelle     trine     queen     zecke     praline   magt      pracht    fritte    so*e      larve     murmel    hexe      pampe     sirene    dr%se     klette    petze     brumme    glatze    qualle    natter    kralle    ziege     gr%tze    s%lze     nulpe     wampe     frikadelleflunder   trulla    "};
@@ -55,12 +55,12 @@ bool     eeprom = false;                         // EEPROM used -> Auto detect
 
 volatile bool wake = true;                       // Stay wake when button is pressed
 
-SSD1306_Mini oled;                               // Set display
+SSD1306_Mini  oled;                              // Set display
 
 int main(void) {                                 
   init(); {                                      // Setup
     // Power saving
-    ACSR |= _BV(ACD);                            // Disable analog comparator - default?
+    ACSR |= _BV(ACD);                            // Disable analog comparator - anyway by default?
     ADCSRA &= ~_BV(ADEN);                        // Switch ADC off
 
     // Port setup
@@ -134,7 +134,7 @@ int main(void) {
         get_swearword(number);                   // Read first part of second word 
         
         // Second word second part
-        if (eeprom) seed = address[gender + 1];  // Set start adress for EEPROM
+        if (eeprom) seed = address[gender + 1];  // Set start address for EEPROM
         number = (random(seed, address[gender + 2])); // Select second part of second word
         field = data3;                           // Female
         if (gender == 1) field = data4;          // Male
@@ -151,7 +151,7 @@ int main(void) {
       // Go to sleep after 10 seconds if button is not pressed before                           
       oled.sendCommand(0xAE);                    // Display off and sleep
       set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
-      sleep_mode();                              // Good night, sleep until reset
+      sleep_mode();                              // Good night, sleep until interrupt
     }
   }
 }
@@ -161,9 +161,9 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
   char c;
   uint16_t i;
   address *= 10;
-  for (i = address; i < address + 10; i ++) {    // Read ten chars        
+  for (i = address; i < address + 10; i ++) {    // Read 10 characters        
     c = pgm_read_byte(&field[i]);                // From wordlist
-    if (eeprom) c = read_eeprom(i + 10);         // or from EEPROM with address memory offset
+    if (eeprom) c = read_eeprom(i + 10);         // Or from EEPROM with address memory offset
     if (c != 32) {                               // Check for space
       switch (c) {                               // Print german Umlaute   
         case 35: wordbuffer[chars] = 27; break;  // # -> ä
@@ -172,7 +172,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
         case 42: wordbuffer[chars] = 30; break;  // * -> ß
         default: wordbuffer[chars] = c - 65;     // Set non-empty character
       }
-    chars ++;
+    chars ++;                                    // Increase number of fetched characters
     }
   } 
 }

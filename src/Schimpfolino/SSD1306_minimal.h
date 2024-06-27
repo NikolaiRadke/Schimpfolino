@@ -12,7 +12,7 @@
   Modified by: CoPiino Electronics (http://copiino.cc)
   Modified by: Kirk Northrop (github.com/kirknorthrop)
   Modified by: Nikolai Radke (www.monstermaker.de)
-               -- Reworked horrible formatting and spelling
+               -- Reworked horrible formating and spelling
                -- Removed unused code
                -- Modified for Wire.h instead of TinyWireM.h
                -- Optimized Init-sequence and functions
@@ -47,7 +47,7 @@ extern uint8_t chars;
 
 class SSD1306_Mini {
   public:
-    // Call this function once in "void setup()" to initiallize the display
+    // Call this function once to initiallize the display
     void init();
   
     // Reset clipArea to maximum and clear the display

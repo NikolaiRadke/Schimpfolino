@@ -46,12 +46,12 @@ char     wordbuffer[20];                         // Buffer for reading words
 
 volatile bool wake = true;                       // Stay wake when button is pressed
 
-SSD1306_Mini  oled;                            // Set display
+SSD1306_Mini  oled;                              // Set display
 
 int main(void) {                                 
   init(); {                                      // Setup
     // Power saving
-    ACSR = (1 << ACD);                           // Disable analog comparator - by default?
+    ACSR = (1 << ACD);                           // Disable analog comparator - anyway by default?
     ADCSRA &= ~(1 << ADEN);                      // Switch ADC off
 
     // Port setup
@@ -131,7 +131,7 @@ int main(void) {
       // Go to sleep after 10 seconds if button is not pressed before                           
       oled.sendCommand(0xAE);                    // Display off and sleep
       set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
-      sleep_mode();                              // Good night, sleep until reset
+      sleep_mode();                              // Good night, sleep until interrupt
     }
   }
 }
