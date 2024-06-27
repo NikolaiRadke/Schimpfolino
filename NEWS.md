@@ -2,7 +2,7 @@
 
 # 2024
   
-* **27.06.2024** write_eeprom now waits for EEPROM connection.
+* **27.06.2024** eeprom_writer now waits for EEPROM connection.
 * **26.06.2024** Added hints to pull up resistors when using the EEPROM with Arduino.  
 * **18.06.2024** The **EEPROM Editor** has been improved.  
 * **16.06.2024** An **EEPROM Editor** for the word list files was added.  
