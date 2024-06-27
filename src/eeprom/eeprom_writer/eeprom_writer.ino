@@ -1,33 +1,48 @@
 /*
-    Schimpfolino EEPROM writer V1.0 25.06.2024 - Nikolai Radke
-    EEPROMS bigger than 512 kBit (65 kB) are NOT supported.
+    Schimpfolino EEPROM writer V1.0 27.06.2024 - Nikolai Radke
+    EEPROMS bigger than 512 kBit (64 kB) are NOT supported.
     24LCXX supports page writing, but is unused here.
   
     This sketch writes the wordlist into 24LCXXX eeprom.
     No code and power optimizations were used for better readability.
-    Umlaute must be converted for UTF-8.
+    Umlaute must be converted for UTF-8, only first 128 characters are supported.
     #=ä, $=ö, %=ü, *=ß. Capitals are not supported.
     Last character of each file must be !.
  
-    Wordlist addresses:
+    Wordlist addresses in EEPROM:
     0+1: eeprom1.txt | 2+3: eeprom2.txt | 4+5: eeprom3.txt | 6+7: eeprom4.txt | 8+9: eeprom5.txt
     See README in folder src/eeprom/.
+
+    Wireing:
+             ----
+    GND - 1 |    | 8 - VCC (3.3V)
+    GND - 2 |    | 7 
+    GND - 3 |    | 6 - SCL (A5)
+    GND - 4 |    | 5 - SDA (A4) (- 4k7 Resistor - VCC)
+             -----
+    The 4k7 resistor is optional, see src/eeprom/README.md
 */
 
-#include <Wire.h>
+#include <Wire.h>                                // I2C Library
 
-#define eeprom  0x50                             // 24LC256 address
+#define eeprom  0x50                             // 24LCXXX address
 
 uint16_t address = 10;                           // Starting adress
-uint16_t words = 0;
+uint16_t words = 0;                              // Count words
 uint8_t  low, c;                                 // Helping variables
-uint8_t  file = 0;
+uint8_t  file = 0;                               // Count EEPROM text files
 
 void setup() {
-  Serial.begin(9600);                            // Start serial connection
-  Wire.begin();                                  // Connect ot EEPROM via I2C
-  Serial.println("Select file to send");
-  delay(100);
+  Serial.begin(9600);                            // Start serial connection to terminal
+  Wire.begin();                                  // Start I2C connection
+  Serial.print("Looking for EEPROM... ");
+  while(1) {                                     // Wait for EEPROM connection
+    Wire.beginTransmission(0x50);                // Look for 24LCXX EEPROM at 0x50
+    if (Wire.endTransmission() == 0x00) break;   // 0x00 for used, 0xff for unused
+    delay(100);
+  }
+  Serial.println("found!");
+  Serial.println("Select file to send");         // Ready to flash
 }
 
 void loop() {
@@ -38,7 +53,7 @@ void loop() {
     write_byte(address, low);                    // Write byte to EEPROM
     address ++;                                  // Next address
   }
-  if (c == 33) {                                 // "!"" marks end of file
+  if (c == 33) {                                 // "!" marks end of file
     words = (address - 10) / 10;                 // Count words of ten bytes
     delay(10);
     write_byte(0 + file, words / 255);           // Write high byte of batch number
@@ -58,8 +73,8 @@ void loop() {
       file = 0;                                  // Reset counter variables for new writing process
     }
     else {
-      Serial.println("Waiting for next file...");
-      file += 2;
+      Serial.println("Waiting for next file.");  // Wait for next file 
+      file += 2;                                 // Increase file counter
     }
   }
 }
