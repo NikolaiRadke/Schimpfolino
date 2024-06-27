@@ -32,6 +32,7 @@ uint16_t words = 0;                              // Count words
 uint8_t  low, c;                                 // Helping variables
 uint8_t  file = 0;                               // Count EEPROM text files
 
+// Open connection to terminal and EEPROM
 void setup() {
   Serial.begin(9600);                            // Start serial connection to terminal
   Wire.begin();                                  // Start I2C connection
@@ -46,13 +47,16 @@ void setup() {
 }
 
 void loop() {
-  while(Serial.available() ==0);                 // Wait for serial data
-  c = Serial.read();                             // Read charakter from stream
+  // Main loop waits for one byte and perfoms checks before writing
+  while(Serial.available() == 0);                // Wait for serial data
+  c = Serial.read();                             // Read character from stream
   low = c & 0x00FF;                              // Take only LSB (Least Significant Byte)
   if (!((low == 0xC3) || (low == 0x0A) || (low == 0x21))) { // Write if not "!"
     write_byte(address, low);                    // Write byte to EEPROM
     address ++;                                  // Next address
   }
+
+  // End of file found?
   if (c == 33) {                                 // "!" marks end of file
     words = (address - 10) / 10;                 // Count words of ten bytes
     delay(10);
@@ -60,20 +64,20 @@ void loop() {
     delay(10);
     write_byte(1 + file, words % 255);           // Write low byte of batch number
     delay(10);
-    Serial.print("File ");                       // Print some informations
+    Serial.print("File ");                       // Print number of file
     Serial.print(1 + file / 2);
-    Serial.print("/5: ");
-    Serial.print(address - 10);
-    Serial.print(" characters in ");
+    Serial.print("/5: ");                        // Number of 5 (eeprom1.txt to eeprom5.txt)
+    Serial.print(address - 10);                  
+    Serial.print(" characters in ");             // Print number of characters written
     Serial.print(words);
-    Serial.println(" words written.");
+    Serial.println(" words written.");           // Print number of words written
     if (file == 8) {                             // After 5 files send, print finish message
       Serial.println("Done.");
       address = 10;
       file = 0;                                  // Reset counter variables for new writing process
     }
     else {
-      Serial.println("Waiting for next file.");  // Wait for next file 
+      Serial.println("Waiting for next file.");  // Ready for next file
       file += 2;                                 // Increase file counter
     }
   }
