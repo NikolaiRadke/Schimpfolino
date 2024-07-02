@@ -88,6 +88,9 @@
         function loadFileAsText(){
             const fileToLoad = document.getElementById("fileToLoad").files[0];
             const fileReader = new FileReader();
+            var name = document.getElementById('fileToLoad'); 
+            document.getElementById('opend').innerHTML = name.files.item(0).name;
+            document.getElementById('filename').value = name.files.item(0).name;
             fileReader.onload = function(fileLoadedEvent) {
                 const textLoaded = fileLoadedEvent.target.result;
                 let buffer = '';
@@ -184,8 +187,8 @@
             zehn Zeichen werden mit Leerzeichen aufgef&uuml;llt.<br />
             <br />
         </div>
-        <div class="rechts"  id="container">
-            <h3>Gehirn</h3>
+        <div class="rechts" id="container">
+            <h3 id="opend">Datei</h3>
         </div>
     </div>
     <div class="unten">
