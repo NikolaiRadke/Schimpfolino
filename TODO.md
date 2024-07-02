@@ -12,3 +12,4 @@
 
 * Rewriting Schimpfolino-eeprom
 * HTML-based EEPROM text file editor
+* Release
