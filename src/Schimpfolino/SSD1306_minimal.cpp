@@ -46,7 +46,7 @@ const uint8_t InitSequence[] PROGMEM = {
   0xA1, 0xC8                                     // Flip the screen
 };
 
-// Reworked 5x8 font table with only used charakters
+// Reworked 5x8 font table with only used characters
 const unsigned char BasicFont[] PROGMEM = {
   0x7C, 0x12, 0x11, 0x12, 0x7C, // A 0
   0x7F, 0x49, 0x49, 0x49, 0x36, // B 1
