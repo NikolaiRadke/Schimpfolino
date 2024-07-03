@@ -17,16 +17,12 @@
                -- Modified for Wire.h instead of TinyWireM.h
                -- Optimized Init-sequence and functions
 
-      CoPiino Electronics invests time and resources providing this open source code,
-      please support CoPiino Electronics and open-source hardware by purchasing
-      products from CoPiino Electronics!
-
       What is it?
         This library is derived from GOFi2cOLED library, only for SSD1306 in I2C Mode.
         As the original library only supports Frame Buffered mode which requires to have
         at least 1024bytes of free RAM for a 128x64px display it is too big for smaller devices.
 
-        So this a SSD1306 library that works great with ATTiny85 devices :)
+        So this a SSD1306 library that works great with ATTiny45/85 devices :)
 
   It is a free software; you can redistribute it and/or modify it 
   under the terms of BSD license, check LICENSE for more information.
@@ -66,8 +62,14 @@ class SSD1306_Mini {
     void sendCommand(unsigned char command);
 
   private:
+
+    // Set command mode
     void commandMode();
+
+    // Set data mode
     void dataMode();
+
+    // Send data
     void sendData(unsigned char Data);
 };
 #endif

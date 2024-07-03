@@ -38,7 +38,7 @@
    
 // Variables
 uint8_t  gender;                                 // Gender of the swearword
-uint8_t  chars = 0;                              // Number of charakters in the word | Gobal
+uint8_t  chars = 0;                              // Number of characters in the word | Gobal
 uint16_t number, seed;                           // Random seed and helping variable
 uint16_t address[5];                             // Wordlists addresses array
 uint32_t counter;                                // Timer begin for sleep timeout
@@ -52,7 +52,7 @@ int main(void) {
   init(); {                                      // Setup
     // Power saving
     ACSR = (1 << ACD);                           // Disable analog comparator - anyway by default?
-    ADCSRA &= ~(1 << ADEN);                      // Switch ADC off
+    ADCSRA &= ~(1 << ADEN);                      // Switch ADC off | saves 270uA
 
     // Port setup
     DDRB &= ~(1 << Button);                      // PB1 button INPUT
@@ -60,7 +60,7 @@ int main(void) {
 
     // Hardware interrupt
     cli();                                       // Stop all interrupts
-    GIMSK |= (1 << PCIE);                        // Turns on pin change interrupt
+    GIMSK |= (1 << PCIE);                        // Turn on pin change interrupt
     PCMSK |= (1 << PCINT1);                      // Turn on interrupt on PB1 button
     sei();                                       // Start interrupts
 
@@ -77,7 +77,7 @@ int main(void) {
       gender = 0;                                // gender and seed are helping variables here
       for (seed = 0; seed < 5; seed ++) {        // Read numbers of 4 wordlists
         number = read_eeprom(0 + gender) * 255;  // Calculate number: 
-        number += read_eeprom(1 + gender);       // First byte = High, second bye = low
+        number += read_eeprom(1 + gender);       // First byte = high, second bye = low
         if (number == 0) wake = false;           // Sleep if no EEPROM or no wordlist present
         address[seed] = number;                  // Write word numbers to array 
         gender += 2;                             // Chance number address
