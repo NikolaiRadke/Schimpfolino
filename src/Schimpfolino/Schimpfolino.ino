@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.0 14.06.2024 - Nikolai Radke
+    Schimpfolino V1.0 05.07.2024 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | Only with additional 24LCXX EEPROM
@@ -27,7 +27,7 @@
 #include <Wire.h>                                // I2C communication with display and EEPROM
 #include <EEPROM.h>                              // Internal EEPROM saves random seed
 #include <avr/sleep.h>                           // Used for deep sleep
-#include <util/delay.h>
+#include <util/delay.h>                          // Less flash memory needed
 #include "SSD1306_minimal.h"                     // Modified library!
 
 // Hardware
@@ -55,8 +55,7 @@ int main(void) {
     ADCSRA &= ~(1 << ADEN);                      // Switch ADC off | saves 270uA
 
     // Port setup
-    DDRB &= ~(1 << Button);                      // PB1 button INPUT
-    PORTB |= (1 << Button);                      // PB1 INPUT_PULLUP 
+    PORTB = 0x3f;                                // Set all Ports to INPUT_PULLUP to prevent floating
 
     // Hardware interrupt
     cli();                                       // Stop all interrupts
@@ -92,7 +91,7 @@ int main(void) {
         eeprom_write_word(number, 0);            // Write seed 0
       }
       seed = eeprom_read_word(number);           // Read seed
-      if (seed > 999) {                          // After 1000 write-cyles move to another address
+      if (seed > 999) {                          // After 1000 write cyles move to another address
         seed = 0;                                // to keep the EEPROM alive
         number += 2;                             // 2 places, address is a word
         eeprom_write_word(0, number);            // Write address of seed

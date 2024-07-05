@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.0 14.06.2024 - Nikolai Radke
+    Schimpfolino V1.0 05.07.2024 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | With or without additional 24LCXX EEPROM
@@ -11,7 +11,7 @@
 
     Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
-    Last charakter of a wordlist in EEPROM is '!'
+    Last character of a wordlist in EEPROM is '!'
 
     Wiring:
     1: RST | PB5  Free    
@@ -46,7 +46,7 @@ const char data5[] PROGMEM = {"sekret    balg      blag      monster   gel$t    
 // Variables
 char     *field;                                 // Pointer to one of the character arrays
 uint8_t  gender;                                 // Gender of the swearword
-uint8_t  chars = 0;                              // Number of charakters in the word | Gobal
+uint8_t  chars = 0;                              // Number of characters in the word | Gobal
 uint16_t number, seed;                           // Random seed and helping variable
 uint16_t address[5] = {90, 90, 90, 90, 90};      // Wordlists addresses array - overwritten if EEPROM present
 uint32_t counter;                                // Timer begin for sleep timeout
@@ -64,12 +64,11 @@ int main(void) {
     ADCSRA &= ~_BV(ADEN);                        // Switch ADC off
 
     // Port setup
-    DDRB &= ~(1 << Button);                      // PB1 button INPUT
-    PORTB |= (1 << Button);                      // PB1 INPUT_PULLUP 
+    PORTB = 0x3f;                                // Set all Ports to INPUT_PULLUP to prevent floating
 
     // Hardware interrupt
     cli();                                       // Stop all interrupts
-    GIMSK |= (1 << PCIE);                        // Turns on pin change interrupt
+    GIMSK |= (1 << PCIE);                        // Turn on pin change interrupt
     PCMSK |= (1 << PCINT1);                      // Turn on interrupt on PB1 button
     sei();                                       // Start interrupts
 
@@ -104,7 +103,7 @@ int main(void) {
         eeprom_write_word(number, 0);            // Write seed 0
       }
       seed = eeprom_read_word(number);           // Read seed
-      if (seed > 999) {                          // After 1000 write-cyles move to another address
+      if (seed > 999) {                          // After 1000 write cyles move to another address
         seed = 0;                                // to keep the EEPROM alive
         number += 2;                             // 2 places, adress is a word
         eeprom_write_word(0, number);            // Write address of seed

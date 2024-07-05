@@ -62,7 +62,6 @@ class SSD1306_Mini {
     void sendCommand(unsigned char command);
 
   private:
-
     // Set command mode
     void commandMode();
 

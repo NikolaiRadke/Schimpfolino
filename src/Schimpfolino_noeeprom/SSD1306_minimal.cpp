@@ -12,14 +12,10 @@
   Modified by: CoPiino Electronics (http://copiino.cc)
   Modified by: Kirk Northrop (github.com/kirknorthrop)
   Modified by: Nikolai Radke (www.monstermaker.de) 
-               -- Reworked horrible formatting and spelling
+               -- Reworked horrible formating and spelling
                -- Removed unused code
                -- Modified for Wire.h instead of TinyWireM.h
                -- Optimized Init-sequence and functions
-
-      CoPiino Electronics invests time and resources providing this open source code,
-      please support CoPiino Electronics and open-source hardware by purchasing
-      products from CoPiino Electronics!
 
       What is it?
         This library is derived from GOFi2cOLED library, only for SSD1306 in I2C Mode.
