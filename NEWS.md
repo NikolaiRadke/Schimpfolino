@@ -1,7 +1,8 @@
 # Newsblog
 
 # 2024
-  
+
+* **05.07.2024** Set open ports to INPUT_PULLUP to prevent floating. **1.0-05072024**.
 * **27.06.2024** eeprom_writer now waits for EEPROM connection.
 * **26.06.2024** Added hints to pull up resistors when using the EEPROM with Arduino.  
 * **18.06.2024** The **EEPROM Editor** has been improved.  
