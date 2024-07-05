@@ -14,14 +14,12 @@
     Last character of a wordlist in EEPROM is '!'
 
     Wiring:
-    1: RST | PB5  Free    
-    2: D3  | PB3  Free
-    3: A2  | PB4  Free 
-    4: GND |      GND
-    5: D0  | PB0  SDA
-    6: D1  | PB1  Button - GND
-    7: D2  | PB2  SCL  
-    8: VCC |      VCC
+                  +-\/-+
+    RST   | PB5  1|    |8  VCC | Battery
+    Free  | PB3  2|    |7  PB2 | SCL
+    Free  | PB4  3|    |6  PB1 | Button -> GND
+    GND   | GND  4|    |5  PB0 | SCL
+                  +----+
 */
 
 #include <Wire.h>                                // I2C communication with display and EEPROM

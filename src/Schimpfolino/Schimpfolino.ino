@@ -14,19 +14,18 @@
     Last charakter of a wordlist is '!'
 
     Wiring:
-    1: RST | PB5  Free    
-    2: D3  | PB3  Free
-    3: A2  | PB4  Free 
-    4: GND |      GND
-    5: D0  | PB0  SDA   
-    6: D1  | PB1  Button - GND
-    7: D2  | PB2  SCL    
-    8: VCC |      VCC
+                  +-\/-+
+    RST   | PB5  1|    |8  VCC | Battery
+    Free  | PB3  2|    |7  PB2 | SCL
+    Free  | PB4  3|    |6  PB1 | Button -> GND
+    GND   | GND  4|    |5  PB0 | SCL
+                  +----+
 */
 
 #include <Wire.h>                                // I2C communication with display and EEPROM
 #include <EEPROM.h>                              // Internal EEPROM saves random seed
 #include <avr/sleep.h>                           // Used for deep sleep
+#include <avr/power.h>
 #include <util/delay.h>                          // Less flash memory needed
 #include "SSD1306_minimal.h"                     // Modified library!
 
@@ -52,7 +51,7 @@ int main(void) {
   init(); {                                      // Setup
     // Power saving
     ACSR = (1 << ACD);                           // Disable analog comparator - anyway by default?
-    ADCSRA &= ~(1 << ADEN);                      // Switch ADC off | saves 270uA
+    ADCSRA = 0;                   // Switch ADC off | saves 270uA
 
     // Port setup
     PORTB = 0x3f;                                // Set all Ports to INPUT_PULLUP to prevent floating
