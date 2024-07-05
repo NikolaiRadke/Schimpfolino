@@ -18,9 +18,9 @@
     2: D3  | PB3  Free
     3: A2  | PB4  Free 
     4: GND |      GND
-    5: D0  | PB0  SDA    - SDA | SSD1306 
+    5: D0  | PB0  SDA
     6: D1  | PB1  Button - GND
-    7: D2  | PB2  SCL    - SCL | SSD1306
+    7: D2  | PB2  SCL  
     8: VCC |      VCC
 */
 
