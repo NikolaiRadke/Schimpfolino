@@ -51,7 +51,7 @@ int main(void) {
   init(); {                                      // Setup
     // Power saving
     ACSR = (1 << ACD);                           // Disable analog comparator - anyway by default?
-    ADCSRA = 0;                   // Switch ADC off | saves 270uA
+    ADCSRA = 0;                                  // Switch ADC off | saves 270uA
 
     // Port setup
     PORTB = 0x3f;                                // Set all Ports to INPUT_PULLUP to prevent floating

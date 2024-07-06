@@ -179,7 +179,7 @@ void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
   dataMode();
   for (a=0; a<5; a++) 
     Wire.write(pgm_read_byte(&BasicFont[ch * 5 + a]));
-  Wire.write(0x00);                              // One row space for better readabiltiy
-  if (chars < 19) Wire.write(0x00);              // One more row space when the line has enough room
+  Wire.write(0x00);                              // One column space for better readabiltiy
+  if (chars < 19) Wire.write(0x00);              // One more column space when the line has enough room
   Wire.endTransmission();
 }
