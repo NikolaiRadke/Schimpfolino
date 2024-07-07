@@ -62,7 +62,7 @@ int main(void) {
     ADCSRA = 0;                                  // Switch ADC off | saves 270uA
 
     // Port setup
-    PORTB = 0x3f;                                // Set all Ports to INPUT_PULLUP to prevent floating
+    PORTB = 0x3F;                                // Set all Ports to INPUT_PULLUP to prevent floating
 
     // Hardware interrupt
     cli();                                       // Stop all interrupts
