@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.0 05.07.2024 - Nikolai Radke
+    Schimpfolino V1.0 09.07.2024 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | With or without additional 24LCXX EEPROM
@@ -29,10 +29,12 @@
 #include "SSD1306_minimal.h"                     // Modified library!
 
 // Hardware
-#define Button   PB1                             // Button address   
+#define  Button   PB1                             // Button pin
 
 // Software
-#define Timeout  10000                           // 10 seconds before sleep
+#define  Ctime __TIME__                          // Generate a precompiled random number from compiling time string
+#define  Firstseed uint16_t((uint8_t(Ctime[3])) + (uint8_t(Ctime[4])) + (uint8_t(Ctime[6])) + (uint8_t(Ctime[7])))
+#define  Timeout  10000                           // 10 seconds before sleep
 
 //Wordlist arrays - a single array can hold only 4000 bytes | Used, if no EEPROM present | 5 x 90 words = 4500 bytes
 const char data1[] PROGMEM = {"Dumpfe    Staubige  Miefende  Stinkende Gammlige  Hinkende  Winzige   Popelige  Nasse     Furzende  Rostige   Hohle     Siffige   Miese     Krumme    Klapprige Trockene  Haarige   Uralte    Grunzende SchreiendeMeckernde Nervende  Sabbernde Triefende Modrige   Lumpige   Lausige   Sinnlose  Olle      Unn$tige  Dampfende Ledrige   Einarmige Leere     L#stige   Heulende  Pickelige Faule     Ranzige   Tr%be     Dralle    Blanke    Gierige   Tranige   Wackelnde Torkelnde W%ste     Fischige  Beknackte Modrige   VerkorksteHeimliche L$chrige  Brockige  Plumpe    Tattrige  Ratternde SchmutzigeLiderlicheD$sige    Prollige  Fiese     Dr$ge     Muffige   M%ffelnde Peinliche N$rgelnde Fettige   Zahnlose  Freche    Sch#bige  Piefige   Gummige   Labbrige  Patzige   Pelzige   Reudige   Pekige    M%rbe     Harzige   Lahme     Mickrige  Br#sige   Zottelige Gelbliche Knorrige  Salzige   Schrille  Dusselige "};
@@ -86,7 +88,7 @@ int main(void) {
         gender = 0;                              // gender and seed are helping variables here
         for (seed = 0; seed < 5; seed ++) {      // Read numbers of 4 wordlists
           number = read_eeprom(0 + gender) * 255; // Calculate number: 
-          number += read_eeprom(1 + gender);     // First byte = High, second bye = low
+          number += read_eeprom(1 + gender);     // First byte = High, second byte = low
           address[seed] = number;                // Write word numbers to array 
           gender += 2;                           // Chance number address
         }  
@@ -98,7 +100,7 @@ int main(void) {
         // Initialize EEPROM and size for first use or after end of cycle
         number = 2;                              // Starting address
         eeprom_write_word(0, number);            // Write starting address
-        eeprom_write_word(number, 0);            // Write seed 0
+        eeprom_write_word(number, Firstseed);    // Write personal seed 
       }
       seed = eeprom_read_word(number);           // Read seed
       if (seed > 999) {                          // After 1000 write cyles move to another address
@@ -182,7 +184,7 @@ void write_swearword(uint8_t line) {             // Write centered word
   oled.cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; x ++)                   // Print the characters
     oled.printChar(wordbuffer[x]);               // from buffer
-  chars = 0;                                     // Set number of character back to 0
+  chars = 0;                                     // Set number of characters back to 0
 }
 
 uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM

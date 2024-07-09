@@ -162,9 +162,9 @@ void SSD1306_Mini::cursorTo(unsigned char col, unsigned char row) {
 
 void SSD1306_Mini::clear() {
   uint8_t a, b;
-  sendCommand(0x00 | 0x0);                       // Low col = 0
-  sendCommand(0x10 | 0x0);                       // Hi col = 0
-  sendCommand(0x40 | 0x0);                       // Line #0   
+  sendCommand(0x00 | 0x00);                      // Low col = 0
+  sendCommand(0x10 | 0x00);                      // Hi col = 0
+  sendCommand(0x40 | 0x00);                      // Line #0   
   clipArea(0 , 0, 128, 8);
   for (a = 0; a <= 64; a ++) {
     dataMode();
