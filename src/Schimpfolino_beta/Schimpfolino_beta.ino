@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.1 09.07.2024 BETA - Nikolai Radke
+    Schimpfolino V1.1 10.07.2024 BETA - Nikolai Radke
     Compatible with old V1.0 boards
     https://www.monstermaker.de
 
@@ -7,8 +7,8 @@
     For ATtiny45/85 - set to 8 Mhz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" first!
 
-    Flash usage: 3.308 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
-    Power:       5mA (idle) | < 1μA (sleep)
+    Flash usage: 3.332 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Power:       2.5mA (idle) | < 1μA (sleep)
 
     Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
@@ -31,10 +31,10 @@
 
 // Hardware
 #define  Button   PB1                            // Button pin    
-#define  Display  PB4                            // Display power pin
+#define  Devices  PB4                            // External devices power pin
 
 // Software
-#define  Timeout  10000                          // 10 seconds before sleep
+#define  Timeout  1250                          // 10 seconds before sleep | 10000ms / 8Mhz 
    
 // Variables
 uint8_t  gender;                                 // Gender of the swearword
@@ -55,7 +55,7 @@ int main(void) {
     ADCSRA = 0;                                  // Switch ADC off | saves 270uA
 
     // Port setup
-    DDRB  |= (1 << Display);                     // Set D4 to OUTPUT to power up display
+    DDRB  |= (1 << Devices);                     // Set D4 to OUTPUT to power up display and EEPROM
     PORTB = 0x3F;                                // Set all Ports to INPUT_PULLUP (HIGH) to prevent floating
 
     // Hardware interrupt
@@ -64,31 +64,33 @@ int main(void) {
     PCMSK |= (1 << PCINT1);                      // Turn on interrupt on PB1 button
     sei();                                       // Start interrupts
 
-    // Randomize number generator
-    while (!wake);                               // Wait for button to "turn on"
-    randomSeed(millis());                        // Time passed by manual pressing is used for random numbers
-
     // Init I2C
     Wire.setClock(400000L);                      // Fast mode
     Wire.begin();                                // Start I2C
+
+    // Read wordlist addresses
+    gender = 0;                                // gender and list are helping variables here
+    for (list = 0; list < 5; list ++) {        // Read numbers of 4 wordlists
+      number = read_eeprom(0 + gender) * 255;  // Calculate number: 
+      number += read_eeprom(1 + gender);       // First byte = high, second byte = low
+      if (number == 0) wake = false;           // Sleep if no EEPROM or no wordlist present
+      address[list] = number;                  // Write word numbers to array 
+      gender += 2;                             // Chance number address
+    }
+
+    // Randomize number generator
+    set_clock(3);                                // Set clock to 1 Mhz to save power while waiting
+    while (!wake);                               // Wait for button to "turn on"
+    randomSeed(millis());                        // Time passed by manual pressing is used for random numbers
 
     // Main routine - runs after waking up
     while(1) {
       // Init Display
       oled.init();                               // Connect and start OLED via I2C
 
-      // Read wordlist addresses
-      gender = 0;                                // gender and list are helping variables here
-      for (list = 0; list < 5; list ++) {        // Read numbers of 4 wordlists
-        number = read_eeprom(0 + gender) * 255;  // Calculate number: 
-        number += read_eeprom(1 + gender);       // First byte = high, second byte = low
-        if (number == 0) wake = false;           // Sleep if no EEPROM or no wordlist present
-        address[list] = number;                  // Write word numbers to array 
-        gender += 2;                             // Chance number address
-      }
-
       // Display swearwords until timeout
       while (wake) {                             // Wait 10 seconds timeout
+        set_clock(0);
         counter = millis();                      // Set starting time
         oled.clear();                            // Clear display buffer
 
@@ -109,17 +111,18 @@ int main(void) {
         write_swearword(4);                      // Write second word in second line
         
         // Wait for button or sleep
-        _delay_ms(500);                          // Debounce button
+        set_clock(3);
+        _delay_ms(50);                           // Debounce button
         wake = false;                            // Set to sleep
         while ((!wake) && (millis() - counter < Timeout)); // Wait for button oder timeout
       } 
 
       // Go to sleep after 10 seconds if button is not pressed before                           
-      oled.sendCommand(0xAE);                    // Display off and sleep
-      PORTB &= ~(1 << Display);                  // Display off   
+      oled.sendCommand(0xAE);                    // Display off and sleep (V1.0)
+      PORTB &= ~(1 << Devices);                  // Devices off (V1.1)   
       set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
       sleep_mode();                              // Good night, sleep until interrupt
-      PORTB |= (1 << Display);                   // Display on
+      PORTB |= (1 << Devices);                   // Devices on (V1.1)
     }
   }
 }
@@ -164,4 +167,11 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
   return Wire.read();                            // Read and return byte
 }
 
-ISR(PCINT0_vect) {wake = true;}                  // Interrupt routine. Set wake flag if button is pressed
+void set_clock(uint8_t freq) {                   // Switch Clock from 8 MHz to 1 MHz
+  CLKPR = 0x80;                                  // Set clock
+  CLKPR = freq;                                  // 0 = 8 Mhz | 3 = 1 Mhz
+}
+
+ISR(PCINT0_vect) {                               // Interrupt routine for pin change 
+  wake = true;                                   // Set wake flag when button is pressed
+}
