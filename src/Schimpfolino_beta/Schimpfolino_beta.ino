@@ -1,12 +1,13 @@
 /*  
     Schimpfolino V1.1 09.07.2024 BETA - Nikolai Radke
+    Compatible with old V1.0 boards
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | Only with additional 24LCXX EEPROM
     For ATtiny45/85 - set to 8 Mhz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" first!
 
-    Flash usage: 3.304 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.308 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       5mA (idle) | < 1μA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -22,11 +23,11 @@
                          +----+
 */
 
-#include <Wire.h>                                // I2C communication with display and EEPROM
 #include <EEPROM.h>                              // Internal EEPROM saves random list
 #include <avr/sleep.h>                           // Used for deep sleep
 #include <util/delay.h>                          // Needs less flash memory
 #include "SSD1306_minimal.h"                     // Modified library!
+#include <Wire.h>                                // I2C communication with display and EEPROM
 
 // Hardware
 #define  Button   PB1                            // Button pin    
@@ -114,6 +115,7 @@ int main(void) {
       } 
 
       // Go to sleep after 10 seconds if button is not pressed before                           
+      oled.sendCommand(0xAE);                    // Display off and sleep
       PORTB &= ~(1 << Display);                  // Display off   
       set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
       sleep_mode();                              // Good night, sleep until interrupt
