@@ -6,7 +6,7 @@
     For ATtiny45/85 - set to 8 Mhz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" first!
 
-    Flash usage: 3.516 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.520 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       5mA (idle) | 7μA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -92,7 +92,7 @@ int main(void) {
       }
       seed = eeprom_read_word(number);           // Read seed
       if (seed > 999) {                          // After 1000 write cyles move to another address
-        seed = 0;                                // to keep the EEPROM alive
+        seed = Firstseed;                        // to keep the EEPROM alive
         number += 2;                             // 2 places, address is a word
         eeprom_write_word(0, number);            // Write address of seed
       }
