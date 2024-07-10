@@ -6,7 +6,7 @@
     For ATtiny85 only - set to 8 Mhz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" first!
 
-    Flash usage: 8.192 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 7.990 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       5mA (idle) | 7μA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -32,8 +32,6 @@
 #define  Button   PB1                             // Button pin
 
 // Software
-#define  Ctime __TIME__                          // Generate a precompiled random number from compiling time string
-#define  Firstseed uint16_t((uint8_t(Ctime[3])) + (uint8_t(Ctime[4])) + (uint8_t(Ctime[6])) + (uint8_t(Ctime[7])))
 #define  Timeout  10000                           // 10 seconds before sleep
 
 //Wordlist arrays - a single array can hold only 4000 bytes | Used, if no EEPROM present | 5 x 90 words = 4500 bytes
@@ -47,13 +45,13 @@ const char data5[] PROGMEM = {"sekret    balg      blag      monster   gel$t    
 char     *field;                                 // Pointer to one of the character arrays
 uint8_t  gender;                                 // Gender of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
-uint16_t number, seed;                           // Random seed and helping variable
+uint16_t number, list;                           // Random seed and helping variable
 uint16_t address[5] = {90, 90, 90, 90, 90};      // Wordlists addresses array - overwritten if EEPROM present
 uint32_t counter;                                // Timer begin for sleep timeout
 char     wordbuffer[20];                         // Buffer for read words
 bool     eeprom = false;                         // EEPROM used -> Auto detect
 
-volatile bool wake = true;                       // Stay wake when button is pressed
+volatile bool wake = false;                      // Stay wake when button is pressed
 
 SSD1306_Mini  oled;                              // Set display
 
@@ -72,45 +70,31 @@ int main(void) {
     PCMSK |= (1 << PCINT1);                      // Turn on interrupt on PB1 button
     sei();                                       // Start interrupts
 
+    // Randomize number generator
+    while (!wake);                               // Wait for button to "turn on"
+    randomSeed(millis());                        // Time passed by manual pressing is used for random numbers
+
+    // Init I2C
+    Wire.setClock(400000L);                      // Fast mode
+    Wire.begin();                                // Start I2C
+
+    // Look for EEPROM and read wordlist addresses if available
+    Wire.beginTransmission(0x50);                // Look for 24LCXX EEPROM at 0x50
+    if (Wire.endTransmission() == 0) {           // 0x00 for used, 0xff for unused
+      eeprom = true;                             // if used, set EEPROM flag
+      gender = 0;                                // gender and seed are helping variables here
+      for (list = 0; list < 5; list ++) {        // Read numbers of 4 wordlists
+        number = read_eeprom(0 + gender) * 255;  // Calculate number: 
+        number += read_eeprom(1 + gender);       // First byte = High, second byte = low
+        address[list] = number;                  // Write word numbers to array 
+        gender += 2;                             // Chance number address
+      }  
+    }
+
     // Main routine - runs after waking up
     while(1) {
-      // Init I2C
-      Wire.setClock(400000L);                    // Fast mode
-      Wire.begin();                              // Start I2C
-
       // Init Display
       oled.init();                               // Connect and start OLED via I2C
-
-      // Look for EEPROM and read wordlist addresses if available
-      Wire.beginTransmission(0x50);              // Look for 24LCXX EEPROM at 0x50
-      if (Wire.endTransmission() == 0) {         // 0x00 for used, 0xff for unused
-        eeprom = true;                           // if used, set EEPROM flag
-        gender = 0;                              // gender and seed are helping variables here
-        for (seed = 0; seed < 5; seed ++) {      // Read numbers of 4 wordlists
-          number = read_eeprom(0 + gender) * 255; // Calculate number: 
-          number += read_eeprom(1 + gender);     // First byte = High, second byte = low
-          address[seed] = number;                // Write word numbers to array 
-          gender += 2;                           // Chance number address
-        }  
-      }
-
-      // Randomize number generator
-      number = eeprom_read_word(0);              // Read EEPROM address
-      if ((number < 2) || (number > (EEPROM.length() - 3))) {
-        // Initialize EEPROM and size for first use or after end of cycle
-        number = 2;                              // Starting address
-        eeprom_write_word(0, number);            // Write starting address
-        eeprom_write_word(number, Firstseed);    // Write personal seed 
-      }
-      seed = eeprom_read_word(number);           // Read seed
-      if (seed > 999) {                          // After 1000 write cyles move to another address
-        seed = Firstseed;                        // to keep the EEPROM alive
-        number += 2;                             // 2 places, adress is a word
-        eeprom_write_word(0, number);            // Write address of seed
-      }
-      seed ++;                                   // New seed
-      eeprom_write_word(number, seed);           // Save new seed for next startup
-      randomSeed(seed);                          // Randomize number generator
 
       // Display swearwords until timeout
       while (wake) {                             // Wait 10 seconds timeout
@@ -124,17 +108,17 @@ int main(void) {
         write_swearword(2);                      // Write first word
 
         // Second word first part
-        seed = 0;                                // Set start address for array
+        list = 0;                                // Set start address for array
         gender = random(0, 3);                   // Set word gender
         if (gender != 0) oled.printChar(48 + gender); // If male, write "r", if neutrum, write "s"
-        if (eeprom) seed = address[0];           // Set start adress for EEPROM
-        number = (random(seed, address[1]));     // Select second part of second word
+        if (eeprom) list = address[0];           // Set start adress for EEPROM
+        number = (random(list, address[1]));     // Select second part of second word
         field = data2;                           // Vector to second array
         get_swearword(number);                   // Read first part of second word 
         
         // Second word second part
-        if (eeprom) seed = address[gender + 1];  // Set start address for EEPROM
-        number = (random(seed, address[gender + 2])); // Select second part of second word
+        if (eeprom) list = address[gender + 1];  // Set start address for EEPROM
+        number = (random(list, address[gender + 2])); // Select second part of second word
         field = data3;                           // Female
         if (gender == 1) field = data4;          // Male
         if (gender == 2) field = data5;          // Neutrum

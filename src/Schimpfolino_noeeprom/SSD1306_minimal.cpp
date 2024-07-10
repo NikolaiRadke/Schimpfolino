@@ -119,7 +119,7 @@ void SSD1306_Mini::dataMode() {
   Wire.write(0x40);                              // Data mode
 }
 
-void SSD1306_Mini::sendCommand(unsigned char command) { // Public funtcion now to turn off display
+void SSD1306_Mini::sendCommand(unsigned char command) { // Public function now to turn off display
   commandMode();
   Wire.write(command);                           // Send command
   Wire.endTransmission();    		                 // End I2C transmission
