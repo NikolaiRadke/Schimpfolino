@@ -7,8 +7,8 @@
     For ATtiny45/85 - set to 8 Mhz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" first!
 
-    Flash usage: 3.332 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
-    Power:       2.5mA (idle) | < 1μA (sleep)
+    Flash usage: 3.326 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Power:       2.2 mA (idle) | ~ 300 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
@@ -34,12 +34,12 @@
 #define  Devices  PB4                            // External devices power pin
 
 // Software
-#define  Timeout  1250                          // 10 seconds before sleep | 10000ms / 8Mhz 
+#define  Timeout  1250                           // 10 seconds before sleep | 10000 ms / 8 for 1 MHz
    
 // Variables
 uint8_t  gender;                                 // Gender of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
-uint16_t number, list;                           // Helping variable
+uint16_t number, list;                           // Helping variables
 uint16_t address[5];                             // Wordlists addresses array
 uint32_t counter;                                // Timer begin for sleep timeout
 char     wordbuffer[20];                         // Buffer for reading words
@@ -52,7 +52,7 @@ int main(void) {
   init(); {                                      // Setup
     // Power saving
     ACSR = (1 << ACD);                           // Disable analog comparator - anyway by default?
-    ADCSRA = 0;                                  // Switch ADC off | saves 270uA
+    ADCSRA = 0x00;                               // Switch ADC off | saves 270 uA
 
     // Port setup
     DDRB  |= (1 << Devices);                     // Set D4 to OUTPUT to power up display and EEPROM
@@ -79,7 +79,7 @@ int main(void) {
     }
 
     // Randomize number generator
-    set_clock(3);                                // Set clock to 1 Mhz to save power while waiting
+    set_clock(4);                                // Set clock to 1 Mhz to save power while waiting
     while (!wake);                               // Wait for button to "turn on"
     randomSeed(millis());                        // Time passed by manual pressing is used for random numbers
 
@@ -90,7 +90,7 @@ int main(void) {
 
       // Display swearwords until timeout
       while (wake) {                             // Wait 10 seconds timeout
-        set_clock(0);
+        set_clock(0);                            // Set clock to 8 MHz for faster rendering
         counter = millis();                      // Set starting time
         oled.clear();                            // Clear display buffer
 
@@ -111,9 +111,9 @@ int main(void) {
         write_swearword(4);                      // Write second word in second line
         
         // Wait for button or sleep
-        set_clock(3);
-        _delay_ms(50);                           // Debounce button
+        _delay_ms(500);                          // Debounce button
         wake = false;                            // Set to sleep
+        set_clock(4);                            // Set clock back to 1 MHz to save power
         while ((!wake) && (millis() - counter < Timeout)); // Wait for button oder timeout
       } 
 
@@ -169,7 +169,7 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
 
 void set_clock(uint8_t freq) {                   // Switch Clock from 8 MHz to 1 MHz
   CLKPR = 0x80;                                  // Set clock
-  CLKPR = freq;                                  // 0 = 8 Mhz | 3 = 1 Mhz
+  CLKPR = freq;                                  // 0 = 8 Mhz | 4 = 1 Mhz
 }
 
 ISR(PCINT0_vect) {                               // Interrupt routine for pin change 
