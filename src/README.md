@@ -28,7 +28,7 @@ In order to flash your ATtiny with the Schimpfolino sketch, you need the **Ardui
 
 1. Disconnect your Arduino.
 2. Connect your ATtiny as seen below.
-3. Add the 10uF capacitor.    
+3. Add the 10 uF capacitor.    
   
 ![ATTINY-ARDUINO](http://www.nikolairadke.de/NOKOlino_2/attiny_steckplatine.png)  
   
