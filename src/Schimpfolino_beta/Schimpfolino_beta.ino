@@ -133,7 +133,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
   uint16_t i;
   address *= 10;
   for (i = address; i < address + 10; i ++) {    // Read 10 characters        
-    c = read_eeprom(i+10);                       // from EEPROM with address memory offset
+    c = read_eeprom(i + 10);                       // from EEPROM with address memory offset
     if (c != 32) {                               // Check for space
       switch (c) {                               // Set german Umlaute   
         case 35: wordbuffer[chars] = 27; break;  // # -> ä
