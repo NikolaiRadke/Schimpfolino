@@ -7,7 +7,7 @@
     Remember to burn the "bootloader" first!
 
     Flash usage: 3.320 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
-    Power:       2.5 mA (idle) | 7 μA (sleep)
+    Power:       2 mA (idle) | 7 μA (sleep)
 
     Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
