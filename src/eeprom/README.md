@@ -13,13 +13,13 @@ You need:
 ![EEPROM with Arduino](https://www.nikolairadke.de/schimpfolino/eeprom_verbinden.jpg)
 
 **Wait!** Where is the **pull up resistor**?  
-Yes indeed, I2C needs a pull up resistor, **4,7k** between **SDA** and **VCC**. But: The Arduino has an internal **20 kOhm** pull up resistor at every I/O pin. These are pulled up with every I2C connections when the standard library **Wire.h** is used. This is not the correct value but works reliable with slow connections. This is a very slow connection. But if you are unsure, add an externel pull up resistor. Schimpfolino's display finally has the missing resistors on board.    
+Yes indeed, I2C needs a pull up resistor, **4,7kOhm** between **SDA** and **VCC**. But: The Arduino has an internal **20 kOhm** pull up resistor at every I/O pin. These are pulled up with every I2C connections when the standard library **Wire.h** is used. This is not the correct value but works reliable with slow connections. This is a very slow connection. But if you are unsure, add an externel pull up resistor. Schimpfolino's display finally has the missing resistors on board.    
 
 ### Flashing the content
 
 1. Connect the Arduino to your computer.  
 2. Open the Schimpfolino writer sketch **eeprom_writer.ino** in the Arduino IDE and upload the sketch. 
-3. Start your favorite serial terminal, set to **9600 Baud, 8-N-1** and a **5ms delay** after each character, no Linefeed (LF) oder Carriage Return (CR). 
+3. Start your favorite serial terminal, set to **9600 Baud, 8-N-1** and a **5 ms delay** after each character, no Linefeed (LF) oder Carriage Return (CR). 
 4. Open the connection to the port (COM? in Windows, see Device Manager or IDE | /dev/ttyACM0 for Arduino Uno or /dev/ttyUSB? other Arduinos in Linux)
 5. The Arduino will tell you through the serial terminal, what eeprom_writer is doing. Now upload the files **eeprom1.txt** to **eeprom5.txt**.
 6. Close the connection and remove the EEPROM.
