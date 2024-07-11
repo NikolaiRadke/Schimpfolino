@@ -13,7 +13,7 @@ You need:
 ![EEPROM with Arduino](https://www.nikolairadke.de/schimpfolino/eeprom_verbinden.jpg)
 
 **Wait!** Where is the **pull up resistor**?  
-Yes indeed, I2C needs a pull up resistor, **4,7kOhm** between **SDA** and **VCC**. But: The Arduino has an internal **20 kOhm** pull up resistor at every I/O pin. These are pulled up with every I2C connections when the standard library **Wire.h** is used. This is not the correct value but works reliable with slow connections. This is a very slow connection. But if you are unsure, add an externel pull up resistor. Schimpfolino's display finally has the missing resistors on board.    
+Yes indeed, I2C needs a pull up resistor, **4,7 kOhm** between **SDA** and **VCC**. But: The Arduino has an internal **20 kOhm** pull up resistor at every I/O pin. These are pulled up with every I2C connections when the standard library **Wire.h** is used. This is not the correct value but works reliable with slow connections. This is a very slow connection. But if you are unsure, add an externel pull up resistor. Schimpfolino's display finally has the missing resistors on board.    
 
 ### Flashing the content
 
