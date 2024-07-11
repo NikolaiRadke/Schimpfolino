@@ -7,7 +7,7 @@
     Remember to burn the "bootloader" first!
 
     Flash usage: 7.990 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
-    Power:       2 mA (idle) | 7 μA (sleep)
+    Power:       2.2 mA (idle) | 7 μA (sleep)
 
     Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
@@ -128,9 +128,9 @@ int main(void) {
         write_swearword(4);                      // Write second word in second line
         
         // Wait for button or sleep
-        set_clock(4);                            // Set clock back to 1 MHz to save power
-        _delay_ms(50);                           // Debounce button
+        _delay_ms(500);                          // Debounce button
         wake = false;                            // Set to sleep
+        set_clock(4);                            // Set clock back to 1 MHz to save power
         while ((!wake) && (millis() - counter < Timeout)); // Wait for button oder timeout
       } 
 
@@ -185,7 +185,7 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
 
 void set_clock(uint8_t freq) {                   // Switch Clock from 8 MHz to 1 MHz
   CLKPR = 0x80;                                  // Set clock
-  CLKPR = freq;                                  // 0 = 8 Mhz | 3 = 1 Mhz
+  CLKPR = freq;                                  // 0 = 8 Mhz | 4 = 1 Mhz
 }
 
 ISR(PCINT0_vect) {                               // Interrupt routine for pin change 
