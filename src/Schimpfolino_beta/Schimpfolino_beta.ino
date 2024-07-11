@@ -1,10 +1,10 @@
 /*  
-    Schimpfolino V1.1 10.07.2024 BETA - Nikolai Radke
+    Schimpfolino V1.1 11.07.2024 BETA - Nikolai Radke
     Compatible with old V1.0 boards
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | Only with additional 24LCXX EEPROM
-    For ATtiny45/85 - set to 8 Mhz | B.O.D disabled | No bootloader
+    For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" first!
 
     Flash usage: 3.326 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
@@ -69,17 +69,17 @@ int main(void) {
     Wire.begin();                                // Start I2C
 
     // Read wordlist addresses
-    gender = 0;                                // gender and list are helping variables here
-    for (list = 0; list < 5; list ++) {        // Read numbers of 4 wordlists
-      number = read_eeprom(0 + gender) * 255;  // Calculate number: 
-      number += read_eeprom(1 + gender);       // First byte = high, second byte = low
-      if (number == 0) wake = false;           // Sleep if no EEPROM or no wordlist present
-      address[list] = number;                  // Write word numbers to array 
-      gender += 2;                             // Chance number address
+    gender = 0;                                  // gender and list are helping variables here
+    for (list = 0; list < 5; list ++) {          // Read numbers of 4 wordlists
+      number = read_eeprom(0 + gender) * 255;    // Calculate number: 
+      number += read_eeprom(1 + gender);         // First byte = high, second byte = low
+      if (number == 0) wake = false;             // Sleep if no EEPROM or no wordlist present
+      address[list] = number;                    // Write word numbers to array 
+      gender += 2;                               // Chance number address
     }
 
     // Randomize number generator
-    set_clock(4);                                // Set clock to 1 Mhz to save power while waiting
+    set_clock(4);                                // Set clock to 1 MHz to save power while waiting
     while (!wake);                               // Wait for button to "turn on"
     randomSeed(millis());                        // Time passed by manual pressing is used for random numbers
 
@@ -169,7 +169,7 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
 
 void set_clock(uint8_t freq) {                   // Switch Clock from 8 MHz to 1 MHz
   CLKPR = 0x80;                                  // Set clock
-  CLKPR = freq;                                  // 0 = 8 Mhz | 4 = 1 Mhz
+  CLKPR = freq;                                  // 0 = 8 MHz | 4 = 1 MHz
 }
 
 ISR(PCINT0_vect) {                               // Interrupt routine for pin change 

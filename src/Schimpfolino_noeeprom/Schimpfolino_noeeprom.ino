@@ -3,7 +3,7 @@
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | With or without additional 24LCXX EEPROM
-    For ATtiny85 only - set to 8 Mhz | B.O.D disabled | No bootloader
+    For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" first!
 
     Flash usage: 7.990 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
@@ -11,7 +11,6 @@
 
     Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
-    Last character of a wordlist in EEPROM is '!'
 
     Wiring:
                   +-\/-+
@@ -88,7 +87,7 @@ int main(void) {
     }
 
     // Randomize number generator
-    set_clock(4);                                // Set clock to 1 Mhz to save power while waiting
+    set_clock(4);                                // Set clock to 1 MHz to save power while waiting
     while (!wake);                               // Wait for button to "turn on"
     randomSeed(millis());                        // Time passed by manual pressing is used for random numbers
 
@@ -185,7 +184,7 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
 
 void set_clock(uint8_t freq) {                   // Switch Clock from 8 MHz to 1 MHz
   CLKPR = 0x80;                                  // Set clock
-  CLKPR = freq;                                  // 0 = 8 Mhz | 4 = 1 Mhz
+  CLKPR = freq;                                  // 0 = 8 MHz | 4 = 1 MHz
 }
 
 ISR(PCINT0_vect) {                               // Interrupt routine for pin change 
