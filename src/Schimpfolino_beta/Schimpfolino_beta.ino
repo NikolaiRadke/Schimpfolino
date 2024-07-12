@@ -7,18 +7,21 @@
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" first!
 
-    Flash usage: 3.326 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.328 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       2.2 mA (idle) | ~ 300 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
     Last character of a wordlist is '!'
 
+    Changes to V1.0:
+    * Display and EEPROM are powered by PB4
+
     Wiring:
                          +-\/-+
     RST          - PB5  1|    |8  VCC - Battery
     Free         - PB3  2|    |7  PB2 - SCL
-    Display VCC  - PB4  3|    |6  PB1 - Button -> GND
+    Devices VCC  - PB4  3|    |6  PB1 - Button -> GND
     GND          - GND  4|    |5  PB0 - SCL
                          +----+
 */
@@ -34,12 +37,13 @@
 #define  Devices  PB4                            // External devices power pin
 
 // Software
-#define  Timeout  1250                           // 10 seconds before sleep | 10000 ms / 8 for 1 MHz
+#define  Timeout  1280                           // 10 seconds before sleep | 1280 for 500 kHz
    
 // Variables
 uint8_t  gender;                                 // Gender of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
-uint16_t number, list;                           // Helping variables
+uint8_t  list;                                   // Helping variable for parsing word lists
+uint16_t number;                                 // Helping variable for calculating addresses and selecting words
 uint16_t address[5];                             // Wordlists addresses array
 uint32_t counter;                                // Timer begin for sleep timeout
 char     wordbuffer[20];                         // Buffer for reading words
@@ -79,18 +83,19 @@ int main(void) {
     }
 
     // Randomize number generator
-    set_clock(4);                                // Set clock to 1 MHz to save power while waiting
-    while (!wake);                               // Wait for button to "turn on"
+    set_clock(8);                                // Set clock to 32 kHz to save power while waiting
+    while (!wake);                               // Wait for button to "turn on" - Sleep mode would disable timer
+    set_clock(0);                                // Set clock to 8 MHz for faster rendering
     randomSeed(millis());                        // Time passed by manual pressing is used for random numbers
 
     // Main routine - runs after waking up
     while(1) {
       // Init Display
+      PORTB |= (1 << Devices);                   // Devices on (V1.1)
       oled.init();                               // Connect and start OLED via I2C
 
       // Display swearwords until timeout
       while (wake) {                             // Wait 10 seconds timeout
-        set_clock(0);                            // Set clock to 8 MHz for faster rendering
         counter = millis();                      // Set starting time
         oled.clear();                            // Clear display buffer
 
@@ -113,7 +118,7 @@ int main(void) {
         // Wait for button or sleep
         _delay_ms(500);                          // Debounce button
         wake = false;                            // Set to sleep
-        set_clock(4);                            // Set clock back to 1 MHz to save power
+        set_clock(4);                            // Set clock back to 500 kHz to save power
         while ((!wake) && (millis() - counter < Timeout)); // Wait for button oder timeout
       } 
 
@@ -121,8 +126,9 @@ int main(void) {
       oled.sendCommand(0xAE);                    // Display off and sleep (V1.0)
       PORTB &= ~(1 << Devices);                  // Devices off (V1.1)   
       set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
+      //set_clock(8);                              // Set clock to 8 MHz for faster rendering
       sleep_mode();                              // Good night, sleep until interrupt
-      PORTB |= (1 << Devices);                   // Devices on (V1.1)
+      set_clock(0);                              // Set clock to 8 MHz for faster rendering
     }
   }
 }
@@ -132,8 +138,8 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
   char c;
   uint16_t i;
   address *= 10;
-  for (i = address; i < address + 10; i ++) {    // Read 10 characters        
-    c = read_eeprom(i + 10);                       // from EEPROM with address memory offset
+  for (i = address; i < address + 10; i ++) {    // Read 10 characters...        
+    c = read_eeprom(i + 10);                     // ...from EEPROM with address memory offset
     if (c != 32) {                               // Check for space
       switch (c) {                               // Set german Umlaute   
         case 35: wordbuffer[chars] = 27; break;  // # -> ä
@@ -159,7 +165,7 @@ void write_swearword(uint8_t line) {             // Write centered word
 }
 
 uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
-  Wire.beginTransmission(0x50);                  // open transmission to I2C-address 0x50
+  Wire.beginTransmission(0x50);                  // Open transmission to I2C-address 0x50
   Wire.write((uint16_t)(e_address >> 8));        // Send the MSB (Most Significant Byte) of the memory address
   Wire.write((uint16_t)(e_address & 0xFF));      // Send the LSB (Least Significant Byte) of the memory address
   Wire.endTransmission();                        // Close transmissiom
@@ -167,7 +173,7 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
   return Wire.read();                            // Read and return byte
 }
 
-void set_clock(uint8_t freq) {                   // Switch Clock from 8 MHz to 1 MHz
+void set_clock(uint8_t freq) {                   // Switch clock from 8 MHz to 1 MHz
   CLKPR = 0x80;                                  // Set clock
   CLKPR = freq;                                  // 0 = 8 MHz | 4 = 1 MHz
 }

@@ -1,0 +1,3206 @@
+
+/tmp/arduino/sketches/0A5BD7CB6719673755883654DB6DC99E/Schimpfolino_beta.ino.elf:     file format elf32-avr
+
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+__vectors():
+   0:	a5 c0       	rjmp	.+330    	; 0x14c <__ctors_end>
+   2:	bf c0       	rjmp	.+382    	; 0x182 <__bad_interrupt>
+   4:	d6 c3       	rjmp	.+1964   	; 0x7b2 <__vector_2>
+   6:	bd c0       	rjmp	.+378    	; 0x182 <__bad_interrupt>
+   8:	bc c0       	rjmp	.+376    	; 0x182 <__bad_interrupt>
+   a:	f6 c2       	rjmp	.+1516   	; 0x5f8 <__vector_5>
+   c:	ba c0       	rjmp	.+372    	; 0x182 <__bad_interrupt>
+   e:	b9 c0       	rjmp	.+370    	; 0x182 <__bad_interrupt>
+  10:	b8 c0       	rjmp	.+368    	; 0x182 <__bad_interrupt>
+  12:	b7 c0       	rjmp	.+366    	; 0x182 <__bad_interrupt>
+  14:	b6 c0       	rjmp	.+364    	; 0x182 <__bad_interrupt>
+  16:	b5 c0       	rjmp	.+362    	; 0x182 <__bad_interrupt>
+  18:	b4 c0       	rjmp	.+360    	; 0x182 <__bad_interrupt>
+  1a:	b2 c3       	rjmp	.+1892   	; 0x780 <__vector_13>
+  1c:	37 c3       	rjmp	.+1646   	; 0x68c <__vector_14>
+
+0000001e <__trampolines_end>:
+__trampolines_start():
+  1e:	20 00       	.word	0x0020	; ????
+  20:	a8 3f       	cpi	r26, 0xF8	; 248
+  22:	81 ff       	sbrs	r24, 1
+  24:	8d 14       	cp	r8, r13
+  26:	af a1       	ldd	r26, Y+39	; 0x27
+  28:	c8 7c       	Address 0x0000000000000028 is out of bounds.
+.word	0xffff	; ????
+
+00000029 <BasicFont>:
+  29:	7c 12 11 12 7c 7f 49 49 49 36 3e 41 41 41 22 7f     |...|.III6>AAA".
+  39:	41 41 22 1c 7f 49 49 49 41 7f 09 09 09 01 3e 41     AA"..IIIA.....>A
+  49:	49 49 7a 7f 08 08 08 7f 00 41 7f 41 00 20 40 41     IIz......A.A. @A
+  59:	3f 01 7f 08 14 22 41 7f 40 40 40 40 7f 02 0c 02     ?...."A.@@@@....
+  69:	7f 7f 04 08 10 7f 3e 41 41 41 3e 7f 09 09 09 06     ......>AAA>.....
+  79:	3e 41 51 21 5e 7f 09 19 29 46 46 49 49 49 31 01     >AQ!^...)FFIII1.
+  89:	01 7f 01 01 3f 40 40 40 3f 1f 20 40 20 1f 3f 40     ....?@@@?. @ .?@
+  99:	38 40 3f 63 14 08 14 63 07 08 70 08 07 61 51 49     8@?c...c..p..aQI
+  a9:	45 43 1c 3e 7c 3e 1c 20 55 54 55 78 38 45 44 45     EC.>|>. UTUx8EDE
+  b9:	38 3c 41 40 21 7c fc 02 2a 2a 28 00 00 00 00 00     8<A@!|..**(.....
+  c9:	20 54 54 54 78 7f 48 44 44 38 38 44 44 44 20 38      TTTx.HDD88DDD 8
+  d9:	44 44 48 7f 38 54 54 54 18 08 7e 09 01 02 18 a4     DDH.8TTT..~.....
+  e9:	a4 a4 7c 7f 08 04 04 78 00 44 7d 40 00 40 80 84     ..|....x.D}@.@..
+  f9:	7d 00 7f 10 28 44 00 00 41 7f 40 00 7c 04 18 04     }...(D..A.@.|...
+ 109:	78 7c 08 04 04 78 38 44 44 44 38 fc 24 24 24 18     x|...x8DDD8.$$$.
+ 119:	18 24 24 18 fc 7c 08 04 04 08 48 54 54 54 20 04     .$$..|....HTTT .
+ 129:	3f 44 40 20 3c 40 40 20 7c 1c 20 40 20 1c 3c 40     ?D@ <@@ |. @ .<@
+ 139:	30 40 3c 44 28 10 28 44 1c a0 a0 a0 7c 44 64 54     0@<D(.(D....|DdT
+ 149:	4c 44 00                                            LD.
+
+0000014c <__ctors_end>:
+__dtors_end():
+ 14c:	11 24       	eor	r1, r1
+ 14e:	1f be       	out	0x3f, r1	; 63
+ 150:	cf e5       	ldi	r28, 0x5F	; 95
+ 152:	d2 e0       	ldi	r29, 0x02	; 2
+ 154:	de bf       	out	0x3e, r29	; 62
+ 156:	cd bf       	out	0x3d, r28	; 61
+
+00000158 <__do_copy_data>:
+__do_copy_data():
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2409
+ 158:	10 e0       	ldi	r17, 0x00	; 0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2410
+ 15a:	a0 e6       	ldi	r26, 0x60	; 96
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2411
+ 15c:	b0 e0       	ldi	r27, 0x00	; 0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2412
+ 15e:	ea ef       	ldi	r30, 0xFA	; 250
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2413
+ 160:	fc e0       	ldi	r31, 0x0C	; 12
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2414
+ 162:	02 c0       	rjmp	.+4      	; 0x168 <__do_copy_data+0x10>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2417
+ 164:	05 90       	lpm	r0, Z+
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2422
+ 166:	0d 92       	st	X+, r0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2424
+ 168:	a4 36       	cpi	r26, 0x64	; 100
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2425
+ 16a:	b1 07       	cpc	r27, r17
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2426
+ 16c:	d9 f7       	brne	.-10     	; 0x164 <__do_copy_data+0xc>
+
+0000016e <__do_clear_bss>:
+__do_clear_bss():
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2441
+ 16e:	20 e0       	ldi	r18, 0x00	; 0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2442
+ 170:	a4 e6       	ldi	r26, 0x64	; 100
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2443
+ 172:	b0 e0       	ldi	r27, 0x00	; 0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2444
+ 174:	01 c0       	rjmp	.+2      	; 0x178 <.do_clear_bss_start>
+
+00000176 <.do_clear_bss_loop>:
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2446
+ 176:	1d 92       	st	X+, r1
+
+00000178 <.do_clear_bss_start>:
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2448
+ 178:	a0 3c       	cpi	r26, 0xC0	; 192
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2449
+ 17a:	b2 07       	cpc	r27, r18
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2450
+ 17c:	e1 f7       	brne	.-8      	; 0x176 <.do_clear_bss_loop>
+.do_clear_bss_start():
+ 17e:	28 d3       	rcall	.+1616   	; 0x7d0 <main>
+ 180:	ba c5       	rjmp	.+2932   	; 0xcf6 <_exit>
+
+00000182 <__bad_interrupt>:
+__vector_1():
+ 182:	3e cf       	rjmp	.-388    	; 0x0 <__vectors>
+
+00000184 <TwoWire::write(unsigned char) [clone .constprop.21]>:
+_ZN7TwoWire5writeEh.constprop.21():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:507
+
+// must be called in:
+// slave tx event callback
+// or after beginTransmission(address)
+size_t TwoWire::write(uint8_t data) {
+  if (transmitting) { // in master transmitter mode
+ 184:	90 91 bf 00 	lds	r25, 0x00BF	; 0x8000bf <TwoWire::transmitting>
+ 188:	99 23       	and	r25, r25
+ 18a:	a1 f0       	breq	.+40     	; 0x1b4 <TwoWire::write(unsigned char) [clone .constprop.21]+0x30>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:509
+    // don't bother if buffer is full
+    if (BufferLength >= TWI_BUFFER_SIZE) {
+ 18c:	90 91 be 00 	lds	r25, 0x00BE	; 0x8000be <TwoWire::BufferLength>
+ 190:	90 32       	cpi	r25, 0x20	; 32
+ 192:	40 f5       	brcc	.+80     	; 0x1e4 <TwoWire::write(unsigned char) [clone .constprop.21]+0x60>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:513
+      return 0;
+    }
+    // put byte in tx buffer
+    Buffer[BufferIndex] = data;
+ 194:	90 91 bd 00 	lds	r25, 0x00BD	; 0x8000bd <TwoWire::BufferIndex>
+ 198:	e9 2f       	mov	r30, r25
+ 19a:	f0 e0       	ldi	r31, 0x00	; 0
+ 19c:	ec 59       	subi	r30, 0x9C	; 156
+ 19e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1a0:	80 83       	st	Z, r24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:514
+    ++BufferIndex;
+ 1a2:	81 e0       	ldi	r24, 0x01	; 1
+ 1a4:	89 0f       	add	r24, r25
+ 1a6:	80 93 bd 00 	sts	0x00BD, r24	; 0x8000bd <TwoWire::BufferIndex>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:516
+    // update amount in buffer
+    BufferLength = BufferIndex;
+ 1aa:	80 93 be 00 	sts	0x00BE, r24	; 0x8000be <TwoWire::BufferLength>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:525
+      return 0;
+    }
+    // reply to master
+    USI_TWI_Transmit_Byte(data);
+  }
+  return 1;
+ 1ae:	81 e0       	ldi	r24, 0x01	; 1
+ 1b0:	90 e0       	ldi	r25, 0x00	; 0
+ 1b2:	08 95       	ret
+USI_TWI_Space_In_Transmission_Buffer():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:144
+
+// Check if there is space in the transmission buffer.
+unsigned char USI_TWI_Space_In_Transmission_Buffer(void)
+{
+  unsigned char tmpTxHead;
+  tmpTxHead = (TWI_TxHead + 1) & TWI_TX_BUFFER_MASK; // Calculate next buffer index.
+ 1b4:	20 91 bc 00 	lds	r18, 0x00BC	; 0x8000bc <TWI_TxHead>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:145
+  return (TWI_TxTail - tmpTxHead) & TWI_TX_BUFFER_MASK; // Return 0 (FALSE) if the transmission buffer is full.
+ 1b8:	90 91 bb 00 	lds	r25, 0x00BB	; 0x8000bb <TWI_TxTail>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:144
+
+// Check if there is space in the transmission buffer.
+unsigned char USI_TWI_Space_In_Transmission_Buffer(void)
+{
+  unsigned char tmpTxHead;
+  tmpTxHead = (TWI_TxHead + 1) & TWI_TX_BUFFER_MASK; // Calculate next buffer index.
+ 1bc:	2f 5f       	subi	r18, 0xFF	; 255
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:145
+  return (TWI_TxTail - tmpTxHead) & TWI_TX_BUFFER_MASK; // Return 0 (FALSE) if the transmission buffer is full.
+ 1be:	92 1b       	sub	r25, r18
+ 1c0:	9f 70       	andi	r25, 0x0F	; 15
+_ZN7TwoWire5writeEh.constprop.21():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:519
+    ++BufferIndex;
+    // update amount in buffer
+    BufferLength = BufferIndex;
+  } else { // in slave send mode
+    // don't bother if buffer is full
+    if (!USI_TWI_Space_In_Transmission_Buffer()) {
+ 1c2:	81 f0       	breq	.+32     	; 0x1e4 <TwoWire::write(unsigned char) [clone .constprop.21]+0x60>
+USI_TWI_Transmit_Byte():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:100
+// Puts data in the transmission buffer, Waits if buffer is full.
+void USI_TWI_Transmit_Byte(unsigned char data)
+{
+  unsigned char tmphead;
+
+  tmphead = (TWI_TxHead + 1) & TWI_TX_BUFFER_MASK; // Calculate buffer index.
+ 1c4:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <TWI_TxHead>
+ 1c8:	9f 5f       	subi	r25, 0xFF	; 255
+ 1ca:	9f 70       	andi	r25, 0x0F	; 15
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:101
+  while (tmphead == TWI_TxTail)
+ 1cc:	20 91 bb 00 	lds	r18, 0x00BB	; 0x8000bb <TWI_TxTail>
+ 1d0:	92 17       	cp	r25, r18
+ 1d2:	e1 f3       	breq	.-8      	; 0x1cc <TwoWire::write(unsigned char) [clone .constprop.21]+0x48>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:103
+    ;                         // Wait for free space in buffer.
+  TWI_TxBuf[tmphead] = data;    // Store data in buffer.
+ 1d4:	e9 2f       	mov	r30, r25
+ 1d6:	f0 e0       	ldi	r31, 0x00	; 0
+ 1d8:	ec 58       	subi	r30, 0x8C	; 140
+ 1da:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1dc:	80 83       	st	Z, r24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:104
+  TWI_TxHead         = tmphead; // Store new index.
+ 1de:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <TWI_TxHead>
+ 1e2:	e5 cf       	rjmp	.-54     	; 0x1ae <TwoWire::write(unsigned char) [clone .constprop.21]+0x2a>
+_ZN7TwoWire5writeEh.constprop.21():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:510
+// or after beginTransmission(address)
+size_t TwoWire::write(uint8_t data) {
+  if (transmitting) { // in master transmitter mode
+    // don't bother if buffer is full
+    if (BufferLength >= TWI_BUFFER_SIZE) {
+      return 0;
+ 1e4:	90 e0       	ldi	r25, 0x00	; 0
+ 1e6:	80 e0       	ldi	r24, 0x00	; 0
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:526
+    }
+    // reply to master
+    USI_TWI_Transmit_Byte(data);
+  }
+  return 1;
+}
+ 1e8:	08 95       	ret
+
+000001ea <TwoWire::write(int) [clone .constprop.20]>:
+_ZN7TwoWire5writeEi.constprop.20():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.h:157
+    uint8_t isActive(void);
+
+    inline size_t write(unsigned long n) { return write((uint8_t)n); }
+    inline size_t write(long n) { return write((uint8_t)n); }
+    inline size_t write(unsigned int n) { return write((uint8_t)n); }
+    inline size_t write(int n) { return write((uint8_t)n); }
+ 1ea:	cc cf       	rjmp	.-104    	; 0x184 <TwoWire::write(unsigned char) [clone .constprop.21]>
+
+000001ec <TwoWire::beginTransmission(unsigned char) [clone .constprop.19]>:
+_ZN7TwoWire17beginTransmissionEh.constprop.19():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:462
+  return requestFrom((uint8_t)address, (uint8_t)quantity, (uint8_t)sendStop);
+}
+
+void TwoWire::beginTransmission(uint8_t address) {
+  // indicate that we are transmitting
+  transmitting = 1;
+ 1ec:	91 e0       	ldi	r25, 0x01	; 1
+ 1ee:	90 93 bf 00 	sts	0x00BF, r25	; 0x8000bf <TwoWire::transmitting>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:464
+  // set address of targeted slave and write mode
+  Buffer[0] = (address << TWI_ADR_BITS) | (0 << TWI_READ_BIT);
+ 1f2:	88 0f       	add	r24, r24
+ 1f4:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <__data_end>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:466
+  // reset tx buffer iterator vars
+  BufferIndex = 1; // reserved by slave address
+ 1f8:	90 93 bd 00 	sts	0x00BD, r25	; 0x8000bd <TwoWire::BufferIndex>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:467
+  BufferLength = BufferIndex;
+ 1fc:	90 93 be 00 	sts	0x00BE, r25	; 0x8000be <TwoWire::BufferLength>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:468
+}
+ 200:	08 95       	ret
+
+00000202 <SSD1306_Mini::commandMode() [clone .constprop.17]>:
+_ZN12SSD1306_Mini11commandModeEv.constprop.17():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:471
+
+void TwoWire::beginTransmission(int address) {
+  beginTransmission((uint8_t)address);
+ 202:	8c e3       	ldi	r24, 0x3C	; 60
+ 204:	f3 df       	rcall	.-26     	; 0x1ec <TwoWire::beginTransmission(unsigned char) [clone .constprop.19]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:114
+};
+
+// Private functions
+void SSD1306_Mini::commandMode() {               
+  Wire.beginTransmission(SlaveAddress);          // Begin I2C transmission
+  Wire.write(0x80);                              // Command mode
+ 206:	80 e8       	ldi	r24, 0x80	; 128
+ 208:	90 e0       	ldi	r25, 0x00	; 0
+ 20a:	ef cf       	rjmp	.-34     	; 0x1ea <TwoWire::write(int) [clone .constprop.20]>
+
+0000020c <USI_TWI_Master_Transfer>:
+USI_TWI_Master_Transfer():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:225
+ Data to be sent has to be placed into the USIDR prior to calling
+ this function. Data read, will be return'ed from the function.
+---------------------------------------------------------------*/
+unsigned char USI_TWI_Master_Transfer(unsigned char temp)
+{
+  USISR = temp;                                          // Set USISR according to temp.
+ 20c:	8e b9       	out	0x0e, r24	; 14
+_delay_loop_1():
+/home/niko/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay_basic.h:83
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+ 20e:	28 e2       	ldi	r18, 0x28	; 40
+ 210:	3c e0       	ldi	r19, 0x0C	; 12
+USI_TWI_Master_Transfer():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:233
+         (1 << USIWM1) | (0 << USIWM0) |                 // Set USI in Two-wire mode.
+         (1 << USICS1) | (0 << USICS0) | (1 << USICLK) | // Software clock strobe as source.
+         (1 << USITC);                                   // Toggle Clock Port.
+  do {
+    if (USI_TWI_MASTER_SPEED) DELAY_T2TWI_FM; else DELAY_T2TWI;
+    USICR = temp; // Generate positive SCL edge.
+ 212:	8b e2       	ldi	r24, 0x2B	; 43
+_delay_loop_1():
+/home/niko/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay_basic.h:83
+ 214:	40 e2       	ldi	r20, 0x20	; 32
+ 216:	56 e0       	ldi	r21, 0x06	; 6
+USI_TWI_Master_Transfer():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:232
+  temp = (0 << USISIE) | (0 << USIOIE) |                 // Interrupts disabled
+         (1 << USIWM1) | (0 << USIWM0) |                 // Set USI in Two-wire mode.
+         (1 << USICS1) | (0 << USICS0) | (1 << USICLK) | // Software clock strobe as source.
+         (1 << USITC);                                   // Toggle Clock Port.
+  do {
+    if (USI_TWI_MASTER_SPEED) DELAY_T2TWI_FM; else DELAY_T2TWI;
+ 218:	90 91 ac 00 	lds	r25, 0x00AC	; 0x8000ac <USI_TWI_MASTER_SPEED>
+ 21c:	99 23       	and	r25, r25
+ 21e:	e1 f0       	breq	.+56     	; 0x258 <USI_TWI_Master_Transfer+0x4c>
+_delay_loop_1():
+/home/niko/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay_basic.h:83
+ 220:	93 2f       	mov	r25, r19
+ 222:	9a 95       	dec	r25
+ 224:	f1 f7       	brne	.-4      	; 0x222 <USI_TWI_Master_Transfer+0x16>
+USI_TWI_Master_Transfer():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:233
+    USICR = temp; // Generate positive SCL edge.
+ 226:	8d b9       	out	0x0d, r24	; 13
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:234
+    while (!(PIN_USI_CL & (1 << PIN_USI_SCL)))
+ 228:	b2 9b       	sbis	0x16, 2	; 22
+ 22a:	fe cf       	rjmp	.-4      	; 0x228 <USI_TWI_Master_Transfer+0x1c>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:236
+      ; // Wait for SCL to go high.
+    if (USI_TWI_MASTER_SPEED) DELAY_T4TWI_FM; else DELAY_T4TWI;
+ 22c:	90 91 ac 00 	lds	r25, 0x00AC	; 0x8000ac <USI_TWI_MASTER_SPEED>
+ 230:	99 23       	and	r25, r25
+ 232:	a1 f0       	breq	.+40     	; 0x25c <USI_TWI_Master_Transfer+0x50>
+_delay_loop_1():
+/home/niko/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay_basic.h:83
+ 234:	95 2f       	mov	r25, r21
+ 236:	9a 95       	dec	r25
+ 238:	f1 f7       	brne	.-4      	; 0x236 <USI_TWI_Master_Transfer+0x2a>
+USI_TWI_Master_Transfer():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:237
+    USICR = temp;                   // Generate negative SCL edge.
+ 23a:	8d b9       	out	0x0d, r24	; 13
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:238
+  } while (!(USISR & (1 << USIOIF))); // Check for transfer complete.
+ 23c:	76 9b       	sbis	0x0e, 6	; 14
+ 23e:	ec cf       	rjmp	.-40     	; 0x218 <USI_TWI_Master_Transfer+0xc>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:240
+
+  if (USI_TWI_MASTER_SPEED) DELAY_T2TWI_FM; else DELAY_T2TWI;
+ 240:	80 91 ac 00 	lds	r24, 0x00AC	; 0x8000ac <USI_TWI_MASTER_SPEED>
+ 244:	88 23       	and	r24, r24
+ 246:	61 f0       	breq	.+24     	; 0x260 <__stack+0x1>
+_delay_loop_1():
+/home/niko/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay_basic.h:83
+ 248:	8c e0       	ldi	r24, 0x0C	; 12
+ 24a:	8a 95       	dec	r24
+ 24c:	f1 f7       	brne	.-4      	; 0x24a <USI_TWI_Master_Transfer+0x3e>
+USI_TWI_Master_Transfer():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:241
+  temp  = USIDR;                 // Read out data.
+ 24e:	8f b1       	in	r24, 0x0f	; 15
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:242
+  USIDR = 0xFF;                  // Release SDA.
+ 250:	9f ef       	ldi	r25, 0xFF	; 255
+ 252:	9f b9       	out	0x0f, r25	; 15
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:243
+  DDR_USI |= (1 << PIN_USI_SDA); // Enable SDA as output.
+ 254:	b8 9a       	sbi	0x17, 0	; 23
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:246
+
+  return temp; // Return the data from the USIDR
+}
+ 256:	08 95       	ret
+_delay_loop_1():
+/home/niko/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay_basic.h:83
+ 258:	92 2f       	mov	r25, r18
+ 25a:	e3 cf       	rjmp	.-58     	; 0x222 <USI_TWI_Master_Transfer+0x16>
+ 25c:	94 2f       	mov	r25, r20
+ 25e:	eb cf       	rjmp	.-42     	; 0x236 <USI_TWI_Master_Transfer+0x2a>
+ 260:	88 e2       	ldi	r24, 0x28	; 40
+ 262:	f3 cf       	rjmp	.-26     	; 0x24a <USI_TWI_Master_Transfer+0x3e>
+
+00000264 <USI_TWI_Start_Transceiver_With_Data_Stop>:
+USI_TWI_Start_Transceiver_With_Data_Stop():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:108
+ parameter that defines if a Stop Condition should be send at the end
+ of the transmission.
+---------------------------------------------------------------*/
+
+unsigned char USI_TWI_Start_Transceiver_With_Data_Stop(unsigned char *msg, unsigned char msgSize, unsigned char stop)
+{
+ 264:	ff 92       	push	r15
+ 266:	0f 93       	push	r16
+ 268:	1f 93       	push	r17
+ 26a:	cf 93       	push	r28
+ 26c:	df 93       	push	r29
+ 26e:	06 2f       	mov	r16, r22
+ 270:	14 2f       	mov	r17, r20
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:115
+  // Prepare register value to: Clear flags set USI to shift 8 bits i.e. count 16 clock edges.
+
+  unsigned char tempUSISR_1bit = (1 << USISIF) | (1 << USIOIF) | (1 << USIPF) | (1 << USIDC) | (0xE << USICNT0);
+  // Prepare register value to: Clear flags, and set USI to shift 1 bit i.e. count 2 clock edges.
+
+  USI_TWI_state.errorState  = 0;
+ 272:	21 e0       	ldi	r18, 0x01	; 1
+ 274:	20 93 ba 00 	sts	0x00BA, r18	; 0x8000ba <USI_TWI_state>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:146
+    USI_TWI_state.errorState = USI_TWI_UE_DATA_COL;
+    return (FALSE);
+  }
+#endif
+
+  if (!(*msg & (1 << TWI_READ_BIT))) // The LSB in the address byte determines if is a masterRead or masterWrite operation.
+ 278:	fc 01       	movw	r30, r24
+ 27a:	20 81       	ld	r18, Z
+ 27c:	20 fd       	sbrc	r18, 0
+ 27e:	03 c0       	rjmp	.+6      	; 0x286 <USI_TWI_Start_Transceiver_With_Data_Stop+0x22>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:148
+  {
+    USI_TWI_state.masterWriteDataMode = TRUE;
+ 280:	23 e0       	ldi	r18, 0x03	; 3
+ 282:	20 93 ba 00 	sts	0x00BA, r18	; 0x8000ba <USI_TWI_state>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:152
+  }
+
+  /* Release SCL to ensure that (repeated) Start can be performed */
+  PORT_USI_CL |= (1 << PIN_USI_SCL); // Release SCL.
+ 286:	c2 9a       	sbi	0x18, 2	; 24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:153
+  while (!(PIN_USI_CL & (1 << PIN_USI_SCL)))
+ 288:	b2 9b       	sbis	0x16, 2	; 22
+ 28a:	fe cf       	rjmp	.-4      	; 0x288 <USI_TWI_Start_Transceiver_With_Data_Stop+0x24>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:155
+    ; // Verify that SCL becomes high.
+  if (USI_TWI_MASTER_SPEED) DELAY_T4TWI_FM; // Delay for T4TWI if TWI_FAST_MODE
+ 28c:	20 91 ac 00 	lds	r18, 0x00AC	; 0x8000ac <USI_TWI_MASTER_SPEED>
+ 290:	22 23       	and	r18, r18
+ 292:	d1 f0       	breq	.+52     	; 0x2c8 <USI_TWI_Start_Transceiver_With_Data_Stop+0x64>
+_delay_loop_1():
+/home/niko/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay_basic.h:83
+ 294:	26 e0       	ldi	r18, 0x06	; 6
+ 296:	2a 95       	dec	r18
+ 298:	f1 f7       	brne	.-4      	; 0x296 <USI_TWI_Start_Transceiver_With_Data_Stop+0x32>
+USI_TWI_Start_Transceiver_With_Data_Stop():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:159
+  else DELAY_T2TWI;    // Delay for T2TWI if TWI_STANDARD_MODE
+
+  /* Generate Start Condition */
+  PORT_USI &= ~(1 << PIN_USI_SDA); // Force SDA LOW.
+ 29a:	c0 98       	cbi	0x18, 0	; 24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:161
+
+  if (USI_TWI_MASTER_SPEED) DELAY_T4TWI_FM; else DELAY_T4TWI; // UGGGGLLLYYYYY - but if you never call clock() which is the only thing that could change USI_TWI_MASTER_SPEED, should be optimized out
+ 29c:	20 91 ac 00 	lds	r18, 0x00AC	; 0x8000ac <USI_TWI_MASTER_SPEED>
+ 2a0:	22 23       	and	r18, r18
+ 2a2:	a1 f0       	breq	.+40     	; 0x2cc <USI_TWI_Start_Transceiver_With_Data_Stop+0x68>
+_delay_loop_1():
+/home/niko/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay_basic.h:83
+ 2a4:	26 e0       	ldi	r18, 0x06	; 6
+ 2a6:	2a 95       	dec	r18
+ 2a8:	f1 f7       	brne	.-4      	; 0x2a6 <USI_TWI_Start_Transceiver_With_Data_Stop+0x42>
+USI_TWI_Start_Transceiver_With_Data_Stop():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:163
+
+  PORT_USI_CL &= ~(1 << PIN_USI_SCL); // Pull SCL LOW.
+ 2aa:	c2 98       	cbi	0x18, 2	; 24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:164
+  PORT_USI |= (1 << PIN_USI_SDA);  // Release SDA.
+ 2ac:	c0 9a       	sbi	0x18, 0	; 24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:167
+
+#ifdef SIGNAL_VERIFY
+  if (!(USISR & (1 << USISIF))) {
+ 2ae:	77 99       	sbic	0x0e, 7	; 14
+ 2b0:	0f c0       	rjmp	.+30     	; 0x2d0 <USI_TWI_Start_Transceiver_With_Data_Stop+0x6c>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:168
+    USI_TWI_state.errorState = USI_TWI_MISSING_START_CON;
+ 2b2:	87 e0       	ldi	r24, 0x07	; 7
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:186
+
+      /* Clock and verify (N)ACK from slave */
+      DDR_USI &= ~(1 << PIN_USI_SDA); // Enable SDA as input.
+      if (USI_TWI_Master_Transfer(tempUSISR_1bit) & (1 << TWI_NACK_BIT)) {
+        if (USI_TWI_state.addressMode)
+          USI_TWI_state.errorState = USI_TWI_NO_ACK_ON_ADDRESS;
+ 2b4:	80 93 ba 00 	sts	0x00BA, r24	; 0x8000ba <USI_TWI_state>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:189
+        else
+          USI_TWI_state.errorState = USI_TWI_NO_ACK_ON_DATA;
+        return (FALSE);
+ 2b8:	10 e0       	ldi	r17, 0x00	; 0
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:216
+    USI_TWI_Master_Stop(); // Send a STOP condition on the TWI bus.
+  }
+
+  /* Transmission successfully completed*/
+  return (TRUE);
+}
+ 2ba:	81 2f       	mov	r24, r17
+ 2bc:	df 91       	pop	r29
+ 2be:	cf 91       	pop	r28
+ 2c0:	1f 91       	pop	r17
+ 2c2:	0f 91       	pop	r16
+ 2c4:	ff 90       	pop	r15
+ 2c6:	08 95       	ret
+_delay_loop_1():
+/home/niko/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay_basic.h:83
+ 2c8:	28 e2       	ldi	r18, 0x28	; 40
+ 2ca:	e5 cf       	rjmp	.-54     	; 0x296 <USI_TWI_Start_Transceiver_With_Data_Stop+0x32>
+ 2cc:	20 e2       	ldi	r18, 0x20	; 32
+ 2ce:	eb cf       	rjmp	.-42     	; 0x2a6 <USI_TWI_Start_Transceiver_With_Data_Stop+0x42>
+ 2d0:	ec 01       	movw	r28, r24
+USI_TWI_Start_Transceiver_With_Data_Stop():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:202
+      *(msg++) = USI_TWI_Master_Transfer(tempUSISR_8bit);
+
+      /* Prepare to generate ACK (or NACK in case of End Of Transmission) */
+      if (msgSize == 1) // If transmission of last byte was performed.
+      {
+        USIDR = 0xFF; // Load NACK to confirm End Of Transmission.
+ 2d2:	ff 24       	eor	r15, r15
+ 2d4:	fa 94       	dec	r15
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:176
+#endif
+
+  /*Write address and Read/Write data */
+  do {
+    /* If masterWrite cycle (or initial address transmission)*/
+    if (USI_TWI_state.addressMode || USI_TWI_state.masterWriteDataMode) {
+ 2d6:	80 91 ba 00 	lds	r24, 0x00BA	; 0x8000ba <USI_TWI_state>
+ 2da:	83 70       	andi	r24, 0x03	; 3
+ 2dc:	19 f1       	breq	.+70     	; 0x324 <USI_TWI_Start_Transceiver_With_Data_Stop+0xc0>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:178
+      /* Write a byte */
+      PORT_USI_CL &= ~(1 << PIN_USI_SCL);         // Pull SCL LOW.
+ 2de:	c2 98       	cbi	0x18, 2	; 24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:179
+      USIDR = *(msg++);                        // Setup data.
+ 2e0:	88 81       	ld	r24, Y
+ 2e2:	8f b9       	out	0x0f, r24	; 15
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:180
+      USI_TWI_Master_Transfer(tempUSISR_8bit); // Send 8 bits on bus.
+ 2e4:	80 ef       	ldi	r24, 0xF0	; 240
+ 2e6:	92 df       	rcall	.-220    	; 0x20c <USI_TWI_Master_Transfer>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:183
+
+      /* Clock and verify (N)ACK from slave */
+      DDR_USI &= ~(1 << PIN_USI_SDA); // Enable SDA as input.
+ 2e8:	b8 98       	cbi	0x17, 0	; 23
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:184
+      if (USI_TWI_Master_Transfer(tempUSISR_1bit) & (1 << TWI_NACK_BIT)) {
+ 2ea:	8e ef       	ldi	r24, 0xFE	; 254
+ 2ec:	8f df       	rcall	.-226    	; 0x20c <USI_TWI_Master_Transfer>
+ 2ee:	80 ff       	sbrs	r24, 0
+ 2f0:	0c c0       	rjmp	.+24     	; 0x30a <USI_TWI_Start_Transceiver_With_Data_Stop+0xa6>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:185
+        if (USI_TWI_state.addressMode)
+ 2f2:	80 91 ba 00 	lds	r24, 0x00BA	; 0x8000ba <USI_TWI_state>
+ 2f6:	18 2f       	mov	r17, r24
+ 2f8:	11 70       	andi	r17, 0x01	; 1
+ 2fa:	80 ff       	sbrs	r24, 0
+ 2fc:	02 c0       	rjmp	.+4      	; 0x302 <USI_TWI_Start_Transceiver_With_Data_Stop+0x9e>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:186
+          USI_TWI_state.errorState = USI_TWI_NO_ACK_ON_ADDRESS;
+ 2fe:	86 e0       	ldi	r24, 0x06	; 6
+ 300:	d9 cf       	rjmp	.-78     	; 0x2b4 <USI_TWI_Start_Transceiver_With_Data_Stop+0x50>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:188
+        else
+          USI_TWI_state.errorState = USI_TWI_NO_ACK_ON_DATA;
+ 302:	85 e0       	ldi	r24, 0x05	; 5
+USI_TWI_Master_Stop():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:264
+  PORT_USI |= (1 << PIN_USI_SDA); // Release SDA.
+  if (USI_TWI_MASTER_SPEED) DELAY_T2TWI_FM; else DELAY_T2TWI;
+
+#ifdef SIGNAL_VERIFY
+  if (!(USISR & (1 << USIPF))) {
+    USI_TWI_state.errorState = USI_TWI_MISSING_STOP_CON;
+ 304:	80 93 ba 00 	sts	0x00BA, r24	; 0x8000ba <USI_TWI_state>
+ 308:	d8 cf       	rjmp	.-80     	; 0x2ba <USI_TWI_Start_Transceiver_With_Data_Stop+0x56>
+USI_TWI_Start_Transceiver_With_Data_Stop():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:191
+          USI_TWI_state.errorState = USI_TWI_NO_ACK_ON_ADDRESS;
+        else
+          USI_TWI_state.errorState = USI_TWI_NO_ACK_ON_DATA;
+        return (FALSE);
+      }
+      USI_TWI_state.addressMode = FALSE; // Only perform address transmission once.
+ 30a:	80 91 ba 00 	lds	r24, 0x00BA	; 0x8000ba <USI_TWI_state>
+ 30e:	8e 7f       	andi	r24, 0xFE	; 254
+ 310:	80 93 ba 00 	sts	0x00BA, r24	; 0x8000ba <USI_TWI_state>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:208
+      } else {
+        USIDR = 0x00; // Load ACK. Set data register bit 7 (output for SDA) low.
+      }
+      USI_TWI_Master_Transfer(tempUSISR_1bit); // Generate ACK/NACK.
+    }
+  } while (--msgSize); // Until all data sent/received.
+ 314:	01 50       	subi	r16, 0x01	; 1
+ 316:	21 96       	adiw	r28, 0x01	; 1
+ 318:	01 11       	cpse	r16, r1
+ 31a:	dd cf       	rjmp	.-70     	; 0x2d6 <USI_TWI_Start_Transceiver_With_Data_Stop+0x72>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:210
+
+  if (stop) {
+ 31c:	11 11       	cpse	r17, r1
+ 31e:	0e c0       	rjmp	.+28     	; 0x33c <USI_TWI_Start_Transceiver_With_Data_Stop+0xd8>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:215
+    USI_TWI_Master_Stop(); // Send a STOP condition on the TWI bus.
+  }
+
+  /* Transmission successfully completed*/
+  return (TRUE);
+ 320:	11 e0       	ldi	r17, 0x01	; 1
+ 322:	cb cf       	rjmp	.-106    	; 0x2ba <USI_TWI_Start_Transceiver_With_Data_Stop+0x56>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:196
+      USI_TWI_state.addressMode = FALSE; // Only perform address transmission once.
+    }
+    /* Else masterRead cycle*/
+    else {
+      /* Read a data byte */
+      DDR_USI &= ~(1 << PIN_USI_SDA); // Enable SDA as input.
+ 324:	b8 98       	cbi	0x17, 0	; 23
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:197
+      *(msg++) = USI_TWI_Master_Transfer(tempUSISR_8bit);
+ 326:	80 ef       	ldi	r24, 0xF0	; 240
+ 328:	71 df       	rcall	.-286    	; 0x20c <USI_TWI_Master_Transfer>
+ 32a:	88 83       	st	Y, r24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:200
+
+      /* Prepare to generate ACK (or NACK in case of End Of Transmission) */
+      if (msgSize == 1) // If transmission of last byte was performed.
+ 32c:	01 30       	cpi	r16, 0x01	; 1
+ 32e:	21 f4       	brne	.+8      	; 0x338 <USI_TWI_Start_Transceiver_With_Data_Stop+0xd4>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:202
+      {
+        USIDR = 0xFF; // Load NACK to confirm End Of Transmission.
+ 330:	ff b8       	out	0x0f, r15	; 15
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:206
+      } else {
+        USIDR = 0x00; // Load ACK. Set data register bit 7 (output for SDA) low.
+      }
+      USI_TWI_Master_Transfer(tempUSISR_1bit); // Generate ACK/NACK.
+ 332:	8e ef       	ldi	r24, 0xFE	; 254
+ 334:	6b df       	rcall	.-298    	; 0x20c <USI_TWI_Master_Transfer>
+ 336:	ee cf       	rjmp	.-36     	; 0x314 <USI_TWI_Start_Transceiver_With_Data_Stop+0xb0>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:204
+      /* Prepare to generate ACK (or NACK in case of End Of Transmission) */
+      if (msgSize == 1) // If transmission of last byte was performed.
+      {
+        USIDR = 0xFF; // Load NACK to confirm End Of Transmission.
+      } else {
+        USIDR = 0x00; // Load ACK. Set data register bit 7 (output for SDA) low.
+ 338:	1f b8       	out	0x0f, r1	; 15
+ 33a:	fb cf       	rjmp	.-10     	; 0x332 <USI_TWI_Start_Transceiver_With_Data_Stop+0xce>
+USI_TWI_Master_Stop():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:254
+ Function for generating a TWI Stop Condition. Used to release
+ the TWI bus.
+---------------------------------------------------------------*/
+unsigned char USI_TWI_Master_Stop(void)
+{
+  PORT_USI &= ~(1 << PIN_USI_SDA); // Pull SDA low.
+ 33c:	c0 98       	cbi	0x18, 0	; 24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:255
+  PORT_USI_CL |= (1 << PIN_USI_SCL);  // Release SCL.
+ 33e:	c2 9a       	sbi	0x18, 2	; 24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:256
+  while (!(PIN_USI_CL & (1 << PIN_USI_SCL)))
+ 340:	b2 9b       	sbis	0x16, 2	; 22
+ 342:	fe cf       	rjmp	.-4      	; 0x340 <USI_TWI_Start_Transceiver_With_Data_Stop+0xdc>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:258
+    ; // Wait for SCL to go high.
+  if (USI_TWI_MASTER_SPEED) DELAY_T4TWI_FM; else DELAY_T4TWI;
+ 344:	80 91 ac 00 	lds	r24, 0x00AC	; 0x8000ac <USI_TWI_MASTER_SPEED>
+ 348:	88 23       	and	r24, r24
+ 34a:	79 f0       	breq	.+30     	; 0x36a <USI_TWI_Start_Transceiver_With_Data_Stop+0x106>
+_delay_loop_1():
+/home/niko/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay_basic.h:83
+ 34c:	86 e0       	ldi	r24, 0x06	; 6
+ 34e:	8a 95       	dec	r24
+ 350:	f1 f7       	brne	.-4      	; 0x34e <USI_TWI_Start_Transceiver_With_Data_Stop+0xea>
+USI_TWI_Master_Stop():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:259
+  PORT_USI |= (1 << PIN_USI_SDA); // Release SDA.
+ 352:	c0 9a       	sbi	0x18, 0	; 24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:260
+  if (USI_TWI_MASTER_SPEED) DELAY_T2TWI_FM; else DELAY_T2TWI;
+ 354:	80 91 ac 00 	lds	r24, 0x00AC	; 0x8000ac <USI_TWI_MASTER_SPEED>
+ 358:	88 23       	and	r24, r24
+ 35a:	49 f0       	breq	.+18     	; 0x36e <USI_TWI_Start_Transceiver_With_Data_Stop+0x10a>
+_delay_loop_1():
+/home/niko/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay_basic.h:83
+ 35c:	8c e0       	ldi	r24, 0x0C	; 12
+ 35e:	8a 95       	dec	r24
+ 360:	f1 f7       	brne	.-4      	; 0x35e <USI_TWI_Start_Transceiver_With_Data_Stop+0xfa>
+USI_TWI_Master_Stop():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:263
+
+#ifdef SIGNAL_VERIFY
+  if (!(USISR & (1 << USIPF))) {
+ 362:	75 99       	sbic	0x0e, 5	; 14
+ 364:	dd cf       	rjmp	.-70     	; 0x320 <USI_TWI_Start_Transceiver_With_Data_Stop+0xbc>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:264
+    USI_TWI_state.errorState = USI_TWI_MISSING_STOP_CON;
+ 366:	88 e0       	ldi	r24, 0x08	; 8
+ 368:	cd cf       	rjmp	.-102    	; 0x304 <USI_TWI_Start_Transceiver_With_Data_Stop+0xa0>
+_delay_loop_1():
+/home/niko/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay_basic.h:83
+ 36a:	80 e2       	ldi	r24, 0x20	; 32
+ 36c:	f0 cf       	rjmp	.-32     	; 0x34e <USI_TWI_Start_Transceiver_With_Data_Stop+0xea>
+ 36e:	88 e2       	ldi	r24, 0x28	; 40
+ 370:	f6 cf       	rjmp	.-20     	; 0x35e <USI_TWI_Start_Transceiver_With_Data_Stop+0xfa>
+
+00000372 <TwoWire::endTransmission() [clone .constprop.14]>:
+_ZN7TwoWire15endTransmissionEv.constprop.14():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:478
+
+uint8_t TwoWire::endTransmission(uint8_t sendStop) {
+  // transmit buffer (blocking)
+  uint8_t ret = USI_TWI_Start_Transceiver_With_Data_Stop(Buffer,
+                                                         BufferLength,
+                                                         sendStop);
+ 372:	41 e0       	ldi	r20, 0x01	; 1
+ 374:	60 91 be 00 	lds	r22, 0x00BE	; 0x8000be <TwoWire::BufferLength>
+ 378:	84 e6       	ldi	r24, 0x64	; 100
+ 37a:	90 e0       	ldi	r25, 0x00	; 0
+ 37c:	73 df       	rcall	.-282    	; 0x264 <USI_TWI_Start_Transceiver_With_Data_Stop>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:480
+  // reset tx buffer iterator vars
+  BufferIndex = 0;
+ 37e:	10 92 bd 00 	sts	0x00BD, r1	; 0x8000bd <TwoWire::BufferIndex>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:481
+  BufferLength = 0;
+ 382:	10 92 be 00 	sts	0x00BE, r1	; 0x8000be <TwoWire::BufferLength>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:483
+  // indicate that we are done transmitting
+  transmitting = 0;
+ 386:	10 92 bf 00 	sts	0x00BF, r1	; 0x8000bf <TwoWire::transmitting>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:485
+  // check for error
+  if (ret == FALSE) {
+ 38a:	81 11       	cpse	r24, r1
+ 38c:	10 c0       	rjmp	.+32     	; 0x3ae <TwoWire::endTransmission() [clone .constprop.14]+0x3c>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:486
+    switch (USI_TWI_Get_State_Info()) {
+ 38e:	80 91 ba 00 	lds	r24, 0x00BA	; 0x8000ba <USI_TWI_state>
+ 392:	85 30       	cpi	r24, 0x05	; 5
+ 394:	41 f0       	breq	.+16     	; 0x3a6 <TwoWire::endTransmission() [clone .constprop.14]+0x34>
+ 396:	86 30       	cpi	r24, 0x06	; 6
+ 398:	21 f0       	breq	.+8      	; 0x3a2 <TwoWire::endTransmission() [clone .constprop.14]+0x30>
+ 39a:	81 30       	cpi	r24, 0x01	; 1
+ 39c:	31 f4       	brne	.+12     	; 0x3aa <TwoWire::endTransmission() [clone .constprop.14]+0x38>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:488
+    case USI_TWI_DATA_OUT_OF_BOUND:
+      return 1; //data too long to fit in transmit buffer
+ 39e:	81 e0       	ldi	r24, 0x01	; 1
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:501
+  return 0; //success
+}
+
+uint8_t TwoWire::endTransmission(void) {
+  return endTransmission(true);
+}
+ 3a0:	08 95       	ret
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:490
+  if (ret == FALSE) {
+    switch (USI_TWI_Get_State_Info()) {
+    case USI_TWI_DATA_OUT_OF_BOUND:
+      return 1; //data too long to fit in transmit buffer
+    case USI_TWI_NO_ACK_ON_ADDRESS:
+      return 2; //received NACK on transmit of address
+ 3a2:	82 e0       	ldi	r24, 0x02	; 2
+ 3a4:	08 95       	ret
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:492
+    case USI_TWI_NO_ACK_ON_DATA:
+      return 3; //received NACK on transmit of data
+ 3a6:	83 e0       	ldi	r24, 0x03	; 3
+ 3a8:	08 95       	ret
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:494
+    }
+    return 4; //other error
+ 3aa:	84 e0       	ldi	r24, 0x04	; 4
+ 3ac:	08 95       	ret
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:496
+  }
+  return 0; //success
+ 3ae:	80 e0       	ldi	r24, 0x00	; 0
+ 3b0:	08 95       	ret
+
+000003b2 <SSD1306_Mini::sendCommand(unsigned char) [clone .constprop.13]>:
+_ZN12SSD1306_Mini11sendCommandEh.constprop.13():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:122
+void SSD1306_Mini::dataMode() {
+  Wire.beginTransmission(SlaveAddress);          // Begin I2C transmission
+  Wire.write(0x40);                              // Data mode
+}
+
+void SSD1306_Mini::sendCommand(unsigned char command) { // Public function now to turn off display /V1.0)
+ 3b2:	cf 93       	push	r28
+ 3b4:	c8 2f       	mov	r28, r24
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:123
+  commandMode();
+ 3b6:	25 df       	rcall	.-438    	; 0x202 <SSD1306_Mini::commandMode() [clone .constprop.17]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:124
+  Wire.write(command);                           // Send command
+ 3b8:	8c 2f       	mov	r24, r28
+ 3ba:	e4 de       	rcall	.-568    	; 0x184 <TwoWire::write(unsigned char) [clone .constprop.21]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:126
+  Wire.endTransmission();    		                 // End I2C transmission
+}
+ 3bc:	cf 91       	pop	r28
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:125
+}
+
+void SSD1306_Mini::sendCommand(unsigned char command) { // Public function now to turn off display /V1.0)
+  commandMode();
+  Wire.write(command);                           // Send command
+  Wire.endTransmission();    		                 // End I2C transmission
+ 3be:	d9 cf       	rjmp	.-78     	; 0x372 <TwoWire::endTransmission() [clone .constprop.14]>
+
+000003c0 <SSD1306_Mini::clipArea(unsigned char, unsigned char, unsigned char, unsigned char) [clone .constprop.11]>:
+_ZN12SSD1306_Mini8clipAreaEhhhh.constprop.11():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:144
+  for (i = 0; i < InitLength; i++)   
+    Wire.write(pgm_read_byte(&InitSequence[i]));
+  Wire.endTransmission();
+}
+
+void SSD1306_Mini::clipArea(unsigned char col, unsigned char row, unsigned char w, unsigned char h) {
+ 3c0:	0f 93       	push	r16
+ 3c2:	1f 93       	push	r17
+ 3c4:	cf 93       	push	r28
+ 3c6:	df 93       	push	r29
+ 3c8:	d8 2f       	mov	r29, r24
+ 3ca:	c6 2f       	mov	r28, r22
+ 3cc:	04 2f       	mov	r16, r20
+ 3ce:	12 2f       	mov	r17, r18
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:145
+  commandMode();
+ 3d0:	18 df       	rcall	.-464    	; 0x202 <SSD1306_Mini::commandMode() [clone .constprop.17]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:146
+  Wire.write(0x21);                              // Set column start and end address
+ 3d2:	81 e2       	ldi	r24, 0x21	; 33
+ 3d4:	90 e0       	ldi	r25, 0x00	; 0
+ 3d6:	09 df       	rcall	.-494    	; 0x1ea <TwoWire::write(int) [clone .constprop.20]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:147
+  Wire.write(0x00);
+ 3d8:	90 e0       	ldi	r25, 0x00	; 0
+ 3da:	80 e0       	ldi	r24, 0x00	; 0
+ 3dc:	06 df       	rcall	.-500    	; 0x1ea <TwoWire::write(int) [clone .constprop.20]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:148
+  Wire.write(col);
+ 3de:	8d 2f       	mov	r24, r29
+ 3e0:	d1 de       	rcall	.-606    	; 0x184 <TwoWire::write(unsigned char) [clone .constprop.21]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:149
+  Wire.write(col + w - 1);
+ 3e2:	2d 2f       	mov	r18, r29
+ 3e4:	20 0f       	add	r18, r16
+ 3e6:	33 27       	eor	r19, r19
+ 3e8:	33 1f       	adc	r19, r19
+ 3ea:	c9 01       	movw	r24, r18
+ 3ec:	01 97       	sbiw	r24, 0x01	; 1
+ 3ee:	fd de       	rcall	.-518    	; 0x1ea <TwoWire::write(int) [clone .constprop.20]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:150
+  Wire.endTransmission();                 
+ 3f0:	c0 df       	rcall	.-128    	; 0x372 <TwoWire::endTransmission() [clone .constprop.14]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:151
+  commandMode();
+ 3f2:	07 df       	rcall	.-498    	; 0x202 <SSD1306_Mini::commandMode() [clone .constprop.17]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:152
+  Wire.write(0x22);                              // Set page start and end address
+ 3f4:	82 e2       	ldi	r24, 0x22	; 34
+ 3f6:	90 e0       	ldi	r25, 0x00	; 0
+ 3f8:	f8 de       	rcall	.-528    	; 0x1ea <TwoWire::write(int) [clone .constprop.20]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:153
+  Wire.write(0x00);
+ 3fa:	90 e0       	ldi	r25, 0x00	; 0
+ 3fc:	80 e0       	ldi	r24, 0x00	; 0
+ 3fe:	f5 de       	rcall	.-534    	; 0x1ea <TwoWire::write(int) [clone .constprop.20]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:154
+  Wire.write(row); 
+ 400:	8c 2f       	mov	r24, r28
+ 402:	c0 de       	rcall	.-640    	; 0x184 <TwoWire::write(unsigned char) [clone .constprop.21]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:155
+  Wire.write(row + h - 1);
+ 404:	2c 2f       	mov	r18, r28
+ 406:	21 0f       	add	r18, r17
+ 408:	33 27       	eor	r19, r19
+ 40a:	33 1f       	adc	r19, r19
+ 40c:	c9 01       	movw	r24, r18
+ 40e:	01 97       	sbiw	r24, 0x01	; 1
+ 410:	ec de       	rcall	.-552    	; 0x1ea <TwoWire::write(int) [clone .constprop.20]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:157
+  Wire.endTransmission();               
+}
+ 412:	df 91       	pop	r29
+ 414:	cf 91       	pop	r28
+ 416:	1f 91       	pop	r17
+ 418:	0f 91       	pop	r16
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:156
+  commandMode();
+  Wire.write(0x22);                              // Set page start and end address
+  Wire.write(0x00);
+  Wire.write(row); 
+  Wire.write(row + h - 1);
+  Wire.endTransmission();               
+ 41a:	ab cf       	rjmp	.-170    	; 0x372 <TwoWire::endTransmission() [clone .constprop.14]>
+
+0000041c <SSD1306_Mini::printChar(char) [clone .constprop.8]>:
+_ZN12SSD1306_Mini9printCharEc.constprop.8():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:177
+      Wire.write(0x00);
+    Wire.endTransmission();
+  }
+}
+
+void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
+ 41c:	0f 93       	push	r16
+ 41e:	1f 93       	push	r17
+ 420:	cf 93       	push	r28
+ 422:	df 93       	push	r29
+ 424:	c8 2f       	mov	r28, r24
+beginTransmission():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:471
+  BufferIndex = 1; // reserved by slave address
+  BufferLength = BufferIndex;
+}
+
+void TwoWire::beginTransmission(int address) {
+  beginTransmission((uint8_t)address);
+ 426:	8c e3       	ldi	r24, 0x3C	; 60
+ 428:	e1 de       	rcall	.-574    	; 0x1ec <TwoWire::beginTransmission(unsigned char) [clone .constprop.19]>
+dataMode():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:119
+  Wire.write(0x80);                              // Command mode
+}
+
+void SSD1306_Mini::dataMode() {
+  Wire.beginTransmission(SlaveAddress);          // Begin I2C transmission
+  Wire.write(0x40);                              // Data mode
+ 42a:	80 e4       	ldi	r24, 0x40	; 64
+ 42c:	90 e0       	ldi	r25, 0x00	; 0
+ 42e:	dd de       	rcall	.-582    	; 0x1ea <TwoWire::write(int) [clone .constprop.20]>
+_ZN12SSD1306_Mini9printCharEc.constprop.8():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:181
+
+void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
+  uint8_t a;
+  dataMode();
+  for (a=0; a<5; a++) 
+    Wire.write(pgm_read_byte(&BasicFont[ch * 5 + a]));
+ 430:	8c 2f       	mov	r24, r28
+ 432:	cc 0f       	add	r28, r28
+ 434:	99 0b       	sbc	r25, r25
+ 436:	65 e0       	ldi	r22, 0x05	; 5
+ 438:	70 e0       	ldi	r23, 0x00	; 0
+ 43a:	4c d4       	rcall	.+2200   	; 0xcd4 <__mulhi3>
+ 43c:	d0 e0       	ldi	r29, 0x00	; 0
+ 43e:	c0 e0       	ldi	r28, 0x00	; 0
+ 440:	8c 01       	movw	r16, r24
+ 442:	07 5d       	subi	r16, 0xD7	; 215
+ 444:	1f 4f       	sbci	r17, 0xFF	; 255
+ 446:	f8 01       	movw	r30, r16
+ 448:	ec 0f       	add	r30, r28
+ 44a:	fd 1f       	adc	r31, r29
+ 44c:	84 91       	lpm	r24, Z
+ 44e:	9a de       	rcall	.-716    	; 0x184 <TwoWire::write(unsigned char) [clone .constprop.21]>
+ 450:	21 96       	adiw	r28, 0x01	; 1
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:180
+}
+
+void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
+  uint8_t a;
+  dataMode();
+  for (a=0; a<5; a++) 
+ 452:	c5 30       	cpi	r28, 0x05	; 5
+ 454:	d1 05       	cpc	r29, r1
+ 456:	b9 f7       	brne	.-18     	; 0x446 <SSD1306_Mini::printChar(char) [clone .constprop.8]+0x2a>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:182
+    Wire.write(pgm_read_byte(&BasicFont[ch * 5 + a]));
+  Wire.write(0x00);                              // One column space for better readabiltiy
+ 458:	90 e0       	ldi	r25, 0x00	; 0
+ 45a:	80 e0       	ldi	r24, 0x00	; 0
+ 45c:	c6 de       	rcall	.-628    	; 0x1ea <TwoWire::write(int) [clone .constprop.20]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:183
+  if (chars < 19) Wire.write(0x00);              // One more column space when the line has enough room
+ 45e:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <chars>
+ 462:	83 31       	cpi	r24, 0x13	; 19
+ 464:	18 f4       	brcc	.+6      	; 0x46c <SSD1306_Mini::printChar(char) [clone .constprop.8]+0x50>
+ 466:	90 e0       	ldi	r25, 0x00	; 0
+ 468:	80 e0       	ldi	r24, 0x00	; 0
+ 46a:	bf de       	rcall	.-642    	; 0x1ea <TwoWire::write(int) [clone .constprop.20]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:185
+  Wire.endTransmission();
+}
+ 46c:	df 91       	pop	r29
+ 46e:	cf 91       	pop	r28
+ 470:	1f 91       	pop	r17
+ 472:	0f 91       	pop	r16
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:184
+  dataMode();
+  for (a=0; a<5; a++) 
+    Wire.write(pgm_read_byte(&BasicFont[ch * 5 + a]));
+  Wire.write(0x00);                              // One column space for better readabiltiy
+  if (chars < 19) Wire.write(0x00);              // One more column space when the line has enough room
+  Wire.endTransmission();
+ 474:	7e cf       	rjmp	.-260    	; 0x372 <TwoWire::endTransmission() [clone .constprop.14]>
+
+00000476 <write_swearword(unsigned char)>:
+_Z15write_swearwordh():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:151
+      chars ++;                                  // Increase number of fetched characters
+    }
+  } 
+}
+
+void write_swearword(uint8_t line) {             // Write centered word
+ 476:	0f 93       	push	r16
+ 478:	1f 93       	push	r17
+ 47a:	cf 93       	push	r28
+ 47c:	df 93       	push	r29
+ 47e:	38 2f       	mov	r19, r24
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:153
+  uint8_t x;
+  x = (128 - (chars * 7)) / 2;                   // Calculate centering
+ 480:	d0 91 b9 00 	lds	r29, 0x00B9	; 0x8000b9 <chars>
+ 484:	8d 2f       	mov	r24, r29
+ 486:	90 e0       	ldi	r25, 0x00	; 0
+ 488:	69 ef       	ldi	r22, 0xF9	; 249
+ 48a:	7f ef       	ldi	r23, 0xFF	; 255
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:154
+  if (chars > 18)  x = (128 - (chars * 6)) / 2;  // Or for very long words
+ 48c:	d3 31       	cpi	r29, 0x13	; 19
+ 48e:	10 f0       	brcs	.+4      	; 0x494 <write_swearword(unsigned char)+0x1e>
+ 490:	6a ef       	ldi	r22, 0xFA	; 250
+ 492:	7f ef       	ldi	r23, 0xFF	; 255
+ 494:	1f d4       	rcall	.+2110   	; 0xcd4 <__mulhi3>
+ 496:	80 58       	subi	r24, 0x80	; 128
+ 498:	9f 4f       	sbci	r25, 0xFF	; 255
+ 49a:	97 fd       	sbrc	r25, 7
+ 49c:	01 96       	adiw	r24, 0x01	; 1
+ 49e:	95 95       	asr	r25
+ 4a0:	87 95       	ror	r24
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:155
+  if ((gender != 0) && (line == 2)) x -= 4;      // If not female, set first one half block left for gender character
+ 4a2:	90 91 aa 00 	lds	r25, 0x00AA	; 0x8000aa <gender>
+ 4a6:	99 23       	and	r25, r25
+ 4a8:	19 f0       	breq	.+6      	; 0x4b0 <write_swearword(unsigned char)+0x3a>
+ 4aa:	32 30       	cpi	r19, 0x02	; 2
+ 4ac:	09 f4       	brne	.+2      	; 0x4b0 <write_swearword(unsigned char)+0x3a>
+ 4ae:	84 50       	subi	r24, 0x04	; 4
+cursorTo():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:160
+  Wire.write(row + h - 1);
+  Wire.endTransmission();               
+}
+
+void SSD1306_Mini::cursorTo(unsigned char col, unsigned char row) {
+  clipArea(col, row, 128 - col, 8 - row);            
+ 4b0:	28 e0       	ldi	r18, 0x08	; 8
+ 4b2:	23 1b       	sub	r18, r19
+ 4b4:	40 e8       	ldi	r20, 0x80	; 128
+ 4b6:	48 1b       	sub	r20, r24
+ 4b8:	63 2f       	mov	r22, r19
+ 4ba:	82 df       	rcall	.-252    	; 0x3c0 <SSD1306_Mini::clipArea(unsigned char, unsigned char, unsigned char, unsigned char) [clone .constprop.11]>
+ 4bc:	06 e9       	ldi	r16, 0x96	; 150
+ 4be:	10 e0       	ldi	r17, 0x00	; 0
+_Z15write_swearwordh():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:157
+  oled.cursorTo(x, line);                        // Set cursor to selected line
+  for (x = 0; x < chars; x ++)                   // Print the characters...
+ 4c0:	c0 e0       	ldi	r28, 0x00	; 0
+ 4c2:	dc 17       	cp	r29, r28
+ 4c4:	31 f0       	breq	.+12     	; 0x4d2 <write_swearword(unsigned char)+0x5c>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:158
+    oled.printChar(wordbuffer[x]);               // ...from buffer
+ 4c6:	f8 01       	movw	r30, r16
+ 4c8:	81 91       	ld	r24, Z+
+ 4ca:	8f 01       	movw	r16, r30
+ 4cc:	a7 df       	rcall	.-178    	; 0x41c <SSD1306_Mini::printChar(char) [clone .constprop.8]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:157
+  uint8_t x;
+  x = (128 - (chars * 7)) / 2;                   // Calculate centering
+  if (chars > 18)  x = (128 - (chars * 6)) / 2;  // Or for very long words
+  if ((gender != 0) && (line == 2)) x -= 4;      // If not female, set first one half block left for gender character
+  oled.cursorTo(x, line);                        // Set cursor to selected line
+  for (x = 0; x < chars; x ++)                   // Print the characters...
+ 4ce:	cf 5f       	subi	r28, 0xFF	; 255
+ 4d0:	f8 cf       	rjmp	.-16     	; 0x4c2 <write_swearword(unsigned char)+0x4c>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:159
+    oled.printChar(wordbuffer[x]);               // ...from buffer
+  chars = 0;                                     // Set number of characters back to 0
+ 4d2:	10 92 b9 00 	sts	0x00B9, r1	; 0x8000b9 <chars>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:160
+}
+ 4d6:	df 91       	pop	r29
+ 4d8:	cf 91       	pop	r28
+ 4da:	1f 91       	pop	r17
+ 4dc:	0f 91       	pop	r16
+ 4de:	08 95       	ret
+
+000004e0 <read_eeprom(unsigned int)>:
+_Z11read_eepromj():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:162
+
+uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
+ 4e0:	cf 93       	push	r28
+ 4e2:	df 93       	push	r29
+ 4e4:	ec 01       	movw	r28, r24
+beginTransmission():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:471
+ 4e6:	80 e5       	ldi	r24, 0x50	; 80
+ 4e8:	81 de       	rcall	.-766    	; 0x1ec <TwoWire::beginTransmission(unsigned char) [clone .constprop.19]>
+write():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.h:156
+    void onRequest( void (*)(void) );
+    uint8_t isActive(void);
+
+    inline size_t write(unsigned long n) { return write((uint8_t)n); }
+    inline size_t write(long n) { return write((uint8_t)n); }
+    inline size_t write(unsigned int n) { return write((uint8_t)n); }
+ 4ea:	8d 2f       	mov	r24, r29
+ 4ec:	4b de       	rcall	.-874    	; 0x184 <TwoWire::write(unsigned char) [clone .constprop.21]>
+ 4ee:	8c 2f       	mov	r24, r28
+ 4f0:	49 de       	rcall	.-878    	; 0x184 <TwoWire::write(unsigned char) [clone .constprop.21]>
+_Z11read_eepromj():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:166
+  Wire.beginTransmission(0x50);                  // open transmission to I2C-address 0x50
+  Wire.write((uint16_t)(e_address >> 8));        // Send the MSB (Most Significant Byte) of the memory address
+  Wire.write((uint16_t)(e_address & 0xFF));      // Send the LSB (Least Significant Byte) of the memory address
+  Wire.endTransmission();                        // Close transmissiom
+ 4f2:	3f df       	rcall	.-386    	; 0x372 <TwoWire::endTransmission() [clone .constprop.14]>
+requestFrom():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:426
+  // clamp to buffer length
+  if (quantity > TWI_BUFFER_SIZE) {
+    quantity = TWI_BUFFER_SIZE;
+  }
+  // set address of targeted slave and read mode
+  Buffer[0] = (address << TWI_ADR_BITS) | (1 << TWI_READ_BIT);
+ 4f4:	81 ea       	ldi	r24, 0xA1	; 161
+ 4f6:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <__data_end>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:429
+  // perform blocking read into buffer
+  uint8_t ret = USI_TWI_Start_Transceiver_With_Data_Stop(Buffer, quantity,
+                                                         sendStop);
+ 4fa:	41 e0       	ldi	r20, 0x01	; 1
+ 4fc:	62 e0       	ldi	r22, 0x02	; 2
+ 4fe:	84 e6       	ldi	r24, 0x64	; 100
+ 500:	90 e0       	ldi	r25, 0x00	; 0
+ 502:	b0 de       	rcall	.-672    	; 0x264 <USI_TWI_Start_Transceiver_With_Data_Stop>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:431
+  // set rx buffer iterator vars
+  BufferIndex = 1; // ignore slave address
+ 504:	91 e0       	ldi	r25, 0x01	; 1
+ 506:	90 93 bd 00 	sts	0x00BD, r25	; 0x8000bd <TwoWire::BufferIndex>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:433
+  // check for error
+  if (ret == FALSE) {
+ 50a:	81 11       	cpse	r24, r1
+ 50c:	0d c0       	rjmp	.+26     	; 0x528 <read_eeprom(unsigned int)+0x48>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:434
+    BufferLength = BufferIndex;
+ 50e:	90 93 be 00 	sts	0x00BE, r25	; 0x8000be <TwoWire::BufferLength>
+available():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:551
+
+// must be called in:
+// slave rx event callback
+// or after requestFrom(address, numBytes)
+int TwoWire::available(void) {
+  if (BufferLength) {
+ 512:	80 91 be 00 	lds	r24, 0x00BE	; 0x8000be <TwoWire::BufferLength>
+ 516:	88 23       	and	r24, r24
+ 518:	59 f0       	breq	.+22     	; 0x530 <read_eeprom(unsigned int)+0x50>
+read():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:565
+// or after requestFrom(address, numBytes)
+int TwoWire::read(void) {
+  int value = -1;
+
+  // get each successive byte on each call
+  if (available()) {
+ 51a:	81 30       	cpi	r24, 0x01	; 1
+ 51c:	09 f5       	brne	.+66     	; 0x560 <read_eeprom(unsigned int)+0x80>
+_Z11read_eepromj():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:562
+
+// must be called in:
+// slave rx event callback
+// or after requestFrom(address, numBytes)
+int TwoWire::read(void) {
+  int value = -1;
+ 51e:	8f ef       	ldi	r24, 0xFF	; 255
+ 520:	9f ef       	ldi	r25, 0xFF	; 255
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:169
+  Wire.requestFrom(0x50, 1);                     // Request one byte
+  return Wire.read();                            // Read and return byte
+}
+ 522:	df 91       	pop	r29
+ 524:	cf 91       	pop	r28
+ 526:	08 95       	ret
+requestFrom():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:437
+  // check for error
+  if (ret == FALSE) {
+    BufferLength = BufferIndex;
+    return 0;
+  }
+  BufferLength = quantity;
+ 528:	82 e0       	ldi	r24, 0x02	; 2
+ 52a:	80 93 be 00 	sts	0x00BE, r24	; 0x8000be <TwoWire::BufferLength>
+ 52e:	f1 cf       	rjmp	.-30     	; 0x512 <read_eeprom(unsigned int)+0x32>
+USI_TWI_Data_In_Receive_Buffer():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:136
+
+// Check if there is data in the receive buffer.
+unsigned char USI_TWI_Data_In_Receive_Buffer(void)
+{
+  unsigned char tmpRxTail;          // Temporary variable to store volatile
+  tmpRxTail = TWI_RxTail;           // Not necessary, but prevents warnings
+ 530:	90 91 ad 00 	lds	r25, 0x00AD	; 0x8000ad <TWI_RxTail>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:137
+  return (TWI_RxHead - tmpRxTail) & TWI_RX_BUFFER_MASK; // Return 0 (FALSE) if the receive buffer is empty.
+ 534:	80 91 ae 00 	lds	r24, 0x00AE	; 0x8000ae <TWI_RxHead>
+ 538:	89 1b       	sub	r24, r25
+ 53a:	8f 70       	andi	r24, 0x0F	; 15
+read():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:565
+// or after requestFrom(address, numBytes)
+int TwoWire::read(void) {
+  int value = -1;
+
+  // get each successive byte on each call
+  if (available()) {
+ 53c:	81 f3       	breq	.-32     	; 0x51e <read_eeprom(unsigned int)+0x3e>
+USI_TWI_Receive_Byte():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:112
+// Returns a byte from the receive buffer. Waits if buffer is empty.
+unsigned char USI_TWI_Receive_Byte(void)
+{
+  unsigned char tmptail;
+  unsigned char tmpRxTail; // Temporary variable to store volatile
+  tmpRxTail = TWI_RxTail;  // Not necessary, but prevents warnings
+ 53e:	90 91 ad 00 	lds	r25, 0x00AD	; 0x8000ad <TWI_RxTail>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:113
+  while (TWI_RxHead == tmpRxTail)
+ 542:	80 91 ae 00 	lds	r24, 0x00AE	; 0x8000ae <TWI_RxHead>
+ 546:	98 17       	cp	r25, r24
+ 548:	e1 f3       	breq	.-8      	; 0x542 <read_eeprom(unsigned int)+0x62>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:115
+    ;
+  tmptail    = (TWI_RxTail + 1) & TWI_RX_BUFFER_MASK; // Calculate buffer index
+ 54a:	e0 91 ad 00 	lds	r30, 0x00AD	; 0x8000ad <TWI_RxTail>
+ 54e:	ef 5f       	subi	r30, 0xFF	; 255
+ 550:	ef 70       	andi	r30, 0x0F	; 15
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:116
+  TWI_RxTail = tmptail;                               // Store new index
+ 552:	e0 93 ad 00 	sts	0x00AD, r30	; 0x8000ad <TWI_RxTail>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:117
+  return TWI_RxBuf[tmptail];                          // Return data from the buffer.
+ 556:	f0 e0       	ldi	r31, 0x00	; 0
+ 558:	ec 59       	subi	r30, 0x9C	; 156
+ 55a:	ff 4f       	sbci	r31, 0xFF	; 255
+read():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:570
+    if (BufferLength) {
+      value = Buffer[BufferIndex];
+      ++BufferIndex;
+    } else {
+      value = USI_TWI_Receive_Byte();
+ 55c:	80 81       	ld	r24, Z
+ 55e:	e1 cf       	rjmp	.-62     	; 0x522 <read_eeprom(unsigned int)+0x42>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:567
+  int value = -1;
+
+  // get each successive byte on each call
+  if (available()) {
+    if (BufferLength) {
+      value = Buffer[BufferIndex];
+ 560:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <__data_end+0x1>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:568
+      ++BufferIndex;
+ 564:	22 e0       	ldi	r18, 0x02	; 2
+ 566:	20 93 bd 00 	sts	0x00BD, r18	; 0x8000bd <TwoWire::BufferIndex>
+ 56a:	db cf       	rjmp	.-74     	; 0x522 <read_eeprom(unsigned int)+0x42>
+
+0000056c <get_swearword(unsigned int)>:
+_Z13get_swearwordj():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:132
+    }
+  }
+}
+
+// Functions
+void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
+ 56c:	cf 92       	push	r12
+ 56e:	df 92       	push	r13
+ 570:	ef 92       	push	r14
+ 572:	ff 92       	push	r15
+ 574:	0f 93       	push	r16
+ 576:	1f 93       	push	r17
+ 578:	cf 93       	push	r28
+ 57a:	df 93       	push	r29
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:135
+  char c;
+  uint16_t i;
+  address *= 10;
+ 57c:	6a e0       	ldi	r22, 0x0A	; 10
+ 57e:	70 e0       	ldi	r23, 0x00	; 0
+ 580:	a9 d3       	rcall	.+1874   	; 0xcd4 <__mulhi3>
+ 582:	ec 01       	movw	r28, r24
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:136
+  for (i = address; i < address + 10; i ++) {    // Read 10 characters        
+ 584:	8c 01       	movw	r16, r24
+ 586:	06 5f       	subi	r16, 0xF6	; 246
+ 588:	1f 4f       	sbci	r17, 0xFF	; 255
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:141
+    c = read_eeprom(i + 10);                       // from EEPROM with address memory offset
+    if (c != 32) {                               // Check for space
+      switch (c) {                               // Set german Umlaute   
+        case 35: wordbuffer[chars] = 27; break;  // # -> ä
+        case 36: wordbuffer[chars] = 28; break;  // $ -> ö
+ 58a:	8c e1       	ldi	r24, 0x1C	; 28
+ 58c:	f8 2e       	mov	r15, r24
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:142
+        case 37: wordbuffer[chars] = 29; break;  // % -> ü
+ 58e:	9d e1       	ldi	r25, 0x1D	; 29
+ 590:	e9 2e       	mov	r14, r25
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:143
+        case 42: wordbuffer[chars] = 30; break;  // * -> ß
+ 592:	2e e1       	ldi	r18, 0x1E	; 30
+ 594:	d2 2e       	mov	r13, r18
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:140
+  address *= 10;
+  for (i = address; i < address + 10; i ++) {    // Read 10 characters        
+    c = read_eeprom(i + 10);                       // from EEPROM with address memory offset
+    if (c != 32) {                               // Check for space
+      switch (c) {                               // Set german Umlaute   
+        case 35: wordbuffer[chars] = 27; break;  // # -> ä
+ 596:	3b e1       	ldi	r19, 0x1B	; 27
+ 598:	c3 2e       	mov	r12, r19
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:136
+// Functions
+void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
+  char c;
+  uint16_t i;
+  address *= 10;
+  for (i = address; i < address + 10; i ++) {    // Read 10 characters        
+ 59a:	c0 17       	cp	r28, r16
+ 59c:	d1 07       	cpc	r29, r17
+ 59e:	18 f5       	brcc	.+70     	; 0x5e6 <get_swearword(unsigned int)+0x7a>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:137
+    c = read_eeprom(i + 10);                       // from EEPROM with address memory offset
+ 5a0:	ce 01       	movw	r24, r28
+ 5a2:	0a 96       	adiw	r24, 0x0a	; 10
+ 5a4:	9d df       	rcall	.-198    	; 0x4e0 <read_eeprom(unsigned int)>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:138
+    if (c != 32) {                               // Check for space
+ 5a6:	80 32       	cpi	r24, 0x20	; 32
+ 5a8:	c1 f0       	breq	.+48     	; 0x5da <get_swearword(unsigned int)+0x6e>
+ 5aa:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <chars>
+ 5ae:	e9 2f       	mov	r30, r25
+ 5b0:	f0 e0       	ldi	r31, 0x00	; 0
+ 5b2:	ea 56       	subi	r30, 0x6A	; 106
+ 5b4:	ff 4f       	sbci	r31, 0xFF	; 255
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:139
+      switch (c) {                               // Set german Umlaute   
+ 5b6:	84 32       	cpi	r24, 0x24	; 36
+ 5b8:	91 f0       	breq	.+36     	; 0x5de <get_swearword(unsigned int)+0x72>
+ 5ba:	28 f4       	brcc	.+10     	; 0x5c6 <get_swearword(unsigned int)+0x5a>
+ 5bc:	83 32       	cpi	r24, 0x23	; 35
+ 5be:	49 f0       	breq	.+18     	; 0x5d2 <get_swearword(unsigned int)+0x66>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:144
+        case 35: wordbuffer[chars] = 27; break;  // # -> ä
+        case 36: wordbuffer[chars] = 28; break;  // $ -> ö
+        case 37: wordbuffer[chars] = 29; break;  // % -> ü
+        case 42: wordbuffer[chars] = 30; break;  // * -> ß
+        default: wordbuffer[chars] = c - 65;     // Set non-empty character
+ 5c0:	81 54       	subi	r24, 0x41	; 65
+ 5c2:	80 83       	st	Z, r24
+ 5c4:	07 c0       	rjmp	.+14     	; 0x5d4 <get_swearword(unsigned int)+0x68>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:139
+  uint16_t i;
+  address *= 10;
+  for (i = address; i < address + 10; i ++) {    // Read 10 characters        
+    c = read_eeprom(i + 10);                       // from EEPROM with address memory offset
+    if (c != 32) {                               // Check for space
+      switch (c) {                               // Set german Umlaute   
+ 5c6:	85 32       	cpi	r24, 0x25	; 37
+ 5c8:	61 f0       	breq	.+24     	; 0x5e2 <get_swearword(unsigned int)+0x76>
+ 5ca:	8a 32       	cpi	r24, 0x2A	; 42
+ 5cc:	c9 f7       	brne	.-14     	; 0x5c0 <get_swearword(unsigned int)+0x54>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:143
+        case 35: wordbuffer[chars] = 27; break;  // # -> ä
+        case 36: wordbuffer[chars] = 28; break;  // $ -> ö
+        case 37: wordbuffer[chars] = 29; break;  // % -> ü
+        case 42: wordbuffer[chars] = 30; break;  // * -> ß
+ 5ce:	d0 82       	st	Z, r13
+ 5d0:	01 c0       	rjmp	.+2      	; 0x5d4 <get_swearword(unsigned int)+0x68>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:140
+  address *= 10;
+  for (i = address; i < address + 10; i ++) {    // Read 10 characters        
+    c = read_eeprom(i + 10);                       // from EEPROM with address memory offset
+    if (c != 32) {                               // Check for space
+      switch (c) {                               // Set german Umlaute   
+        case 35: wordbuffer[chars] = 27; break;  // # -> ä
+ 5d2:	c0 82       	st	Z, r12
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:146
+        case 36: wordbuffer[chars] = 28; break;  // $ -> ö
+        case 37: wordbuffer[chars] = 29; break;  // % -> ü
+        case 42: wordbuffer[chars] = 30; break;  // * -> ß
+        default: wordbuffer[chars] = c - 65;     // Set non-empty character
+      }
+      chars ++;                                  // Increase number of fetched characters
+ 5d4:	9f 5f       	subi	r25, 0xFF	; 255
+ 5d6:	90 93 b9 00 	sts	0x00B9, r25	; 0x8000b9 <chars>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:136
+// Functions
+void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
+  char c;
+  uint16_t i;
+  address *= 10;
+  for (i = address; i < address + 10; i ++) {    // Read 10 characters        
+ 5da:	21 96       	adiw	r28, 0x01	; 1
+ 5dc:	de cf       	rjmp	.-68     	; 0x59a <get_swearword(unsigned int)+0x2e>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:141
+    c = read_eeprom(i + 10);                       // from EEPROM with address memory offset
+    if (c != 32) {                               // Check for space
+      switch (c) {                               // Set german Umlaute   
+        case 35: wordbuffer[chars] = 27; break;  // # -> ä
+        case 36: wordbuffer[chars] = 28; break;  // $ -> ö
+ 5de:	f0 82       	st	Z, r15
+ 5e0:	f9 cf       	rjmp	.-14     	; 0x5d4 <get_swearword(unsigned int)+0x68>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:142
+        case 37: wordbuffer[chars] = 29; break;  // % -> ü
+ 5e2:	e0 82       	st	Z, r14
+ 5e4:	f7 cf       	rjmp	.-18     	; 0x5d4 <get_swearword(unsigned int)+0x68>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:149
+        default: wordbuffer[chars] = c - 65;     // Set non-empty character
+      }
+      chars ++;                                  // Increase number of fetched characters
+    }
+  } 
+}
+ 5e6:	df 91       	pop	r29
+ 5e8:	cf 91       	pop	r28
+ 5ea:	1f 91       	pop	r17
+ 5ec:	0f 91       	pop	r16
+ 5ee:	ff 90       	pop	r15
+ 5f0:	ef 90       	pop	r14
+ 5f2:	df 90       	pop	r13
+ 5f4:	cf 90       	pop	r12
+ 5f6:	08 95       	ret
+
+000005f8 <__vector_5>:
+__vector_5():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:308
+      #error "cannot find Millis() timer overflow vector"
+    #endif
+  #else
+    #error "Millis() timer not defined!"
+  #endif
+  {
+ 5f8:	1f 92       	push	r1
+ 5fa:	0f 92       	push	r0
+ 5fc:	0f b6       	in	r0, 0x3f	; 63
+ 5fe:	0f 92       	push	r0
+ 600:	11 24       	eor	r1, r1
+ 602:	2f 93       	push	r18
+ 604:	3f 93       	push	r19
+ 606:	8f 93       	push	r24
+ 608:	9f 93       	push	r25
+ 60a:	af 93       	push	r26
+ 60c:	bf 93       	push	r27
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:311
+    // copy these to local variables so they can be stored in registers
+    // (volatile variables must be read from memory on every access)
+    unsigned long m = millis_timer_millis;
+ 60e:	80 91 b5 00 	lds	r24, 0x00B5	; 0x8000b5 <millis_timer_millis>
+ 612:	90 91 b6 00 	lds	r25, 0x00B6	; 0x8000b6 <millis_timer_millis+0x1>
+ 616:	a0 91 b7 00 	lds	r26, 0x00B7	; 0x8000b7 <millis_timer_millis+0x2>
+ 61a:	b0 91 b8 00 	lds	r27, 0x00B8	; 0x8000b8 <millis_timer_millis+0x3>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:312
+    unsigned char f = millis_timer_fract;
+ 61e:	30 91 b4 00 	lds	r19, 0x00B4	; 0x8000b4 <millis_timer_fract>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:319
+    static unsigned char correct_exact = 0;     // rollover intended
+    if (++correct_exact < CORRECT_EXACT_MANY) {
+      ++f;
+    }
+#endif
+    f += FRACT_INC;
+ 622:	26 e0       	ldi	r18, 0x06	; 6
+ 624:	23 0f       	add	r18, r19
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:321
+
+    if (f >= FRACT_MAX)
+ 626:	2d 37       	cpi	r18, 0x7D	; 125
+ 628:	68 f1       	brcs	.+90     	; 0x684 <__vector_5+0x8c>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:323
+    {
+      f -= FRACT_MAX;
+ 62a:	29 e8       	ldi	r18, 0x89	; 137
+ 62c:	23 0f       	add	r18, r19
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:324
+      m += MILLIS_INC + 1;
+ 62e:	03 96       	adiw	r24, 0x03	; 3
+ 630:	a1 1d       	adc	r26, r1
+ 632:	b1 1d       	adc	r27, r1
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:331
+    else
+    {
+      m += MILLIS_INC;
+    }
+
+    millis_timer_fract = f;
+ 634:	20 93 b4 00 	sts	0x00B4, r18	; 0x8000b4 <millis_timer_fract>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:332
+    millis_timer_millis = m;
+ 638:	80 93 b5 00 	sts	0x00B5, r24	; 0x8000b5 <millis_timer_millis>
+ 63c:	90 93 b6 00 	sts	0x00B6, r25	; 0x8000b6 <millis_timer_millis+0x1>
+ 640:	a0 93 b7 00 	sts	0x00B7, r26	; 0x8000b7 <millis_timer_millis+0x2>
+ 644:	b0 93 b8 00 	sts	0x00B8, r27	; 0x8000b8 <millis_timer_millis+0x3>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:334
+#ifndef CORRECT_EXACT_MICROS
+    millis_timer_overflow_count++;
+ 648:	80 91 b0 00 	lds	r24, 0x00B0	; 0x8000b0 <millis_timer_overflow_count>
+ 64c:	90 91 b1 00 	lds	r25, 0x00B1	; 0x8000b1 <millis_timer_overflow_count+0x1>
+ 650:	a0 91 b2 00 	lds	r26, 0x00B2	; 0x8000b2 <millis_timer_overflow_count+0x2>
+ 654:	b0 91 b3 00 	lds	r27, 0x00B3	; 0x8000b3 <millis_timer_overflow_count+0x3>
+ 658:	01 96       	adiw	r24, 0x01	; 1
+ 65a:	a1 1d       	adc	r26, r1
+ 65c:	b1 1d       	adc	r27, r1
+ 65e:	80 93 b0 00 	sts	0x00B0, r24	; 0x8000b0 <millis_timer_overflow_count>
+ 662:	90 93 b1 00 	sts	0x00B1, r25	; 0x8000b1 <millis_timer_overflow_count+0x1>
+ 666:	a0 93 b2 00 	sts	0x00B2, r26	; 0x8000b2 <millis_timer_overflow_count+0x2>
+ 66a:	b0 93 b3 00 	sts	0x00B3, r27	; 0x8000b3 <millis_timer_overflow_count+0x3>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:336
+#endif
+  }
+ 66e:	bf 91       	pop	r27
+ 670:	af 91       	pop	r26
+ 672:	9f 91       	pop	r25
+ 674:	8f 91       	pop	r24
+ 676:	3f 91       	pop	r19
+ 678:	2f 91       	pop	r18
+ 67a:	0f 90       	pop	r0
+ 67c:	0f be       	out	0x3f, r0	; 63
+ 67e:	0f 90       	pop	r0
+ 680:	1f 90       	pop	r1
+ 682:	18 95       	reti
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:328
+      f -= FRACT_MAX;
+      m += MILLIS_INC + 1;
+    }
+    else
+    {
+      m += MILLIS_INC;
+ 684:	02 96       	adiw	r24, 0x02	; 2
+ 686:	a1 1d       	adc	r26, r1
+ 688:	b1 1d       	adc	r27, r1
+ 68a:	d4 cf       	rjmp	.-88     	; 0x634 <__vector_5+0x3c>
+
+0000068c <__vector_14>:
+__vector_14():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:207
+/*----------------------------------------------------------
+ Handles all the communication. Is disabled only when waiting
+ for new Start Condition.
+----------------------------------------------------------*/
+ISR(USI_OVERFLOW_VECTOR)
+{
+ 68c:	1f 92       	push	r1
+ 68e:	0f 92       	push	r0
+ 690:	0f b6       	in	r0, 0x3f	; 63
+ 692:	0f 92       	push	r0
+ 694:	11 24       	eor	r1, r1
+ 696:	2f 93       	push	r18
+ 698:	8f 93       	push	r24
+ 69a:	9f 93       	push	r25
+ 69c:	ef 93       	push	r30
+ 69e:	ff 93       	push	r31
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:212
+  unsigned char tmpRxHead;
+  unsigned char tmpTxTail; // Temporary variables to store volatiles
+  unsigned char tmpUSIDR;
+
+  switch (USI_TWI_Overflow_State) {
+ 6a0:	80 91 af 00 	lds	r24, 0x00AF	; 0x8000af <USI_TWI_Overflow_State>
+ 6a4:	82 30       	cpi	r24, 0x02	; 2
+ 6a6:	09 f4       	brne	.+2      	; 0x6aa <__vector_14+0x1e>
+ 6a8:	5e c0       	rjmp	.+188    	; 0x766 <__vector_14+0xda>
+ 6aa:	78 f4       	brcc	.+30     	; 0x6ca <__vector_14+0x3e>
+ 6ac:	88 23       	and	r24, r24
+ 6ae:	49 f1       	breq	.+82     	; 0x702 <__vector_14+0x76>
+ 6b0:	81 30       	cpi	r24, 0x01	; 1
+ 6b2:	09 f4       	brne	.+2      	; 0x6b6 <__vector_14+0x2a>
+ 6b4:	3e c0       	rjmp	.+124    	; 0x732 <__vector_14+0xa6>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:306
+    {
+      SET_USI_TO_SEND_NACK();
+    }
+    break;
+  }
+}
+ 6b6:	ff 91       	pop	r31
+ 6b8:	ef 91       	pop	r30
+ 6ba:	9f 91       	pop	r25
+ 6bc:	8f 91       	pop	r24
+ 6be:	2f 91       	pop	r18
+ 6c0:	0f 90       	pop	r0
+ 6c2:	0f be       	out	0x3f, r0	; 63
+ 6c4:	0f 90       	pop	r0
+ 6c6:	1f 90       	pop	r1
+ 6c8:	18 95       	reti
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:212
+{
+  unsigned char tmpRxHead;
+  unsigned char tmpTxTail; // Temporary variables to store volatiles
+  unsigned char tmpUSIDR;
+
+  switch (USI_TWI_Overflow_State) {
+ 6ca:	84 30       	cpi	r24, 0x04	; 4
+ 6cc:	09 f4       	brne	.+2      	; 0x6d0 <__vector_14+0x44>
+ 6ce:	51 c0       	rjmp	.+162    	; 0x772 <__vector_14+0xe6>
+ 6d0:	48 f1       	brcs	.+82     	; 0x724 <__vector_14+0x98>
+ 6d2:	85 30       	cpi	r24, 0x05	; 5
+ 6d4:	81 f7       	brne	.-32     	; 0x6b6 <__vector_14+0x2a>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:293
+    break;
+
+  // Copy data from USIDR and send ACK. Next USI_SLAVE_REQUEST_DATA
+  case USI_SLAVE_GET_DATA_AND_SEND_ACK:
+    // Put data into Buffer
+    USI_TWI_Overflow_State = USI_SLAVE_REQUEST_DATA;
+ 6d6:	84 e0       	ldi	r24, 0x04	; 4
+ 6d8:	80 93 af 00 	sts	0x00AF, r24	; 0x8000af <USI_TWI_Overflow_State>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:294
+    tmpUSIDR              = USIDR; // Not necessary, but prevents warnings
+ 6dc:	9f b1       	in	r25, 0x0f	; 15
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:295
+    tmpRxHead = (TWI_RxHead + 1) & TWI_RX_BUFFER_MASK;
+ 6de:	80 91 ae 00 	lds	r24, 0x00AE	; 0x8000ae <TWI_RxHead>
+ 6e2:	8f 5f       	subi	r24, 0xFF	; 255
+ 6e4:	8f 70       	andi	r24, 0x0F	; 15
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:296
+    if (TWI_RxTail != tmpRxHead) {
+ 6e6:	20 91 ad 00 	lds	r18, 0x00AD	; 0x8000ad <TWI_RxTail>
+ 6ea:	28 17       	cp	r18, r24
+ 6ec:	09 f4       	brne	.+2      	; 0x6f0 <__vector_14+0x64>
+ 6ee:	46 c0       	rjmp	.+140    	; 0x77c <__vector_14+0xf0>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:297
+      TWI_RxHead            = tmpRxHead;
+ 6f0:	80 93 ae 00 	sts	0x00AE, r24	; 0x8000ae <TWI_RxHead>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:298
+      TWI_RxBuf[TWI_RxHead] = tmpUSIDR;
+ 6f4:	e0 91 ae 00 	lds	r30, 0x00AE	; 0x8000ae <TWI_RxHead>
+ 6f8:	f0 e0       	ldi	r31, 0x00	; 0
+ 6fa:	ec 59       	subi	r30, 0x9C	; 156
+ 6fc:	ff 4f       	sbci	r31, 0xFF	; 255
+ 6fe:	90 83       	st	Z, r25
+ 700:	0b c0       	rjmp	.+22     	; 0x718 <__vector_14+0x8c>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:216
+
+  switch (USI_TWI_Overflow_State) {
+  // ---------- Address mode ----------
+  // Check address and send ACK (and next USI_SLAVE_SEND_DATA) if OK, else reset USI.
+  case USI_SLAVE_CHECK_ADDRESS:
+    if ((USIDR == 0) || ((USIDR >> 1) == TWI_slaveAddress)) {
+ 702:	8f b1       	in	r24, 0x0f	; 15
+ 704:	88 23       	and	r24, r24
+ 706:	19 f0       	breq	.+6      	; 0x70e <__vector_14+0x82>
+ 708:	8f b1       	in	r24, 0x0f	; 15
+ 70a:	86 95       	lsr	r24
+ 70c:	71 f4       	brne	.+28     	; 0x72a <__vector_14+0x9e>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:217
+      if (USIDR & 0x01) {
+ 70e:	78 9b       	sbis	0x0f, 0	; 15
+ 710:	07 c0       	rjmp	.+14     	; 0x720 <__vector_14+0x94>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:224
+          // reset tx buffer and call callback
+          tmpTxTail = TWI_TxHead;
+          TWI_TxTail = tmpTxTail;
+          USI_TWI_On_Slave_Transmit();
+        }
+        USI_TWI_Overflow_State = USI_SLAVE_SEND_DATA;
+ 712:	81 e0       	ldi	r24, 0x01	; 1
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:226
+      } else {
+        USI_TWI_Overflow_State = USI_SLAVE_REQUEST_DATA;
+ 714:	80 93 af 00 	sts	0x00AF, r24	; 0x8000af <USI_TWI_Overflow_State>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:228
+      }
+      SET_USI_TO_SEND_ACK();
+ 718:	1f b8       	out	0x0f, r1	; 15
+ 71a:	b8 9a       	sbi	0x17, 0	; 23
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:302
+      TWI_RxHead            = tmpRxHead;
+      TWI_RxBuf[TWI_RxHead] = tmpUSIDR;
+      SET_USI_TO_SEND_ACK();
+    } else // If the buffer is full then:
+    {
+      SET_USI_TO_SEND_NACK();
+ 71c:	8e e7       	ldi	r24, 0x7E	; 126
+ 71e:	21 c0       	rjmp	.+66     	; 0x762 <__vector_14+0xd6>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:226
+          TWI_TxTail = tmpTxTail;
+          USI_TWI_On_Slave_Transmit();
+        }
+        USI_TWI_Overflow_State = USI_SLAVE_SEND_DATA;
+      } else {
+        USI_TWI_Overflow_State = USI_SLAVE_REQUEST_DATA;
+ 720:	84 e0       	ldi	r24, 0x04	; 4
+ 722:	f8 cf       	rjmp	.-16     	; 0x714 <__vector_14+0x88>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:237
+    break;
+
+  // ----- Master write data mode ------
+  // Check reply and goto USI_SLAVE_SEND_DATA if OK, else reset USI.
+  case USI_SLAVE_CHECK_REPLY_FROM_SEND_DATA:
+    if (USIDR) // If NACK, the master does not want more data.
+ 724:	8f b1       	in	r24, 0x0f	; 15
+ 726:	88 23       	and	r24, r24
+ 728:	21 f0       	breq	.+8      	; 0x732 <__vector_14+0xa6>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:255
+    if (TWI_TxHead != tmpTxTail) {
+      TWI_TxTail = (TWI_TxTail + 1) & TWI_TX_BUFFER_MASK;
+      USIDR      = TWI_TxBuf[TWI_TxTail];
+    } else // If the buffer is empty then:
+    {
+      SET_USI_TO_TWI_START_CONDITION_MODE();
+ 72a:	b8 98       	cbi	0x17, 0	; 23
+ 72c:	88 ea       	ldi	r24, 0xA8	; 168
+ 72e:	8d b9       	out	0x0d, r24	; 13
+ 730:	17 c0       	rjmp	.+46     	; 0x760 <__vector_14+0xd4>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:249
+  // Copy data from buffer to USIDR and set USI to shift byte. Next USI_SLAVE_REQUEST_REPLY_FROM_SEND_DATA
+  /* Falls through. */
+  case USI_SLAVE_SEND_DATA:
+
+    // Get data from Buffer
+    tmpTxTail = TWI_TxTail; // Not necessary, but prevents warnings
+ 732:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <TWI_TxTail>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:250
+    if (TWI_TxHead != tmpTxTail) {
+ 736:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <TWI_TxHead>
+ 73a:	98 17       	cp	r25, r24
+ 73c:	b1 f3       	breq	.-20     	; 0x72a <__vector_14+0x9e>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:251
+      TWI_TxTail = (TWI_TxTail + 1) & TWI_TX_BUFFER_MASK;
+ 73e:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <TWI_TxTail>
+ 742:	8f 5f       	subi	r24, 0xFF	; 255
+ 744:	8f 70       	andi	r24, 0x0F	; 15
+ 746:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <TWI_TxTail>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:252
+      USIDR      = TWI_TxBuf[TWI_TxTail];
+ 74a:	e0 91 bb 00 	lds	r30, 0x00BB	; 0x8000bb <TWI_TxTail>
+ 74e:	f0 e0       	ldi	r31, 0x00	; 0
+ 750:	ec 58       	subi	r30, 0x8C	; 140
+ 752:	ff 4f       	sbci	r31, 0xFF	; 255
+ 754:	80 81       	ld	r24, Z
+ 756:	8f b9       	out	0x0f, r24	; 15
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:258
+    } else // If the buffer is empty then:
+    {
+      SET_USI_TO_TWI_START_CONDITION_MODE();
+      return;
+    }
+    USI_TWI_Overflow_State = USI_SLAVE_REQUEST_REPLY_FROM_SEND_DATA;
+ 758:	82 e0       	ldi	r24, 0x02	; 2
+ 75a:	80 93 af 00 	sts	0x00AF, r24	; 0x8000af <USI_TWI_Overflow_State>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:259
+    SET_USI_TO_SEND_DATA();
+ 75e:	b8 9a       	sbi	0x17, 0	; 23
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:272
+
+  // ----- Master read data mode ------
+  // Set USI to sample data from master. Next USI_SLAVE_GET_DATA_AND_SEND_ACK.
+  case USI_SLAVE_REQUEST_DATA:
+    USI_TWI_Overflow_State = USI_SLAVE_GET_DATA_AND_SEND_ACK;
+    SET_USI_TO_READ_DATA();
+ 760:	80 e7       	ldi	r24, 0x70	; 112
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:302
+      TWI_RxHead            = tmpRxHead;
+      TWI_RxBuf[TWI_RxHead] = tmpUSIDR;
+      SET_USI_TO_SEND_ACK();
+    } else // If the buffer is full then:
+    {
+      SET_USI_TO_SEND_NACK();
+ 762:	8e b9       	out	0x0e, r24	; 14
+ 764:	a8 cf       	rjmp	.-176    	; 0x6b6 <__vector_14+0x2a>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:264
+    SET_USI_TO_SEND_DATA();
+    break;
+
+  // Set USI to sample reply from master. Next USI_SLAVE_CHECK_REPLY_FROM_SEND_DATA
+  case USI_SLAVE_REQUEST_REPLY_FROM_SEND_DATA:
+    USI_TWI_Overflow_State = USI_SLAVE_CHECK_REPLY_FROM_SEND_DATA;
+ 766:	83 e0       	ldi	r24, 0x03	; 3
+ 768:	80 93 af 00 	sts	0x00AF, r24	; 0x8000af <USI_TWI_Overflow_State>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:265
+    SET_USI_TO_READ_ACK();
+ 76c:	b8 98       	cbi	0x17, 0	; 23
+ 76e:	1f b8       	out	0x0f, r1	; 15
+ 770:	d5 cf       	rjmp	.-86     	; 0x71c <__vector_14+0x90>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:271
+    break;
+
+  // ----- Master read data mode ------
+  // Set USI to sample data from master. Next USI_SLAVE_GET_DATA_AND_SEND_ACK.
+  case USI_SLAVE_REQUEST_DATA:
+    USI_TWI_Overflow_State = USI_SLAVE_GET_DATA_AND_SEND_ACK;
+ 772:	85 e0       	ldi	r24, 0x05	; 5
+ 774:	80 93 af 00 	sts	0x00AF, r24	; 0x8000af <USI_TWI_Overflow_State>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:272
+    SET_USI_TO_READ_DATA();
+ 778:	b8 98       	cbi	0x17, 0	; 23
+ 77a:	f2 cf       	rjmp	.-28     	; 0x760 <__vector_14+0xd4>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:302
+      TWI_RxHead            = tmpRxHead;
+      TWI_RxBuf[TWI_RxHead] = tmpUSIDR;
+      SET_USI_TO_SEND_ACK();
+    } else // If the buffer is full then:
+    {
+      SET_USI_TO_SEND_NACK();
+ 77c:	b8 98       	cbi	0x17, 0	; 23
+ 77e:	ce cf       	rjmp	.-100    	; 0x71c <__vector_14+0x90>
+
+00000780 <__vector_13>:
+__vector_13():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:165
+ISR(USI_START_VECTOR)
+#elif __ICCAVR__
+#pragma vector = USI_START_VECTOR
+__interrupt void USI_Start_Condition_ISR(void)
+#endif
+{
+ 780:	1f 92       	push	r1
+ 782:	0f 92       	push	r0
+ 784:	0f b6       	in	r0, 0x3f	; 63
+ 786:	0f 92       	push	r0
+ 788:	11 24       	eor	r1, r1
+ 78a:	8f 93       	push	r24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:178
+      // reset rx buffer
+      TWI_RxTail = tmpRxHead;
+    }
+  }
+
+  USI_TWI_Overflow_State = USI_SLAVE_CHECK_ADDRESS;
+ 78c:	10 92 af 00 	sts	0x00AF, r1	; 0x8000af <USI_TWI_Overflow_State>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:179
+  DDR_USI &= ~(1 << PORT_USI_SDA); // Set SDA as input
+ 790:	b8 98       	cbi	0x17, 0	; 23
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:180
+  while ((tmpPin = (PIN_USI_CL & (1 << PORT_USI_SCL))) && ((PIN_USI & (1 << PIN_USI_SDA)) == 0))
+ 792:	b2 9b       	sbis	0x16, 2	; 22
+ 794:	04 c0       	rjmp	.+8      	; 0x79e <__vector_13+0x1e>
+ 796:	b0 9b       	sbis	0x16, 0	; 22
+ 798:	fc cf       	rjmp	.-8      	; 0x792 <__vector_13+0x12>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:185
+    ; // Wait for SCL to go low to ensure the "Start Condition" has completed.
+        // If a Stop condition arises then leave the interrupt to prevent waiting forever.
+  if (tmpPin) {
+    // Stop Condition (waiting for next Start Condition)
+    USICR = (1 << USISIE) | (0 << USIOIE) | // Enable Start Condition Interrupt. Disable Overflow Interrupt.
+ 79a:	88 ea       	ldi	r24, 0xA8	; 168
+ 79c:	01 c0       	rjmp	.+2      	; 0x7a0 <__vector_13+0x20>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:192
+                                            // to first Start Condition (potential failure)
+            (1 << USICS1) | (0 << USICS0) | (0 << USICLK) | // Shift Register Clock Source = External, positive edge
+            (0 << USITC);
+  } else {
+    // really Start Condition (Enable Overflow Interrupt)
+    USICR = (1 << USISIE) | (1 << USIOIE)
+ 79e:	88 ef       	ldi	r24, 0xF8	; 248
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:185
+  while ((tmpPin = (PIN_USI_CL & (1 << PORT_USI_SCL))) && ((PIN_USI & (1 << PIN_USI_SDA)) == 0))
+    ; // Wait for SCL to go low to ensure the "Start Condition" has completed.
+        // If a Stop condition arises then leave the interrupt to prevent waiting forever.
+  if (tmpPin) {
+    // Stop Condition (waiting for next Start Condition)
+    USICR = (1 << USISIE) | (0 << USIOIE) | // Enable Start Condition Interrupt. Disable Overflow Interrupt.
+ 7a0:	8d b9       	out	0x0d, r24	; 13
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:198
+            | // Enable Overflow and Start Condition Interrupt. (Keep StartCondInt to detect RESTART)
+            (1 << USIWM1) | (1 << USIWM0) |                 // Set USI in Two-wire mode.
+            (1 << USICS1) | (0 << USICS0) | (0 << USICLK) | // Shift Register Clock Source = External, positive edge
+            (0 << USITC);
+  }
+  USISR = (1 << USI_START_COND_INT) | (1 << USIOIF) | (1 << USIPF) | (1 << USIDC) | // Clear flags
+ 7a2:	80 ef       	ldi	r24, 0xF0	; 240
+ 7a4:	8e b9       	out	0x0e, r24	; 14
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Slave/USI_TWI_Slave.c:200
+          (0x0 << USICNT0); // Set USI to sample 8 bits i.e. count 16 external pin toggles.
+}
+ 7a6:	8f 91       	pop	r24
+ 7a8:	0f 90       	pop	r0
+ 7aa:	0f be       	out	0x3f, r0	; 63
+ 7ac:	0f 90       	pop	r0
+ 7ae:	1f 90       	pop	r1
+ 7b0:	18 95       	reti
+
+000007b2 <__vector_2>:
+__vector_2():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:176
+void set_clock(uint8_t freq) {                   // Switch Clock from 8 MHz to 1 MHz
+  CLKPR = 0x80;                                  // Set clock
+  CLKPR = freq;                                  // 0 = 8 MHz | 4 = 1 MHz
+}
+
+ISR(PCINT0_vect) {                               // Interrupt routine for pin change 
+ 7b2:	1f 92       	push	r1
+ 7b4:	0f 92       	push	r0
+ 7b6:	0f b6       	in	r0, 0x3f	; 63
+ 7b8:	0f 92       	push	r0
+ 7ba:	11 24       	eor	r1, r1
+ 7bc:	8f 93       	push	r24
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:177
+  wake = true;                                   // Set wake flag when button is pressed
+ 7be:	81 e0       	ldi	r24, 0x01	; 1
+ 7c0:	80 93 ab 00 	sts	0x00AB, r24	; 0x8000ab <wake>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:178
+ 7c4:	8f 91       	pop	r24
+ 7c6:	0f 90       	pop	r0
+ 7c8:	0f be       	out	0x3f, r0	; 63
+ 7ca:	0f 90       	pop	r0
+ 7cc:	1f 90       	pop	r1
+ 7ce:	18 95       	reti
+
+000007d0 <main>:
+main():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:1138
+*/
+
+  // Use the Millis Timer for fast PWM (unless it doesn't have an output).
+  #if (TIMER_TO_USE_FOR_MILLIS == 0)
+    #if defined(WGM01) // if Timer0 has PWM
+      TCCR0A = (1<<WGM01) | (1<<WGM00);
+ 7d0:	83 e0       	ldi	r24, 0x03	; 3
+ 7d2:	8a bd       	out	0x2a, r24	; 42
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:1141
+    #endif
+    #if defined(TCCR0B) //The x61 has a wacky Timer0!
+      TCCR0B = (MillisTimer_Prescale_Index << CS00);
+ 7d4:	83 bf       	out	0x33, r24	; 51
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:1162
+    TCCR1A = 1<<WGM10;
+    TCCR1B = (1<<WGM12) | (MillisTimer_Prescale_Index << CS10);
+  #endif
+
+  // this needs to be called before setup() or some functions won't work there
+  sei();
+ 7d6:	78 94       	sei
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:1167
+
+  #ifndef DISABLEMILLIS
+    // Enable the overflow interrupt (this is the basic system tic-toc for millis)
+    #if defined(TIMSK) && defined(TOIE0) && (TIMER_TO_USE_FOR_MILLIS == 0)
+      sbi(TIMSK, TOIE0);
+ 7d8:	89 b7       	in	r24, 0x39	; 57
+ 7da:	82 60       	ori	r24, 0x02	; 2
+ 7dc:	89 bf       	out	0x39, r24	; 57
+initToneTimerInternal():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:958
+    #elif defined(__AVR_ATtiny43__)
+      TCCR1A = 3; //WGM 10=1, WGM11=1
+      TCCR1B = 3; //prescaler of 64
+    #elif (TIMER_TO_USE_FOR_TONE == 1) && defined(TCCR1) // ATtiny x5
+      // Use the Tone Timer for fast PWM as phase correct not supported by this timer
+      GTCCR = (1<<PWM1B);
+ 7de:	80 e4       	ldi	r24, 0x40	; 64
+ 7e0:	8c bd       	out	0x2c, r24	; 44
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:959
+      OCR1C = 0xFF; //Use 255 as the top to match with the others as this module doesn't have a 8bit PWM mode.
+ 7e2:	9f ef       	ldi	r25, 0xFF	; 255
+ 7e4:	9d bd       	out	0x2d, r25	; 45
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:960
+      TCCR1 = (1<<CTC1) | (1<<PWM1A) | (ToneTimer_Prescale_Index << CS10);
+ 7e6:	87 ec       	ldi	r24, 0xC7	; 199
+ 7e8:	80 bf       	out	0x30, r24	; 48
+main():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:1214
+  #if defined( INITIALIZE_ANALOG_TO_DIGITAL_CONVERTER ) && INITIALIZE_ANALOG_TO_DIGITAL_CONVERTER
+    #if defined(ADCSRA)
+      // set a2d prescale factor
+      // ADCSRA = (ADCSRA & ~((1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0))) | (ADC_ARDUINO_PRESCALER << ADPS0) | (1<<ADEN);
+      // dude, this is being called on startup. We know that ADCSRA is 0! Why add a RMW cycle?!
+      ADCSRA = (ADC_ARDUINO_PRESCALER << ADPS0) | (1<<ADEN);
+ 7ea:	86 e8       	ldi	r24, 0x86	; 134
+ 7ec:	86 b9       	out	0x06, r24	; 6
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:54
+SSD1306_Mini  oled;                              // Set display
+
+int main(void) {                                 
+  init(); {                                      // Setup
+    // Power saving
+    ACSR = (1 << ACD);                           // Disable analog comparator - anyway by default?
+ 7ee:	80 e8       	ldi	r24, 0x80	; 128
+ 7f0:	88 b9       	out	0x08, r24	; 8
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:55
+    ADCSRA = 0x00;                               // Switch ADC off | saves 270 uA
+ 7f2:	16 b8       	out	0x06, r1	; 6
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:58
+
+    // Port setup
+    DDRB  |= (1 << Devices);                     // Set D4 to OUTPUT to power up display and EEPROM
+ 7f4:	bc 9a       	sbi	0x17, 4	; 23
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:59
+    PORTB = 0x3F;                                // Set all Ports to INPUT_PULLUP (HIGH) to prevent floating
+ 7f6:	8f e3       	ldi	r24, 0x3F	; 63
+ 7f8:	88 bb       	out	0x18, r24	; 24
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:62
+
+    // Hardware interrupt
+    cli();                                       // Stop all interrupts
+ 7fa:	f8 94       	cli
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:63
+    GIMSK |= (1 << PCIE);                        // Turn on pin change interrupt
+ 7fc:	8b b7       	in	r24, 0x3b	; 59
+ 7fe:	80 62       	ori	r24, 0x20	; 32
+ 800:	8b bf       	out	0x3b, r24	; 59
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:64
+    PCMSK |= (1 << PCINT1);                      // Turn on interrupt on PB1 button
+ 802:	a9 9a       	sbi	0x15, 1	; 21
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:65
+    sei();                                       // Start interrupts
+ 804:	78 94       	sei
+USI_TWI_Master_Speed():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:49
+    unsigned char unused : 6;
+  };
+} USI_TWI_state;
+
+void USI_TWI_Master_Speed(uint8_t fm) {
+  USI_TWI_MASTER_SPEED=fm?1:0;
+ 806:	81 e0       	ldi	r24, 0x01	; 1
+ 808:	80 93 ac 00 	sts	0x00AC, r24	; 0x8000ac <USI_TWI_MASTER_SPEED>
+begin():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:364
+}
+
+// Public Methods //////////////////////////////////////////////////////////////
+
+void TwoWire::begin(void) {
+  BufferIndex = 0;
+ 80c:	10 92 bd 00 	sts	0x00BD, r1	; 0x8000bd <TwoWire::BufferIndex>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:365
+  BufferLength = 0;
+ 810:	10 92 be 00 	sts	0x00BE, r1	; 0x8000be <TwoWire::BufferLength>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:367
+
+  transmitting = 0;
+ 814:	10 92 bf 00 	sts	0x00BF, r1	; 0x8000bf <TwoWire::transmitting>
+USI_TWI_Master_Initialise():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:61
+{
+  #ifdef PUE_USI
+  PUE_USI |=(1 << PIN_USI_SDA);
+  PUE_USI_CL |=(1 << PIN_USI_SCL);
+  #endif
+  PORT_USI |= (1 << PIN_USI_SDA); // Enable pullup on SDA, to set high as released state.
+ 818:	c0 9a       	sbi	0x18, 0	; 24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:62
+  PORT_USI_CL |= (1 << PIN_USI_SCL); // Enable pullup on SCL, to set high as released state.
+ 81a:	c2 9a       	sbi	0x18, 2	; 24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:64
+
+  DDR_USI_CL |= (1 << PIN_USI_SCL); // Enable SCL as output.
+ 81c:	ba 9a       	sbi	0x17, 2	; 23
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:65
+  DDR_USI |= (1 << PIN_USI_SDA); // Enable SDA as output.
+ 81e:	b8 9a       	sbi	0x17, 0	; 23
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:67
+
+  USIDR = 0xFF;                                           // Preload dataregister with "released level" data.
+ 820:	9f b9       	out	0x0f, r25	; 15
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:68
+  USICR = (0 << USISIE) | (0 << USIOIE) |                 // Disable Interrupts.
+ 822:	8a e2       	ldi	r24, 0x2A	; 42
+ 824:	8d b9       	out	0x0d, r24	; 13
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/USI_TWI_Master/USI_TWI_Master.c:72
+          (1 << USIWM1) | (0 << USIWM0) |                 // Set USI in Two-wire mode.
+          (1 << USICS1) | (0 << USICS0) | (1 << USICLK) | // Software stobe as counter clock source
+          (0 << USITC);
+  USISR = (1 << USISIF) | (1 << USIOIF) | (1 << USIPF) | (1 << USIDC) | // Clear flags,
+ 826:	80 ef       	ldi	r24, 0xF0	; 240
+ 828:	8e b9       	out	0x0e, r24	; 14
+main():
+    // Init I2C
+    Wire.setClock(400000L);                      // Fast mode
+    Wire.begin();                                // Start I2C
+
+    // Read wordlist addresses
+    gender = 0;                                  // gender and list are helping variables here
+ 82a:	10 92 aa 00 	sts	0x00AA, r1	; 0x8000aa <gender>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:73
+    for (list = 0; list < 5; list ++) {          // Read numbers of 4 wordlists
+ 82e:	10 92 95 00 	sts	0x0095, r1	; 0x800095 <list+0x1>
+ 832:	10 92 94 00 	sts	0x0094, r1	; 0x800094 <list>
+ 836:	c0 91 94 00 	lds	r28, 0x0094	; 0x800094 <list>
+ 83a:	d0 91 95 00 	lds	r29, 0x0095	; 0x800095 <list+0x1>
+ 83e:	c5 30       	cpi	r28, 0x05	; 5
+ 840:	d1 05       	cpc	r29, r1
+ 842:	50 f5       	brcc	.+84     	; 0x898 <main+0xc8>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:74
+      number = read_eeprom(0 + gender) * 255;    // Calculate number: 
+ 844:	10 91 aa 00 	lds	r17, 0x00AA	; 0x8000aa <gender>
+ 848:	e1 2e       	mov	r14, r17
+ 84a:	f1 2c       	mov	r15, r1
+ 84c:	c7 01       	movw	r24, r14
+ 84e:	48 de       	rcall	.-880    	; 0x4e0 <read_eeprom(unsigned int)>
+ 850:	08 2f       	mov	r16, r24
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:75
+      number += read_eeprom(1 + gender);         // First byte = high, second byte = low
+ 852:	c7 01       	movw	r24, r14
+ 854:	01 96       	adiw	r24, 0x01	; 1
+ 856:	44 de       	rcall	.-888    	; 0x4e0 <read_eeprom(unsigned int)>
+ 858:	28 2f       	mov	r18, r24
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:74
+    Wire.begin();                                // Start I2C
+
+    // Read wordlist addresses
+    gender = 0;                                  // gender and list are helping variables here
+    for (list = 0; list < 5; list ++) {          // Read numbers of 4 wordlists
+      number = read_eeprom(0 + gender) * 255;    // Calculate number: 
+ 85a:	80 2f       	mov	r24, r16
+ 85c:	90 e0       	ldi	r25, 0x00	; 0
+ 85e:	6f ef       	ldi	r22, 0xFF	; 255
+ 860:	70 e0       	ldi	r23, 0x00	; 0
+ 862:	38 d2       	rcall	.+1136   	; 0xcd4 <__mulhi3>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:75
+      number += read_eeprom(1 + gender);         // First byte = high, second byte = low
+ 864:	82 0f       	add	r24, r18
+ 866:	91 1d       	adc	r25, r1
+ 868:	90 93 93 00 	sts	0x0093, r25	; 0x800093 <number+0x1>
+ 86c:	80 93 92 00 	sts	0x0092, r24	; 0x800092 <number>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:76
+      if (number == 0) wake = false;             // Sleep if no EEPROM or no wordlist present
+ 870:	00 97       	sbiw	r24, 0x00	; 0
+ 872:	11 f4       	brne	.+4      	; 0x878 <main+0xa8>
+ 874:	10 92 ab 00 	sts	0x00AB, r1	; 0x8000ab <wake>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:77
+      address[list] = number;                    // Write word numbers to array 
+ 878:	fe 01       	movw	r30, r28
+ 87a:	ee 0f       	add	r30, r30
+ 87c:	ff 1f       	adc	r31, r31
+ 87e:	e8 57       	subi	r30, 0x78	; 120
+ 880:	ff 4f       	sbci	r31, 0xFF	; 255
+ 882:	91 83       	std	Z+1, r25	; 0x01
+ 884:	80 83       	st	Z, r24
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:78
+      gender += 2;                               // Chance number address
+ 886:	1e 5f       	subi	r17, 0xFE	; 254
+ 888:	10 93 aa 00 	sts	0x00AA, r17	; 0x8000aa <gender>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:73
+    Wire.setClock(400000L);                      // Fast mode
+    Wire.begin();                                // Start I2C
+
+    // Read wordlist addresses
+    gender = 0;                                  // gender and list are helping variables here
+    for (list = 0; list < 5; list ++) {          // Read numbers of 4 wordlists
+ 88c:	21 96       	adiw	r28, 0x01	; 1
+ 88e:	d0 93 95 00 	sts	0x0095, r29	; 0x800095 <list+0x1>
+ 892:	c0 93 94 00 	sts	0x0094, r28	; 0x800094 <list>
+ 896:	cf cf       	rjmp	.-98     	; 0x836 <main+0x66>
+set_clock():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:172
+  Wire.requestFrom(0x50, 1);                     // Request one byte
+  return Wire.read();                            // Read and return byte
+}
+
+void set_clock(uint8_t freq) {                   // Switch Clock from 8 MHz to 1 MHz
+  CLKPR = 0x80;                                  // Set clock
+ 898:	80 e8       	ldi	r24, 0x80	; 128
+ 89a:	86 bd       	out	0x26, r24	; 38
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:173
+  CLKPR = freq;                                  // 0 = 8 MHz | 4 = 1 MHz
+ 89c:	84 e0       	ldi	r24, 0x04	; 4
+ 89e:	86 bd       	out	0x26, r24	; 38
+main():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:84
+    }
+
+    // Randomize number generator
+    //PORTB &= ~(1 << Devices);                    // Devices off while sleeping (V1.1)   
+    set_clock(4);                                // Set clock to 1 MHz to save power while waiting
+    while (!wake);                               // Wait for button to "turn on" - Sleeping would disable timer
+ 8a0:	80 91 ab 00 	lds	r24, 0x00AB	; 0x8000ab <wake>
+ 8a4:	88 23       	and	r24, r24
+ 8a6:	e1 f3       	breq	.-8      	; 0x8a0 <main+0xd0>
+millis():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:341
+  }
+
+  unsigned long millis()
+  {
+    unsigned long m;
+    uint8_t oldSREG = SREG;
+ 8a8:	2f b7       	in	r18, 0x3f	; 63
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:345
+
+    // disable interrupts while we read millis_timer_millis or we might get an
+    // inconsistent value (e.g. in the middle of a write to millis_timer_millis)
+    cli();
+ 8aa:	f8 94       	cli
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:346
+    m = millis_timer_millis;
+ 8ac:	80 91 b5 00 	lds	r24, 0x00B5	; 0x8000b5 <millis_timer_millis>
+ 8b0:	90 91 b6 00 	lds	r25, 0x00B6	; 0x8000b6 <millis_timer_millis+0x1>
+ 8b4:	a0 91 b7 00 	lds	r26, 0x00B7	; 0x8000b7 <millis_timer_millis+0x2>
+ 8b8:	b0 91 b8 00 	lds	r27, 0x00B8	; 0x8000b8 <millis_timer_millis+0x3>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:347
+    SREG = oldSREG;
+ 8bc:	2f bf       	out	0x3f, r18	; 63
+randomSeed():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:32
+  #include "stdlib.h"
+}
+
+void randomSeed(unsigned int seed)
+{
+  if (seed != 0) {
+ 8be:	00 97       	sbiw	r24, 0x00	; 0
+ 8c0:	29 f0       	breq	.+10     	; 0x8cc <main+0xfc>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:33
+    srandom(seed);
+ 8c2:	bc 01       	movw	r22, r24
+ 8c4:	cd 01       	movw	r24, r26
+ 8c6:	88 27       	eor	r24, r24
+ 8c8:	99 27       	eor	r25, r25
+ 8ca:	a4 d1       	rcall	.+840    	; 0xc14 <srandom>
+ 8cc:	c9 e2       	ldi	r28, 0x29	; 41
+ 8ce:	d0 e0       	ldi	r29, 0x00	; 0
+set_clock():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:172
+  Wire.requestFrom(0x50, 1);                     // Request one byte
+  return Wire.read();                            // Read and return byte
+}
+
+void set_clock(uint8_t freq) {                   // Switch Clock from 8 MHz to 1 MHz
+  CLKPR = 0x80;                                  // Set clock
+ 8d0:	10 e8       	ldi	r17, 0x80	; 128
+random():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:42
+long random(long howbig)
+{
+  if (howbig == 0) {
+    return 0;
+  }
+  return random() % howbig;
+ 8d2:	43 e0       	ldi	r20, 0x03	; 3
+ 8d4:	84 2e       	mov	r8, r20
+ 8d6:	91 2c       	mov	r9, r1
+ 8d8:	a1 2c       	mov	r10, r1
+ 8da:	b1 2c       	mov	r11, r1
+main():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:90
+    randomSeed(millis());                        // Time passed by manual pressing is used for random numbers
+
+    // Main routine - runs after waking up
+    while(1) {
+      // Init Display
+      PORTB |= (1 << Devices);                   // Devices on (V1.1)
+ 8dc:	c4 9a       	sbi	0x18, 4	; 24
+_delay_ms():
+/home/niko/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay.h:187
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 8de:	8f e0       	ldi	r24, 0x0F	; 15
+ 8e0:	97 e2       	ldi	r25, 0x27	; 39
+ 8e2:	01 97       	sbiw	r24, 0x01	; 1
+ 8e4:	f1 f7       	brne	.-4      	; 0x8e2 <main+0x112>
+ 8e6:	00 c0       	rjmp	.+0      	; 0x8e8 <main+0x118>
+ 8e8:	00 00       	nop
+init():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:138
+
+// Public functions
+void SSD1306_Mini::init() {
+  uint8_t i;
+  _delay_ms(5);	                                 // Wait for OLED hardware init
+  commandMode();
+ 8ea:	8b dc       	rcall	.-1770   	; 0x202 <SSD1306_Mini::commandMode() [clone .constprop.17]>
+ 8ec:	3e e1       	ldi	r19, 0x1E	; 30
+ 8ee:	e3 2e       	mov	r14, r19
+ 8f0:	30 e0       	ldi	r19, 0x00	; 0
+ 8f2:	f3 2e       	mov	r15, r19
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:140
+  for (i = 0; i < InitLength; i++)   
+    Wire.write(pgm_read_byte(&InitSequence[i]));
+ 8f4:	f7 01       	movw	r30, r14
+ 8f6:	84 91       	lpm	r24, Z
+ 8f8:	45 dc       	rcall	.-1910   	; 0x184 <TwoWire::write(unsigned char) [clone .constprop.21]>
+ 8fa:	ff ef       	ldi	r31, 0xFF	; 255
+ 8fc:	ef 1a       	sub	r14, r31
+ 8fe:	ff 0a       	sbc	r15, r31
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:139
+// Public functions
+void SSD1306_Mini::init() {
+  uint8_t i;
+  _delay_ms(5);	                                 // Wait for OLED hardware init
+  commandMode();
+  for (i = 0; i < InitLength; i++)   
+ 900:	ce 15       	cp	r28, r14
+ 902:	df 05       	cpc	r29, r15
+ 904:	b9 f7       	brne	.-18     	; 0x8f4 <main+0x124>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:141
+    Wire.write(pgm_read_byte(&InitSequence[i]));
+  Wire.endTransmission();
+ 906:	35 dd       	rcall	.-1430   	; 0x372 <TwoWire::endTransmission() [clone .constprop.14]>
+main():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:94
+      oled.init();                               // Connect and start OLED via I2C
+
+      // Display swearwords until timeout
+      while (wake) {                             // Wait 10 seconds timeout
+ 908:	80 91 ab 00 	lds	r24, 0x00AB	; 0x8000ab <wake>
+ 90c:	88 23       	and	r24, r24
+ 90e:	09 f4       	brne	.+2      	; 0x912 <main+0x142>
+ 910:	d9 c0       	rjmp	.+434    	; 0xac4 <main+0x2f4>
+set_clock():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:172
+  Wire.requestFrom(0x50, 1);                     // Request one byte
+  return Wire.read();                            // Read and return byte
+}
+
+void set_clock(uint8_t freq) {                   // Switch Clock from 8 MHz to 1 MHz
+  CLKPR = 0x80;                                  // Set clock
+ 912:	16 bd       	out	0x26, r17	; 38
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:173
+  CLKPR = freq;                                  // 0 = 8 MHz | 4 = 1 MHz
+ 914:	16 bc       	out	0x26, r1	; 38
+millis():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:341
+  }
+
+  unsigned long millis()
+  {
+    unsigned long m;
+    uint8_t oldSREG = SREG;
+ 916:	2f b7       	in	r18, 0x3f	; 63
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:345
+
+    // disable interrupts while we read millis_timer_millis or we might get an
+    // inconsistent value (e.g. in the middle of a write to millis_timer_millis)
+    cli();
+ 918:	f8 94       	cli
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:346
+    m = millis_timer_millis;
+ 91a:	80 91 b5 00 	lds	r24, 0x00B5	; 0x8000b5 <millis_timer_millis>
+ 91e:	90 91 b6 00 	lds	r25, 0x00B6	; 0x8000b6 <millis_timer_millis+0x1>
+ 922:	a0 91 b7 00 	lds	r26, 0x00B7	; 0x8000b7 <millis_timer_millis+0x2>
+ 926:	b0 91 b8 00 	lds	r27, 0x00B8	; 0x8000b8 <millis_timer_millis+0x3>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:347
+    SREG = oldSREG;
+ 92a:	2f bf       	out	0x3f, r18	; 63
+main():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:96
+      oled.init();                               // Connect and start OLED via I2C
+
+      // Display swearwords until timeout
+      while (wake) {                             // Wait 10 seconds timeout
+        set_clock(0);                            // Set clock to 8 MHz for faster rendering
+        counter = millis();                      // Set starting time
+ 92c:	80 93 84 00 	sts	0x0084, r24	; 0x800084 <counter>
+ 930:	90 93 85 00 	sts	0x0085, r25	; 0x800085 <counter+0x1>
+ 934:	a0 93 86 00 	sts	0x0086, r26	; 0x800086 <counter+0x2>
+ 938:	b0 93 87 00 	sts	0x0087, r27	; 0x800087 <counter+0x3>
+clear():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:165
+  clipArea(col, row, 128 - col, 8 - row);            
+}
+
+void SSD1306_Mini::clear() {
+  uint8_t a, b;
+  sendCommand(0x00 | 0x00);                      // Low col = 0
+ 93c:	80 e0       	ldi	r24, 0x00	; 0
+ 93e:	39 dd       	rcall	.-1422   	; 0x3b2 <SSD1306_Mini::sendCommand(unsigned char) [clone .constprop.13]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:166
+  sendCommand(0x10 | 0x00);                      // Hi col = 0
+ 940:	80 e1       	ldi	r24, 0x10	; 16
+ 942:	37 dd       	rcall	.-1426   	; 0x3b2 <SSD1306_Mini::sendCommand(unsigned char) [clone .constprop.13]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:167
+  sendCommand(0x40 | 0x00);                      // Line #0   
+ 944:	80 e4       	ldi	r24, 0x40	; 64
+ 946:	35 dd       	rcall	.-1430   	; 0x3b2 <SSD1306_Mini::sendCommand(unsigned char) [clone .constprop.13]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:168
+  clipArea(0 , 0, 128, 8);
+ 948:	28 e0       	ldi	r18, 0x08	; 8
+ 94a:	40 e8       	ldi	r20, 0x80	; 128
+ 94c:	60 e0       	ldi	r22, 0x00	; 0
+ 94e:	80 e0       	ldi	r24, 0x00	; 0
+ 950:	37 dd       	rcall	.-1426   	; 0x3c0 <SSD1306_Mini::clipArea(unsigned char, unsigned char, unsigned char, unsigned char) [clone .constprop.11]>
+ 952:	01 e4       	ldi	r16, 0x41	; 65
+beginTransmission():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/libraries/Wire/src/Wire.cpp:471
+  BufferIndex = 1; // reserved by slave address
+  BufferLength = BufferIndex;
+}
+
+void TwoWire::beginTransmission(int address) {
+  beginTransmission((uint8_t)address);
+ 954:	8c e3       	ldi	r24, 0x3C	; 60
+ 956:	4a dc       	rcall	.-1900   	; 0x1ec <TwoWire::beginTransmission(unsigned char) [clone .constprop.19]>
+dataMode():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:119
+  Wire.write(0x80);                              // Command mode
+}
+
+void SSD1306_Mini::dataMode() {
+  Wire.beginTransmission(SlaveAddress);          // Begin I2C transmission
+  Wire.write(0x40);                              // Data mode
+ 958:	80 e4       	ldi	r24, 0x40	; 64
+ 95a:	90 e0       	ldi	r25, 0x00	; 0
+ 95c:	46 dc       	rcall	.-1908   	; 0x1ea <TwoWire::write(int) [clone .constprop.20]>
+ 95e:	20 e1       	ldi	r18, 0x10	; 16
+ 960:	f2 2e       	mov	r15, r18
+clear():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:172
+  sendCommand(0x40 | 0x00);                      // Line #0   
+  clipArea(0 , 0, 128, 8);
+  for (a = 0; a <= 64; a ++) {
+    dataMode();
+    for (b = 0; b < 16;  b ++) 
+      Wire.write(0x00);
+ 962:	90 e0       	ldi	r25, 0x00	; 0
+ 964:	80 e0       	ldi	r24, 0x00	; 0
+ 966:	41 dc       	rcall	.-1918   	; 0x1ea <TwoWire::write(int) [clone .constprop.20]>
+ 968:	fa 94       	dec	r15
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:171
+  sendCommand(0x10 | 0x00);                      // Hi col = 0
+  sendCommand(0x40 | 0x00);                      // Line #0   
+  clipArea(0 , 0, 128, 8);
+  for (a = 0; a <= 64; a ++) {
+    dataMode();
+    for (b = 0; b < 16;  b ++) 
+ 96a:	f1 10       	cpse	r15, r1
+ 96c:	fa cf       	rjmp	.-12     	; 0x962 <main+0x192>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:173
+      Wire.write(0x00);
+    Wire.endTransmission();
+ 96e:	01 dd       	rcall	.-1534   	; 0x372 <TwoWire::endTransmission() [clone .constprop.14]>
+ 970:	01 50       	subi	r16, 0x01	; 1
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/SSD1306_minimal.cpp:169
+  uint8_t a, b;
+  sendCommand(0x00 | 0x00);                      // Low col = 0
+  sendCommand(0x10 | 0x00);                      // Hi col = 0
+  sendCommand(0x40 | 0x00);                      // Line #0   
+  clipArea(0 , 0, 128, 8);
+  for (a = 0; a <= 64; a ++) {
+ 972:	81 f7       	brne	.-32     	; 0x954 <main+0x184>
+main():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:100
+        oled.clear();                            // Clear display buffer
+
+        // First word
+        number = (random(0, address[0]));        // Select first word
+ 974:	c0 90 88 00 	lds	r12, 0x0088	; 0x800088 <address>
+ 978:	d0 90 89 00 	lds	r13, 0x0089	; 0x800089 <address+0x1>
+ 97c:	f1 2c       	mov	r15, r1
+ 97e:	e1 2c       	mov	r14, r1
+random():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:47
+}
+
+long random(long howsmall, long howbig)
+{
+  if (howsmall >= howbig) {
+ 980:	c1 14       	cp	r12, r1
+ 982:	d1 04       	cpc	r13, r1
+ 984:	e1 04       	cpc	r14, r1
+ 986:	f1 04       	cpc	r15, r1
+ 988:	29 f0       	breq	.+10     	; 0x994 <main+0x1c4>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:42
+long random(long howbig)
+{
+  if (howbig == 0) {
+    return 0;
+  }
+  return random() % howbig;
+ 98a:	f6 d0       	rcall	.+492    	; 0xb78 <random>
+ 98c:	a7 01       	movw	r20, r14
+ 98e:	96 01       	movw	r18, r12
+ 990:	63 d1       	rcall	.+710    	; 0xc58 <__divmodsi4>
+ 992:	6b 01       	movw	r12, r22
+main():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:100
+ 994:	d0 92 93 00 	sts	0x0093, r13	; 0x800093 <number+0x1>
+ 998:	c0 92 92 00 	sts	0x0092, r12	; 0x800092 <number>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:101
+        get_swearword(number);                   // Read word from EEPROM
+ 99c:	c6 01       	movw	r24, r12
+ 99e:	e6 dd       	rcall	.-1076   	; 0x56c <get_swearword(unsigned int)>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:102
+        write_swearword(2);                      // Write first word in the first line
+ 9a0:	82 e0       	ldi	r24, 0x02	; 2
+ 9a2:	69 dd       	rcall	.-1326   	; 0x476 <write_swearword(unsigned char)>
+random():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:42
+ 9a4:	e9 d0       	rcall	.+466    	; 0xb78 <random>
+ 9a6:	a5 01       	movw	r20, r10
+ 9a8:	94 01       	movw	r18, r8
+ 9aa:	56 d1       	rcall	.+684    	; 0xc58 <__divmodsi4>
+main():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:105
+
+        // Second word first part
+        gender = random(0, 3);                   // Set word gender
+ 9ac:	60 93 aa 00 	sts	0x00AA, r22	; 0x8000aa <gender>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:106
+        if (gender != 0) oled.printChar(48 + gender); // If male, write "r", if neutrum, write "s"
+ 9b0:	66 23       	and	r22, r22
+ 9b2:	19 f0       	breq	.+6      	; 0x9ba <main+0x1ea>
+ 9b4:	80 e3       	ldi	r24, 0x30	; 48
+ 9b6:	86 0f       	add	r24, r22
+ 9b8:	31 dd       	rcall	.-1438   	; 0x41c <SSD1306_Mini::printChar(char) [clone .constprop.8]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:107
+        number = (random(address[0], address[1])); // Select second word
+ 9ba:	c0 90 8a 00 	lds	r12, 0x008A	; 0x80008a <address+0x2>
+ 9be:	d0 90 8b 00 	lds	r13, 0x008B	; 0x80008b <address+0x3>
+ 9c2:	f1 2c       	mov	r15, r1
+ 9c4:	e1 2c       	mov	r14, r1
+ 9c6:	40 90 88 00 	lds	r4, 0x0088	; 0x800088 <address>
+ 9ca:	50 90 89 00 	lds	r5, 0x0089	; 0x800089 <address+0x1>
+ 9ce:	71 2c       	mov	r7, r1
+ 9d0:	61 2c       	mov	r6, r1
+random():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:47
+}
+
+long random(long howsmall, long howbig)
+{
+  if (howsmall >= howbig) {
+ 9d2:	4c 14       	cp	r4, r12
+ 9d4:	5d 04       	cpc	r5, r13
+ 9d6:	6e 04       	cpc	r6, r14
+ 9d8:	7f 04       	cpc	r7, r15
+ 9da:	7c f4       	brge	.+30     	; 0x9fa <main+0x22a>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:50
+    return howsmall;
+  }
+  long diff = howbig - howsmall;
+ 9dc:	c4 18       	sub	r12, r4
+ 9de:	d5 08       	sbc	r13, r5
+ 9e0:	e6 08       	sbc	r14, r6
+ 9e2:	f7 08       	sbc	r15, r7
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:39
+  }
+}
+
+long random(long howbig)
+{
+  if (howbig == 0) {
+ 9e4:	31 f0       	breq	.+12     	; 0x9f2 <main+0x222>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:42
+    return 0;
+  }
+  return random() % howbig;
+ 9e6:	c8 d0       	rcall	.+400    	; 0xb78 <random>
+ 9e8:	a7 01       	movw	r20, r14
+ 9ea:	96 01       	movw	r18, r12
+ 9ec:	35 d1       	rcall	.+618    	; 0xc58 <__divmodsi4>
+ 9ee:	6b 01       	movw	r12, r22
+ 9f0:	7c 01       	movw	r14, r24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:51
+{
+  if (howsmall >= howbig) {
+    return howsmall;
+  }
+  long diff = howbig - howsmall;
+  return random(diff) + howsmall;
+ 9f2:	4c 0c       	add	r4, r12
+ 9f4:	5d 1c       	adc	r5, r13
+ 9f6:	6e 1c       	adc	r6, r14
+ 9f8:	7f 1c       	adc	r7, r15
+main():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:107
+ 9fa:	50 92 93 00 	sts	0x0093, r5	; 0x800093 <number+0x1>
+ 9fe:	40 92 92 00 	sts	0x0092, r4	; 0x800092 <number>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:108
+        get_swearword(number);                   // Read second word from EEPROM
+ a02:	c2 01       	movw	r24, r4
+ a04:	b3 dd       	rcall	.-1178   	; 0x56c <get_swearword(unsigned int)>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:111
+        
+        // Second word second part
+        number = (random(address[gender + 1], address[gender + 2])); // Select second part of second word
+ a06:	e0 91 aa 00 	lds	r30, 0x00AA	; 0x8000aa <gender>
+ a0a:	f0 e0       	ldi	r31, 0x00	; 0
+ a0c:	df 01       	movw	r26, r30
+ a0e:	aa 0f       	add	r26, r26
+ a10:	bb 1f       	adc	r27, r27
+ a12:	a4 57       	subi	r26, 0x74	; 116
+ a14:	bf 4f       	sbci	r27, 0xFF	; 255
+ a16:	cd 90       	ld	r12, X+
+ a18:	dc 90       	ld	r13, X
+ a1a:	f1 2c       	mov	r15, r1
+ a1c:	e1 2c       	mov	r14, r1
+ a1e:	ee 0f       	add	r30, r30
+ a20:	ff 1f       	adc	r31, r31
+ a22:	e6 57       	subi	r30, 0x76	; 118
+ a24:	ff 4f       	sbci	r31, 0xFF	; 255
+ a26:	40 80       	ld	r4, Z
+ a28:	51 80       	ldd	r5, Z+1	; 0x01
+ a2a:	71 2c       	mov	r7, r1
+ a2c:	61 2c       	mov	r6, r1
+random():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:47
+  return random() % howbig;
+}
+
+long random(long howsmall, long howbig)
+{
+  if (howsmall >= howbig) {
+ a2e:	4c 14       	cp	r4, r12
+ a30:	5d 04       	cpc	r5, r13
+ a32:	6e 04       	cpc	r6, r14
+ a34:	7f 04       	cpc	r7, r15
+ a36:	7c f4       	brge	.+30     	; 0xa56 <main+0x286>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:50
+    return howsmall;
+  }
+  long diff = howbig - howsmall;
+ a38:	c4 18       	sub	r12, r4
+ a3a:	d5 08       	sbc	r13, r5
+ a3c:	e6 08       	sbc	r14, r6
+ a3e:	f7 08       	sbc	r15, r7
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:39
+  }
+}
+
+long random(long howbig)
+{
+  if (howbig == 0) {
+ a40:	31 f0       	breq	.+12     	; 0xa4e <main+0x27e>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:42
+    return 0;
+  }
+  return random() % howbig;
+ a42:	9a d0       	rcall	.+308    	; 0xb78 <random>
+ a44:	a7 01       	movw	r20, r14
+ a46:	96 01       	movw	r18, r12
+ a48:	07 d1       	rcall	.+526    	; 0xc58 <__divmodsi4>
+ a4a:	6b 01       	movw	r12, r22
+ a4c:	7c 01       	movw	r14, r24
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/WMath.cpp:51
+{
+  if (howsmall >= howbig) {
+    return howsmall;
+  }
+  long diff = howbig - howsmall;
+  return random(diff) + howsmall;
+ a4e:	4c 0c       	add	r4, r12
+ a50:	5d 1c       	adc	r5, r13
+ a52:	6e 1c       	adc	r6, r14
+ a54:	7f 1c       	adc	r7, r15
+main():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:111
+ a56:	50 92 93 00 	sts	0x0093, r5	; 0x800093 <number+0x1>
+ a5a:	40 92 92 00 	sts	0x0092, r4	; 0x800092 <number>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:112
+        get_swearword(number);                   // Read second part of second word
+ a5e:	c2 01       	movw	r24, r4
+ a60:	85 dd       	rcall	.-1270   	; 0x56c <get_swearword(unsigned int)>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:113
+        write_swearword(4);                      // Write second word in second line
+ a62:	84 e0       	ldi	r24, 0x04	; 4
+ a64:	08 dd       	rcall	.-1520   	; 0x476 <write_swearword(unsigned char)>
+_delay_ms():
+/home/niko/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include/util/delay.h:187
+ a66:	2f ef       	ldi	r18, 0xFF	; 255
+ a68:	84 e3       	ldi	r24, 0x34	; 52
+ a6a:	9c e0       	ldi	r25, 0x0C	; 12
+ a6c:	21 50       	subi	r18, 0x01	; 1
+ a6e:	80 40       	sbci	r24, 0x00	; 0
+ a70:	90 40       	sbci	r25, 0x00	; 0
+ a72:	e1 f7       	brne	.-8      	; 0xa6c <main+0x29c>
+ a74:	00 c0       	rjmp	.+0      	; 0xa76 <main+0x2a6>
+ a76:	00 00       	nop
+main():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:117
+        
+        // Wait for button or sleep
+        _delay_ms(500);                          // Debounce button
+        wake = false;                            // Set to sleep
+ a78:	10 92 ab 00 	sts	0x00AB, r1	; 0x8000ab <wake>
+set_clock():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:172
+  Wire.requestFrom(0x50, 1);                     // Request one byte
+  return Wire.read();                            // Read and return byte
+}
+
+void set_clock(uint8_t freq) {                   // Switch Clock from 8 MHz to 1 MHz
+  CLKPR = 0x80;                                  // Set clock
+ a7c:	16 bd       	out	0x26, r17	; 38
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:173
+  CLKPR = freq;                                  // 0 = 8 MHz | 4 = 1 MHz
+ a7e:	84 e0       	ldi	r24, 0x04	; 4
+ a80:	86 bd       	out	0x26, r24	; 38
+main():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:119
+        
+        // Wait for button or sleep
+        _delay_ms(500);                          // Debounce button
+        wake = false;                            // Set to sleep
+        set_clock(4);                            // Set clock back to 1 MHz to save power
+        while ((!wake) && (millis() - counter < Timeout)); // Wait for button oder timeout
+ a82:	80 91 ab 00 	lds	r24, 0x00AB	; 0x8000ab <wake>
+ a86:	81 11       	cpse	r24, r1
+ a88:	3f cf       	rjmp	.-386    	; 0x908 <main+0x138>
+millis():
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:341
+  }
+
+  unsigned long millis()
+  {
+    unsigned long m;
+    uint8_t oldSREG = SREG;
+ a8a:	2f b7       	in	r18, 0x3f	; 63
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:345
+
+    // disable interrupts while we read millis_timer_millis or we might get an
+    // inconsistent value (e.g. in the middle of a write to millis_timer_millis)
+    cli();
+ a8c:	f8 94       	cli
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:346
+    m = millis_timer_millis;
+ a8e:	80 91 b5 00 	lds	r24, 0x00B5	; 0x8000b5 <millis_timer_millis>
+ a92:	90 91 b6 00 	lds	r25, 0x00B6	; 0x8000b6 <millis_timer_millis+0x1>
+ a96:	a0 91 b7 00 	lds	r26, 0x00B7	; 0x8000b7 <millis_timer_millis+0x2>
+ a9a:	b0 91 b8 00 	lds	r27, 0x00B8	; 0x8000b8 <millis_timer_millis+0x3>
+/home/niko/.arduino15/packages/ATTinyCore/hardware/avr/1.5.2/cores/tiny/wiring.c:347
+    SREG = oldSREG;
+ a9e:	2f bf       	out	0x3f, r18	; 63
+main():
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:119
+ aa0:	40 91 84 00 	lds	r20, 0x0084	; 0x800084 <counter>
+ aa4:	50 91 85 00 	lds	r21, 0x0085	; 0x800085 <counter+0x1>
+ aa8:	60 91 86 00 	lds	r22, 0x0086	; 0x800086 <counter+0x2>
+ aac:	70 91 87 00 	lds	r23, 0x0087	; 0x800087 <counter+0x3>
+ ab0:	84 1b       	sub	r24, r20
+ ab2:	95 0b       	sbc	r25, r21
+ ab4:	a6 0b       	sbc	r26, r22
+ ab6:	b7 0b       	sbc	r27, r23
+ ab8:	82 3e       	cpi	r24, 0xE2	; 226
+ aba:	94 40       	sbci	r25, 0x04	; 4
+ abc:	a1 05       	cpc	r26, r1
+ abe:	b1 05       	cpc	r27, r1
+ ac0:	00 f3       	brcs	.-64     	; 0xa82 <main+0x2b2>
+ ac2:	22 cf       	rjmp	.-444    	; 0x908 <main+0x138>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:123
+      } 
+
+      // Go to sleep after 10 seconds if button is not pressed before                           
+      oled.sendCommand(0xAE);                    // Display off and sleep (V1.0)
+ ac4:	8e ea       	ldi	r24, 0xAE	; 174
+ ac6:	75 dc       	rcall	.-1814   	; 0x3b2 <SSD1306_Mini::sendCommand(unsigned char) [clone .constprop.13]>
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:124
+      PORTB &= ~(1 << Devices);                  // Devices off (V1.1)   
+ ac8:	c4 98       	cbi	0x18, 4	; 24
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:125
+      set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
+ aca:	85 b7       	in	r24, 0x35	; 53
+ acc:	87 7e       	andi	r24, 0xE7	; 231
+ ace:	80 61       	ori	r24, 0x10	; 16
+ ad0:	85 bf       	out	0x35, r24	; 53
+/home/niko/Dropbox/sketchbook/Schimpfolino/src/Schimpfolino_beta/Schimpfolino_beta.ino:126
+      sleep_mode();                              // Good night, sleep until interrupt
+ ad2:	85 b7       	in	r24, 0x35	; 53
+ ad4:	80 62       	ori	r24, 0x20	; 32
+ ad6:	85 bf       	out	0x35, r24	; 53
+ ad8:	88 95       	sleep
+ ada:	85 b7       	in	r24, 0x35	; 53
+ adc:	8f 7d       	andi	r24, 0xDF	; 223
+ ade:	85 bf       	out	0x35, r24	; 53
+ ae0:	fd ce       	rjmp	.-518    	; 0x8dc <main+0x10c>
+
+00000ae2 <random_r>:
+random_r():
+ ae2:	8f 92       	push	r8
+ ae4:	9f 92       	push	r9
+ ae6:	af 92       	push	r10
+ ae8:	bf 92       	push	r11
+ aea:	cf 92       	push	r12
+ aec:	df 92       	push	r13
+ aee:	ef 92       	push	r14
+ af0:	ff 92       	push	r15
+ af2:	cf 93       	push	r28
+ af4:	df 93       	push	r29
+ af6:	ec 01       	movw	r28, r24
+ af8:	68 81       	ld	r22, Y
+ afa:	79 81       	ldd	r23, Y+1	; 0x01
+ afc:	8a 81       	ldd	r24, Y+2	; 0x02
+ afe:	9b 81       	ldd	r25, Y+3	; 0x03
+ b00:	61 15       	cp	r22, r1
+ b02:	71 05       	cpc	r23, r1
+ b04:	81 05       	cpc	r24, r1
+ b06:	91 05       	cpc	r25, r1
+ b08:	21 f4       	brne	.+8      	; 0xb12 <random_r+0x30>
+ b0a:	64 e2       	ldi	r22, 0x24	; 36
+ b0c:	79 ed       	ldi	r23, 0xD9	; 217
+ b0e:	8b e5       	ldi	r24, 0x5B	; 91
+ b10:	97 e0       	ldi	r25, 0x07	; 7
+ b12:	2d e1       	ldi	r18, 0x1D	; 29
+ b14:	33 ef       	ldi	r19, 0xF3	; 243
+ b16:	41 e0       	ldi	r20, 0x01	; 1
+ b18:	50 e0       	ldi	r21, 0x00	; 0
+ b1a:	9e d0       	rcall	.+316    	; 0xc58 <__divmodsi4>
+ b1c:	49 01       	movw	r8, r18
+ b1e:	5a 01       	movw	r10, r20
+ b20:	27 ea       	ldi	r18, 0xA7	; 167
+ b22:	31 e4       	ldi	r19, 0x41	; 65
+ b24:	40 e0       	ldi	r20, 0x00	; 0
+ b26:	50 e0       	ldi	r21, 0x00	; 0
+ b28:	7e d0       	rcall	.+252    	; 0xc26 <__mulsi3>
+ b2a:	6b 01       	movw	r12, r22
+ b2c:	7c 01       	movw	r14, r24
+ b2e:	2c ee       	ldi	r18, 0xEC	; 236
+ b30:	34 ef       	ldi	r19, 0xF4	; 244
+ b32:	4f ef       	ldi	r20, 0xFF	; 255
+ b34:	5f ef       	ldi	r21, 0xFF	; 255
+ b36:	c5 01       	movw	r24, r10
+ b38:	b4 01       	movw	r22, r8
+ b3a:	75 d0       	rcall	.+234    	; 0xc26 <__mulsi3>
+ b3c:	c6 0e       	add	r12, r22
+ b3e:	d7 1e       	adc	r13, r23
+ b40:	e8 1e       	adc	r14, r24
+ b42:	f9 1e       	adc	r15, r25
+ b44:	f7 fe       	sbrs	r15, 7
+ b46:	06 c0       	rjmp	.+12     	; 0xb54 <random_r+0x72>
+ b48:	81 e0       	ldi	r24, 0x01	; 1
+ b4a:	c8 1a       	sub	r12, r24
+ b4c:	d1 08       	sbc	r13, r1
+ b4e:	e1 08       	sbc	r14, r1
+ b50:	80 e8       	ldi	r24, 0x80	; 128
+ b52:	f8 0a       	sbc	r15, r24
+ b54:	c8 82       	st	Y, r12
+ b56:	d9 82       	std	Y+1, r13	; 0x01
+ b58:	ea 82       	std	Y+2, r14	; 0x02
+ b5a:	fb 82       	std	Y+3, r15	; 0x03
+ b5c:	c7 01       	movw	r24, r14
+ b5e:	b6 01       	movw	r22, r12
+ b60:	9f 77       	andi	r25, 0x7F	; 127
+ b62:	df 91       	pop	r29
+ b64:	cf 91       	pop	r28
+ b66:	ff 90       	pop	r15
+ b68:	ef 90       	pop	r14
+ b6a:	df 90       	pop	r13
+ b6c:	cf 90       	pop	r12
+ b6e:	bf 90       	pop	r11
+ b70:	af 90       	pop	r10
+ b72:	9f 90       	pop	r9
+ b74:	8f 90       	pop	r8
+ b76:	08 95       	ret
+
+00000b78 <random>:
+random():
+ b78:	8f 92       	push	r8
+ b7a:	9f 92       	push	r9
+ b7c:	af 92       	push	r10
+ b7e:	bf 92       	push	r11
+ b80:	cf 92       	push	r12
+ b82:	df 92       	push	r13
+ b84:	ef 92       	push	r14
+ b86:	ff 92       	push	r15
+ b88:	60 91 60 00 	lds	r22, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ b8c:	70 91 61 00 	lds	r23, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ b90:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ b94:	90 91 63 00 	lds	r25, 0x0063	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+ b98:	61 15       	cp	r22, r1
+ b9a:	71 05       	cpc	r23, r1
+ b9c:	81 05       	cpc	r24, r1
+ b9e:	91 05       	cpc	r25, r1
+ ba0:	21 f4       	brne	.+8      	; 0xbaa <random+0x32>
+ ba2:	64 e2       	ldi	r22, 0x24	; 36
+ ba4:	79 ed       	ldi	r23, 0xD9	; 217
+ ba6:	8b e5       	ldi	r24, 0x5B	; 91
+ ba8:	97 e0       	ldi	r25, 0x07	; 7
+ baa:	2d e1       	ldi	r18, 0x1D	; 29
+ bac:	33 ef       	ldi	r19, 0xF3	; 243
+ bae:	41 e0       	ldi	r20, 0x01	; 1
+ bb0:	50 e0       	ldi	r21, 0x00	; 0
+ bb2:	52 d0       	rcall	.+164    	; 0xc58 <__divmodsi4>
+ bb4:	49 01       	movw	r8, r18
+ bb6:	5a 01       	movw	r10, r20
+ bb8:	27 ea       	ldi	r18, 0xA7	; 167
+ bba:	31 e4       	ldi	r19, 0x41	; 65
+ bbc:	40 e0       	ldi	r20, 0x00	; 0
+ bbe:	50 e0       	ldi	r21, 0x00	; 0
+ bc0:	32 d0       	rcall	.+100    	; 0xc26 <__mulsi3>
+ bc2:	6b 01       	movw	r12, r22
+ bc4:	7c 01       	movw	r14, r24
+ bc6:	2c ee       	ldi	r18, 0xEC	; 236
+ bc8:	34 ef       	ldi	r19, 0xF4	; 244
+ bca:	4f ef       	ldi	r20, 0xFF	; 255
+ bcc:	5f ef       	ldi	r21, 0xFF	; 255
+ bce:	c5 01       	movw	r24, r10
+ bd0:	b4 01       	movw	r22, r8
+ bd2:	29 d0       	rcall	.+82     	; 0xc26 <__mulsi3>
+ bd4:	c6 0e       	add	r12, r22
+ bd6:	d7 1e       	adc	r13, r23
+ bd8:	e8 1e       	adc	r14, r24
+ bda:	f9 1e       	adc	r15, r25
+ bdc:	f7 fe       	sbrs	r15, 7
+ bde:	06 c0       	rjmp	.+12     	; 0xbec <random+0x74>
+ be0:	81 e0       	ldi	r24, 0x01	; 1
+ be2:	c8 1a       	sub	r12, r24
+ be4:	d1 08       	sbc	r13, r1
+ be6:	e1 08       	sbc	r14, r1
+ be8:	80 e8       	ldi	r24, 0x80	; 128
+ bea:	f8 0a       	sbc	r15, r24
+ bec:	c0 92 60 00 	sts	0x0060, r12	; 0x800060 <__DATA_REGION_ORIGIN__>
+ bf0:	d0 92 61 00 	sts	0x0061, r13	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ bf4:	e0 92 62 00 	sts	0x0062, r14	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ bf8:	f0 92 63 00 	sts	0x0063, r15	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+ bfc:	c7 01       	movw	r24, r14
+ bfe:	b6 01       	movw	r22, r12
+ c00:	9f 77       	andi	r25, 0x7F	; 127
+ c02:	ff 90       	pop	r15
+ c04:	ef 90       	pop	r14
+ c06:	df 90       	pop	r13
+ c08:	cf 90       	pop	r12
+ c0a:	bf 90       	pop	r11
+ c0c:	af 90       	pop	r10
+ c0e:	9f 90       	pop	r9
+ c10:	8f 90       	pop	r8
+ c12:	08 95       	ret
+
+00000c14 <srandom>:
+srandom():
+ c14:	60 93 60 00 	sts	0x0060, r22	; 0x800060 <__DATA_REGION_ORIGIN__>
+ c18:	70 93 61 00 	sts	0x0061, r23	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ c1c:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ c20:	90 93 63 00 	sts	0x0063, r25	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+ c24:	08 95       	ret
+
+00000c26 <__mulsi3>:
+__mulsi3():
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:445
+ c26:	ee 27       	eor	r30, r30
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:446
+ c28:	ff 27       	eor	r31, r31
+
+00000c2a <__mulsi3_helper>:
+__mulsi3_helper():
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:451
+ c2a:	aa 27       	eor	r26, r26
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:452
+ c2c:	bb 27       	eor	r27, r27
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:453
+ c2e:	08 c0       	rjmp	.+16     	; 0xc40 <__mulsi3_helper+0x16>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:457
+ c30:	a2 0f       	add	r26, r18
+ c32:	b3 1f       	adc	r27, r19
+ c34:	e4 1f       	adc	r30, r20
+ c36:	f5 1f       	adc	r31, r21
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:460
+ c38:	22 0f       	add	r18, r18
+ c3a:	33 1f       	adc	r19, r19
+ c3c:	44 1f       	adc	r20, r20
+ c3e:	55 1f       	adc	r21, r21
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:463
+ c40:	96 95       	lsr	r25
+ c42:	87 95       	ror	r24
+ c44:	77 95       	ror	r23
+ c46:	67 95       	ror	r22
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:465
+ c48:	98 f3       	brcs	.-26     	; 0xc30 <__mulsi3_helper+0x6>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:467
+ c4a:	70 40       	sbci	r23, 0x00	; 0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:468
+ c4c:	a9 f7       	brne	.-22     	; 0xc38 <__mulsi3_helper+0xe>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:469
+ c4e:	00 97       	sbiw	r24, 0x00	; 0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:470
+ c50:	99 f7       	brne	.-26     	; 0xc38 <__mulsi3_helper+0xe>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:473
+ c52:	bd 01       	movw	r22, r26
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:474
+ c54:	cf 01       	movw	r24, r30
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:480
+ c56:	08 95       	ret
+
+00000c58 <__divmodsi4>:
+__divmodsi4():
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1686
+ c58:	05 2e       	mov	r0, r21
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1687
+ c5a:	97 fb       	bst	r25, 7
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1688
+ c5c:	16 f4       	brtc	.+4      	; 0xc62 <__divmodsi4+0xa>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1689
+ c5e:	00 94       	com	r0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1690
+ c60:	0f d0       	rcall	.+30     	; 0xc80 <__negsi2>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1692
+ c62:	57 fd       	sbrc	r21, 7
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1693
+ c64:	05 d0       	rcall	.+10     	; 0xc70 <__divmodsi4_neg2>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1694
+ c66:	14 d0       	rcall	.+40     	; 0xc90 <__udivmodsi4>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1695
+ c68:	07 fc       	sbrc	r0, 7
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1696
+ c6a:	02 d0       	rcall	.+4      	; 0xc70 <__divmodsi4_neg2>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1697
+ c6c:	46 f4       	brtc	.+16     	; 0xc7e <__divmodsi4_exit>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1698
+ c6e:	08 c0       	rjmp	.+16     	; 0xc80 <__negsi2>
+
+00000c70 <__divmodsi4_neg2>:
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1701
+ c70:	50 95       	com	r21
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1702
+ c72:	40 95       	com	r20
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1703
+ c74:	30 95       	com	r19
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1704
+ c76:	21 95       	neg	r18
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1705
+ c78:	3f 4f       	sbci	r19, 0xFF	; 255
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1706
+ c7a:	4f 4f       	sbci	r20, 0xFF	; 255
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1707
+ c7c:	5f 4f       	sbci	r21, 0xFF	; 255
+
+00000c7e <__divmodsi4_exit>:
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1709
+ c7e:	08 95       	ret
+
+00000c80 <__negsi2>:
+__negsi2():
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1718
+ c80:	90 95       	com	r25
+ c82:	80 95       	com	r24
+ c84:	70 95       	com	r23
+ c86:	61 95       	neg	r22
+ c88:	7f 4f       	sbci	r23, 0xFF	; 255
+ c8a:	8f 4f       	sbci	r24, 0xFF	; 255
+ c8c:	9f 4f       	sbci	r25, 0xFF	; 255
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1719
+ c8e:	08 95       	ret
+
+00000c90 <__udivmodsi4>:
+__udivmodsi4():
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1638
+ c90:	a1 e2       	ldi	r26, 0x21	; 33
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1639
+ c92:	1a 2e       	mov	r1, r26
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1640
+ c94:	aa 1b       	sub	r26, r26
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1641
+ c96:	bb 1b       	sub	r27, r27
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1642
+ c98:	fd 01       	movw	r30, r26
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1644
+ c9a:	0d c0       	rjmp	.+26     	; 0xcb6 <__udivmodsi4_ep>
+
+00000c9c <__udivmodsi4_loop>:
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1646
+ c9c:	aa 1f       	adc	r26, r26
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1647
+ c9e:	bb 1f       	adc	r27, r27
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1648
+ ca0:	ee 1f       	adc	r30, r30
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1649
+ ca2:	ff 1f       	adc	r31, r31
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1650
+ ca4:	a2 17       	cp	r26, r18
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1651
+ ca6:	b3 07       	cpc	r27, r19
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1652
+ ca8:	e4 07       	cpc	r30, r20
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1653
+ caa:	f5 07       	cpc	r31, r21
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1654
+ cac:	20 f0       	brcs	.+8      	; 0xcb6 <__udivmodsi4_ep>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1655
+ cae:	a2 1b       	sub	r26, r18
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1656
+ cb0:	b3 0b       	sbc	r27, r19
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1657
+ cb2:	e4 0b       	sbc	r30, r20
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1658
+ cb4:	f5 0b       	sbc	r31, r21
+
+00000cb6 <__udivmodsi4_ep>:
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1660
+ cb6:	66 1f       	adc	r22, r22
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1661
+ cb8:	77 1f       	adc	r23, r23
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1662
+ cba:	88 1f       	adc	r24, r24
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1663
+ cbc:	99 1f       	adc	r25, r25
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1664
+ cbe:	1a 94       	dec	r1
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1665
+ cc0:	69 f7       	brne	.-38     	; 0xc9c <__udivmodsi4_loop>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1667
+ cc2:	60 95       	com	r22
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1668
+ cc4:	70 95       	com	r23
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1669
+ cc6:	80 95       	com	r24
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1670
+ cc8:	90 95       	com	r25
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1672
+ cca:	9b 01       	movw	r18, r22
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1674
+ ccc:	ac 01       	movw	r20, r24
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1676
+ cce:	bd 01       	movw	r22, r26
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1678
+ cd0:	cf 01       	movw	r24, r30
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:1680
+ cd2:	08 95       	ret
+
+00000cd4 <__mulhi3>:
+__mulhi3():
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:312
+ cd4:	00 24       	eor	r0, r0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:313
+ cd6:	55 27       	eor	r21, r21
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:314
+ cd8:	04 c0       	rjmp	.+8      	; 0xce2 <__mulhi3+0xe>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:317
+ cda:	08 0e       	add	r0, r24
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:318
+ cdc:	59 1f       	adc	r21, r25
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:320
+ cde:	88 0f       	add	r24, r24
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:321
+ ce0:	99 1f       	adc	r25, r25
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:324
+ ce2:	00 97       	sbiw	r24, 0x00	; 0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:325
+ ce4:	29 f0       	breq	.+10     	; 0xcf0 <__mulhi3+0x1c>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:328
+ ce6:	76 95       	lsr	r23
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:329
+ ce8:	67 95       	ror	r22
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:331
+ cea:	b8 f3       	brcs	.-18     	; 0xcda <__mulhi3+0x6>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:335
+ cec:	71 05       	cpc	r23, r1
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:337
+ cee:	b9 f7       	brne	.-18     	; 0xcde <__mulhi3+0xa>
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:340
+ cf0:	80 2d       	mov	r24, r0
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:341
+ cf2:	95 2f       	mov	r25, r21
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:342
+ cf4:	08 95       	ret
+
+00000cf6 <_exit>:
+exit():
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2278
+ cf6:	f8 94       	cli
+
+00000cf8 <__stop_program>:
+__stop_program():
+/home/jenkins/workspace/avr-gcc-staging/label/debian7-x86_64/gcc-build/avr/avr25/libgcc/../../../../gcc/libgcc/config/avr/lib1funcs.S:2280
+ cf8:	ff cf       	rjmp	.-2      	; 0xcf8 <__stop_program>

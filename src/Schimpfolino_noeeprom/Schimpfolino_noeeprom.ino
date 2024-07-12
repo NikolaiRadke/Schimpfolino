@@ -6,7 +6,7 @@
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" first!
 
-    Flash usage: 7.990 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 7.956 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       2.2 mA (idle) | 7 μA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -31,7 +31,7 @@
 #define  Button   PB1                             // Button pin
 
 // Software
-#define  Timeout  1250                           // 10 seconds before sleep | 10000 ms / 8 for 1 Mhz
+#define  Timeout  1280                           // 10 seconds before sleep | 1280 for 500 kHz
 
 //Wordlist arrays - a single array can hold only 4000 bytes | Used, if no EEPROM present | 5 x 90 words = 4500 bytes
 const char data1[] PROGMEM = {"Dumpfe    Staubige  Miefende  Stinkende Gammlige  Hinkende  Winzige   Popelige  Nasse     Furzende  Rostige   Hohle     Siffige   Miese     Krumme    Klapprige Trockene  Haarige   Uralte    Grunzende SchreiendeMeckernde Nervende  Sabbernde Triefende Modrige   Lumpige   Lausige   Sinnlose  Olle      Unn$tige  Dampfende Ledrige   Einarmige Leere     L#stige   Heulende  Pickelige Faule     Ranzige   Tr%be     Dralle    Blanke    Gierige   Tranige   Wackelnde Torkelnde W%ste     Fischige  Beknackte Modrige   VerkorksteHeimliche L$chrige  Brockige  Plumpe    Tattrige  Ratternde SchmutzigeLiderlicheD$sige    Prollige  Fiese     Dr$ge     Muffige   M%ffelnde Peinliche N$rgelnde Fettige   Zahnlose  Freche    Sch#bige  Piefige   Gummige   Labbrige  Patzige   Pelzige   Reudige   Pekige    M%rbe     Harzige   Lahme     Mickrige  Br#sige   Zottelige Gelbliche Knorrige  Salzige   Schrille  Dusselige "};
@@ -44,7 +44,8 @@ const char data5[] PROGMEM = {"sekret    balg      blag      monster   gel$t    
 char     *field;                                 // Pointer to one of the character arrays
 uint8_t  gender;                                 // Gender of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
-uint16_t number, list;                           // Helping variables
+uint8_t  list;                                   // Helping variable for parsing word lists
+uint16_t number;                                 // Helping variable for calculating addresses and selecting words
 uint16_t address[5] = {90, 90, 90, 90, 90};      // Wordlists addresses array - overwritten if EEPROM present
 uint32_t counter;                                // Timer begin for sleep timeout
 char     wordbuffer[20];                         // Buffer for read words
@@ -87,7 +88,7 @@ int main(void) {
     }
 
     // Randomize number generator
-    set_clock(4);                                // Set clock to 1 MHz to save power while waiting
+    set_clock(4);                                // Set clock to 500 kHz to save power while waiting
     while (!wake);                               // Wait for button to "turn on"
     randomSeed(millis());                        // Time passed by manual pressing is used for random numbers
 
@@ -129,7 +130,7 @@ int main(void) {
         // Wait for button or sleep
         _delay_ms(500);                          // Debounce button
         wake = false;                            // Set to sleep
-        set_clock(4);                            // Set clock back to 1 MHz to save power
+        set_clock(4);                            // Set clock back to 500 kHz to save power
         while ((!wake) && (millis() - counter < Timeout)); // Wait for button oder timeout
       } 
 
@@ -146,9 +147,9 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
   char c;
   uint16_t i;
   address *= 10;
-  for (i = address; i < address + 10; i ++) {    // Read 10 characters        
-    c = pgm_read_byte(&field[i]);                // From wordlist
-    if (eeprom) c = read_eeprom(i + 10);         // Or from EEPROM with address memory offset
+  for (i = address; i < address + 10; i ++) {    // Read 10 characters...        
+    c = pgm_read_byte(&field[i]);                // ...from wordlist...
+    if (eeprom) c = read_eeprom(i + 10);         // ...or from EEPROM with address memory offset
     if (c != 32) {                               // Check for space
       switch (c) {                               // Print german Umlaute   
         case 35: wordbuffer[chars] = 27; break;  // # -> ä
@@ -174,7 +175,7 @@ void write_swearword(uint8_t line) {             // Write centered word
 }
 
 uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
-  Wire.beginTransmission(0x50);                  // open transmission to I2C-address 0x50
+  Wire.beginTransmission(0x50);                  // Open transmission to I2C-address 0x50
   Wire.write((uint16_t)(e_address >> 8));        // Send the MSB (Most Significant Byte) of the memory address
   Wire.write((uint16_t)(e_address & 0xFF));      // Send the LSB (Least Significant Byte) of the memory address
   Wire.endTransmission();                        // Close transmissiom
@@ -182,7 +183,7 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
   return Wire.read();                            // Read and return byte
 }
 
-void set_clock(uint8_t freq) {                   // Switch Clock from 8 MHz to 1 MHz
+void set_clock(uint8_t freq) {                   // Switch clock from 8 MHz to 1 MHz
   CLKPR = 0x80;                                  // Set clock
   CLKPR = freq;                                  // 0 = 8 MHz | 4 = 1 MHz
 }
