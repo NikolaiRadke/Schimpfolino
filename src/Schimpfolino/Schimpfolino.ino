@@ -40,7 +40,7 @@ uint16_t address[5];                             // Wordlists addresses array
 uint32_t counter;                                // Timer begin for sleep timeout
 char     wordbuffer[20];                         // Buffer for reading words
 
-volatile bool wake = false;                      // Stay wake when button is pressed
+volatile bool awake = false;                     // Stay wake when button is pressed
 
 SSD1306_Mini  oled;                              // Set display
 
@@ -72,7 +72,7 @@ int main(void) {
     for (list = 0; list < 5; list ++) {          // Read numbers of 4 wordlists
       number = read_eeprom(0 + gender) * 255;    // Calculate number: 
       number += read_eeprom(1 + gender);         // First byte = high, second byte = low
-      if (number == 0) wake = false;             // Sleep if no EEPROM or no wordlist present
+      if (number == 0) awake = false;            // Sleep if no EEPROM present
       address[list] = number;                    // Write word numbers to array 
       gender += 2;                               // Chance number address
     }
@@ -92,7 +92,7 @@ int main(void) {
       oled.init();                               // Connect and start OLED via I2C
 
       // Display swearwords until timeout
-      while (wake) {                             // Wait 10 seconds timeout
+      while (awake) {                            // Wait 10 seconds timeout
         oled.clear();                            // Clear display buffer
 
         // First word
@@ -113,7 +113,7 @@ int main(void) {
         
         // Wait for button and sleep 8s
         _delay_ms(500);                          // Debounce button
-        wake = false;                            // Set to sleep     
+        awake = false;                           // Set to sleep     
         WDTCR |= (1 << WDIE);                    // Set watchdog interrupt
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);     // Deepest sleep mode
         sleep_mode();                            // Sleep 8s or wake when butten is pressed
@@ -170,7 +170,7 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
 }
 
 ISR(PCINT0_vect) {                               // Interrupt routine for pin change 
-  wake = true;                                   // Set wake flag when button is pressed
+  awake = true;                                  // Set awake flag when button is pressed
 }
 
 ISR(WDT_vect) {}                                 // Interrupt routine for watchdog. Unused but mandatory                               
