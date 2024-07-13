@@ -1,21 +1,24 @@
 /*  
-    Schimpfolino V1.1 11.07.2024 BETA - Nikolai Radke
-    Compatible with old V1.0 boards
+    Schimpfolino V1.1 12.07.2024 BETA - Nikolai Radke
+    Compatible with V1.0 boards
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | Only with additional 24LCXX EEPROM
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader
-    Remember to burn the "bootloader" first!
+    Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 3.328 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
-    Power:       2.2 mA (idle) | ~ 300 nA (sleep)
+    Flash usage: 3.272 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Power:       1.7 mA (idle) | ~ 300 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
     Last character of a wordlist is '!'
 
     Changes to V1.0:
-    * Display and EEPROM are powered by PB4
+    * Display and EEPROM are powered by PB4 - saves 7 uA when sleeping
+    * Clock is set to 32 kHz while waiting for first button press  -  saves 150 uA
+    * Watchdog wakes after 8s instead of millis(). - saves 500 uS when idle
+    * Code optimizations
 
     Wiring:
                          +-\/-+
@@ -26,7 +29,6 @@
                          +----+
 */
 
-#include <EEPROM.h>                              // Internal EEPROM saves random list
 #include <avr/sleep.h>                           // Used for deep sleep
 #include <util/delay.h>                          // Needs less flash memory
 #include "SSD1306_minimal.h"                     // Modified library!
@@ -60,12 +62,15 @@ int main(void) {
 
     // Port setup
     DDRB  |= (1 << Devices);                     // Set D4 to OUTPUT to power up display and EEPROM
-    PORTB = 0x3F;                                // Set all Ports to INPUT_PULLUP (HIGH) to prevent floating
+    PORTB = 0x3F;                                // Set all ports to INPUT_PULLUP (HIGH) to prevent floating
 
-    // Hardware interrupt
+    // Hardware and watchdog interrupt
     cli();                                       // Stop all interrupts
     GIMSK |= (1 << PCIE);                        // Turn on pin change interrupt
     PCMSK |= (1 << PCINT1);                      // Turn on interrupt on PB1 button
+    MCUSR &= ~(1 << WDRF);                       // No watchdog reset 
+    WDTCR |= (1 << WDCE) | (1 << WDE);           // Watchdog change enable
+    WDTCR = (1 << WDP0) | (1 << WDP1 ) | (1 << WDP2) | (1 << WDP3); // Set prescaler to 8s
     sei();                                       // Start interrupts
 
     // Init I2C
@@ -85,7 +90,7 @@ int main(void) {
     // Randomize number generator
     set_clock(8);                                // Set clock to 32 kHz to save power while waiting
     while (!wake);                               // Wait for button to "turn on" - Sleep mode would disable timer
-    set_clock(0);                                // Set clock to 8 MHz for faster rendering
+    set_clock(0);                                // Set clock to 8 MHz
     randomSeed(millis());                        // Time passed by manual pressing is used for random numbers
 
     // Main routine - runs after waking up
@@ -96,7 +101,6 @@ int main(void) {
 
       // Display swearwords until timeout
       while (wake) {                             // Wait 10 seconds timeout
-        counter = millis();                      // Set starting time
         oled.clear();                            // Clear display buffer
 
         // First word
@@ -115,20 +119,21 @@ int main(void) {
         get_swearword(number);                   // Read second part of second word
         write_swearword(4);                      // Write second word in second line
         
-        // Wait for button or sleep
+        // Wait for button and sleep 8s
         _delay_ms(500);                          // Debounce button
         wake = false;                            // Set to sleep
-        set_clock(4);                            // Set clock back to 500 kHz to save power
-        while ((!wake) && (millis() - counter < Timeout)); // Wait for button oder timeout
+       
+        WDTCR |= (1 << WDIE);                    // Set watchdog interrupt
+        set_sleep_mode(SLEEP_MODE_PWR_DOWN);     // Deepest sleep mode
+        sleep();                                 // Sleep 8s or wake when butten is pressed
+        WDTCR &= ~(1 << WDIE);                   // Stop watchdog interrupt
       } 
 
       // Go to sleep after 10 seconds if button is not pressed before                           
       oled.sendCommand(0xAE);                    // Display off and sleep (V1.0)
       PORTB &= ~(1 << Devices);                  // Devices off (V1.1)   
       set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
-      //set_clock(8);                              // Set clock to 8 MHz for faster rendering
-      sleep_mode();                              // Good night, sleep until interrupt
-      set_clock(0);                              // Set clock to 8 MHz for faster rendering
+      sleep();
     }
   }
 }
@@ -173,11 +178,19 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
   return Wire.read();                            // Read and return byte
 }
 
-void set_clock(uint8_t freq) {                   // Switch clock from 8 MHz to 1 MHz
+void set_clock(uint8_t freq) {                   // Switch clock from 8 MHz to 32 kHz
   CLKPR = 0x80;                                  // Set clock
-  CLKPR = freq;                                  // 0 = 8 MHz | 4 = 1 MHz
+  CLKPR = freq;                                  // 0 = 8 MHz | 8 = 32 kHz
+}
+
+void sleep() {
+  set_clock(8);                                  // Set clock back to 32 kHz to save power
+  sleep_mode();                                  // Good night, sleep until button interrupt or timeout
+  set_clock(0);                                  // Set clock to 8 MHz
 }
 
 ISR(PCINT0_vect) {                               // Interrupt routine for pin change 
   wake = true;                                   // Set wake flag when button is pressed
 }
+
+ISR(WDT_vect) {}                                 // Interrupt routine for watchdog. Unused but mandatory                               

@@ -22,7 +22,6 @@
 */
 
 #include <Wire.h>                                // I2C communication with display and EEPROM
-#include <EEPROM.h>                              // Internal EEPROM saves random seed
 #include <avr/sleep.h>                           // Used for deep sleep
 #include <util/delay.h>
 #include "SSD1306_minimal.h"                     // Modified library!
@@ -62,7 +61,7 @@ int main(void) {
     ADCSRA = 0;                                  // Switch ADC off | saves 270 uA
 
     // Port setup
-    PORTB = 0x3F;                                // Set all Ports to INPUT_PULLUP to prevent floating
+    PORTB = 0x3F;                                // Set all ports to INPUT_PULLUP to prevent floating
 
     // Hardware interrupt
     cli();                                       // Stop all interrupts
