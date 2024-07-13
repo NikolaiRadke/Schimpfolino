@@ -6,7 +6,7 @@
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" first!
 
-    Flash usage: 7.950 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 7.952 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (idle) | ~ 300 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -64,7 +64,7 @@ int main(void) {
 
     // Port setup
     DDRB  |= (1 << Devices);                     // Set D4 to OUTPUT to power up display and EEPROM
-    PORTB = 0x3F;                                // Set all ports to INPUT_PULLUP (HIGH) to prevent floating
+    PORTB = 0x3F;                                // Set all ports to INPUT_PULLUP to prevent floating and start devices
 
     // Hardware and watchdog interrupt
     cli();                                       // Stop all interrupts
@@ -93,6 +93,7 @@ int main(void) {
     }
 
     // Randomize number generator
+    PORTB &= ~(1 << Devices);                    // Devices off
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);         // Deepest sleep mode
     sleep_mode();                                // Sleep until button is pressed to "turn on"
     _delay_ms(5);                                // Wait to settle ports

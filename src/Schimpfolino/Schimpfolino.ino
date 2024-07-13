@@ -51,9 +51,9 @@ int main(void) {
     ADCSRA = 0x00;                               // Switch ADC off | saves 270 uA
 
     // Port setup
-    DDRB  |= (1 << Devices);                     // Set D4 to OUTPUT to power up display and EEPROM
-    PORTB = 0x3F;                                // Set all ports to INPUT_PULLUP (HIGH) to prevent floating
-
+    DDRB  |= (1 << Devices);                     // Set PB4 to OUTPUT to power up display and EEPROM
+    PORTB = 0x3F;                                // Set all ports to INPUT_PULLUP to prevent floating and start devices
+    
     // Hardware and watchdog interrupt
     cli();                                       // Stop all interrupts
     GIMSK |= (1 << PCIE);                        // Turn on pin change interrupt
@@ -78,6 +78,7 @@ int main(void) {
     }
 
     // Randomize number generator
+    PORTB &= ~(1 << Devices);                    // Devices off
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);         // Deepest sleep mode
     sleep_mode();                                // Sleep until button is pressed to "turn on"
     _delay_ms(5);                                // Wait to settle ports
@@ -87,7 +88,7 @@ int main(void) {
     // Main routine - runs after waking up
     while(1) {
       // Init Display
-      PORTB |= (1 << Devices);                   // Devices on (V1.1)
+      PORTB |= (1 << Devices);                   // Devices on
       oled.init();                               // Connect and start OLED via I2C
 
       // Display swearwords until timeout
@@ -120,8 +121,8 @@ int main(void) {
       } 
 
       // Go to sleep after 10 seconds if button is not pressed before                           
-      oled.sendCommand(0xAE);                    // Display off and sleep (V1.0)
-      PORTB &= ~(1 << Devices);                  // Devices off (V1.1)   
+      oled.sendCommand(0xAE);                    // Display off and sleep (old boards)
+      PORTB &= ~(1 << Devices);                  // Devices off   
       set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
       sleep_mode();
     }
