@@ -22,10 +22,10 @@
                          +----+
 */
 
-#include <Wire.h>                                // I2C communication with display and EEPROM
 #include <avr/sleep.h>                           // Used for deep sleep
-#include <util/delay.h>
+#include <util/delay.h>                          // Needs less flash memory than delay()
 #include "SSD1306_minimal.h"                     // Modified library!
+#include <Wire.h>                                // I2C communication with display and EEPROM
 
 // Hardware
 #define  Button   PB1                            // Button pin
