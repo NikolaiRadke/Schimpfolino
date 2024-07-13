@@ -2,6 +2,7 @@
 
 # 2024
 
+* **13.07.2024** Optimized power management and prepared firmware for new coming board. **1.0-13072024**.
 * **10.07.2024** Halfed idle power draw. **1.0-10072024**.  
 * **10.07.2024** Better random numner generator. Small and reliable.
 * **09.07.2024** Better individual random seed. **1.0-09072024**.
