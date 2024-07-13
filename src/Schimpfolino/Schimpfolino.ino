@@ -1,38 +1,36 @@
 /*  
-    Schimpfolino V1.0 10.07.2024 - Nikolai Radke
+    Schimpfolino V1.0 13.07.2024 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | Only with additional 24LCXX EEPROM
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader
-    Remember to burn the "bootloader" first!
+    Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 3.308 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
-    Power:       2.2 mA (idle) | 7 μA (sleep)
+    Flash usage: 3.284 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Power:       1.7 mA (idle) | ~ 300 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
     Last character of a wordlist is '!'
 
     Wiring:
-                  +-\/-+
-    RST   | PB5  1|    |8  VCC | Battery
-    Free  | PB3  2|    |7  PB2 | SCL
-    Free  | PB4  3|    |6  PB1 | Button -> GND
-    GND   | GND  4|    |5  PB0 | SCL
-                  +----+
+                         +-\/-+
+    RST          - PB5  1|    |8  VCC - Battery
+    Free         - PB3  2|    |7  PB2 - SCL
+    Devices VCC  - PB4  3|    |6  PB1 - Button -> GND
+    GND          - GND  4|    |5  PB0 - SCL
+                         +----+
 */
 
-#include <Wire.h>                                // I2C communication with display and EEPROM
 #include <avr/sleep.h>                           // Used for deep sleep
-#include <util/delay.h>                          // Less flash memory needed
+#include <util/delay.h>                          // Needs less flash memory
 #include "SSD1306_minimal.h"                     // Modified library!
+#include <Wire.h>                                // I2C communication with display and EEPROM
 
 // Hardware
-#define  Button   PB1                            // Button pin 
+#define  Button   PB1                            // Button pin    
+#define  Devices  PB4                            // External devices power pin
 
-// Software
-#define  Timeout  1280                           // 10 seconds before sleep | 1280 for 500 kHz
-   
 // Variables
 uint8_t  gender;                                 // Gender of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
@@ -50,15 +48,19 @@ int main(void) {
   init(); {                                      // Setup
     // Power saving
     ACSR = (1 << ACD);                           // Disable analog comparator - anyway by default?
-    ADCSRA = 0;                                  // Switch ADC off | saves 270 uA
+    ADCSRA = 0x00;                               // Switch ADC off | saves 270 uA
 
     // Port setup
-    PORTB = 0x3F;                                // Set all ports to INPUT_PULLUP to prevent floating
+    DDRB  |= (1 << Devices);                     // Set D4 to OUTPUT to power up display and EEPROM
+    PORTB = 0x3F;                                // Set all ports to INPUT_PULLUP (HIGH) to prevent floating
 
-    // Hardware interrupt
+    // Hardware and watchdog interrupt
     cli();                                       // Stop all interrupts
     GIMSK |= (1 << PCIE);                        // Turn on pin change interrupt
     PCMSK |= (1 << PCINT1);                      // Turn on interrupt on PB1 button
+    MCUSR &= ~(1 << WDRF);                       // No watchdog reset 
+    WDTCR |= (1 << WDCE) | (1 << WDE);           // Watchdog change enable
+    WDTCR = (1 << WDP0) | (1 << WDP1 ) | (1 << WDP2) | (1 << WDP3); // Set prescaler to 8s
     sei();                                       // Start interrupts
 
     // Init I2C
@@ -69,26 +71,27 @@ int main(void) {
     gender = 0;                                  // gender and list are helping variables here
     for (list = 0; list < 5; list ++) {          // Read numbers of 4 wordlists
       number = read_eeprom(0 + gender) * 255;    // Calculate number: 
-      number += read_eeprom(1 + gender);         // First byte = high, second bye = low
+      number += read_eeprom(1 + gender);         // First byte = high, second byte = low
       if (number == 0) wake = false;             // Sleep if no EEPROM or no wordlist present
       address[list] = number;                    // Write word numbers to array 
       gender += 2;                               // Chance number address
     }
 
     // Randomize number generator
-    set_clock(4);                                // Set clock to 500 kHz to save power while waiting
-    while (!wake);                               // Wait for button to "turn on"
-    randomSeed(millis());                        // Time passed by manual pressing is used for random numbers
+    set_sleep_mode(SLEEP_MODE_PWR_DOWN);         // Deepest sleep mode
+    sleep_mode();                                // Sleep until button is pressed to "turn on"
+    _delay_ms(5);                                // Wait to settle ports
+    while (!(PINB & (1 << Button)));             // Wait until button is released
+    randomSeed(millis());                        // Time passed is used for random numbers
 
     // Main routine - runs after waking up
     while(1) {
       // Init Display
+      PORTB |= (1 << Devices);                   // Devices on (V1.1)
       oled.init();                               // Connect and start OLED via I2C
 
       // Display swearwords until timeout
       while (wake) {                             // Wait 10 seconds timeout
-        set_clock(0);                            // Set clock to 8 MHz for faster rendering
-        counter = millis();                      // Set starting time
         oled.clear();                            // Clear display buffer
 
         // First word
@@ -107,17 +110,20 @@ int main(void) {
         get_swearword(number);                   // Read second part of second word
         write_swearword(4);                      // Write second word in second line
         
-        // Wait for button or sleep
+        // Wait for button and sleep 8s
         _delay_ms(500);                          // Debounce button
-        wake = false;                            // Set to sleep
-        set_clock(4);                            // Set clock back to 500 kHz to save power
-        while ((!wake) && (millis() - counter < Timeout)); // Wait for button oder timeout
+        wake = false;                            // Set to sleep     
+        WDTCR |= (1 << WDIE);                    // Set watchdog interrupt
+        set_sleep_mode(SLEEP_MODE_PWR_DOWN);     // Deepest sleep mode
+        sleep_mode();                            // Sleep 8s or wake when butten is pressed
+        WDTCR &= ~(1 << WDIE);                   // Stop watchdog interrupt
       } 
 
       // Go to sleep after 10 seconds if button is not pressed before                           
-      oled.sendCommand(0xAE);                    // Display off and sleep
+      oled.sendCommand(0xAE);                    // Display off and sleep (V1.0)
+      PORTB &= ~(1 << Devices);                  // Devices off (V1.1)   
       set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
-      sleep_mode();                              // Good night, sleep until interrupt
+      sleep_mode();
     }
   }
 }
@@ -162,11 +168,8 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
   return Wire.read();                            // Read and return byte
 }
 
-void set_clock(uint8_t freq) {                   // Switch clock from 8 MHz to 1 MHz
-  CLKPR = 0x80;                                  // Set clock
-  CLKPR = freq;                                  // 0 = 8 MHz | 4 = 1 MHz
-}
-
 ISR(PCINT0_vect) {                               // Interrupt routine for pin change 
   wake = true;                                   // Set wake flag when button is pressed
 }
+
+ISR(WDT_vect) {}                                 // Interrupt routine for watchdog. Unused but mandatory                               

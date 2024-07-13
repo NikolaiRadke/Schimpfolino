@@ -57,8 +57,8 @@ class SSD1306_Mini {
     
     // Print a single character
     void printChar(char ch);
-    
-    // Send a command - Schimpfolino needs to switch off the display
+
+    // Send a command - Schimpfolino needs to switch off the display (V1.0)
     void sendCommand(unsigned char command);
 
   private:
