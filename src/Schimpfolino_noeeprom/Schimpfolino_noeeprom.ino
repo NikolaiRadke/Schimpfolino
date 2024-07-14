@@ -139,7 +139,7 @@ int main(void) {
         awake = false;                           // Set to sleep
         WDTCR |= (1 << WDIE);                    // Set watchdog interrupt
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);     // Deepest sleep mode
-        sleep_mode();                            // Sleep 8s or wake when butten is pressed
+        sleep_mode();                            // Sleep 8s or wake when button is pressed
         WDTCR &= ~(1 << WDIE);                   // Stop watchdog interrupt
       } 
 
