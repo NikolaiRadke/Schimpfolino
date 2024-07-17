@@ -6,7 +6,7 @@
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 3.286 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.282 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (idle) | ~ 300 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -47,7 +47,6 @@ SSD1306_Mini  oled;                              // Set display
 int main(void) {                                 
   init(); {                                      // Setup
     // Power saving
-    ACSR = (1 << ACD);                           // Disable analog comparator - anyway by default?
     ADCSRA = 0x00;                               // Switch ADC off | saves 270 uA
 
     // Port setup
@@ -68,7 +67,7 @@ int main(void) {
     Wire.begin();                                // Start I2C
 
     // Read wordlist addresses
-    gender = 0;                                  // gender and list are helping variables here
+    gender = 0;                                  // gender is a helping variable here
     for (list = 0; list < 5; list ++) {          // Read numbers of 4 wordlists
       number = read_eeprom(0 + gender) * 255;    // Calculate number: 
       number += read_eeprom(1 + gender);         // First byte = high, second byte = low
@@ -120,7 +119,7 @@ int main(void) {
         WDTCR &= ~(1 << WDIE);                   // Stop watchdog interrupt
       } 
 
-      // Go to sleep after 10 seconds if button is not pressed before                           
+      // Go to sleep after 8 seconds if button is not pressed before                           
       oled.sendCommand(0xAE);                    // Display off and sleep (old boards)
       PORTB &= ~(1 << Devices);                  // Devices off   
       set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode

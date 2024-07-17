@@ -6,7 +6,7 @@
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" first!
 
-    Flash usage: 7.952 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 7.950 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (idle) | ~ 300 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -30,9 +30,6 @@
 // Hardware
 #define  Button   PB1                            // Button pin
 #define  Devices  PB4                            // External devices power pin
-
-// Software
-#define  Timeout  1280                           // 10 seconds before sleep | 1280 for 500 kHz
 
 //Wordlist arrays - a single array can hold only 4000 bytes | Used, if no EEPROM present | 5 x 90 words = 4500 bytes
 const char data1[] PROGMEM = {"Dumpfe    Staubige  Miefende  Stinkende Gammlige  Hinkende  Winzige   Popelige  Nasse     Furzende  Rostige   Hohle     Siffige   Miese     Krumme    Klapprige Trockene  Haarige   Uralte    Grunzende SchreiendeMeckernde Nervende  Sabbernde Triefende Modrige   Lumpige   Lausige   Sinnlose  Olle      Unn$tige  Dampfende Ledrige   Einarmige Leere     L#stige   Heulende  Pickelige Faule     Ranzige   Tr%be     Dralle    Blanke    Gierige   Tranige   Wackelnde Torkelnde W%ste     Fischige  Beknackte Modrige   VerkorksteHeimliche L$chrige  Brockige  Plumpe    Tattrige  Ratternde SchmutzigeLiderlicheD$sige    Prollige  Fiese     Dr$ge     Muffige   M%ffelnde Peinliche N$rgelnde Fettige   Zahnlose  Freche    Sch#bige  Piefige   Gummige   Labbrige  Patzige   Pelzige   Reudige   Pekige    M%rbe     Harzige   Lahme     Mickrige  Br#sige   Zottelige Gelbliche Knorrige  Salzige   Schrille  Dusselige "};
@@ -59,7 +56,6 @@ SSD1306_Mini  oled;                              // Set display
 int main(void) {                                 
   init(); {                                      // Setup
     // Power saving
-    ACSR |= _BV(ACD);                            // Disable analog comparator - anyway by default?
     ADCSRA = 0;                                  // Switch ADC off | saves 270 uA
 
     // Port setup
@@ -143,7 +139,7 @@ int main(void) {
         WDTCR &= ~(1 << WDIE);                   // Stop watchdog interrupt
       } 
 
-      // Go to sleep after 10 seconds if button is not pressed before                           
+      // Go to sleep after 8s seconds if button is not pressed before                           
       oled.sendCommand(0xAE);                    // Display off and sleep (V1.0)
       PORTB &= ~(1 << Devices);                  // Devices off (V1.1)   
       set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
