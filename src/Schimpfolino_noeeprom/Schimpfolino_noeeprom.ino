@@ -4,7 +4,7 @@
 
     Sketch for the insulting gadget | With or without additional 24LCXX EEPROM
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader
-    Remember to burn the "bootloader" first!
+    Remember to burn the "bootloader" (IDE is setting fuses) first!
 
     Flash usage: 7.950 (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (idle) | ~ 300 nA (sleep)
@@ -45,7 +45,6 @@ uint8_t  chars = 0;                              // Number of characters in the 
 uint8_t  list;                                   // Helping variable for parsing word lists
 uint16_t number;                                 // Helping variable for calculating addresses and selecting words
 uint16_t address[5] = {90, 90, 90, 90, 90};      // Wordlists addresses array - overwritten if EEPROM present
-uint32_t counter;                                // Timer begin for sleep timeout
 char     wordbuffer[20];                         // Buffer for read words
 bool     eeprom = false;                         // EEPROM used -> Auto detect
 

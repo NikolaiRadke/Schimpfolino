@@ -37,7 +37,6 @@ uint8_t  chars = 0;                              // Number of characters in the 
 uint8_t  list;                                   // Helping variable for parsing word lists
 uint16_t number;                                 // Helping variable for calculating addresses and selecting words
 uint16_t address[5];                             // Wordlists addresses array
-uint32_t counter;                                // Timer begin for sleep timeout
 char     wordbuffer[20];                         // Buffer for reading words
 
 volatile bool awake = false;                     // Stay wake when button is pressed

@@ -69,6 +69,6 @@ class SSD1306_Mini {
     void dataMode();
 
     // Send data
-    void sendData(unsigned char Data);
+    void sendData(unsigned char data);
 };
 #endif

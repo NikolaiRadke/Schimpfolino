@@ -125,9 +125,9 @@ void SSD1306_Mini::sendCommand(unsigned char command) { // Public function now t
   Wire.endTransmission();    		                 // End I2C transmission
 }
 
-void SSD1306_Mini::sendData(unsigned char Data) {
+void SSD1306_Mini::sendData(unsigned char data) {
   dataMode();
-  Wire.write(Data);                              // Send data
+  Wire.write(data);                              // Send data
   Wire.endTransmission();                        // Stop I2C transmission
 }
 
@@ -177,7 +177,7 @@ void SSD1306_Mini::clear() {
 void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
   uint8_t a;
   dataMode();
-  for (a=0; a<5; a++) 
+  for (a = 0; a < 5; a ++) 
     Wire.write(pgm_read_byte(&BasicFont[ch * 5 + a]));
   Wire.write(0x00);                              // One column space for better readabiltiy
   if (chars < 19) Wire.write(0x00);              // One more column space when the line has enough room
