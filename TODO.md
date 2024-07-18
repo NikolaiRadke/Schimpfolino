@@ -1,5 +1,6 @@
 # TODO
 
+* Update to V1.1
 * More case design files
 * Other kind of suits
 * English version?
