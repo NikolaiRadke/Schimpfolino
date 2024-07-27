@@ -18,7 +18,7 @@
     RST          - PB5  1|    |8  VCC - Battery
     Free         - PB3  2|    |7  PB2 - SCL
     Devices VCC  - PB4  3|    |6  PB1 - Button -> GND
-    GND          - GND  4|    |5  PB0 - SCL
+    GND          - GND  4|    |5  PB0 - SDA
                          +----+
 */
 
