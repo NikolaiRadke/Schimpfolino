@@ -64,4 +64,4 @@ Enter your password and restart. Now it should work.
 
 If not: Maybe you are using an **Arduino Nano clone** with **CH340 chip**, the IDE may not find your port. This is because of a conflict with the preinstalled Braille driver. If you don't need it, deinstall the driver with  
 ``` sudo apt-get remove brltty ```  
-and the IDE should find the port now.  
+and the IDE should find the port after reboot now.  
