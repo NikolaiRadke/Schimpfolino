@@ -62,3 +62,6 @@ This issue can be solved by adding your user to the dialout-group. Open a termin
 ``` sudo usermod -a -G dialout $USERNAME ```.  
 Enter your password and restart. Now it should work.  
 
+If not: Maybe you are using an Arduino Nano clone with CH340 chip, the IDE may not find your port. This is because of a conflict with preinstalled Braille driver. If you don't need it, deinstall the driver with  
+``` sudo apt-get remove brltty ```  
+and the IDE should find the port now.  
