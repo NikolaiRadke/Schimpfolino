@@ -32,7 +32,7 @@
 #define  Devices  PB4                            // External devices power pin
 
 // Variables
-uint8_t  gender;                                 // Gender of the swearword
+uint8_t  genus;                                  // Genus of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
 uint8_t  list;                                   // Helping variable for parsing word lists
 uint16_t number;                                 // Helping variable for calculating addresses and selecting words
@@ -66,13 +66,13 @@ int main(void) {
     Wire.begin();                                // Start I2C
 
     // Read wordlist addresses
-    gender = 0;                                  // gender is a helping variable here
+    genus = 0;                                   // genus is a helping variable here
     for (list = 0; list < 5; list ++) {          // Read numbers of 4 wordlists
-      number = read_eeprom(0 + gender) * 255;    // Calculate number: 
-      number += read_eeprom(1 + gender);         // First byte = high, second byte = low
+      number = read_eeprom(0 + genus) * 255;     // Calculate number: 
+      number += read_eeprom(1 + genus);          // First byte = high, second byte = low
       if (number == 0) awake = false;            // Sleep if no EEPROM present
       address[list] = number;                    // Write word numbers to array 
-      gender += 2;                               // Chance number address
+      genus += 2;                                // Chance number address
     }
 
     // Randomize number generator
@@ -99,13 +99,13 @@ int main(void) {
         write_swearword(2);                      // Write first word in the first line
 
         // Second word first part
-        gender = random(0, 3);                   // Set word gender
-        if (gender != 0) oled.printChar(48 + gender); // If male, write "r", if neutrum, write "s"
+        genus = random(0, 3);                    // Set word genus
+        if (genus != 0) oled.printChar(48 + genus); // If male, write "r", if neutrum, write "s"
         number = (random(address[0], address[1])); // Select second word
         get_swearword(number);                   // Read second word from EEPROM
         
         // Second word second part
-        number = (random(address[gender + 1], address[gender + 2])); // Select second part of second word
+        number = (random(address[genus + 1], address[genus + 2])); // Select second part of second word
         get_swearword(number);                   // Read second part of second word
         write_swearword(4);                      // Write second word in second line
         
@@ -151,7 +151,7 @@ void write_swearword(uint8_t line) {             // Write centered word
   uint8_t x;
   x = (128 - (chars * 7)) / 2;                   // Calculate centering
   if (chars > 18)  x = (128 - (chars * 6)) / 2;  // Or for very long words
-  if ((gender != 0) && (line == 2)) x -= 4;      // If not female, set first one half block left for gender character
+  if ((genus != 0) && (line == 2)) x -= 4;       // If not female, set first one half block left for genus character
   oled.cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; x ++)                   // Print the characters...
     oled.printChar(wordbuffer[x]);               // ...from buffer

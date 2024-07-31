@@ -31,7 +31,7 @@
 #define  Button   PB1                            // Button pin
 #define  Devices  PB4                            // External devices power pin
 
-//Wordlist arrays - a single array can hold only 4000 bytes | Used, if no EEPROM present | 5 x 90 words = 4500 bytes
+//Wordlist arrays - a single array can hold only 4000 bytes | Used if no EEPROM present | 5 x 90 words = 4500 bytes
 const char data1[] PROGMEM = {"Dumpfe    Staubige  Miefende  Stinkende Gammlige  Hinkende  Winzige   Popelige  Nasse     Furzende  Rostige   Hohle     Siffige   Miese     Krumme    Klapprige Trockene  Haarige   Uralte    Grunzende SchreiendeMeckernde Nervende  Sabbernde Triefende Modrige   Lumpige   Lausige   Sinnlose  Olle      Unn$tige  Dampfende Ledrige   Einarmige Leere     L#stige   Heulende  Pickelige Faule     Ranzige   Tr%be     Dralle    Blanke    Gierige   Tranige   Wackelnde Torkelnde W%ste     Fischige  Beknackte Modrige   VerkorksteHeimliche L$chrige  Brockige  Plumpe    Tattrige  Ratternde SchmutzigeLiderlicheD$sige    Prollige  Fiese     Dr$ge     Muffige   M%ffelnde Peinliche N$rgelnde Fettige   Zahnlose  Freche    Sch#bige  Piefige   Gummige   Labbrige  Patzige   Pelzige   Reudige   Pekige    M%rbe     Harzige   Lahme     Mickrige  Br#sige   Zottelige Gelbliche Knorrige  Salzige   Schrille  Dusselige "};
 const char data2[] PROGMEM = {"Stampf    Wabbel    Pups      Schmalz   Schmier   Hack      Zement    Spuck     Stachel   Keller    Laber     Stock     Runzel    Schrumpf  Ekel      Schnodder Matsch    Wurm      Eiter     Speck     Mist      Klotz     W%rg      Lumpen    Schleim   Wurst     Doof      Brat      Schwamm   Kratz     Grotten   Kriech    Gift      Schlabber Reier     G$bel     Knatter   Kleb      Schmadder Grind     Labber    Luft      Massen    Schimmel  Mini      Ochsen    Problem   Quassel   Schnaps   Saft      Fummel    Friemel   Zappel    Tropf     Pluntsch  Sumpf     Hecken    Grab      Schwitz   Schnarch  Schleich  Schluff   Fl$ten    Holz      Kreisch   Dulli     Luschen   Gammel    Alt$l     R$chel    Glibber   Lach      Krach     Knick     Quetsch   Quatsch   Quietsch  Knautsch  T%mpel    Teich     Knatter   Sauf      Pipi      Struller  Gr#ten    Nasen     Pech      Leier     Reier     Bl$d      "};
 const char data3[] PROGMEM = {"suppe     socke     bombe     boulette  schwarte  warze     beule     pest      pflaume   r%be      geige     ratte     krankheit wunde     oma       knolle    stulle    liese     brut      henne     zwiebel   bude      kiste     braut     leuchte   kr$te     nuss      spinne    grube     toilette  krake     pf%tze    backe     bratsche  klatsche  nudel     knolle    t%te      nase      made      tonne     krampe    b%rste    windel    semmel    haxe      gr#fin    schleuder zierde    kr#he     latte     niete     rassel    assel     torte     galle     latsche   schrulle  kanone    blase     pelle     trine     queen     zecke     praline   magt      pracht    fritte    so*e      larve     murmel    hexe      pampe     sirene    dr%se     klette    petze     brumme    glatze    qualle    natter    kralle    ziege     gr%tze    s%lze     nulpe     wampe     frikadelleflunder   trulla    "};
@@ -40,13 +40,13 @@ const char data5[] PROGMEM = {"sekret    balg      blag      monster   gel$t    
 
 // Variables
 char     *field;                                 // Pointer to one of the character arrays
-uint8_t  gender;                                 // Gender of the swearword
+uint8_t  genus;                                  // Genus of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
 uint8_t  list;                                   // Helping variable for parsing word lists
 uint16_t number;                                 // Helping variable for calculating addresses and selecting words
-uint16_t address[5] = {90, 90, 90, 90, 90};      // Wordlists addresses array - overwritten if EEPROM present
+uint16_t address[5] = {90, 90, 90, 90, 90};      // Wordlists addresses array - overwritten if EEPROM is present
 char     wordbuffer[20];                         // Buffer for read words
-bool     eeprom = false;                         // EEPROM used -> Auto detect
+bool     eeprom = false;                         // No EEPROM used -> Auto detect
 
 volatile bool awake = false;                     // Stay wake when button is pressed
 
@@ -78,12 +78,12 @@ int main(void) {
     Wire.beginTransmission(0x50);                // Look for 24LCXX EEPROM at 0x50
     if (Wire.endTransmission() == 0) {           // 0x00 for used, 0xff for unused
       eeprom = true;                             // if used, set EEPROM flag
-      gender = 0;                                // gender and list are helping variables here
+      genus = 0;                                 // genus and list are helping variables here
       for (list = 0; list < 5; list ++) {        // Read numbers of 4 wordlists
-        number = read_eeprom(0 + gender) * 255;  // Calculate number: 
-        number += read_eeprom(1 + gender);       // First byte = High, second byte = low
+        number = read_eeprom(0 + genus) * 255;   // Calculate number: 
+        number += read_eeprom(1 + genus);        // First byte = High, second byte = low
         address[list] = number;                  // Write word numbers to array 
-        gender += 2;                             // Chance number address
+        genus += 2;                              // Change number address
       }  
     }
 
@@ -113,19 +113,19 @@ int main(void) {
 
         // Second word first part
         list = 0;                                // Set start address for array
-        gender = random(0, 3);                   // Set word gender
-        if (gender != 0) oled.printChar(48 + gender); // If male, write "r", if neutrum, write "s"
+        genus = random(0, 3);                    // Set word genus
+        if (genus != 0) oled.printChar(48 + genus); // If male, write "r", if neutrum, write "s"
         if (eeprom) list = address[0];           // Set start adress for EEPROM
         number = (random(list, address[1]));     // Select second part of second word
         field = data2;                           // Vector to second array
         get_swearword(number);                   // Read first part of second word 
         
         // Second word second part
-        if (eeprom) list = address[gender + 1];  // Set start address for EEPROM
-        number = (random(list, address[gender + 2])); // Select second part of second word
+        if (eeprom) list = address[genus + 1];   // Set start address for EEPROM
+        number = (random(list, address[genus + 2])); // Select second part of second word
         field = data3;                           // Female
-        if (gender == 1) field = data4;          // Male
-        if (gender == 2) field = data5;          // Neutrum
+        if (genus == 1) field = data4;           // Male
+        if (genus == 2) field = data5;           // Neutrum
         get_swearword(number);                   // Read second part of second word
         write_swearword(4);                      // Write second word in second line
         
@@ -172,11 +172,11 @@ void write_swearword(uint8_t line) {             // Write centered word
   uint8_t x;
   x = (128 - (chars * 7)) / 2;                   // Calculate centering
   if (chars > 18)  x = (128 - (chars * 6)) / 2;  // or for very long words
-  if ((gender != 0) && (line == 2)) x -= 4;      // If not female, set first one half block left for gender character
+  if ((genus != 0) && (line == 2)) x -= 4;       // If not female, set first one half block left for genus character
   oled.cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; x ++)                   // Print the characters
     oled.printChar(wordbuffer[x]);               // from buffer
-  chars = 0;                                     // Set number of characters back to 0
+  chars = 0;                                     // Set number of characters back to 0 
 }
 
 uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
