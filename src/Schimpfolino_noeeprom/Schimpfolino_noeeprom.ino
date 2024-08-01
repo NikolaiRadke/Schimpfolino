@@ -98,7 +98,7 @@ int main(void) {
     // Main routine - runs after waking up
     while(1) {
       // Init Display
-      PORTB |= (1 << Devices);                   // Devices on (V1.1)
+      PORTB |= (1 << Devices);                   // Devices on
       oled.init();                               // Connect and start OLED via I2C
 
       // Display swearwords until timeout
@@ -139,8 +139,8 @@ int main(void) {
       } 
 
       // Go to sleep after 8s seconds if button is not pressed before                           
-      oled.sendCommand(0xAE);                    // Display off and sleep (V1.0)
-      PORTB &= ~(1 << Devices);                  // Devices off (V1.1)   
+      oled.sendCommand(0xAE);                    // Display off and sleep (old boards)
+      PORTB &= ~(1 << Devices);                  // Devices off
       set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
       sleep_mode();
     }
