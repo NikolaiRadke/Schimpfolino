@@ -32,8 +32,7 @@
 #ifndef __SSD1306_MINIMAL_H__
 #define __SSD1306_MINIMAL_H__
 
-#include <Arduino.h>
-#include <Wire.h>
+#include <Arduino.h>                             // Arduino specific library
 
 // Config
 #define SlaveAddress 0x3c                        // SSD1306 I2C adress
@@ -43,7 +42,7 @@ extern uint8_t chars;
 
 class SSD1306_Mini {
   public:
-    // Call this function once to initiallize the display
+    // Call this function once to initialize the display
     void init();
   
     // Reset clipArea to maximum and clear the display
@@ -58,7 +57,7 @@ class SSD1306_Mini {
     // Print a single character
     void printChar(char ch);
 
-    // Send a command - Schimpfolino needs to switch off the display
+    // Send a command - Schimpfolino needs to switch off the display (old boards)
     void sendCommand(unsigned char command);
 
   private:

@@ -6,20 +6,20 @@
     This sketch writes the wordlist into 24LCXXX eeprom.
     No code and power optimizations were used for better readability.
     Umlaute must be converted for UTF-8, only first 128 characters are supported.
-    #=ä, $=ö, %=ü, *=ß. Capitals are not supported.
+    # = ä, $ = ö, % = ü, * = ß. Capitals are not supported.
     Last character of each file must be !.
  
     Wordlist addresses in EEPROM:
-    0+1: eeprom1.txt | 2+3: eeprom2.txt | 4+5: eeprom3.txt | 6+7: eeprom4.txt | 8+9: eeprom5.txt
+    0 + 1: eeprom1.txt | 2 + 3: eeprom2.txt | 4 + 5: eeprom3.txt | 6 + 7: eeprom4.txt | 8 + 9: eeprom5.txt
     See README in folder src/eeprom/.
 
-    Wireing:
-             ----
+    Wiring:
+            +-V--+
     GND - 1 |    | 8 - VCC (3.3V)
     GND - 2 |    | 7 
     GND - 3 |    | 6 - SCL (A5)
     GND - 4 |    | 5 - SDA (A4) (- 4k7 Resistor - VCC)
-             -----
+            +----+
     The 4k7 resistor is optional, see src/eeprom/README.md
 */
 
@@ -89,6 +89,6 @@ void write_byte(uint16_t address, uint8_t data) { // Writes one byte to an addre
   Wire.write((uint16_t)(address & 0xFF));        // Send the LSB (Least Significant Byte) of the memory address
   Wire.write(data);                              // Write character to EEPROM
   Wire.endTransmission();                        // Close transmission
-  delay(1);                                      // EEPROMs are kind of slow
+  delay(1);                                      // Wait. EEPROMs are kind of slow
 }
 

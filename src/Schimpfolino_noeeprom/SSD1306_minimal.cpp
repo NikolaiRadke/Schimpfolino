@@ -29,8 +29,8 @@
 	All text above must be included in any redistribution.
 */
 
-#include <Wire.h>
-#include <util/delay.h>
+#include <Wire.h>                                // Arduino I2C library
+#include <util/delay.h>                          // Needs less flash memory than delay()
 #include "SSD1306_minimal.h"
 
 #define InitLength 11                            // Number of Init commands
@@ -120,13 +120,13 @@ void SSD1306_Mini::dataMode() {
 }
 
 void SSD1306_Mini::sendCommand(unsigned char command) { // Public function now to turn off display
-  commandMode();
+  commandMode();                                 // Set command mode
   Wire.write(command);                           // Send command
   Wire.endTransmission();    		                 // End I2C transmission
 }
 
 void SSD1306_Mini::sendData(unsigned char data) {
-  dataMode();
+  dataMode();                                    // Set data mode
   Wire.write(data);                              // Send data
   Wire.endTransmission();                        // Stop I2C transmission
 }
@@ -135,20 +135,20 @@ void SSD1306_Mini::sendData(unsigned char data) {
 void SSD1306_Mini::init() {
   uint8_t i;
   _delay_ms(5);	                                 // Wait for OLED hardware init
-  commandMode();
-  for (i = 0; i < InitLength; i++)   
-    Wire.write(pgm_read_byte(&InitSequence[i]));
+  commandMode();                                 // Set command mode
+  for (i = 0; i < InitLength; i++)              
+    Wire.write(pgm_read_byte(&InitSequence[i])); // Write init sequence from PROGMEM
   Wire.endTransmission();
 }
 
 void SSD1306_Mini::clipArea(unsigned char col, unsigned char row, unsigned char w, unsigned char h) {
-  commandMode();
+  commandMode();                                 // Set command mode
   Wire.write(0x21);                              // Set column start and end address
   Wire.write(0x00);
   Wire.write(col);
   Wire.write(col + w - 1);
   Wire.endTransmission();                 
-  commandMode();
+  commandMode();                                 // Set command mode
   Wire.write(0x22);                              // Set page start and end address
   Wire.write(0x00);
   Wire.write(row); 
@@ -176,10 +176,11 @@ void SSD1306_Mini::clear() {
 
 void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
   uint8_t a;
-  dataMode();
-  for (a = 0; a < 5; a ++) 
-    Wire.write(pgm_read_byte(&BasicFont[ch * 5 + a]));
+  dataMode();                                    // Set data mode
+  for (a = 0; a < 5; a ++)                       // Write 5 columns for each character
+    Wire.write(pgm_read_byte(&BasicFont[ch * 5 + a])); // Write column from PROGMEM
   Wire.write(0x00);                              // One column space for better readabiltiy
   if (chars < 19) Wire.write(0x00);              // One more column space when the line has enough room
   Wire.endTransmission();
 }
+
