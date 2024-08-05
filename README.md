@@ -35,7 +35,7 @@ And the following hardware:
 * Schimpfolino PCB 
 * ATtiny45/85
 * 24LC64 or larger EEPROM
-* 0,96" SSD1306 oled display
+* 0,96" SSD1306 OLED display
 * Button
 * 2 Dip8 sockets
 * Batteryholder
