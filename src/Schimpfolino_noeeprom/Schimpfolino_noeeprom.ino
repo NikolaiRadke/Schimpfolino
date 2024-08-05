@@ -110,11 +110,11 @@ int main(void) {
         field = data1;                           // Pointer to first array
         get_swearword(number);                   // Read first word 
         write_swearword(2);                      // Write first word
+        genus = random(0, 3);                    // Set word genus
+        if (genus != 0) oled.printChar(48 + genus); // If male, write "r", if neutrum, write "s"
 
         // Second word first part
         list = 0;                                // Set start address for array
-        genus = random(0, 3);                    // Set word genus
-        if (genus != 0) oled.printChar(48 + genus); // If male, write "r", if neutrum, write "s"
         if (eeprom) list = address[0];           // Set start adress for EEPROM
         number = (random(list, address[1]));     // Select second part of second word
         field = data2;                           // Pointer to second array

@@ -97,10 +97,10 @@ int main(void) {
         number = (random(0, address[0]));        // Select first word
         get_swearword(number);                   // Read word from EEPROM
         write_swearword(2);                      // Write first word in the first line
-
-        // Second word first part
         genus = random(0, 3);                    // Set word genus
         if (genus != 0) oled.printChar(48 + genus); // If male, write "r", if neutrum, write "s"
+
+        // Second word first part
         number = (random(address[0], address[1])); // Select second word
         get_swearword(number);                   // Read second word from EEPROM
         
