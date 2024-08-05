@@ -1,7 +1,7 @@
 /*
-  SSD1306_minimal.cpp - SSD1306 OLED Driver Library
+  SSD1306_minimal.cpp - SSD1306 OLED driver library
   
-  Copyright (c) 2012, Adafruit Industries. All rights reserved.
+  Copyright (c) 2012 Adafruit Industries. All rights reserved.
   Copyright (c) 2012 GOF Electronics Co. Ltd ( http://www.geekonfire.com )
   Copyright (c) 2015 CoPiino Electronics All right reserved.
   Copyright (c) 2016 Kirk Northrop (github.com/kirknorthrop)
@@ -18,15 +18,16 @@
                -- Optimized Init-sequence and functions
 
       What is it?
-        This library is derived from GOFi2cOLED library, only for SSD1306 in I2C Mode.
-        As the original library only supports Frame Buffered mode which requires to have
-        at least 1024bytes of free RAM for a 128x64px display it is too big for smaller devices.
+        This library is derived from GOFi2cOLED library, only for SSD1306 in I2C mode.
+        As the original library only supports frame buffered mode which requires to have
+        at least 1024 bytes of free RAM for a 128 x 64 px display it is too big for 
+        smaller devices.
 
-        So this a SSD1306 library that works great with ATTiny85 devices :)
+        So this a SSD1306 library that works great with ATtiny85 devices :)
 
-  It is a free software; you can redistribute it and/or modify it 
-  under the terms of BSD license, check LICENSE for more information.
-	All text above must be included in any redistribution.
+  It is a free software; you can redistribute it and/or modify it under the terms of 
+  BSD license, check LICENSE for more information. All text above must be included in 
+  any redistribution.
 */
 
 #include <Wire.h>                                // Arduino an ATtiny I2C library
