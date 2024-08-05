@@ -76,8 +76,8 @@ int main(void) {
 
     // Look for EEPROM and read wordlist addresses if available
     Wire.beginTransmission(0x50);                // Look for 24LCXX EEPROM at 0x50
-    if (Wire.endTransmission() == 0) {           // 0x00 for used, 0xff for unused
-      eeprom = true;                             // if used, set EEPROM flag
+    if (Wire.endTransmission() == 0) {           // 0x00 for available, 0xFF for not found
+      eeprom = true;                             // if available, set EEPROM flag
       genus = 0;                                 // genus and list are helping variables here
       for (list = 0; list < 5; list ++) {        // Read numbers of 4 wordlists
         number = read_eeprom(0 + genus) * 255;   // Calculate number: 
@@ -107,7 +107,7 @@ int main(void) {
 
         // First word
         number = (random(0, address[0]));        // Select first word
-        field = data1;                           // Vector to first array
+        field = data1;                           // Pointer to first array
         get_swearword(number);                   // Read first word 
         write_swearword(2);                      // Write first word
 
@@ -117,15 +117,15 @@ int main(void) {
         if (genus != 0) oled.printChar(48 + genus); // If male, write "r", if neutrum, write "s"
         if (eeprom) list = address[0];           // Set start adress for EEPROM
         number = (random(list, address[1]));     // Select second part of second word
-        field = data2;                           // Vector to second array
+        field = data2;                           // Pointer to second array
         get_swearword(number);                   // Read first part of second word 
         
         // Second word second part
         if (eeprom) list = address[genus + 1];   // Set start address for EEPROM
         number = (random(list, address[genus + 2])); // Select second part of second word
-        field = data3;                           // Female
-        if (genus == 1) field = data4;           // Male
-        if (genus == 2) field = data5;           // Neutrum
+        field = data3;                           // Pointer to female array
+        if (genus == 1) field = data4;           // Pointer to male array
+        if (genus == 2) field = data5;           // Pointer to neutrum array
         get_swearword(number);                   // Read second part of second word
         write_swearword(4);                      // Write second word in second line
         
