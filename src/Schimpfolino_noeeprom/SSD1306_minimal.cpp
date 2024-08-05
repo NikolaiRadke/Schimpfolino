@@ -29,11 +29,11 @@
 	All text above must be included in any redistribution.
 */
 
-#include <Wire.h>                                // Arduino I2C library
+#include <Wire.h>                                // Arduino an ATtiny I2C library
 #include <util/delay.h>                          // Needs less flash memory than delay()
 #include "SSD1306_minimal.h"
 
-#define InitLength 11                            // Number of Init commands
+#define InitLength 11                            // Number of init commands
 
 const uint8_t InitSequence[] PROGMEM = {
   0x20,             	                           // Set addressing mode
@@ -46,7 +46,7 @@ const uint8_t InitSequence[] PROGMEM = {
   0xA1, 0xC8                                     // Flip the screen
 };
 
-// Reworked 5x8 font table with only used charakters
+// Reworked 5x8 font table with only used characters
 const unsigned char BasicFont[] PROGMEM = {
   0x7C, 0x12, 0x11, 0x12, 0x7C, // A 0
   0x7F, 0x49, 0x49, 0x49, 0x36, // B 1

@@ -32,12 +32,12 @@
 #ifndef __SSD1306_MINIMAL_H__
 #define __SSD1306_MINIMAL_H__
 
-#include <Arduino.h>                             // Arduino specific library
+#include <Arduino.h>                             // Arduino and ATtiny specific library
 
 // Config
-#define SlaveAddress 0x3c                        // SSD1306 I2C adress
+#define SlaveAddress 0x3c                        // SSD1306 I2C address
 
-// Schimpfolino: Count chars in main sketch, used to shrink font witdh if too long
+// Schimpfolino: Count characters in main sketch, used to shrink font witdh if too long
 extern uint8_t chars;                            
 
 class SSD1306_Mini {

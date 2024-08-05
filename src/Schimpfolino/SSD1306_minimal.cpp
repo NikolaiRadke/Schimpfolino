@@ -29,11 +29,11 @@
 	All text above must be included in any redistribution.
 */
 
-#include <Wire.h>                                // Arduino I2C library
+#include <Wire.h>                                // Arduino an ATtiny I2C library
 #include <util/delay.h>                          // Needs less flash memory than delay()
 #include "SSD1306_minimal.h"
 
-#define InitLength 11                            // Number of Init commands
+#define InitLength 11                            // Number of init commands
 
 const uint8_t InitSequence[] PROGMEM = {
   0x20,             	                           // Set addressing mode
