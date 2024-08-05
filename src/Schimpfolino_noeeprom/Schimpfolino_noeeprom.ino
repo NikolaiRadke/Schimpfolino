@@ -2,7 +2,7 @@
     Schimpfolino V1.0 13.07.2024 - Nikolai Radke
     https://www.monstermaker.de
 
-    Sketch for the insulting gadget | With or without additional 24LCXX EEPROM
+    Sketch for the insulting gadget | With or without additional 24LCXXX EEPROM
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
@@ -67,7 +67,7 @@ int main(void) {
     PCMSK |= (1 << PCINT1);                      // Turn on interrupt on PB1 button
     MCUSR &= ~(1 << WDRF);                       // No watchdog reset 
     WDTCR |= (1 << WDCE) | (1 << WDE);           // Watchdog change enable
-    WDTCR = (1 << WDP0) | (1 << WDP1 ) | (1 << WDP2) | (1 << WDP3); // Set prescaler to 8s
+    WDTCR = (1 << WDP0) | (1 << WDP1 ) | (1 << WDP2) | (1 << WDP3); // Set prescaler to  8s
     sei();                                       // Start interrupts
 
     // Init I2C

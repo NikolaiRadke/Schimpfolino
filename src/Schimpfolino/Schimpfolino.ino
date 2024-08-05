@@ -2,7 +2,7 @@
     Schimpfolino V1.0 13.07.2024 - Nikolai Radke
     https://www.monstermaker.de
 
-    Sketch for the insulting gadget | Only with additional 24LCXX EEPROM
+    Sketch for the insulting gadget | Only with additional 24LCXXX EEPROM
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 

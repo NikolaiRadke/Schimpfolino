@@ -39,7 +39,7 @@ void setup() {
   Serial.print("Looking for EEPROM... ");
   while(1) {                                     // Wait for EEPROM connection
     Wire.beginTransmission(0x50);                // Look for 24LCXXX EEPROM at 0x50
-    if (Wire.endTransmission() == 0x00) break;   // 0x00 for used, 0xff for unused
+    if (Wire.endTransmission() == 0x00) break;   // 0x00 for available, 0xFF for not found
     delay(100);
   }
   Serial.println("found!");
@@ -58,7 +58,7 @@ void loop() {
 
   // End of file found?
   if (c == 33) {                                 // "!" marks end of file
-    words = (address - 10) / 10;                 // Count words of ten bytes
+    words = (address - 10) / 10;                 // Count words of 10 bytes
     delay(10);
     write_byte(0 + file, words / 255);           // Write high byte of batch number
     delay(10);
