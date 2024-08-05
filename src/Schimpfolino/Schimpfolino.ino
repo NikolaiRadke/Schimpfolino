@@ -11,7 +11,7 @@
 
     Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
-    Last character of a wordlist is '!'
+    Last character of a wordlist is "!" 
 
     Wiring:
                          +-\/-+
@@ -58,7 +58,7 @@ int main(void) {
     PCMSK |= (1 << PCINT1);                      // Turn on interrupt on PB1 button
     MCUSR &= ~(1 << WDRF);                       // No watchdog reset 
     WDTCR |= (1 << WDCE) | (1 << WDE);           // Watchdog change enable
-    WDTCR = (1 << WDP0) | (1 << WDP1 ) | (1 << WDP2) | (1 << WDP3); // Set prescaler to 8s
+    WDTCR = (1 << WDP0) | (1 << WDP1 ) | (1 << WDP2) | (1 << WDP3); // Set prescaler to 8 s
     sei();                                       // Start interrupts
 
     // Init I2C

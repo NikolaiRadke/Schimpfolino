@@ -11,7 +11,7 @@
 
     Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
-    Last character of a wordlist is '!'
+    Last character of a wordlist is "!" 
 
     Wiring:
                          +-\/-+
