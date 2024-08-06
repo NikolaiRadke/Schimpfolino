@@ -29,8 +29,8 @@ Exept for the tools and some time, you need:
 * Arduino UNO/Nano/Whatever with USB cable
 * A breadboard
 * Some Dupont wires
-* A 10uF capacitor
-
+* A 10 uF capacitor
+  
 And the following hardware:
 * Schimpfolino PCB 
 * ATtiny45/85
@@ -41,7 +41,8 @@ And the following hardware:
 * Batteryholder
 * CR2032 battery
 * Double-sided adhesive pad
-
+* (Optional 2 100 nF capacitors)  
+  
 ### Content
 
 ```
