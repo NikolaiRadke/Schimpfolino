@@ -34,7 +34,7 @@ Exept for the tools and some time, you need:
 And the following hardware:
 * Schimpfolino PCB 
 * ATtiny45/85
-* 24LC64 or larger EEPROM
+* 24LC64 or larger EEPROM (up to 24LC512)
 * 0,96" SSD1306 OLED display
 * Button
 * 2 Dip8 sockets
