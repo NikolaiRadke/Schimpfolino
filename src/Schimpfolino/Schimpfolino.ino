@@ -29,7 +29,7 @@
 
 // Hardware
 #define  Button   PB1                            // Button pin    
-#define  Devices  PB4                            // External devices power pin
+#define  DEVICES  PB4                            // External devices power pin
 
 // Variables
 uint8_t  genus;                                  // Genus of the swearword
@@ -49,7 +49,7 @@ int main(void) {
     ADCSRA = 0x00;                               // Switch ADC off | saves 270 uA
 
     // Port setup
-    DDRB  |= (1 << Devices);                     // Set PB4 to OUTPUT to power up display and EEPROM
+    DDRB  |= (1 << DEVICES);                     // Set PB4 to OUTPUT to power up display and EEPROM
     PORTB = 0x3F;                                // Set all ports to INPUT_PULLUP to prevent floating and start devices
     
     // Hardware and watchdog interrupt
@@ -76,7 +76,7 @@ int main(void) {
     }
 
     // Randomize number generator
-    PORTB &= ~(1 << Devices);                    // Devices off
+    PORTB &= ~(1 << DEVICES);                    // Devices off
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);         // Deepest sleep mode
     sleep_mode();                                // Sleep until button is pressed to "turn on"
     _delay_ms(5);                                // Wait to settle ports
@@ -86,7 +86,7 @@ int main(void) {
     // Main routine - runs after waking up
     while(1) {
       // Init Display
-      PORTB |= (1 << Devices);                   // Devices on
+      PORTB |= (1 << DEVICES);                   // Devices on
       oled.init();                               // Connect and start OLED via I2C
 
       // Display swearwords until timeout
@@ -120,7 +120,7 @@ int main(void) {
 
       // Go to sleep after 8 seconds if button is not pressed before                           
       oled.sendCommand(0xAE);                    // Display off and sleep (old boards)
-      PORTB &= ~(1 << Devices);                  // Devices off   
+      PORTB &= ~(1 << DEVICES);                  // Devices off   
       set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
       sleep_mode();
     }
