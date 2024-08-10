@@ -2,6 +2,7 @@
 
 # 2024
   
+* **10.08.2024** Code of Conduct was added.  
 * **07.08.2024** Final PCB design was uploaded.  
 * **13.07.2024** Optimized power management and prepared firmware for new coming board. **1.0-13072024**.
 * **10.07.2024** Halfed idle power draw. **1.0-10072024**.  
