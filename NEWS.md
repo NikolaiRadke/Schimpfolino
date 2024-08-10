@@ -6,7 +6,7 @@
 * **07.08.2024** Final PCB design was uploaded.  
 * **13.07.2024** Optimized power management and prepared firmware for new coming board. **1.0-13072024**.
 * **10.07.2024** Halfed idle power draw. **1.0-10072024**.  
-* **10.07.2024** Better random numner generator. Small and reliable.
+* **10.07.2024** Better random numnner generator. Small and reliable.
 * **09.07.2024** Better individual random seed. **1.0-09072024**.
 * **05.07.2024** Set open ports to INPUT_PULLUP to prevent floating. **1.0-05072024**.
 * **27.06.2024** eeprom_writer now waits for EEPROM connection.
