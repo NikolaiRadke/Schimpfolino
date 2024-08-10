@@ -149,9 +149,9 @@ int main(void) {
 
 // Functions
 void get_swearword(uint16_t address) {           // Fetch characters from EEPROM array
-  char c;
-  uint16_t i;
-  address *= 10;
+  char c;                                        // Helping variable for fetched character
+  uint16_t i;                                    // Helping variable for 10 readings
+  address *= 10;                                 // Each address has 10 characters
   for (i = address; i < address + 10; i ++) {    // Read 10 characters...        
     c = pgm_read_byte(&field[i]);                // ...from wordlist...
     if (eeprom) c = read_eeprom(i + 10);         // ...or from EEPROM with address memory offset
@@ -169,7 +169,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
 }
 
 void write_swearword(uint8_t line) {             // Write centered word
-  uint8_t x;
+  uint8_t x;                                     // Helping variable for the x position on display
   x = (128 - (chars * 7)) / 2;                   // Calculate centering
   if (chars > 18)  x = (128 - (chars * 6)) / 2;  // or for very long words
   if ((genus != 0) && (line == 2)) x -= 4;       // If not female, set first one half block left for genus character
