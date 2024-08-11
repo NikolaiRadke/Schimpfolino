@@ -35,12 +35,12 @@ And the following hardware:
 * Schimpfolino PCB 
 * ATtiny45/85
 * 24LC64 or larger EEPROM (up to 24LC512)
-* 0,96" SSD1306 OLED display
-* Button
+* 0,96" SD D1306 display I2C
+* Button 6 x 6 mm, 9,5 mm height
 * 2 Dip8 sockets
-* Batteryholder
+* Batteryholder, 20 mm pin spacing
 * CR2032 battery
-* Double-sided adhesive pad
+* Double-sided adhesive pad, 25 x 15 x 3 mm
 * (Optional 2 100 nF capacitors)  
   
 ### Content
