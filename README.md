@@ -29,7 +29,7 @@ Exept for the tools and some time, you need:
 * Arduino UNO/Nano/Whatever with USB cable
 * A breadboard
 * Some Dupont wires
-* A 10 uF capacitor
+* A 10 µF capacitor
   
 And the following hardware:
 * Schimpfolino PCB 
