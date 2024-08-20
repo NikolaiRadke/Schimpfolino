@@ -28,7 +28,7 @@
 #include <Wire.h>                                // I2C communication with display and EEPROM
 
 // Hardware
-#define  Button   PB1                            // Button pin    
+#define  BUTTON   PB1                            // Button pin    
 #define  DEVICES  PB4                            // External devices power pin
 
 // Variables
@@ -80,7 +80,7 @@ int main(void) {
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);         // Deepest sleep mode
     sleep_mode();                                // Sleep until button is pressed to "turn on"
     _delay_ms(5);                                // Wait to settle ports
-    while (!(PINB & (1 << Button)));             // Wait until button is released
+    while (!(PINB & (1 << BUTTON)));             // Wait until button is released
     randomSeed(millis());                        // Time passed is used for random numbers
 
     // Main routine - runs after waking up
