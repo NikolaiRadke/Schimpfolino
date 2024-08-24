@@ -1,7 +1,8 @@
 # Newsblog
 
 # 2024
-  
+
+* **24.08.2024** Schimpfolino is now using a **24AAXX** EEPROM to save more power. No changes in the code needed.  
 * **10.08.2024** Code of Conduct was added.
 * **07.08.2024** Release **V1.0** - Schimpfolino seems to be finished! Well... almost ;-)   
 * **07.08.2024** Final PCB design was uploaded.  
