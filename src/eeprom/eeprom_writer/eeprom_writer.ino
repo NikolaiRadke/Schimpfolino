@@ -1,9 +1,10 @@
 /*
     Schimpfolino EEPROM writer V1.0 27.06.2024 - Nikolai Radke
     EEPROMS bigger than 512 kBit (64 kB) are NOT supported.
-    24LCXXX supports page writing, but is unused here.
+    24AAXXX supports page writing, but is unused here.
+    Works with 24LCXXX too, if no 24AAXXX are available.
   
-    This sketch writes the wordlist into 24LCXXX (maximum 24LC512) EEPROM.
+    This sketch writes the wordlist into 24AAXXX (maximum 24AA512) EEPROM.
     No code and power optimizations were used for better readability.
     Umlaute must be converted for UTF-8, only first 128 characters are supported.
     # = ä, $ = ö, % = ü, * = ß. Capitals are not supported.
@@ -25,7 +26,7 @@
 
 #include <Wire.h>                                // I2C Library
 
-#define eeprom  0x50                             // 24LCXXX address
+#define eeprom  0x50                             // 24AAXXX address
 
 uint16_t address = 10;                           // Starting adress
 uint16_t words = 0;                              // Count words
@@ -38,7 +39,7 @@ void setup() {
   Wire.begin();                                  // Start I2C connection
   Serial.print("Looking for EEPROM... ");
   while(1) {                                     // Wait for EEPROM connection
-    Wire.beginTransmission(0x50);                // Look for 24LCXXX EEPROM at 0x50
+    Wire.beginTransmission(0x50);                // Look for 24AAXXX EEPROM at 0x50
     if (Wire.endTransmission() == 0x00) break;   // 0x00 for available, 0xFF for not found
     delay(100);
   }
