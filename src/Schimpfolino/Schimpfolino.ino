@@ -53,7 +53,7 @@ int main(void) {
     PORTB = 0x3F;                                // Set all ports to INPUT_PULLUP to prevent floating and start devices
     
     // Hardware and watchdog interrupt
-    cli();                                       // Stop all interrupts
+    cli();                                       // Stop all interrupts. An interrupt can ruin the timed sequence
     GIMSK |= (1 << PCIE);                        // Turn on pin change interrupt
     PCMSK |= (1 << PCINT1);                      // Turn on interrupt on PB1 button
     MCUSR &= ~(1 << WDRF);                       // No watchdog reset 
