@@ -16,7 +16,7 @@
 
     Wiring:
             +-V--+
-    GND - 1 |    | 8 - VCC (3.3V)
+    GND - 1 |    | 8 - VCC (3.3 V)
     GND - 2 |    | 7 
     GND - 3 |    | 6 - SCL (A5)
     GND - 4 |    | 5 - SDA (A4) (- 4k7 Resistor - VCC)
