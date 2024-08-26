@@ -62,7 +62,7 @@ int main(void) {
     sei();                                       // Start interrupts
 
     // Init I2C
-    Wire.setClock(400000L);                      // Fast mode
+    Wire.setClock(400000L);                      // Fast mode (400 kHz)
     Wire.begin();                                // Start I2C
 
     // Read wordlist addresses
@@ -90,7 +90,7 @@ int main(void) {
       oled.init();                               // Connect and start OLED via I2C
 
       // Display swearwords until timeout
-      while (awake) {                            // Wait 10 seconds timeout
+      while (awake) {                            // Wait 8.5 seconds timeout
         oled.clear();                            // Clear display buffer
 
         // First word
@@ -114,7 +114,7 @@ int main(void) {
         awake = false;                           // Set to sleep     
         WDTCR |= (1 << WDIE);                    // Set watchdog interrupt
         set_sleep_mode(SLEEP_MODE_PWR_DOWN);     // Deepest sleep mode
-        sleep_mode();                            // Sleep 8s or wake when button is pressed
+        sleep_mode();                            // Sleep 8 s or wake when button is pressed
         WDTCR &= ~(1 << WDIE);                   // Stop watchdog interrupt
       } 
 
