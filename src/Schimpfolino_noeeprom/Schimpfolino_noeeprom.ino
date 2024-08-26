@@ -181,8 +181,8 @@ void write_swearword(uint8_t line) {             // Write centered word
 
 uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
   Wire.beginTransmission(0x50);                  // Open transmission to I2C-address 0x50
-  Wire.write((uint16_t)(e_address >> 8));        // Send the MSB (Most Significant Byte) of the memory address
-  Wire.write((uint16_t)(e_address & 0xFF));      // Send the LSB (Least Significant Byte) of the memory address
+  Wire.write(e_address >> 8);                    // Send the MSB (Most Significant Byte) of the memory address
+  Wire.write(e_address & 0xFF);                  // Send the LSB (Least Significant Byte) of the memory address
   Wire.endTransmission();                        // Close transmissiom
   Wire.requestFrom(0x50,1);                      // Request one byte
   return Wire.read();                            // Read and return byte
