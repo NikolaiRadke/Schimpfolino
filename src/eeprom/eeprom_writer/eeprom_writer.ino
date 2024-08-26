@@ -59,7 +59,7 @@ void loop() {
 
   // End of file found?
   if (c == 33) {                                 // "!" marks end of file
-    words = (address - 10) / 10;                 // Count words of 10 bytes
+    words = (address - 10) / 10;                 // Count words of 10 Bytes
     delay(10);
     write_byte(0 + file, words / 255);           // Write high byte of batch number
     delay(10);
