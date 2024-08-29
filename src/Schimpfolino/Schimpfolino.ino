@@ -82,7 +82,7 @@ int main(void) {
     _delay_ms(5);                                // Wait to settle ports
     while (!(PINB & (1 << BUTTON)));             // Wait until button is released
     randomSeed(millis());                        // Time passed is used for random numbers
-    PRR |= (1 << PRTIM0) | (1 << PRTIM1);        // Both timers are not needed anymore | saves 100 uA when active
+    PRR |= (1 << PRTIM0) | (1 << PRTIM1);        // Both timers are not needed anymore | saves 100 uA
 
     // Main routine - runs after waking up
     while(1) {
