@@ -6,8 +6,8 @@
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 3.266 Bytes (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
-    Power:       1.7 mA (active) | ~ 200 nA (sleep)
+    Flash usage: 3.272 Bytes (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Power:       1.6 mA (active) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
@@ -82,6 +82,7 @@ int main(void) {
     _delay_ms(5);                                // Wait to settle ports
     while (!(PINB & (1 << BUTTON)));             // Wait until button is released
     randomSeed(millis());                        // Time passed is used for random numbers
+    PRR |= (1 << PRTIM0) | (1 << PRTIM1);        // Both timers are not needed anymore | saves 100 uA when active
 
     // Main routine - runs after waking up
     while(1) {
