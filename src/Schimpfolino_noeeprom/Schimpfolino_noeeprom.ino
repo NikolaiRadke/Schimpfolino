@@ -1,13 +1,13 @@
 /*  
-    Schimpfolino V1.0 13.07.2024 - Nikolai Radke
+    Schimpfolino V1.0 29.09.2024 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | With or without additional 24LAAXX EEPROM
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 7.950 Bytes (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
-    Power:       1.7 mA (active) | ~ 200 nA (sleep)
+    Flash usage: 7.934 Bytes (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Power:       1.6 mA (active) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
@@ -56,6 +56,7 @@ int main(void) {
   init(); {                                      // Setup
     // Power saving
     ADCSRA = 0;                                  // Switch ADC off | saves 270 uA
+    set_sleep_mode(SLEEP_MODE_PWR_DOWN);         // Always deepest sleep mode
 
     // Port setup
     DDRB  |= (1 << DEVICES);                     // Set PB4 to OUTPUT to power up display and EEPROM
@@ -89,7 +90,6 @@ int main(void) {
 
     // Randomize number generator
     PORTB &= ~(1 << DEVICES);                    // Devices off
-    set_sleep_mode(SLEEP_MODE_PWR_DOWN);         // Deepest sleep mode
     sleep_mode();                                // Sleep until button is pressed to "turn on"
     _delay_ms(5);                                // Wait to settle ports
     while (!(PINB & (1 << BUTTON)));             // Wait until button is released
@@ -133,7 +133,6 @@ int main(void) {
         _delay_ms(500);                          // Debounce button
         awake = false;                           // Set to sleep
         WDTCR |= (1 << WDIE);                    // Set watchdog interrupt
-        set_sleep_mode(SLEEP_MODE_PWR_DOWN);     // Deepest sleep mode
         sleep_mode();                            // Sleep 8 s or wake when button is pressed
         WDTCR &= ~(1 << WDIE);                   // Stop watchdog interrupt
       } 
@@ -141,8 +140,7 @@ int main(void) {
       // Go to sleep after 8s seconds if button is not pressed before                           
       oled.sendCommand(0xAE);                    // Display off and sleep (old boards)
       PORTB &= ~(1 << DEVICES);                  // Devices off
-      set_sleep_mode(SLEEP_MODE_PWR_DOWN);       // Deepest sleep mode
-      sleep_mode();
+      sleep_mode();                              // Sleep until button is pressed
     }
   }
 }
