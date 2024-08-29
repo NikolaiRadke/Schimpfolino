@@ -2,15 +2,16 @@
 
 # 2024
 
+* **24.08.2024** Slightly flash usage improvements. **1.0-290824**.  
 * **24.08.2024** Schimpfolino is now using a **24AAXX** EEPROM to save more power. No changes in the code needed.  
 * **10.08.2024** Code of Conduct was added.
 * **07.08.2024** Release **V1.0** - Schimpfolino seems to be finished! Well... almost ;-)   
 * **07.08.2024** Final PCB design was uploaded.  
-* **13.07.2024** Optimized power management and prepared firmware for new coming board. **1.0-13072024**.
-* **10.07.2024** Halfed idle power draw. **1.0-10072024**.  
+* **13.07.2024** Optimized power management and prepared firmware for new coming board. **1.0-130724**.
+* **10.07.2024** Halfed idle power draw. **1.0-100724**.  
 * **10.07.2024** Better random numnner generator. Small and reliable.
-* **09.07.2024** Better individual random seed. **1.0-09072024**.
-* **05.07.2024** Set open ports to INPUT_PULLUP to prevent floating. **1.0-05072024**.
+* **09.07.2024** Better individual random seed. **1.0-090724**.
+* **05.07.2024** Set open ports to INPUT_PULLUP to prevent floating. **1.0-050724**.
 * **27.06.2024** eeprom_writer now waits for EEPROM connection.
 * **26.06.2024** Added hints to pull up resistors when using the EEPROM with Arduino.  
 * **18.06.2024** The **EEPROM Editor** has been improved.  
