@@ -7,7 +7,7 @@
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
     Flash usage: 3.272 Bytes (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
-    Power:       1.6 mA (active) | ~ 200 nA (sleep)
+    Power:       1.7 mA (display on) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
     ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
@@ -46,7 +46,7 @@ SSD1306_Mini  oled;                              // Set display
 int main(void) {                                 
   init(); {                                      // Setup
     // Power saving
-    ADCSRA = 0x00;                               // Switch ADC off | saves 270 uA
+    ADCSRA &= ~(1 << ADEN);                      // Switch ADC off | saves 270 uA
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);         // Always deepest sleep mode
 
     // Port setup
@@ -82,12 +82,12 @@ int main(void) {
     _delay_ms(5);                                // Wait to settle ports
     while (!(PINB & (1 << BUTTON)));             // Wait until button is released
     randomSeed(millis());                        // Time passed is used for random numbers
-    PRR |= (1 << PRTIM0) | (1 << PRTIM1);        // Both timers are not needed anymore | saves 100 uA
 
     // Main routine - runs after waking up
     while(1) {
       // Init Display
       PORTB |= (1 << DEVICES);                   // Devices on
+      PRR |= (1 << PRTIM0) | (1 << PRTIM1);      // Both timers are not needed anymore | saves 100 uA
       oled.init();                               // Connect and start OLED via I2C
 
       // Display swearwords until timeout
