@@ -28,8 +28,8 @@ Yes indeed, I2C needs a pull up resistor, **4,7 kOhm** between **SDA** and **VCC
 
 Each file contains a set of words. Each word has **10** characters, spaces are mandatory! Just write them one after another. The EEPROM writing sketch will calculate their number and store both number and words into the EEPROM. The last character of the file has to be a **!**. You need a text editor. An office word processor will not work.  
 
-German **Umlaute** must be converted and only small letters are possible:
-**ä** -> **#** | **ö** -> **$** | **ü** -> **%** | **ß** -> *  
+German **Umlaute** must be converted:
+**ä** -> **#** | **ö** -> **$** | **ü** -> **%** | **ß** -> * | **Ä** -> & | **Ö** -> ' | **Ü** -> (
 
 There is an (beta) offline editor **eeprom.html** in the files folder. You can easily add new words or generate a new eeprom?.txt. Umlaute will be converted and spaces and the terminating ! added automatically.  
 
