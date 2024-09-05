@@ -2,6 +2,7 @@
 
 # 2024
 
+* **05.08.2024** Big Umlaute are supported. **1.0-050924**.
 * **24.08.2024** Slightly flash usage improvements. **1.0-290824**.  
 * **24.08.2024** Schimpfolino is now using a **24AAXX** EEPROM to save more power. No changes in the code needed.  
 * **10.08.2024** Code of Conduct was added.
