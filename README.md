@@ -25,7 +25,7 @@ The building wiki and the curse words are in German. You need English words? **C
 
 Exept for the tools and some time, you need:
 * Arduino IDE 1.6.6 or higher
-* Serial terminal software like *Tera Term* (Windows) or *CuteCom* (Linux).
+* Serial terminal software like *RealTerm* (Windows) or *CuteCom* (Linux).
 * Arduino UNO/Nano/Whatever with USB cable
 * A breadboard
 * Some Dupont wires
