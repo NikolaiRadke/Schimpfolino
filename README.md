@@ -23,13 +23,14 @@ The building wiki and the curse words are in German. You need English words? **C
 
 ### Prerequisites
 
-Exept for the tools and some time, you need:
+Except for the tools and some time, you need:
 * Arduino IDE 1.6.6 or higher
 * Serial terminal software like *RealTerm* (Windows) or *CuteCom* (Linux).
 * Arduino UNO/Nano/Whatever with USB cable
 * A breadboard
 * Some Dupont wires
 * A 10 µF capacitor
+* (Optional a 4.7 kOhm resistor)  
   
 And the following hardware:
 * Schimpfolino PCB 
