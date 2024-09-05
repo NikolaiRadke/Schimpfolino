@@ -100,6 +100,9 @@
                         case '#': buffer += 'ä'; break;
                         case '$': buffer += 'ö'; break;
                         case '%': buffer += 'ü'; break;
+                        case '&': buffer += 'Ä'; break;         
+                        case '\'': buffer += 'Ö'; break;
+                        case '(': buffer += 'Ü'; break;
                         case '*': buffer += 'ß'; break;
                         default: buffer += textLoaded.charAt(i);  
                     } 
@@ -136,6 +139,9 @@
                     text = text.replace('ä', '#');
                     text = text.replace('ö", "$');
                     text = text.replace('ü', '%');
+                    text = text.replace('Ä', '&');
+                    text = text.replace('Ö', '\'');
+                    text = text.replace('Ü', '(');
                     text = text.replace('ß', '*');
                 }
                 if (length < 10) 
@@ -174,6 +180,9 @@
                 <li>Ein Wortteil &quot;Luschen&quot;-</li>
                 <li>Ein Substantiv -&quot;iltis&quot; (m&auml;nnlich).</li>
             </ol>
+            Das Adjektiv muss im Femininum, also &quot;Mickrige&quot; geschrieben werden. &quot;r&quot; bei Maskulinum
+            und &quot;s&quot; bei Neutrum werden von Schimpfolino automatisch ergänzt.<br />
+            <br />
             Diese Komponenten werden zu je <b>zehn</b> Zeichen in <b>f&uuml;nf</b> Dateien gespeichert:<br />
             <ol>
                 <li><b>eeprom1.txt</b>: Adjektiv</li>
@@ -185,6 +194,8 @@
             Jede dieser Dateien kann hier erstellt oder bearbeitet werden. <b>Leerzeichen</b> innerhalb eines 
             Wortes sind nicht erlaubt. <b>Umlaute</b> werden konvertiert, Leerzeilen entfernt, weniger als 
             zehn Zeichen werden mit Leerzeichen aufgef&uuml;llt.<br />
+            <br />            
+            Gro&szlig;e Umlaute sind m&ouml;glich, aber nicht sehr schick.<br />
             <br />
         </div>
         <div class="rechts" id="container">

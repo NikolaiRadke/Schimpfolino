@@ -1,16 +1,16 @@
 /*  
-    Schimpfolino V1.0 29.09.2024 - Nikolai Radke
+    Schimpfolino V1.0 05.09.2024 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | With or without additional 24LAAXX EEPROM
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 7.940 Bytes (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 8.012 Bytes (IDE 2.3.2 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.6 mA (display on, no EEPROM) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
-    ä -> # | ö -> $ | ü -> % | ß -> * | Captial letters are not supported
+    ä -> # | ö -> $ | ü -> % | ß -> * | Ä -> & | Ö -> ' | Ü -> (
     Last character of a wordlist is "!" 
 
     Wiring:
@@ -155,10 +155,13 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
     c = pgm_read_byte(&field[i]);                // ...from wordlist...
     if (eeprom) c = read_eeprom(i + 10);         // ...or from EEPROM with address memory offset
     if (c != 32) {                               // Check for space
-      switch (c) {                               // Print german Umlaute   
+      switch (c) {                               // Set german Umlaute   
         case 35: wordbuffer[chars] = 27; break;  // # -> ä
         case 36: wordbuffer[chars] = 28; break;  // $ -> ö
         case 37: wordbuffer[chars] = 29; break;  // % -> ü
+        case 38: wordbuffer[chars] = 58; break;  // & -> Ä
+        case 39: wordbuffer[chars] = 59; break;  // ' -> Ö
+        case 40: wordbuffer[chars] = 60; break;  // ' -> Ü
         case 42: wordbuffer[chars] = 30; break;  // * -> ß
         default: wordbuffer[chars] = c - 65;     // Set non-empty character
       }
