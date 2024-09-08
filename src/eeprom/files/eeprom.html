@@ -11,7 +11,6 @@
         	padding: 0;
             height: 100%;
         	color: #000;
-
         }
         .top {
             background-color: #00c7c7;
@@ -33,6 +32,7 @@
         .links {
             direction: ltr; 
             margin: 10px;
+            margin-top: 0px;
             width: 45%;
             height: 100%;
             float: left;
@@ -40,6 +40,7 @@
         }
         .rechts {
             margin: 10px;
+            margin-top: 0px;
             width: 45%;
             height: 100%;
             float: right;
@@ -50,6 +51,7 @@
         .unten {
             position: absolute;
             width: 100%;
+            font-size: 14px;
             bottom: 0px;
             background-color: #00c7c7;
             height: 30px;
@@ -85,11 +87,12 @@
         }
     </style>
     <script>
+        var elements = 0;
         function loadFileAsText(){
             const fileToLoad = document.getElementById("fileToLoad").files[0];
             const fileReader = new FileReader();
             var name = document.getElementById('fileToLoad'); 
-            document.getElementById('opend').innerHTML = name.files.item(0).name;
+            document.getElementById('opened').innerHTML = name.files.item(0).name;
             document.getElementById('filename').value = name.files.item(0).name;
             fileReader.onload = function(fileLoadedEvent) {
                 const textLoaded = fileLoadedEvent.target.result;
@@ -117,6 +120,8 @@
             fileReader.readAsText(fileToLoad, "UTF-8");
         }
         function addTextField(entry) {
+            elements ++;
+            document.getElementById('words').innerHTML = elements;
             const container = document.getElementById('container');
             const div = document.createElement('div');
             div.className = 'textfield';
@@ -181,7 +186,8 @@
                 <li>Ein Substantiv -&quot;iltis&quot; (m&auml;nnlich).</li>
             </ol>
             Das Adjektiv muss im Femininum, also &quot;Mickrige&quot; geschrieben werden. &quot;r&quot; bei Maskulinum
-            und &quot;s&quot; bei Neutrum werden von Schimpfolino automatisch ergänzt.<br />
+            und &quot;s&quot; bei Neutrum werden von Schimpfolino automatisch ergänzt. Das Substantiv muss klein 
+            geschrieben werden.<br />
             <br />
             Diese Komponenten werden zu je <b>zehn</b> Zeichen in <b>f&uuml;nf</b> Dateien gespeichert:<br />
             <ol>
@@ -195,11 +201,9 @@
             Wortes sind nicht erlaubt. <b>Umlaute</b> werden konvertiert, Leerzeilen entfernt, weniger als 
             zehn Zeichen werden mit Leerzeichen aufgef&uuml;llt.<br />
             <br />            
-            Gro&szlig;e Umlaute sind m&ouml;glich, aber nicht sehr schick.<br />
-            <br />
         </div>
         <div class="rechts" id="container">
-            <h3 id="opend">Datei</h3>
+            <h3 id="opened">Datei</h3>
         </div>
     </div>
     <div class="unten">
@@ -212,6 +216,7 @@
             <option value="eeprom5.txt">eeprom5.txt</option>
         </select>
         <button class="button" onclick="saveTextFields()">Speichern</button>
+        W&ouml;rter: <b id="words">0</b>
     </div>
 </body>
 </html>
