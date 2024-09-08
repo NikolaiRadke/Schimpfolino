@@ -3,12 +3,13 @@
     EEPROMS bigger than 512 kBit (64 kB) are NOT supported.
     24AAXXX supports page writing, but is unused here.
     Works with 24LCXXX too, if no 24AAXXX are available.
+    EEPROM address must be 0x50.
   
     This sketch writes the wordlist into 24AAXXX (maximum 24AA512) EEPROM.
     No code and power optimizations were used for better readability.
-    Umlaute must be converted for UTF-8, only first 128 characters are supported.
-    # = ä, $ = ö, % = ü, * = ß. Capitals are not supported.
-    Last character of each file must be !.
+    Umlaute have to be converted (UTF-8):
+    ä -> # | ö -> $ | ü -> % | ß -> * | Ä -> & | Ö -> ' | Ü -> (
+    Last character of a wordlist is "!" 
  
     Wordlist addresses in EEPROM:
     0 + 1: eeprom1.txt | 2 + 3: eeprom2.txt | 4 + 5: eeprom3.txt | 6 + 7: eeprom4.txt | 8 + 9: eeprom5.txt
@@ -41,7 +42,7 @@ void setup() {
   while(1) {                                     // Wait for EEPROM connection
     Wire.beginTransmission(0x50);                // Look for 24AAXXX EEPROM at 0x50
     if (Wire.endTransmission() == 0x00) break;   // 0x00 for available, 0xFF for not found
-    delay(100);
+    delay(100);                                  // Wait for answer
   }
   Serial.println("found!");
   Serial.println("Select file to send");         // Ready to flash
@@ -92,4 +93,3 @@ void write_byte(uint16_t address, uint8_t data) { // Writes one byte to an addre
   Wire.endTransmission();                        // Close transmission
   delay(1);                                      // Wait. EEPROMs are kind of slow
 }
-
