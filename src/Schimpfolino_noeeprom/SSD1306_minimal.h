@@ -1,7 +1,7 @@
 /*
   SSD1306_minimal.h - SSD1306 OLED Driver Library
   
-  Copyright (c) 2012, Adafruit Industries. All rights reserved.
+  Copyright (c) 2012 Adafruit Industries. All rights reserved.
   Copyright (c) 2012 GOF Electronics Co. Ltd ( http://www.geekonfire.com )
   Copyright (c) 2015 CoPiino Electronics All right reserved.
   Copyright (c) 2016 Kirk Northrop (github.com/kirknorthrop)
