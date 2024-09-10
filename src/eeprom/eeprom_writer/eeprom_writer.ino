@@ -31,7 +31,7 @@
 
 uint16_t address = 10;                           // Starting adress
 uint16_t words = 0;                              // Count words
-uint8_t  low, c;                                 // Helping variables
+uint8_t  c;                                      // Helping variables
 uint8_t  file = 0;                               // Count EEPROM text files
 
 // Open connection to terminal and EEPROM
@@ -52,9 +52,8 @@ void loop() {
   // Main loop waits for one byte and perfoms checks before writing
   while(Serial.available() == 0);                // Wait for serial data
   c = Serial.read();                             // Read character from stream
-  low = c & 0x00FF;                              // Take only LSB (Least Significant Byte)
-  if (!((low == 0xC3) || (low == 0x0A) || (low == 0x21))) { // Write if not "!"
-    write_byte(address, low);                    // Write byte to EEPROM
+  if ((c != 0x0A) && (c != 0x21)) {              // Write if not "!" and not Line Feed
+    write_byte(address, c);                      // Write byte to EEPROM
     address ++;                                  // Next address
   }
 
