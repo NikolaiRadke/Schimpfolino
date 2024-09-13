@@ -1,5 +1,5 @@
 /*
-    Schimpfolino EEPROM writer V1.0 27.06.2024 - Nikolai Radke
+    Schimpfolino EEPROM writer V1.0 13.09.2024 - Nikolai Radke
     EEPROMS bigger than 512 kBit (64 kB) are NOT supported.
     24AAXXX supports page writing, but is unused here.
     Works with 24LCXXX too, if no 24AAXXX are available.
@@ -38,7 +38,8 @@ uint8_t  file = 0;                               // Count EEPROM text files
 void setup() {
   Serial.begin(9600);                            // Start serial connection to terminal
   Wire.begin();                                  // Start I2C connection
-  Serial.print("Looking for EEPROM... ");
+  Serial.println("\nSchimpfolino EEPROM writer");
+  Serial.print("Looking for EEPROM at 0x50... ");
   while(1) {                                     // Wait for EEPROM connection
     Wire.beginTransmission(0x50);                // Look for 24AAXXX EEPROM at 0x50
     if (Wire.endTransmission() == 0x00) break;   // 0x00 for available, 0xFF for not found
@@ -73,7 +74,7 @@ void loop() {
     Serial.print(words);
     Serial.println(" words written.");           // Print number of words written
     if (file == 8) {                             // After 5 files send, print finish message
-      Serial.println("Done.");
+      Serial.println("Done. Ready for next EEPROM");
       address = 10;
       file = 0;                                  // Reset counter variables for new writing process
     }
