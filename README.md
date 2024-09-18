@@ -30,7 +30,7 @@ Except for the tools and some time, you need:
 * A breadboard
 * Some Dupont wires
 * A 10 µF capacitor
-* (Optional a 4.7 kOhm resistor)  
+* (Optional a 2 kOhm resistor)  
   
 And the following hardware:
 * Schimpfolino PCB 
