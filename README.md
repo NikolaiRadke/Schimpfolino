@@ -38,7 +38,7 @@ And the following hardware:
 * 24AA64 or larger EEPROM (up to 24AA512)
 * 0,96" SDD1306 display I2C
 * Button 6 x 6 mm, 9,5 mm height
-* 2 Dip8 sockets
+* 2 DIP-8 sockets
 * Batteryholder, 20 mm pin spacing
 * CR2032 battery
 * Double-sided adhesive pad, 25 x 15 x 3 mm
