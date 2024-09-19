@@ -2,7 +2,7 @@
 
 # 2024
 
-* **19.08.2024** Release **V1.0** - Schimpfolino seems to be finished! Well... for now ;-)   
+* **19.08.2024** Release **V1.0M** - Schimpfolino seems to be finished! Well... for now ;-)   
 * **05.08.2024** Big Umlaute are supported. **1.0-050924**.
 * **24.08.2024** Slightly flash usage improvements. **1.0-290824**.  
 * **24.08.2024** Schimpfolino is now using a **24AAXX** EEPROM to save more power. No changes in the code needed.  
