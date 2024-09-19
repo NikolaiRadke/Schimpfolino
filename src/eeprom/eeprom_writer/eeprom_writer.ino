@@ -20,16 +20,16 @@
     GND - 1 |    | 8 - VCC (3.3 V)
     GND - 2 |    | 7 
     GND - 3 |    | 6 - SCL (A5)
-    GND - 4 |    | 5 - SDA (A4) (- 4k7 Resistor - VCC)
+    GND - 4 |    | 5 - SDA (A4) (- 2k Resistor - VCC)
             +----+
-    The 4k7 resistor is optional, see src/eeprom/README.md
+    The 2k resistor is optional, see src/eeprom/README.md
 */
 
 #include <Wire.h>                                // I2C Library
 
-#define eeprom  0x50                             // 24AAXXX address
+#define EEPROM  0x50                             // 24AAXXX address
 
-uint16_t address = 10;                           // Starting adress
+uint16_t address = 10;                           // Starting address
 uint16_t words = 0;                              // Count words
 uint8_t  c;                                      // Helping variables
 uint8_t  file = 0;                               // Count EEPROM text files
@@ -86,7 +86,7 @@ void loop() {
 }
 
 void write_byte(uint16_t address, uint8_t data) { // Writes one byte to an address
-  Wire.beginTransmission(eeprom);                // Beginn transmission to EEPROM
+  Wire.beginTransmission(EEPROM);                // Beginn transmission to EEPROM
   Wire.write((uint16_t)(address >> 8));          // Send the MSB (Most Significant Byte) of the memory address
   Wire.write((uint16_t)(address & 0xFF));        // Send the LSB (Least Significant Byte) of the memory address
   Wire.write(data);                              // Write character to EEPROM
