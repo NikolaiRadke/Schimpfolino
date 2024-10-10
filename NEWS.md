@@ -2,6 +2,7 @@
 
 # 2024
 
+* **10.10.2024** New sketches added. **1.01-101024** with removed millis() - 182 Bytes saved. Old versions are for the make ariticle but the new 1.01 versions are comatible.  
 * **19.08.2024** Release **V1.0M** - Schimpfolino seems to be finished! Well... for now ;-)   
 * **05.08.2024** Big Umlaute are supported. **1.0-050924**.
 * **24.08.2024** Slightly flash usage improvements. **1.0-290824**.  
