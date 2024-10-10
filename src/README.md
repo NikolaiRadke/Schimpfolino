@@ -2,6 +2,8 @@
 
 * **Schimpfolino**: a sketch for use with EEPROM only. For ATtiny45/85. **Recommended**.
 * **Schimpfolino_noreeprom**: a hybrid sketch for use with or without EEPROM with reduced internal word list. For **ATtiny85 only**.
+* **Schimpfolino_new**: new version for new improvments. Compatible to old version.
+* **Schimpfolino_noeeprom_new**: Same as above but with internal word list.
 * **eeprom/**: folder for files with EEPROM content and writing tool.  
 
 # Compiling instructions for Schimpfolino
@@ -41,7 +43,8 @@ Technically, this process will flash no bootloader, the IDE just sets the fuses.
 3. Select ``` Tools > Board > ATTinyCore > ATtiny25/45/85 (No bootloader) ```.
 4. Select ``` Tools > Port ``` for the matching port.  
 5. Select ``` Tools > B.O.D. Level [...] > B.O.D. Disabled (saves power) ```.
-6. Select ``` Tools > Chip > ATtiny85 ``` or ``` Tools > Chip > ATtiny45 ```.  
+6. Select ``` Tools > Chip > ATtiny85 ``` or ``` Tools > Chip > ATtiny45 ```.
+7. **For V1.0X**: Select ``` Tools > millis()/micros() > Disabled (saves flash) ```.
 8. Start burning process with ``` Tools > Burn bootloader ```.  
 
 Now you can flash your ATtiny with any sketch you want! But this time, we focus on Schimpfolino.   
