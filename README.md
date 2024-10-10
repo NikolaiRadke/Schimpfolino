@@ -66,9 +66,13 @@ Root directory with some explanation files.
     |       The EEPROM content word lists and the editor.
     |
     ├── Schimpfolino/
-    |   Standard sketch with libraries.
-    └── Schimpfolino_nopeeprom/
-        Sketch for Schimpfolino without EEPROM.
+    |   Standard sketch with libraries used in the Make article.
+    ├── Schimpfolino_new/
+    |   Version for new improvments. Compatible to old version.
+    ├── Schimpfolino_nopeeprom/
+    |   Sketch for Schimpfolino without EEPROM.
+    └── Schimpfolino_nopeeprom_new/
+        New version. Compatible to old version.
 ```
 
 ### Let's get started!
