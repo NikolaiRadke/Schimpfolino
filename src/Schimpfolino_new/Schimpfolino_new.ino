@@ -1,7 +1,7 @@
 /*  
     Schimpfolino V1.01 10.10.2024 - Nikolai Radke
     https://www.monstermaker.de
-    Next version for new improvements. Compatible with to older versions
+    Next version for new improvements. Compatible with older versions
 
     Sketch for the insulting gadget | Only with additional 24AAXXX EEPROM
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
