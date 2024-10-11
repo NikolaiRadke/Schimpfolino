@@ -7,7 +7,7 @@
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 3.150 Bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.140 Bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (display on, EEPROM on) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -35,7 +35,6 @@
 // Variables
 uint8_t  genus = 0;                              // Genus of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
-uint8_t  list;                                   // Variable for parsing word lists
 uint16_t number;                                 // Variable for calculating addresses and selecting words
 uint16_t address[5];                             // Wordlists addresses array
 char     wordbuffer[20];                         // Buffer for reading words
@@ -68,7 +67,7 @@ int main(void) {
     Wire.begin();                                // Start I2C
 
     // Read wordlist addresses | genus is a helping variable here
-    for (list = 0; list < 5; list ++) {          // Read numbers of 5 wordlists
+    for (uint8_t list = 0; list < 5; list ++) {  // Read numbers of 5 wordlists
       number = read_eeprom(0 + genus) * 255;     // Calculate number: 
       number += read_eeprom(1 + genus);          // First byte = high, second byte = low
       if (number == 0) awake = false;            // Sleep if no EEPROM present
