@@ -1,9 +1,9 @@
 /*
   SSD1306_minimal.h - SSD1306 OLED Driver Library
   
-  Copyright (c) 2012 Adafruit Industries. All rights reserved.
-  Copyright (c) 2012 GOF Electronics Co. Ltd ( http://www.geekonfire.com )
-  Copyright (c) 2015 CoPiino Electronics All right reserved.
+  Copyright (c) 2012 Adafruit Industries. All rights reserved
+  Copyright (c) 2012 GOF Electronics Co. Ltd (http://www.geekonfire.com)
+  Copyright (c) 2015 CoPiino Electronics. All rights reserved
   Copyright (c) 2016 Kirk Northrop (github.com/kirknorthrop)
   Copytight (c) 2024 Nikolai Radke (http://www.monstermaker.de)
   
@@ -24,9 +24,9 @@
 
         So this a SSD1306 library that works great with ATtiny45/85 devices :)
 
-  It is a free software; you can redistribute it and/or modify it 
-  under the terms of BSD license, check LICENSE for more information.
-  All text above must be included in any redistribution.
+  It is a free software; you can redistribute it and/or modify it under the terms of 
+  BSD license, check LICENSE for more information. All text above must be included in 
+  any redistribution.
 */
 
 #ifndef __SSD1306_MINIMAL_H__

@@ -1,9 +1,9 @@
 /*
   SSD1306_minimal.cpp - SSD1306 OLED driver library
   
-  Copyright (c) 2012 Adafruit Industries. All rights reserved.
-  Copyright (c) 2012 GOF Electronics Co. Ltd ( http://www.geekonfire.com )
-  Copyright (c) 2015 CoPiino Electronics All right reserved.
+  Copyright (c) 2012 Adafruit Industries. All rights reserved
+  Copyright (c) 2012 GOF Electronics Co. Ltd (http://www.geekonfire.com)
+  Copyright (c) 2015 CoPiino Electronics. All rights reserved
   Copyright (c) 2016 Kirk Northrop (github.com/kirknorthrop)
   Copytight (c) 2024 Nikolai Radke (http://www.monstermaker.de)
   
@@ -11,19 +11,18 @@
   Modified by: Jimbo.we (www.geekonfire.com)
   Modified by: CoPiino Electronics (http://copiino.cc)
   Modified by: Kirk Northrop (github.com/kirknorthrop)
-  Modified by: Nikolai Radke (www.monstermaker.de) 
+  Modified by: Nikolai Radke (www.monstermaker.de)
                -- Reworked horrible formatting and spelling
                -- Removed unused code
                -- Modified for Wire.h instead of TinyWireM.h
                -- Optimized init sequence and functions
 
       What is it?
-        This library is derived from GOFi2cOLED library, only for SSD1306 in I2C mode.
+        This library is derived from GOFi2cOLED library, only for SSD1306 in I2C Mode.
         As the original library only supports frame buffered mode which requires to have
-        at least 1024 bytes of free RAM for a 128 x 64 px display it is too big for 
-        smaller devices.
+        at least 1024 bytes of free RAM for a 128 x 64 px display it is too big for smaller devices.
 
-        So this a SSD1306 library that works great with ATtiny85 devices :)
+        So this a SSD1306 library that works great with ATtiny45/85 devices :)
 
   It is a free software; you can redistribute it and/or modify it under the terms of 
   BSD license, check LICENSE for more information. All text above must be included in 
@@ -75,7 +74,7 @@ const unsigned char BasicFont[] PROGMEM = {
   0x63, 0x14, 0x08, 0x14, 0x63, // X 23
   0x07, 0x08, 0x70, 0x08, 0x07, // Y 24
   0x61, 0x51, 0x49, 0x45, 0x43, // Z 25
-  0x1C, 0x3E, 0x7C, 0x3E, 0x1C, // ♥ 26
+  0x1C, 0x3E, 0x7C, 0x3E, 0x1C, // ♥ 26 unused :-(
   0x20, 0x55, 0x54, 0x55, 0x78, // ä 27 
   0x38, 0x45, 0x44, 0x45, 0x38, // ö 28
   0x3C, 0x41, 0x40, 0x21, 0x7C, // ü 29
