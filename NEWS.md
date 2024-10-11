@@ -2,7 +2,7 @@
 
 # 2024
 
-* **11.10,2024** Better helping variable handling. Won 6 Bytes! Worth an update? Yes, of course! **1.01-111024** and **1.0-111024**.  
+* **11.10.2024** Better helping variable handling. Won 6 Bytes! Worth an update? Yes, of course! **1.01-111024** and **1.0-111024**.  
 * **10.10.2024** New sketches added. **1.01-101024** with removed millis(): 182 Bytes saved. Old versions are for the Make ariticle but the new 1.01 versions are compatible.  
 * **19.08.2024** Release **V1.0M** - Schimpfolino seems to be finished! Well... for now ;-)   
 * **05.08.2024** Big Umlaute are supported. **1.0-050924**.
