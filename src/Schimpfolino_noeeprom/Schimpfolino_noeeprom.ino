@@ -115,7 +115,7 @@ int main(void) {
 
         // Second word first part
         list = 0;                                // Set start address for array
-        if (eeprom) list = address[0];           // Set start adress for EEPROM
+        if (eeprom) list = address[0];           // Set start address for EEPROM
         number = (random(list, address[1]));     // Select second part of second word
         field = data2;                           // Pointer to second array
         get_swearword(number);                   // Read first part of second word 
