@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.0 10.10.2024 - Nikolai Radke
+    Schimpfolino V1.0 11.10.2024 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | With or without additional 24LAAXX EEPROM
