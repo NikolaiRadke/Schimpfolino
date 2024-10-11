@@ -19,8 +19,8 @@
 
       What is it?
         This library is derived from GOFi2cOLED library, only for SSD1306 in I2C Mode.
-        As the original library only supports Frame Buffered mode which requires to have
-        at least 1024bytes of free RAM for a 128x64px display it is too big for smaller devices.
+        As the original library only supports frame buffered mode which requires to have
+        at least 1024 bytes of free RAM for a 128 x 64 px display it is too big for smaller devices.
 
         So this a SSD1306 library that works great with ATtiny45/85 devices :)
 
