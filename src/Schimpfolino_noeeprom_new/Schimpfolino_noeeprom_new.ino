@@ -8,7 +8,7 @@
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 7.830 Bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 7.826 Bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.6 mA (display on, no EEPROM) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -42,10 +42,10 @@ const char data5[] PROGMEM = {"sekret    balg      blag      monster   gel$t    
 
 // Variables
 char     *field;                                 // Pointer to one of the character arrays
-uint8_t  genus;                                  // Genus of the swearword
+uint8_t  genus = 0;                              // Genus of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
-uint8_t  list;                                   // Helping variable for parsing word lists
-uint16_t number;                                 // Helping variable for calculating addresses and selecting words
+uint8_t  list;                                   // Variable for parsing word lists
+uint16_t number;                                 // Variable for calculating addresses and selecting words
 uint16_t address[5] = {90, 90, 90, 90, 90};      // Wordlists addresses array - overwritten if EEPROM is present
 char     wordbuffer[20];                         // Buffer for read words
 bool     eeprom = false;                         // No EEPROM used -> Auto detect
@@ -77,11 +77,10 @@ int main(void) {
     Wire.setClock(400000L);                      // Fast mode (400 kHz)
     Wire.begin();                                // Start I2C
 
-    // Look for EEPROM and read wordlist addresses if available
+    // Look for EEPROM and read wordlist addresses if available | genus is a helping variable here 
     Wire.beginTransmission(0x50);                // Look for 24LCXX EEPROM at 0x50
     if (Wire.endTransmission() == 0) {           // 0x00 for available, 0xFF for not found
       eeprom = true;                             // if available, set EEPROM flag
-      genus = 0;                                 // genus and list are helping variables here
       for (list = 0; list < 5; list ++) {        // Read numbers of 5 wordlists
         number = read_eeprom(0 + genus) * 255;   // Calculate number: 
         number += read_eeprom(1 + genus);        // First byte = High, second byte = low
