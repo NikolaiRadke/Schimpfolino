@@ -17,7 +17,7 @@ What's new?
 -- More news? See the [newsblog](https://github.com/NikolaiRadke/Schimpfolino/tree/main/NEWS.md).   
   
 
-### Notes for non-German Nokolino makers  
+### Notes for non-German Schimpfolino makers  
   
 The building wiki and the curse words are in German. You need English words? **Contribute!**  
 
