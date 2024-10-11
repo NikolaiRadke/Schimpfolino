@@ -80,7 +80,7 @@ int main(void) {
     if (Wire.endTransmission() == 0) {           // 0x00 for available, 0xFF for not found
       eeprom = true;                             // if available, set EEPROM flag
       genus = 0;                                 // genus and list are helping variables here
-      for (list = 0; list < 5; list ++) {        // Read numbers of 4 wordlists
+      for (list = 0; list < 5; list ++) {        // Read numbers of 5 wordlists
         number = read_eeprom(0 + genus) * 255;   // Calculate number: 
         number += read_eeprom(1 + genus);        // First byte = High, second byte = low
         address[list] = number;                  // Write word numbers to array 

@@ -68,7 +68,7 @@ int main(void) {
 
     // Read wordlist addresses
     genus = 0;                                   // genus is a helping variable here
-    for (list = 0; list < 5; list ++) {          // Read numbers of 4 wordlists
+    for (list = 0; list < 5; list ++) {          // Read numbers of 5 wordlists
       number = read_eeprom(0 + genus) * 255;     // Calculate number: 
       number += read_eeprom(1 + genus);          // First byte = high, second byte = low
       if (number == 0) awake = false;            // Sleep if no EEPROM present
