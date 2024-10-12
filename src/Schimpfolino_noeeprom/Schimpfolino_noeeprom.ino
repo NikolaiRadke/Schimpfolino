@@ -55,7 +55,7 @@ SSD1306_Mini  oled;                              // Set display
 int main(void) {                                 
   init(); {                                      // Setup
     // Power saving
-    ADCSRA &= ~(1 << ADEN);                      // Switch ADC off | saves 270 uA
+    ADCSRA &= ~(1 << ADEN);                      // Switch ADC off | Saves 270 uA
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);         // Always deepest sleep mode
 
     // Port setup
@@ -94,11 +94,11 @@ int main(void) {
     while (!(PINB & (1 << BUTTON)));             // Wait until button is released
     randomSeed(millis());                        // Time passed is used for random numbers
 
-    // Main routine - runs after waking up
+    // Main routine | Runs after waking up
     while(1) {
       // Init Display
       PORTB |= (1 << DEVICES);                   // Devices on
-      PRR |= (1 << PRTIM0) | (1 << PRTIM1);      // Both timers are not needed anymore | saves 100 uA when active
+      PRR |= (1 << PRTIM0) | (1 << PRTIM1);      // Both timers are not needed anymore | Saves 100 uA when active
       oled.init();                               // Connect and start OLED via I2C
 
       // Display swearwords until timeout
