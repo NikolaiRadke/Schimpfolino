@@ -30,7 +30,7 @@
   any redistribution.
 */
 
-#include <Wire.h>                                // Arduino an ATtiny I2C library
+#include <Wire.h>                                // Arduino and ATtiny I2C library
 #include <util/delay.h>                          // Needs less flash memory than delay()
 #include "SSD1306_minimal.h"
 
