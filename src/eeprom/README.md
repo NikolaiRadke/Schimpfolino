@@ -3,7 +3,7 @@
 You need:  
 * Sketch **eeprom_writer.ino**.
 * An Arduino Uno/Nano/Whatever.
-* A serial terminal like *CoolTerm* (Windows) or *CuteCom* (Linux).
+* A serial terminal like *CoolTerm* (Linux/Windows/Mac) or *CuteCom* (Linux).
 
 ### Connecting your Arduino with the EEPROM
 
