@@ -111,6 +111,8 @@ int main(void) {
         write_swearword(4);                      // Write second word in second line
         
         // Wait for button and sleep 8s
+        sleep_mode();                            // Sleep 8 s or wake when button is pressed
+
         _delay_ms(500);                          // Debounce button
         awake = false;                           // Set to sleep     
         WDTCR |= (1 << WDIE);                    // Set watchdog interrupt
@@ -134,7 +136,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
   for (i = address; i < address + 10; i ++) {    // Read 10 characters...        
     c = read_eeprom(i + 10);                     // ...from EEPROM with address memory offset
     if (c != 32) {                               // Check for space
-      switch (c) {                               // Set german Umlaute   
+      switch (c) {                               // Set German Umlaute   
         case 35: wordbuffer[chars] = 27; break;  // # -> ä
         case 36: wordbuffer[chars] = 28; break;  // $ -> ö
         case 37: wordbuffer[chars] = 29; break;  // % -> ü
@@ -152,7 +154,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
 void write_swearword(uint8_t line) {             // Write centered word
   uint8_t x;                                     // Helping variable for the x position on display
   x = (128 - (chars * 7)) / 2;                   // Calculate centering
-  if (chars > 18)  x = (128 - (chars * 6)) / 2;  // Or for very long words
+  if (chars > 18)  x = (128 - (chars * 6)) / 2;  // Modify for very long words
   if ((genus != 0) && (line == 2)) x -= 4;       // If not female, set first one half block left for genus character
   oled.cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; x ++)                   // Print the characters...

@@ -1,12 +1,13 @@
 /*  
-    Schimpfolino V1.0 11.10.2024 - Nikolai Radke
+    Schimpfolino V1.01 11.10.2024 - Nikolai Radke
     https://www.monstermaker.de
+    Next version for new improvements. Compatible with older versions
 
     Sketch for the insulting gadget | Only with additional 24AAXXX EEPROM
-    For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader
+    For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 3.322 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.140 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (display on, EEPROM on) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -25,7 +26,7 @@
 #include <avr/sleep.h>                           // Used for deep sleep
 #include <util/delay.h>                          // Needs less flash memory than delay()
 #include "SSD1306_minimal.h"                     // Modified library!
-#include <Wire.h>                                // I2C communication with display and EEPROM
+#include "i2c.h"                                // I2C communication with display and EEPROM
 
 // Hardware
 #define  BUTTON   PB1                            // Button pin    
@@ -62,7 +63,7 @@ int main(void) {
     sei();                                       // Start interrupts
 
     // Init I2C
-    Wire.setClock(400000L);                      // Fast mode (400 kHz)
+    //Wire.setClock(400000L);                      // Fast mode (400 kHz)
     Wire.begin();                                // Start I2C
 
     // Read wordlist addresses | genus is a helping variable here
@@ -77,9 +78,10 @@ int main(void) {
     // Randomize number generator
     PORTB &= ~(1 << DEVICES);                    // Devices off
     sleep_mode();                                // Sleep until button is pressed to "turn on"
-    _delay_ms(5);                                // Wait to settle ports
+    TCCR0A = 0x00;                               // Set timer 0 to normal mode
+    TCCR0B = (1 << CS00);                        // Set prescaler to 1 to start the timer
     while (!(PINB & (1 << BUTTON)));             // Wait until button is released
-    randomSeed(millis());                        // Time passed is used for random numbers
+    randomSeed(TCNT0);                           // Get a time count as seed
 
     // Main routine | Runs after waking up
     while(1) {
@@ -132,7 +134,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
   for (i = address; i < address + 10; i ++) {    // Read 10 characters...        
     c = read_eeprom(i + 10);                     // ...from EEPROM with address memory offset
     if (c != 32) {                               // Check for space
-      switch (c) {                               // Set German Umlaute   
+      switch (c) {                               // Set german Umlaute   
         case 35: wordbuffer[chars] = 27; break;  // # -> ä
         case 36: wordbuffer[chars] = 28; break;  // $ -> ö
         case 37: wordbuffer[chars] = 29; break;  // % -> ü
@@ -150,7 +152,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
 void write_swearword(uint8_t line) {             // Write centered word
   uint8_t x;                                     // Helping variable for the x position on display
   x = (128 - (chars * 7)) / 2;                   // Calculate centering
-  if (chars > 18)  x = (128 - (chars * 6)) / 2;  // Modify for very long words
+  if (chars > 18)  x = (128 - (chars * 6)) / 2;  // Or for very long words
   if ((genus != 0) && (line == 2)) x -= 4;       // If not female, set first one half block left for genus character
   oled.cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; x ++)                   // Print the characters...

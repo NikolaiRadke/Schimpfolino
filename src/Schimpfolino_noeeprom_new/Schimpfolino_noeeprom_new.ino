@@ -69,7 +69,7 @@ int main(void) {
     PCMSK |= (1 << PCINT1);                      // Turn on interrupt on PB1 button
     MCUSR &= ~(1 << WDRF);                       // No watchdog reset 
     WDTCR |= (1 << WDCE) | (1 << WDE);           // Watchdog change enable
-    WDTCR = (1 << WDP0) | (1 << WDP3);           // Set prescaler to 8s
+    WDTCR = (1 << WDP0) | (1 << WDP3);           // Set prescaler to 8 s
     sei();                                       // Start interrupts
 
     // Init I2C
@@ -82,7 +82,7 @@ int main(void) {
       eeprom = true;                             // if available, set EEPROM flag
       for (list = 0; list < 5; list ++) {        // Read numbers of 5 wordlists
         number = read_eeprom(0 + genus) * 255;   // Calculate number: 
-        number += read_eeprom(1 + genus);        // First byte = High, second byte = low
+        number += read_eeprom(1 + genus);        // First byte = high, second byte = low
         address[list] = number;                  // Write word numbers to array 
         genus += 2;                              // Change number address
       }  
@@ -111,7 +111,7 @@ int main(void) {
         number = (random(0, address[0]));        // Select first word
         field = data1;                           // Pointer to first array
         get_swearword(number);                   // Read first word 
-        write_swearword(2);                      // Write first word
+        write_swearword(2);                      // Write first word in the first line
         genus = random(0, 3);                    // Set word genus
         if (genus != 0) oled.printChar(48 + genus); // If male, write "r", if neutrum, write "s"
 
@@ -148,7 +148,7 @@ int main(void) {
 }
 
 // Functions
-void get_swearword(uint16_t address) {           // Fetch characters from EEPROM array
+void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
   char c;                                        // Helping variable for fetched character
   uint16_t i;                                    // Helping variable for 10 readings
   address *= 10;                                 // Each address has 10 characters
@@ -156,7 +156,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
     c = pgm_read_byte(&field[i]);                // ...from wordlist...
     if (eeprom) c = read_eeprom(i + 10);         // ...or from EEPROM with address memory offset
     if (c != 32) {                               // Check for space
-      switch (c) {                               // Set german Umlaute   
+      switch (c) {                               // Set German Umlaute   
         case 35: wordbuffer[chars] = 27; break;  // # -> ä
         case 36: wordbuffer[chars] = 28; break;  // $ -> ö
         case 37: wordbuffer[chars] = 29; break;  // % -> ü
@@ -174,11 +174,11 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
 void write_swearword(uint8_t line) {             // Write centered word
   uint8_t x;                                     // Helping variable for the x position on display
   x = (128 - (chars * 7)) / 2;                   // Calculate centering
-  if (chars > 18)  x = (128 - (chars * 6)) / 2;  // or for very long words
+  if (chars > 18)  x = (128 - (chars * 6)) / 2;  // Modify for very long words
   if ((genus != 0) && (line == 2)) x -= 4;       // If not female, set first one half block left for genus character
   oled.cursorTo(x, line);                        // Set cursor to selected line
-  for (x = 0; x < chars; x ++)                   // Print the characters
-    oled.printChar(wordbuffer[x]);               // from buffer
+  for (x = 0; x < chars; x ++)                   // Print the characters...
+    oled.printChar(wordbuffer[x]);               // ...from buffer
   chars = 0;                                     // Set number of characters back to 0 
 }
 
@@ -187,7 +187,7 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
   Wire.write(e_address >> 8);                    // Send the MSB (Most Significant Byte) of the memory address
   Wire.write(e_address & 0xFF);                  // Send the LSB (Least Significant Byte) of the memory address
   Wire.endTransmission();                        // Close transmission
-  Wire.requestFrom(0x50,1);                      // Request one byte
+  Wire.requestFrom(0x50, 1);                     // Request one byte
   return Wire.read();                            // Read and return byte
 }
 
