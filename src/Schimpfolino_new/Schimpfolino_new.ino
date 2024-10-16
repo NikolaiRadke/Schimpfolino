@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.01 11.10.2024 - Nikolai Radke
+    Schimpfolino V1.01 16.10.2024 - Nikolai Radke
     https://www.monstermaker.de
     Next version for new improvements. Compatible with older versions
 
@@ -7,7 +7,7 @@
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 3.140 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.154 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (display on, EEPROM on) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -36,7 +36,7 @@
 uint8_t  genus = 0;                              // Genus of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
 uint16_t number;                                 // Variable for calculating addresses and selecting words
-uint16_t address[5];                             // Wordlists addresses array
+uint16_t addresses[5];                           // Wordlists addresses array
 char     wordbuffer[20];                         // Buffer for reading words
 
 volatile bool awake = false;                     // Stay wake when button is pressed
@@ -71,7 +71,7 @@ int main(void) {
       number = read_eeprom(0 + genus) * 255;     // Calculate number: 
       number += read_eeprom(1 + genus);          // First byte = high, second byte = low
       if (number == 0) awake = false;            // Sleep if no EEPROM present
-      address[list] = number;                    // Write word numbers to array 
+      addresses[list] = number;                  // Write word numbers to array 
       genus += 2;                                // Chance number address
     }
 
@@ -95,18 +95,18 @@ int main(void) {
         oled.clear();                            // Clear display buffer
 
         // First word
-        number = (random(0, address[0]));        // Select first word
+        number = (random(0, addresses[0]));      // Select first word
         get_swearword(number);                   // Read word from EEPROM
         write_swearword(2);                      // Write first word in the first line
         genus = random(0, 3);                    // Set word genus
         if (genus != 0) oled.printChar(48 + genus); // If male, write "r", if neutrum, write "s"
 
         // Second word first part
-        number = (random(address[0], address[1])); // Select second word
+        number = (random(addresses[0], addresses[1])); // Select second word
         get_swearword(number);                   // Read second word from EEPROM
         
         // Second word second part
-        number = (random(address[genus + 1], address[genus + 2])); // Select second part of second word
+        number = (random(addresses[genus + 1], addresses[genus + 2])); // Select second part of second word
         get_swearword(number);                   // Read second part of second word
         write_swearword(4);                      // Write second word in second line
         

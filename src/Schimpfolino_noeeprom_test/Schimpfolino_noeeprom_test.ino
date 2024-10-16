@@ -1,13 +1,12 @@
 /*  
-    Schimpfolino V1.01 16.10.2024 - Nikolai Radke
+    Schimpfolino V1.0 16.10.2024 - Nikolai Radke
     https://www.monstermaker.de
-    Next version for new improvements. Compatible with older versions
 
     Sketch for the insulting gadget | With or without additional 24LAAXX EEPROM
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 7.830 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 7.990 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.6 mA (display on, no EEPROM) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -80,10 +79,10 @@ int main(void) {
     Wire.beginTransmission(0x50);                // Look for 24LCXX EEPROM at 0x50
     if (Wire.endTransmission() == 0) {           // 0x00 for available, 0xFF for not found
       eeprom = true;                             // if available, set EEPROM flag
-      for (list = 0; list < 5; list ++) {        // Read numbers of 5 wordlists
+      for (uint8_t last = 0; last < 5; last ++) { // Read numbers of 5 wordlists
         number = read_eeprom(0 + genus) * 255;   // Calculate number: 
         number += read_eeprom(1 + genus);        // First byte = high, second byte = low
-        addresses[list] = number;                // Write word numbers to array 
+        addresses[last] = number;                // Write word numbers to array 
         genus += 2;                              // Change number address
       }  
     }
@@ -91,10 +90,8 @@ int main(void) {
     // Randomize number generator
     PORTB &= ~(1 << DEVICES);                    // Devices off
     sleep_mode();                                // Sleep until button is pressed to "turn on"
-    TCCR0A = 0x00;                               // Set timer 0 to normal mode
-    TCCR0B = (1 << CS00);                        // Set prescaler to 1 to start the timer
     while (!(PINB & (1 << BUTTON)));             // Wait until button is released
-    randomSeed(TCNT0);                           // Get a time count as seed
+    randomSeed(millis());                        // Time passed is used for random numbers
 
     // Main routine | Runs after waking up
     while(1) {
@@ -111,7 +108,7 @@ int main(void) {
         number = (random(0, addresses[0]));      // Select first word
         field = data1;                           // Pointer to first array
         get_swearword(number);                   // Read first word 
-        write_swearword(2);                      // Write first word in the first line
+        write_swearword(2);                      // Write first word in ghe first line
         genus = random(0, 3);                    // Set word genus
         if (genus != 0) oled.printChar(48 + genus); // If male, write "r", if neutrum, write "s"
 
@@ -154,7 +151,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
   address *= 10;                                 // Each address has 10 characters
   for (i = address; i < address + 10; i ++) {    // Read 10 characters...        
     c = pgm_read_byte(&field[i]);                // ...from wordlist...
-    if (eeprom) c = read_eeprom(i + 10);         // ...or from EEPROM with address memory offset
+    if (eeprom) c = read_eeprom(i  + 10);        // ...or from EEPROM with address memory offset
     if (c != 32) {                               // Check for space
       switch (c) {                               // Set German Umlaute   
         case 35: wordbuffer[chars] = 27; break;  // # -> ä

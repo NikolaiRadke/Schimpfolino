@@ -1,12 +1,12 @@
 /*  
-    Schimpfolino V1.0 11.10.2024 - Nikolai Radke
+    Schimpfolino V1.0 16.10.2024 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | With or without additional 24LAAXX EEPROM
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 8.008 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 7.996 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.6 mA (display on, no EEPROM) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -44,7 +44,7 @@ uint8_t  genus = 0;                              // Genus of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
 uint8_t  list;                                   // Variable for parsing word lists
 uint16_t number;                                 // Variable for calculating addresses and selecting words
-uint16_t address[5] = {90, 90, 90, 90, 90};      // Wordlists addresses array - overwritten if EEPROM is present
+uint16_t addresses[5] = {90, 90, 90, 90, 90};    // Wordlists addresses array - overwritten if EEPROM is present
 char     wordbuffer[20];                         // Buffer for read words
 bool     eeprom = false;                         // No EEPROM used -> Auto detect
 
@@ -82,7 +82,7 @@ int main(void) {
       for (list = 0; list < 5; list ++) {        // Read numbers of 5 wordlists
         number = read_eeprom(0 + genus) * 255;   // Calculate number: 
         number += read_eeprom(1 + genus);        // First byte = high, second byte = low
-        address[list] = number;                  // Write word numbers to array 
+        addresses[list] = number;                // Write word numbers to array 
         genus += 2;                              // Change number address
       }  
     }
@@ -90,7 +90,6 @@ int main(void) {
     // Randomize number generator
     PORTB &= ~(1 << DEVICES);                    // Devices off
     sleep_mode();                                // Sleep until button is pressed to "turn on"
-    _delay_ms(5);                                // Wait to settle ports
     while (!(PINB & (1 << BUTTON)));             // Wait until button is released
     randomSeed(millis());                        // Time passed is used for random numbers
 
@@ -106,7 +105,7 @@ int main(void) {
         oled.clear();                            // Clear display buffer
 
         // First word
-        number = (random(0, address[0]));        // Select first word
+        number = (random(0, addresses[0]));      // Select first word
         field = data1;                           // Pointer to first array
         get_swearword(number);                   // Read first word 
         write_swearword(2);                      // Write first word in ghe first line
@@ -115,14 +114,14 @@ int main(void) {
 
         // Second word first part
         list = 0;                                // Set start address for array
-        if (eeprom) list = address[0];           // Set start address for EEPROM
-        number = (random(list, address[1]));     // Select second part of second word
+        if (eeprom) list = addresses[0];         // Set start address for EEPROM
+        number = (random(list, addresses[1]));   // Select second part of second word
         field = data2;                           // Pointer to second array
         get_swearword(number);                   // Read first part of second word 
         
         // Second word second part
-        if (eeprom) list = address[genus + 1];   // Set start address for EEPROM
-        number = (random(list, address[genus + 2])); // Select second part of second word
+        if (eeprom) list = addresses[genus + 1]; // Set start address for EEPROM
+        number = (random(list, addresses[genus + 2])); // Select second part of second word
         field = data3;                           // Pointer to female array
         if (genus == 1) field = data4;           // Pointer to male array
         if (genus == 2) field = data5;           // Pointer to neutrum array
@@ -152,7 +151,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
   address *= 10;                                 // Each address has 10 characters
   for (i = address; i < address + 10; i ++) {    // Read 10 characters...        
     c = pgm_read_byte(&field[i]);                // ...from wordlist...
-    if (eeprom) c = read_eeprom(i  + 10);         // ...or from EEPROM with address memory offset
+    if (eeprom) c = read_eeprom(i  + 10);        // ...or from EEPROM with address memory offset
     if (c != 32) {                               // Check for space
       switch (c) {                               // Set German Umlaute   
         case 35: wordbuffer[chars] = 27; break;  // # -> ä
