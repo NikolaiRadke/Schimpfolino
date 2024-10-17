@@ -1,6 +1,7 @@
 # Newsblog
 
 # 2024
+* **17.10.2024** Release **V1.0M fixed**: important for Schimpfolino_noeeprom.ino **with** EEPROM and small furhter optimizations.  
 * **17.10.2024** Warning: This version is not working correct. There seems to be a bug in the core     or maybe even in the hardware.
 * **16.10.2024** Small optimization and **Schimpfolino_noeeprom.ino** is working correctly again! Pew! **1.0x-16102024**.  
 * **11.10.2024** Better helping variable handling. Won 16 bytes! Worth an update? Yes, of course! **1.01-111024** and **1.0-111024**.  
