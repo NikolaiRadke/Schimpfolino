@@ -85,6 +85,21 @@
         input[type=file]::file-selector-button:hover {
             background-color: #d0d0d0;
         }
+        /* Für mobile Geräte */
+        @media (max-width: 600px) {
+            .rechts {
+                position: relative;
+                top: 0;         /* Nach oben verschieben */
+                float: none;    /* Float deaktivieren, um Flexibilität zu haben */
+                margin-top: 0;  /* Abstand oben */
+                width: 100%;    /* Volle Breite auf mobilen Geräten */
+            }
+
+            .links {
+                float: none;
+                width: 100%;    /* Volle Breite auf mobilen Geräten */
+            }
+        }
     </style>
     <script>
         var elements = 0;
