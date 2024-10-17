@@ -120,8 +120,8 @@ int main(void) {
         get_swearword(number);                   // Read first part of second word 
         
         // Second word second part
-        if (eeprom) list = addresses[genus + 1]; // Set start address for EEPROM
-        number = (random(list, addresses[genus + 2])); // Select second part of second word
+        if (eeprom) number = (random(addresses[genus + 1], addresses[genus + 2]));
+        else number = (random(list, addresses[genus + 2])); // Select second part of second word
         field = data3;                           // Pointer to female array
         if (genus == 1) field = data4;           // Pointer to male array
         if (genus == 2) field = data5;           // Pointer to neutrum array
