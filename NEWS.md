@@ -1,7 +1,7 @@
 # Newsblog
 
 # 2024
-
+* **17.10.2024** Warning: This version is not working correct. There seems to be a bug in the core     or maybe even in the hardware.
 * **16.10.2024** Small optimization and **Schimpfolino_noeeprom.ino** is working correctly again! Pew! **1.0x-16102024**.  
 * **11.10.2024** Better helping variable handling. Won 16 bytes! Worth an update? Yes, of course! **1.01-111024** and **1.0-111024**.  
 * **10.10.2024** New sketches added. **1.01-101024** with removed millis(): 182 bytes saved. Old versions are for the Make article but the new 1.01 versions are compatible.  
