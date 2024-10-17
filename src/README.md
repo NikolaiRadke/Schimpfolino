@@ -4,8 +4,10 @@
 * **Schimpfolino_noreeprom**: a hybrid sketch for use with or without EEPROM with reduced internal word list. For **ATtiny85 only**.
 * **Schimpfolino_new**: new version for new improvments. Compatible to old version.
 * **Schimpfolino_noeeprom_new**: Same as above but with internal word list.
-* **eeprom/**: folder for files with EEPROM content and writing tool.  
+* **eeprom/**: folder for files with EEPROM content and writing tool.
 
+**WARNING**: the *new* versions are not working correct. There seems to be a bug in the core or maybe even in the hardware.  
+  
 # Compiling instructions for Schimpfolino
 
 In order to flash your ATtiny with the Schimpfolino sketch, you need the **Arduino-IDE** (1.6.6 or higher), with installed **ATtiny-support** and an **Arduino** connected to your microcontroller.
