@@ -1,15 +1,13 @@
 /*  
-    Schimpfolino V1.01 16.10.2024 - Nikolai Radke
+    Schimpfolino V1.01 18.10.2024 - Nikolai Radke
     https://www.monstermaker.de
     Next version for new improvements. Compatible with older versions
-    WARNING: This version is not working correct. There seems to be a bug in the core 
-    or maybe even in the hardware.
 
     Sketch for the insulting gadget | Only with additional 24AAXXX EEPROM
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 3.154 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.116 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (display on, EEPROM on) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -25,10 +23,9 @@
                          +----+
 */
 
-#include <avr/sleep.h>                           // Used for deep sleep
 #include <util/delay.h>                          // Needs less flash memory than delay()
-#include "SSD1306_minimal.h"                     // Modified library!
 #include <Wire.h>                                // I2C communication with display and EEPROM
+#include "SSD1306_minimal.h"                     // Modified library!
 
 // Hardware
 #define  BUTTON   PB1                            // Button pin    
@@ -49,7 +46,7 @@ int main(void) {
   init(); {                                      // Setup
     // Power saving
     ADCSRA &= ~(1 << ADEN);                      // Switch ADC off | Saves 270 uA
-    set_sleep_mode(SLEEP_MODE_PWR_DOWN);         // Always deepest sleep mode
+    MCUCR = (1 << SM1) | (0 << SM0);             // Always deepest sleep mode (Power-down)
 
     // Port setup
     DDRB  |= (1 << DEVICES);                     // Set PB4 to OUTPUT to power up display and EEPROM
@@ -79,7 +76,7 @@ int main(void) {
 
     // Randomize number generator
     PORTB &= ~(1 << DEVICES);                    // Devices off
-    sleep_mode();                                // Sleep until button is pressed to "turn on"
+    sleep();                                     // Sleep until button is pressed to "turn on"
     TCCR0A = 0x00;                               // Set timer 0 to normal mode
     TCCR0B = (1 << CS00);                        // Set prescaler to 1 to start the timer
     while (!(PINB & (1 << BUTTON)));             // Wait until button is released
@@ -113,21 +110,24 @@ int main(void) {
         write_swearword(4);                      // Write second word in second line
         
         // Wait for button and sleep 8s
-        sleep_mode();                            // Sleep 8 s or wake when button is pressed
-
         _delay_ms(500);                          // Debounce button
         awake = false;                           // Set to sleep     
         WDTCR |= (1 << WDIE);                    // Set watchdog interrupt
-        sleep_mode();                            // Sleep 8 s or wake when button is pressed
+        sleep();                                 // Sleep 8 s or wake when button is pressed
         WDTCR &= ~(1 << WDIE);                   // Stop watchdog interrupt
       } 
-
       // Go to sleep after 8 seconds if button is not pressed before                           
       oled.sendCommand(0xAE);                    // Display off and sleep (old boards)
       PORTB &= ~(1 << DEVICES);                  // Devices off   
-      sleep_mode();                              // Sleep until button is pressed
+      sleep();                                   // Sleep until button is pressed
     }
   }
+}
+
+void sleep() {
+  MCUCR |= (1 << SE);                            // Set SE (sleep Enable) bit
+  __asm__ __volatile__ ( "sleep" "\n\t" :: );    // Sleep now!!
+  MCUCR &= ~(1 << SE);                           // Delete SE bit
 }
 
 // Functions
