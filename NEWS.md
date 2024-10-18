@@ -4,7 +4,7 @@
 
 * **18.10.2024** Firmware **1.01-181024** is working in the *new* sketches now. **Schimpfolino_noeeprom_new.ino** got 5x5 new words.  
 * **17.10.2024** Release **V1.0M fixed**: important for Schimpfolino_noeeprom.ino **with** EEPROM and small further optimizations.  
-* **17.10.2024** Warning: The **_new** versions are not working correctly. There seems to be a bug in the core or maybe even in the hardware.
+* **17.10.2024** Warning: The **_new** versions are not working correctly.  
 * **16.10.2024** Small optimization and **Schimpfolino_noeeprom.ino** is working correctly again! Pew! **1.0x-16102024**.  
 * **11.10.2024** Better helping variable handling. Won 16 bytes! Worth an update? Yes, of course! **1.01-111024** and **1.0-111024**.  
 * **10.10.2024** New sketches added. **1.01-101024** with removed millis(): 182 bytes saved. Old versions are for the Make article but the new 1.01 versions are compatible.  
