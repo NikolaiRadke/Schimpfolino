@@ -5,8 +5,6 @@
 * **Schimpfolino_new**: new version for new improvments. Compatible to old version.
 * **Schimpfolino_noeeprom_new**: Same as above but with internal word list.
 * **eeprom/**: folder for files with EEPROM content and writing tool.
-
-**WARNING**: the *new* versions are not working correct. There seems to be a bug in the core or maybe even in the hardware.  
   
 # Compiling instructions for Schimpfolino
 
