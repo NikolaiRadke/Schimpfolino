@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.01 18.10.2024 - Nikolai Radke
+    Schimpfolino V1.01 19.10.2024 - Nikolai Radke
     https://www.monstermaker.de
     Next version for new improvements. Compatible with older versions
 
