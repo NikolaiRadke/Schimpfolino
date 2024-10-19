@@ -1,12 +1,12 @@
 /*  
-    Schimpfolino V1.0 16.10.2024 - Nikolai Radke
+    Schimpfolino V1.0 19.10.2024 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | With or without additional 24LAAXX EEPROM
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 8.000 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 7.996 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.6 mA (display on, no EEPROM) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -120,8 +120,8 @@ int main(void) {
         get_swearword(number);                   // Read first part of second word 
         
         // Second word second part
-        if (eeprom) number = (random(addresses[genus + 1], addresses[genus + 2]));
-        else number = (random(list, addresses[genus + 2])); // Select second part of second word
+        if (eeprom) list = addresses[genus + 1]; //  Set start adress for EEPROM
+        number = (random(list, addresses[genus + 2])); // Select second part of second word
         field = data3;                           // Pointer to female array
         if (genus == 1) field = data4;           // Pointer to male array
         if (genus == 2) field = data5;           // Pointer to neutrum array
