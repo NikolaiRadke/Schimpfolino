@@ -42,7 +42,7 @@ const char data5[] PROGMEM = {"sekret    balg      blag      monster   gel$t    
 char     *field;                                 // Pointer to one of the character arrays
 uint8_t  genus = 0;                              // Genus of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
-uint8_t  list;                                   // Variable for parsing word lists
+uint16_t list;                                   // Variable for parsing word lists
 uint16_t number;                                 // Variable for calculating addresses and selecting words
 uint16_t addresses[5] = {90, 90, 90, 90, 90};    // Wordlists addresses array - overwritten if EEPROM is present
 char     wordbuffer[20];                         // Buffer for read words

@@ -9,7 +9,7 @@
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 8.052 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 8.056 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.6 mA (display on, no EEPROM) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -44,7 +44,7 @@ const char data5[] PROGMEM = {"sekret    balg      blag      monster   gel$t    
 char     *field;                                 // Pointer to one of the character arrays
 uint8_t  genus = 0;                              // Genus of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
-uint8_t  list;                                   // Variable for parsing word lists
+uint16_t  list;                                   // Variable for parsing word lists
 uint16_t number;                                 // Variable for calculating addresses and selecting words
 uint16_t addresses[5] = {95, 95, 95, 95, 95};    // Wordlists addresses array - overwritten if EEPROM is present
 char     wordbuffer[20];                         // Buffer for read words
