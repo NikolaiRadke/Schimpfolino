@@ -4,7 +4,8 @@ These people helped me with Schimpfolino:
  - **Elise Lindner** - finding funny words.
  - **Elisabeth Seidl** - graphics. 
  - **Jan Fanslau** - filament and some ideas.
- - **Marcus Hansson** - The great articles in the german Make Magazin.
+ - **Marcus Hansson** - The great articles in the German Make Magazin.
+ - **MDecker** - Spelling corrections.  
   
 Used ressources:  
   
