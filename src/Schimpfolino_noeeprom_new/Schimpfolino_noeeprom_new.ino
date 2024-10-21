@@ -7,7 +7,7 @@
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 7.436 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 8.040 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.6 mA (display on, no EEPROM) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -180,14 +180,11 @@ void write_swearword(uint8_t line) {             // Write centered word
 }
 
 uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
-  uint8_t b;                                     // Helping variable for returning read value
   TinyI2C.start(0x50, 0);                        // Open connection to I2C-address 0x50 in write mode
   TinyI2C.write(e_address >> 8);                 // Send the MSB (Most Significant Byte) of the memory address
   TinyI2C.write(e_address & 0xFF);               // Send the LSB (Least Significant Byte) of the memory address
   TinyI2C.restart(0x50, 1);                      // Restart connection for reading one byte
-  b = TinyI2C.read();                            // Read and return byte
-  TinyI2C.stop();                                // Close connection
-  return b;                                      // Return value
+  return TinyI2C.readLast();                     // Read and return byte
 }
 
 void sleep() {
