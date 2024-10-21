@@ -11,17 +11,16 @@
   Modified by: Jimbo.we (www.geekonfire.com)
   Modified by: CoPiino Electronics (http://copiino.cc)
   Modified by: Kirk Northrop (github.com/kirknorthrop)
-  Modified by: Nikolai Radke (www.monstermaker.de) 
+  Modified by: Nikolai Radke (www.monstermaker.de)
                -- Reworked horrible formatting and spelling
                -- Removed unused code
-               -- Modified for Wire.h instead of TinyWireM.h
+               -- Modified for TinyI2C.h instead of TinyI2C.h
                -- Optimized init sequence and functions
 
       What is it?
-        This library is derived from GOFi2cOLED library, only for SSD1306 in I2C mode.
+        This library is derived from GOFi2cOLED library, only for SSD1306 in I2C Mode.
         As the original library only supports frame buffered mode which requires to have
-        at least 1024 bytes of free RAM for a 128 x 64 px display it is too big for
-        smaller devices.
+        at least 1024 bytes of free RAM for a 128 x 64 px display it is too big for smaller devices.
 
         So this a SSD1306 library that works great with ATtiny45/85 devices :)
 
@@ -30,7 +29,7 @@
   any redistribution.
 */
 
-#include <Wire.h>                                // Arduino and ATtiny I2C library
+#include "TinyI2CMaster.h"                                // Arduino and ATtiny I2C library
 #include <util/delay.h>                          // Needs less flash memory than delay()
 #include "SSD1306_minimal.h"
 
@@ -75,7 +74,7 @@ const unsigned char BasicFont[] PROGMEM = {
   0x63, 0x14, 0x08, 0x14, 0x63, // X 23
   0x07, 0x08, 0x70, 0x08, 0x07, // Y 24
   0x61, 0x51, 0x49, 0x45, 0x43, // Z 25
-  0x1C, 0x3E, 0x7C, 0x3E, 0x1C, // ♥ 26 unused :-(
+  0x1C, 0x3E, 0x7C, 0x3E, 0x1C, // ♥ 26
   0x20, 0x55, 0x54, 0x55, 0x78, // ä 27 
   0x38, 0x45, 0x44, 0x45, 0x38, // ö 28
   0x3C, 0x41, 0x40, 0x21, 0x7C, // ü 29
@@ -114,25 +113,25 @@ const unsigned char BasicFont[] PROGMEM = {
 
 // Private functions
 void SSD1306_Mini::commandMode() {               
-  Wire.beginTransmission(SlaveAddress);          // Begin I2C transmission
-  Wire.write(0x80);                              // Command mode
+  TinyI2C.start(SlaveAddress, 0);          // Begin I2C transmission
+  TinyI2C.write(0x80);                              // Command mode
 }
 
 void SSD1306_Mini::dataMode() {
-  Wire.beginTransmission(SlaveAddress);          // Begin I2C transmission
-  Wire.write(0x40);                              // Data mode
+  TinyI2C.start(SlaveAddress, 0);          // Begin I2C transmission
+  TinyI2C.write(0x40);                              // Data mode
 }
 
 void SSD1306_Mini::sendCommand(unsigned char command) { // Public function now to turn off display (old boars)
   commandMode();                                 // Set command mode
-  Wire.write(command);                           // Send command
-  Wire.endTransmission();    		                 // End I2C transmission
+  TinyI2C.write(command);                           // Send command
+  TinyI2C.stop();    		                 // End I2C transmission
 }
 
 void SSD1306_Mini::sendData(unsigned char data) {
   dataMode();                                    // Set data mode
-  Wire.write(data);                              // Send data
-  Wire.endTransmission();                        // Stop I2C transmission
+  TinyI2C.write(data);                              // Send data
+  TinyI2C.stop();                        // Stop I2C transmission
 }
 
 // Public functions
@@ -140,24 +139,24 @@ void SSD1306_Mini::init() {
   uint8_t i;
   _delay_ms(5);	                                 // Wait for OLED hardware init
   commandMode();                                 // Set command mode
-  for (i = 0; i < InitLength; i++)   
-    Wire.write(pgm_read_byte(&InitSequence[i])); // Write init sequence from PROGMEM
-  Wire.endTransmission();
+  for (i = 0; i < InitLength; i++)              
+    TinyI2C.write(pgm_read_byte(&InitSequence[i])); // Write init sequence from PROGMEM
+  TinyI2C.stop();
 }
 
 void SSD1306_Mini::clipArea(unsigned char col, unsigned char row, unsigned char w, unsigned char h) {
   commandMode();                                 // Set command mode
-  Wire.write(0x21);                              // Set column start and end address
-  Wire.write(0x00);
-  Wire.write(col);
-  Wire.write(col + w - 1);
-  Wire.endTransmission();                 
+  TinyI2C.write(0x21);                              // Set column start and end address
+  TinyI2C.write(0x00);
+  TinyI2C.write(col);
+  TinyI2C.write(col + w - 1);
+  TinyI2C.stop();                 
   commandMode();                                 // Set command mode
-  Wire.write(0x22);                              // Set page start and end address
-  Wire.write(0x00);
-  Wire.write(row); 
-  Wire.write(row + h - 1);
-  Wire.endTransmission();               
+  TinyI2C.write(0x22);                              // Set page start and end address
+  TinyI2C.write(0x00);
+  TinyI2C.write(row); 
+  TinyI2C.write(row + h - 1);
+  TinyI2C.stop();               
 }
 
 void SSD1306_Mini::cursorTo(unsigned char col, unsigned char row) {
@@ -173,8 +172,8 @@ void SSD1306_Mini::clear() {
   for (a = 0; a <= 64; a ++) {
     dataMode();
     for (b = 0; b < 16;  b ++) 
-      Wire.write(0x00);
-    Wire.endTransmission();
+      TinyI2C.write(0x00);
+    TinyI2C.stop();
   }
 }
 
@@ -182,8 +181,9 @@ void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
   uint8_t a;
   dataMode();                                    // Set data mode
   for (a = 0; a < 5; a ++)                       // Write 5 columns for each character
-    Wire.write(pgm_read_byte(&BasicFont[ch * 5 + a])); // Write column from PROGMEM
-  Wire.write(0x00);                              // One column space for better readabiltiy
-  if (chars < 19) Wire.write(0x00);              // One more column space when the line has enough room
-  Wire.endTransmission();
+    TinyI2C.write(pgm_read_byte(&BasicFont[ch * 5 + a])); // Write column from PROGMEM
+  TinyI2C.write(0x00);                              // One column space for better readabiltiy
+  if (chars < 19) TinyI2C.write(0x00);              // One more column space when the line has enough room
+  TinyI2C.stop();
 }
+

@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.01 19.10.2024 - Nikolai Radke
+    Schimpfolino V1.02 21.10.2024 - Nikolai Radke
     https://www.monstermaker.de
     Next version for new improvements. Compatible with older versions
 
@@ -7,7 +7,7 @@
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 3.116 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 2.438 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (display on, EEPROM on) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -24,7 +24,7 @@
 */
 
 #include <util/delay.h>                          // Needs less flash memory than delay()
-#include <Wire.h>                                // I2C communication with display and EEPROM
+#include "TinyI2CMaster.h"                       // I2C communication with display and EEPROM. Veeeery tight library!
 #include "SSD1306_minimal.h"                     // Modified library!
 
 // Hardware
@@ -62,8 +62,7 @@ int main(void) {
     sei();                                       // Start interrupts
 
     // Init I2C
-    Wire.setClock(400000L);                      // Fast mode (400 kHz)
-    Wire.begin();                                // Start I2C
+    TinyI2C.init();                              // Start I2C
 
     // Read wordlist addresses | genus is a helping variable here
     for (uint8_t list = 0; list < 5; list ++) {  // Read numbers of 5 wordlists
@@ -124,12 +123,6 @@ int main(void) {
   }
 }
 
-void sleep() {
-  MCUCR |= (1 << SE);                            // Set SE (sleep Enable) bit
-  __asm__ __volatile__ ( "sleep" "\n\t" :: );    // Sleep now!!
-  MCUCR &= ~(1 << SE);                           // Delete SE bit
-}
-
 // Functions
 void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
   char c;                                        // Helping variable for fetched character
@@ -161,16 +154,24 @@ void write_swearword(uint8_t line) {             // Write centered word
   oled.cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; x ++)                   // Print the characters...
     oled.printChar(wordbuffer[x]);               // ...from buffer
-  chars = 0;                                     // Set number of characters back to 0
+  chars = 0;                                     // Set number of characters back to 0 
 }
 
 uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
-  Wire.beginTransmission(0x50);                  // Open transmission to I2C-address 0x50
-  Wire.write(e_address >> 8);                    // Send the MSB (Most Significant Byte) of the memory address
-  Wire.write(e_address & 0xFF);                  // Send the LSB (Least Significant Byte) of the memory address
-  Wire.endTransmission();                        // Close transmission
-  Wire.requestFrom(0x50, 1);                     // Request one byte
-  return Wire.read();                            // Read and return byte
+  uint8_t b;                                     // Helping variable for returning read value
+  TinyI2C.start(0x50, 0);                        // Open connection to I2C-address 0x50 in write mode
+  TinyI2C.write(e_address >> 8);                 // Send the MSB (Most Significant Byte) of the memory address
+  TinyI2C.write(e_address & 0xFF);               // Send the LSB (Least Significant Byte) of the memory address
+  TinyI2C.restart(0x50, 1);                      // Restart connection for reading one byte
+  b = TinyI2C.read();                            // Read and return byte
+  TinyI2C.stop();                                // Close connection
+  return b;                                      // Return value
+}
+
+void sleep() {
+  MCUCR |= (1 << SE);                            // Set SE (sleep Enable) bit
+  __asm__ __volatile__ ( "sleep" "\n\t" :: );    // Sleep now!!
+  MCUCR &= ~(1 << SE);                           // Clear SE bit
 }
 
 ISR(PCINT0_vect) {                               // Interrupt routine for pin change 
