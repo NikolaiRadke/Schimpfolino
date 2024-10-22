@@ -49,16 +49,16 @@ class SSD1306_Mini {
     void clear();
     
     // Set the clipArea, by default (0, 0, 128, 8)
-    void clipArea(unsigned char col, unsigned char row, unsigned char w, unsigned char h);
+    void clipArea(uint8_t col, uint8_t row, uint8_t w, uint8_t h);
     
     // Move the cursor to a location (similar to clipArea)
-    void cursorTo( unsigned char row, unsigned char col);
+    void cursorTo(uint8_t row, uint8_t col);
     
     // Print a single character
     void printChar(char ch);
 
     // Send a command | Schimpfolino needs to switch off the display (old boards)
-    void sendCommand(unsigned char command);
+    void sendCommand(uint8_t command);
 
   private:
     // Set command mode
@@ -68,6 +68,6 @@ class SSD1306_Mini {
     void dataMode();
 
     // Send data
-    void sendData(unsigned char data);
+    void sendData(uint8_t data);
 };
 #endif
