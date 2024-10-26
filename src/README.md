@@ -5,6 +5,10 @@
 * **Schimpfolino_new**: new version for new improvments. Compatible to old version.
 * **Schimpfolino_noeeprom_new**: Same as above but with internal word list.
 * **eeprom/**: folder for files with EEPROM content and writing tool.
+
+# Configuration
+
+No changes are needed exepct for **SH1106** displays: in **oled.h** comment ``` #define OLED_CS_SSD1306 ``` to ``` // #define OLED_CS_SSD1306 ``` and uncomment ``` //#define OLED_CS_SH1106 ``` to ``` #define OLED_CS_SH1106 ```.     
   
 # Compiling instructions for Schimpfolino
 
