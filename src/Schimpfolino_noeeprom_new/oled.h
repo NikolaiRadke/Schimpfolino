@@ -1,6 +1,7 @@
 /*
-  SSD1306_minimal.h - SSD1306 OLED Driver Library
-  
+  oled.h - SSD1306 and SH1106 OLED driver library
+  based on SSD1306_minimal.h
+
   Copyright (c) 2012 Adafruit Industries. All rights reserved
   Copyright (c) 2012 GOF Electronics Co. Ltd (http://www.geekonfire.com)
   Copyright (c) 2015 CoPiino Electronics. All rights reserved
@@ -16,26 +17,29 @@
                -- Removed unused code
                -- Modified for Wire.h instead of TinyWireM.h
                -- Optimized init sequence and functions
+               -- SH1106 support by Sebastian Völke
 
       What is it?
         This library is derived from GOFi2cOLED library, only for SSD1306 in I2C Mode.
         As the original library only supports frame buffered mode which requires to have
         at least 1024 bytes of free RAM for a 128 x 64 px display it is too big for smaller devices.
 
-        So this a SSD1306 library that works great with ATtiny45/85 devices :)
+        So this a SSD1306/SH1106 library that works great with ATtiny45/85 devices :)
 
   It is a free software; you can redistribute it and/or modify it under the terms of 
   BSD license, check LICENSE for more information. All text above must be included in 
   any redistribution.
 */
 
-#ifndef __SSD1306_MINIMAL_H__
-#define __SSD1306_MINIMAL_H__
+#ifndef __OLED_H__
+#define __OLED_H__
 
 #include <Arduino.h>                             // Arduino and ATtiny specific library
 
-// Config
+// Config Display | For SH1106 comment OLED_CS_SSD!06 and uncomment OLED_CS_SH1106
 #define SlaveAddress 0x3c                        // SSD1306 I2C address
+#define OLED_CS_SSD1306                          // (most 0.96" OLED Displays) 
+//#define OLED_CS_SH1106                         // (most 1.30" OLED Displays)
 
 // Schimpfolino: Count characters in main sketch, used to shrink font witdh if too long
 extern uint8_t chars;                            

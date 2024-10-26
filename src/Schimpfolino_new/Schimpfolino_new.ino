@@ -1,11 +1,12 @@
 /*  
-    Schimpfolino V1.02 21.10.2024 - Nikolai Radke
+    Schimpfolino V1.03 26.10.2024 - Nikolai Radke
     https://www.monstermaker.de
     Next version for new improvements. Compatible with older versions
 
     Sketch for the insulting gadget | Only with additional 24AAXXX EEPROM
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
+    For SH1106 display see and modify oled.h.
 
     Flash usage: 2.392 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (display on, EEPROM on) | ~ 200 nA (sleep)
@@ -24,8 +25,8 @@
 */
 
 #include <util/delay.h>                          // Needs less flash memory than delay()
-#include "TinyI2CMaster.h"                       // I2C communication with display and EEPROM. Veeeery tight library!
-#include "SSD1306_minimal.h"                     // Modified library!
+#include "TinyI2CMaster.h"                       // I2C communication with display and EEPROM. Very tight library!
+#include "oled.h"                                // OLED display library for SSD1306 and SH1106
 
 // Hardware
 #define  BUTTON   PB1                            // Button pin    

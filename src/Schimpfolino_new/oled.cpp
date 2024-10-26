@@ -1,5 +1,6 @@
 /*
-  SSD1306_minimal.cpp - SSD1306 OLED driver library
+  oled.cpp - SSD1306 and SH1106 OLED driver library
+  based on SSD1306_minimal.cpp
   
   Copyright (c) 2012 Adafruit Industries. All rights reserved
   Copyright (c) 2012 GOF Electronics Co. Ltd (http://www.geekonfire.com)
@@ -16,13 +17,14 @@
                -- Removed unused code
                -- Modified for TinyI2C.h instead of TinyI2C.h
                -- Optimized init sequence and functions
+               -- SH1106 support by Sebastian Völke
 
       What is it?
         This library is derived from GOFi2cOLED library, only for SSD1306 in I2C Mode.
         As the original library only supports frame buffered mode which requires to have
         at least 1024 bytes of free RAM for a 128 x 64 px display it is too big for smaller devices.
 
-        So this a SSD1306 library that works great with ATtiny45/85 devices :)
+        So this a SDD1306/SH1106 library that works great with ATtiny45/85 devices :)
 
   It is a free software; you can redistribute it and/or modify it under the terms of 
   BSD license, check LICENSE for more information. All text above must be included in 
@@ -31,7 +33,7 @@
 
 #include "TinyI2CMaster.h"                       // Arduino and ATtiny I2C library
 #include <util/delay.h>                          // Needs less flash memory than delay()
-#include "SSD1306_minimal.h"
+#include "oled.h"
 
 #define InitLength 11                            // Number of init commands
 
@@ -145,6 +147,13 @@ void SSD1306_Mini::init() {
 }
 
 void SSD1306_Mini::clipArea(uint8_t col, uint8_t row, uint8_t w, uint8_t h) {
+#ifdef OLED_CS_SH1106
+  sendCommand(0xb0 | row);
+  sendCommand(0x00 | (col & 0xf));
+  sendCommand(0x10 | ((col >> 4) & 0xf));
+#endif
+
+#ifdef OLED_CS_SSD1306
   commandMode();                                 // Set command mode
   TinyI2C.write(0x21);                           // Set column start and end address
   TinyI2C.write(0x00);
@@ -157,6 +166,7 @@ void SSD1306_Mini::clipArea(uint8_t col, uint8_t row, uint8_t w, uint8_t h) {
   TinyI2C.write(row); 
   TinyI2C.write(row + h - 1);
   TinyI2C.stop();               
+#endif
 }
 
 void SSD1306_Mini::cursorTo(uint8_t col, uint8_t row) {
@@ -164,6 +174,24 @@ void SSD1306_Mini::cursorTo(uint8_t col, uint8_t row) {
 }
 
 void SSD1306_Mini::clear() {
+#ifdef OLED_CS_SH1106
+  uint8_t a, b, c;
+  sendCommand(0xae);                               // Display off   
+  for (c = 0; c < 8; c++) {
+    sendCommand(0xb0 | c);                         // Page 0 - 7   
+    sendCommand(0x00 | 0x00);                      // Low col = 0
+    sendCommand(0x10 | 0x00);                      // Hi col = 0
+    for (a = 0; a <= 16; a++) {
+      dataMode();
+      for (b = 0; b < 8;  b++) 
+        TinyI2C.write(0x00);
+      TinyI2C.stop();
+    }
+  }
+  sendCommand(0xaf);                               // Display on   
+#endif
+
+#ifdef OLED_CS_SSD1306
   uint8_t a, b;
   sendCommand(0x00 | 0x00);                      // Low col = 0
   sendCommand(0x10 | 0x00);                      // Hi col = 0
@@ -175,6 +203,7 @@ void SSD1306_Mini::clear() {
       TinyI2C.write(0x00);
     TinyI2C.stop();
   }
+#endif
 }
 
 void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
