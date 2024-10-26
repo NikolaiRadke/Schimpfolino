@@ -8,7 +8,9 @@
 
 # Configuration
 
-No changes are needed exepct for **SH1106** displays: in **oled.h** comment ``` #define OLED_CS_SSD1306 ``` to ``` // #define OLED_CS_SSD1306 ``` and uncomment ``` //#define OLED_CS_SH1106 ``` to ``` #define OLED_CS_SH1106 ```.     
+No changes are needed exepct for **SH1106** displays: in **oled.h** comment   
+``` #define OLED_CS_SSD1306 ``` to ``` // #define OLED_CS_SSD1306 ``` and uncomment   
+``` //#define OLED_CS_SH1106 ``` to ``` #define OLED_CS_SH1106 ```.     
   
 # Compiling instructions for Schimpfolino
 
