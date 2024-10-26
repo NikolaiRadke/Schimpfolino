@@ -1,7 +1,8 @@
 # Newsblog
 
 # 2024
-  
+
+* **26.10.2024** **1.03-261024** now supports SH1106 displays. Thanks to Sebastian Völkel.  
 * **21.10.2024** Firmware **1.02-201024**. Switched to Tiny-I2C library and freed 600 bytes. Schimpfolino_new_eeprom now has 5x15 more words.  
 * **19.10.2024** Firmware **1.0x-191024**. Fixed the noeeprom bug and removed the workaround. Finally. Pew.  
 * **18.10.2024** Firmware **1.01-181024** for the *new* versions is working now. **Schimpfolino_noeeprom_new.ino** got 5x5 new words.  
