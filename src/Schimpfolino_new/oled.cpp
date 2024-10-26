@@ -124,7 +124,7 @@ void SSD1306_Mini::dataMode() {
   TinyI2C.write(0x40);                           // Data mode
 }
 
-void SSD1306_Mini::sendCommand(uint8_t command) { // Public function now to turn off display (old boars)
+void SSD1306_Mini::sendCommand(uint8_t command) { // Public function now to turn off display (old boards)
   commandMode();                                 // Set command mode
   TinyI2C.write(command);                        // Send command
   TinyI2C.stop();    		                         // End I2C transmission
@@ -176,11 +176,11 @@ void SSD1306_Mini::cursorTo(uint8_t col, uint8_t row) {
 void SSD1306_Mini::clear() {
 #ifdef OLED_CS_SH1106
   uint8_t a, b, c;
-  sendCommand(0xae);                               // Display off   
+  sendCommand(0xae);                             // Display off   
   for (c = 0; c < 8; c++) {
-    sendCommand(0xb0 | c);                         // Page 0 - 7   
-    sendCommand(0x00 | 0x00);                      // Low col = 0
-    sendCommand(0x10 | 0x00);                      // Hi col = 0
+    sendCommand(0xb0 | c);                       // Page 0 - 7   
+    sendCommand(0x00 | 0x00);                    // Low col = 0
+    sendCommand(0x10 | 0x00);                    // Hi col = 0
     for (a = 0; a <= 16; a++) {
       dataMode();
       for (b = 0; b < 8;  b++) 
@@ -188,7 +188,7 @@ void SSD1306_Mini::clear() {
       TinyI2C.stop();
     }
   }
-  sendCommand(0xaf);                               // Display on   
+  sendCommand(0xaf);                             // Display on   
 #endif
 
 #ifdef OLED_CS_SSD1306

@@ -36,12 +36,12 @@
 
 #include <Arduino.h>                             // Arduino and ATtiny specific library
 
-// Config Display | For SH1106 comment OLED_CS_SSD!06 and uncomment OLED_CS_SH1106
+// Config display | For SH1106 comment OLED_CS_SSD!06 and uncomment OLED_CS_SH1106
 #define SlaveAddress 0x3c                        // SSD1306 I2C address
-#define OLED_CS_SSD1306                          // (most 0.96" OLED Displays) 
-//#define OLED_CS_SH1106                         // (most 1.30" OLED Displays)
+#define OLED_CS_SSD1306                          // Most 0.96" OLED displays 
+//#define OLED_CS_SH1106                         // Most 1.30" OLED displays
 
-// Schimpfolino: Count characters in main sketch, used to shrink font witdh if too long
+// Schimpfolino: count characters in main sketch, used to shrink font witdh if too long
 extern uint8_t chars;                            
 
 class SSD1306_Mini {

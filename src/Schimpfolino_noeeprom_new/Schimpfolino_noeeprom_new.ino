@@ -25,8 +25,8 @@
 */
 
 #include <util/delay.h>                          // Needs less flash memory than delay()
-#include "TinyI2CMaster.h"                       // I2C communication with display and EEPROM. Veeeery tight library!
-#include "SSD1306_minimal.h"                     // Modified library!
+#include "TinyI2CMaster.h"                       // I2C communication with display and EEPROM. Very tight library!
+#include "oled.h"                                // OLED display library for SSD1306 and SH1106
 
 // Hardware
 #define  BUTTON   PB1                            // Button pin
