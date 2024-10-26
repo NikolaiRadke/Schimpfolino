@@ -5,7 +5,8 @@ These people helped me with Schimpfolino:
  - **Elisabeth Seidl** - graphics. 
  - **Jan Fanslau** - filament and some ideas.
  - **Marcus Hansson** - The great articles in the German Make Magazin.
- - **MDecker** - Spelling corrections.  
+ - **MDecker** - Spelling corrections.
+ - **Sebastian Völke** - SH1106 support.  
   
 Used ressources:  
   
