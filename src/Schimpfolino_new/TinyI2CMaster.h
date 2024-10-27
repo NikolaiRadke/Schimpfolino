@@ -1,10 +1,12 @@
-/* TinyI2C v2.0.1
+/* 
+    TinyI2C v2.0.1
 
-   David Johnson-Davies - www.technoblogy.com - 5th June 2022
-   
-   CC BY 4.0
-   Licensed under a Creative Commons Attribution 4.0 International license: 
-   http://creativecommons.org/licenses/by/4.0/
+    David Johnson-Davies - www.technoblogy.com - 5th June 2022
+    Modified for ATtiny85 8 MHz only by Nikolai Radke - wwwm-monstermaker.de - 27th October 2024
+  
+    CC BY 4.0
+    Licensed under a Creative Commons Attribution 4.0 International license: 
+    http://creativecommons.org/licenses/by/4.0/
 */
 
 #ifndef TinyI2CMaster_h

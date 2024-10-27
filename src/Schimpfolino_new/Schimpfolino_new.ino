@@ -8,7 +8,7 @@
     Remember to burn the "bootloader" (IDE is setting fuses) first!
     For SH1106 display see and modify oled.h.
 
-    Flash usage: 2.392 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 2.386 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (display on, EEPROM on) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -50,8 +50,8 @@ int main(void) {
     MCUCR = (1 << SM1) | (0 << SM0);             // Always deepest sleep mode (Power-down)
 
     // Port setup
-    DDRB  |= (1 << DEVICES);                     // Set PB4 to OUTPUT to power up display and EEPROM
-    PORTB = 0x3F;                                // Set all ports to INPUT_PULLUP to prevent floating and start devices
+    DDRB = (1 << DEVICES) | (1 << SDA) | (1 << SCL); // Set PB4 to OUTPUT to power up display and EEPROM | SDA and SCL for I2C
+    PORTB = 0x3F;                                // Set output ports to HIGH and input ports to INPUT_PULLUP to prevent floating
     
     // Hardware pin and watchdog interrupt
     cli();                                       // Stop all interrupts. An interrupt can ruin the timed sequence

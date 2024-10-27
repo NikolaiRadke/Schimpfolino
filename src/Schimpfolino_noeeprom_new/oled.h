@@ -1,34 +1,34 @@
 /*
-  oled.h - SSD1306 and SH1106 OLED driver library
-  based on SSD1306_minimal.h
+    oled.h - SSD1306 and SH1106 OLED driver library
+    based on SSD1306_minimal.h
 
-  Copyright (c) 2012 Adafruit Industries. All rights reserved
-  Copyright (c) 2012 GOF Electronics Co. Ltd (http://www.geekonfire.com)
-  Copyright (c) 2015 CoPiino Electronics. All rights reserved
-  Copyright (c) 2016 Kirk Northrop (github.com/kirknorthrop)
-  Copytight (c) 2024 Nikolai Radke (http://www.monstermaker.de)
+    Copyright (c) 2012 Adafruit Industries. All rights reserved
+    Copyright (c) 2012 GOF Electronics Co. Ltd (http://www.geekonfire.com)
+    Copyright (c) 2015 CoPiino Electronics. All rights reserved
+    Copyright (c) 2016 Kirk Northrop (github.com/kirknorthrop)
+    Copyright (c) 2024 Nikolai Radke (http://www.monstermaker.de)
   
-  Original Author: Limor Fried/Ladyada Adafruit Industries
-  Modified by: Jimbo.we (www.geekonfire.com)
-  Modified by: CoPiino Electronics (http://copiino.cc)
-  Modified by: Kirk Northrop (github.com/kirknorthrop)
-  Modified by: Nikolai Radke (www.monstermaker.de)
-               -- Reworked formatting and spelling
-               -- Removed unused code
-               -- Modified for TinyI2C.h instead of TinyWireM.h
-               -- Optimized init sequence and functions
-               -- SH1106 support by Sebastian Völke
+    Original Author: Limor Fried/Ladyada Adafruit Industries
+    Modified by: Jimbo.we (www.geekonfire.com)
+    Modified by: CoPiino Electronics (http://copiino.cc)
+    Modified by: Kirk Northrop (github.com/kirknorthrop)
+    Modified by: Nikolai Radke (www.monstermaker.de)
+                 -- Reworked formatting and spelling
+                 -- Removed unused code
+                 -- Modified for TinyI2C.h instead of TinyWireM.h
+                 -- Optimized init sequence and functions
+                 -- SH1106 support by Sebastian Völke
 
-      What is it?
-        This library is derived from GOFi2cOLED library, only for SSD1306 in I2C Mode.
-        As the original library only supports frame buffered mode which requires to have
-        at least 1024 bytes of free RAM for a 128 x 64 px display it is too big for smaller devices.
+    What is it?
+      This library is derived from GOFi2cOLED library, only for SSD1306 in I2C Mode.
+      As the original library only supports frame buffered mode which requires to have
+      at least 1024 bytes of free RAM for a 128 x 64 px display it is too big for smaller devices.
 
-        So this a SSD1306/SH1106 library that works great with ATtiny45/85 devices :)
+      So this a SSD1306/SH1106 library that works great with ATtiny45/85 devices :)
 
-  It is a free software; you can redistribute it and/or modify it under the terms of 
-  BSD license, check LICENSE for more information. All text above must be included in 
-  any redistribution.
+    It is a free software; you can redistribute it and/or modify it under the terms of 
+    BSD license, check LICENSE for more information. All text above must be included in 
+    any redistribution.
 */
 
 #ifndef __OLED_H__
@@ -36,7 +36,7 @@
 
 #include <Arduino.h>                             // Arduino and ATtiny specific library
 
-// Config sisplay | For SH1106 comment OLED_CS_SSD!06 and uncomment OLED_CS_SH1106
+// Config display | For SH1106 comment OLED_CS_SSD!06 and uncomment OLED_CS_SH1106
 #define SlaveAddress 0x3c                        // SSD1306 I2C address
 #define OLED_CS_SSD1306                          // Most 0.96" OLED displays 
 //#define OLED_CS_SH1106                         // Most 1.30" OLED displays
