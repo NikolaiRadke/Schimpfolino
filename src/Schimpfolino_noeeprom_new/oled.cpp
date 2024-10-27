@@ -147,26 +147,9 @@ void Oled::init() {
 }
 
 void Oled::clipArea(uint8_t col, uint8_t row, uint8_t w, uint8_t h) {
-#ifdef OLED_CS_SH1106
   sendCommand(0xb0 | row);
   sendCommand(0x00 | (col & 0xf));
   sendCommand(0x10 | ((col >> 4) & 0xf));
-#endif
-
-#ifdef OLED_CS_SSD1306
-  commandMode();                                 // Set command mode
-  TinyI2C.write(0x21);                           // Set column start and end address
-  TinyI2C.write(0x00);
-  TinyI2C.write(col);
-  TinyI2C.write(col + w - 1);
-  TinyI2C.stop();                 
-  commandMode();                                 // Set command mode
-  TinyI2C.write(0x22);                           // Set page start and end address
-  TinyI2C.write(0x00);
-  TinyI2C.write(row); 
-  TinyI2C.write(row + h - 1);
-  TinyI2C.stop();               
-#endif
 }
 
 void Oled::cursorTo(uint8_t col, uint8_t row) {
@@ -174,7 +157,6 @@ void Oled::cursorTo(uint8_t col, uint8_t row) {
 }
 
 void Oled::clear() {
-#ifdef OLED_CS_SH1106
   uint8_t a, b, c;
   sendCommand(0xae);                             // Display off   
   for (c = 0; c < 8; c++) {
@@ -189,21 +171,6 @@ void Oled::clear() {
     }
   }
   sendCommand(0xaf);                             // Display on   
-#endif
-
-#ifdef OLED_CS_SSD1306
-  uint8_t a, b;
-  sendCommand(0x00 | 0x00);                      // Low col = 0
-  sendCommand(0x10 | 0x00);                      // Hi col = 0
-  sendCommand(0x40 | 0x00);                      // Line #0   
-  clipArea(0 , 0, 128, 8);
-  for (a = 0; a <= 64; a ++) {
-    dataMode();
-    for (b = 0; b < 16;  b ++) 
-      TinyI2C.write(0x00);
-    TinyI2C.stop();
-  }
-#endif
 }
 
 void Oled::printChar(char ch) {          // Reworked for Schimpfolino
