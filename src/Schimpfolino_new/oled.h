@@ -13,9 +13,9 @@
   Modified by: CoPiino Electronics (http://copiino.cc)
   Modified by: Kirk Northrop (github.com/kirknorthrop)
   Modified by: Nikolai Radke (www.monstermaker.de)
-               -- Reworked horrible formatting and spelling
+               -- Reworked formatting and spelling
                -- Removed unused code
-               -- Modified for Wire.h instead of TinyWireM.h
+               -- Modified for TinyI2C.h instead of TinyWireM.h
                -- Optimized init sequence and functions
                -- SH1106 support by Sebastian Völke
 
