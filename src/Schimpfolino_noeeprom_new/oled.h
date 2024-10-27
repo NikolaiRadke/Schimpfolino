@@ -44,7 +44,7 @@
 // Schimpfolino: count characters in main sketch, used to shrink font witdh if too long
 extern uint8_t chars;                            
 
-class SSD1306_Mini {
+class Oled {
   public:
     // Call this function once to initialize the display
     void init();

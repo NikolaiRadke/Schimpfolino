@@ -41,7 +41,7 @@ char     wordbuffer[20];                         // Buffer for reading words
 
 volatile bool awake = false;                     // Stay wake when button is pressed
 
-SSD1306_Mini  oled;                              // Set display
+Oled     oled;                                   // Set display
 
 int main(void) {                                 
   init(); {                                      // Setup

@@ -114,30 +114,30 @@ const uint8_t BasicFont[] PROGMEM = {
 };
 
 // Private functions
-void SSD1306_Mini::commandMode() {               
+void Oled::commandMode() {               
   TinyI2C.start(SlaveAddress, 0);                // Begin I2C transmission
   TinyI2C.write(0x80);                           // Command mode
 }
 
-void SSD1306_Mini::dataMode() {
+void Oled::dataMode() {
   TinyI2C.start(SlaveAddress, 0);                // Begin I2C transmission
   TinyI2C.write(0x40);                           // Data mode
 }
 
-void SSD1306_Mini::sendCommand(uint8_t command) { // Public function now to turn off display (old boards)
+void Oled::sendCommand(uint8_t command) { // Public function now to turn off display (old boards)
   commandMode();                                 // Set command mode
   TinyI2C.write(command);                        // Send command
   TinyI2C.stop();    		                         // End I2C transmission
 }
 
-void SSD1306_Mini::sendData(uint8_t data) {
+void Oled::sendData(uint8_t data) {
   dataMode();                                    // Set data mode
   TinyI2C.write(data);                           // Send data
   TinyI2C.stop();                                // Stop I2C transmission
 }
 
 // Public functions
-void SSD1306_Mini::init() {
+void Oled::init() {
   uint8_t i;
   _delay_ms(5);	                                 // Wait for OLED hardware init
   commandMode();                                 // Set command mode
@@ -146,7 +146,7 @@ void SSD1306_Mini::init() {
   TinyI2C.stop();
 }
 
-void SSD1306_Mini::clipArea(uint8_t col, uint8_t row, uint8_t w, uint8_t h) {
+void Oled::clipArea(uint8_t col, uint8_t row, uint8_t w, uint8_t h) {
 #ifdef OLED_CS_SH1106
   sendCommand(0xb0 | row);
   sendCommand(0x00 | (col & 0xf));
@@ -169,11 +169,11 @@ void SSD1306_Mini::clipArea(uint8_t col, uint8_t row, uint8_t w, uint8_t h) {
 #endif
 }
 
-void SSD1306_Mini::cursorTo(uint8_t col, uint8_t row) {
+void Oled::cursorTo(uint8_t col, uint8_t row) {
   clipArea(col, row, 128 - col, 8 - row);            
 }
 
-void SSD1306_Mini::clear() {
+void Oled::clear() {
 #ifdef OLED_CS_SH1106
   uint8_t a, b, c;
   sendCommand(0xae);                             // Display off   
@@ -206,7 +206,7 @@ void SSD1306_Mini::clear() {
 #endif
 }
 
-void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
+void Oled::printChar(char ch) {          // Reworked for Schimpfolino
   uint8_t a;
   dataMode();                                    // Set data mode
   for (a = 0; a < 5; a ++)                       // Write 5 columns for each character
@@ -215,4 +215,3 @@ void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
   if (chars < 19) TinyI2C.write(0x00);           // One more column space when the line has enough room
   TinyI2C.stop();
 }
-
