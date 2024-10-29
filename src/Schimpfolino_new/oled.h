@@ -18,6 +18,8 @@
                  -- Modified for TinyI2C.h instead of TinyWireM.h
                  -- Optimized init sequence and functions
                  -- SH1106 support by Sebastian Völke
+                 -- Bold font by Sebastian Völke
+
 
     What is it?
       This library is derived from GOFi2cOLED library, only for SSD1306 in I2C Mode.
@@ -38,6 +40,7 @@
 
 // Config display
 #define SlaveAddress 0x3c                        // SSD1306 I2C address
+//#define bold                                   // Uncomment to use bold font
 
 // Schimpfolino: count characters in main sketch, used to shrink font witdh if too long
 extern uint8_t chars;                            
