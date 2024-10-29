@@ -44,16 +44,17 @@ Technically, this process will flash no bootloader, the IDE just sets the fuses.
 4. Select ``` Tools > Port ``` for the matching port.  
 5. Select ``` Tools > B.O.D. Level [...] > B.O.D. Disabled (saves power) ```.
 6. Select ``` Tools > Chip > ATtiny85 ``` or ``` Tools > Chip > ATtiny45 ```.
-7. **For V1.0X**: Select ``` Tools > millis()/micros() > Disabled (saves flash) ```.
+7. **For V1.X**: Select ``` Tools > millis()/micros() > Disabled (saves flash) ```.
 8. Start burning process with ``` Tools > Burn bootloader ```.  
 
 Now you can flash your ATtiny with any sketch you want! But this time, we focus on Schimpfolino.   
 
-### Flashing Schimpfolino firmware
+### Flashing and configuring Schimpfolino firmware
   
-1. Open **Schimpfolino.ino**, **Schimpfolino_wire.ino**.
-2. Select ``` Sketch > Upload using programmer ``` (IDE 2.X) or press upload button (IDE 1.X) 
-3. DONE.  
+1. Open the Schimpfolino sketch.
+2. If you want a bold font, Uncomment ``` #// define bold ``` in **oled.h** by removing ``` // ```.     
+3. Select ``` Sketch > Upload using programmer ``` (IDE 2.X) or press upload button (IDE 1.X and 2.3.3 or newer). 
+4. DONE.  
 
 Now you can remove the microcontroller and plug it into the socket of your Schimpfolino.  
 
