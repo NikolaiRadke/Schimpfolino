@@ -53,6 +53,7 @@ extern uint8_t chars;
     
     // Move the cursor to a location (similar to clipArea)
     void Oled_cursorTo(uint8_t row, uint8_t col);
+    void clipArea(uint8_t col, uint8_t row, uint8_t w, uint8_t h);
     
     // Print a single character
     void Oled_printChar(char ch);
