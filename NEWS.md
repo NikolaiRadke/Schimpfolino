@@ -2,6 +2,8 @@
 
 # 2024
   
+* **30.10.2024** Firmware **1.2-391024** with heavy shrunk (and crippled) libraries.    
+* **29.10.2024** Release **V1.2** with enough new features to justify it.   
 * **29.10.2024** **V1.2** with optional bold font. **1.2-291024**  
 * **26.10.2024** **V1.1** now with full SH1106 support. **1.1-271024**  
 * **26.10.2024** **1.03-261024** now supports SH1106 displays. Thanks to Sebastian Völkel.  
