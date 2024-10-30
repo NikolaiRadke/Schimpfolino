@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.2 29.10.2024 - Nikolai Radke
+    Schimpfolino V1.2 30.10.2024 - Nikolai Radke
     https://www.monstermaker.de
     Next version for new improvements. Compatible with older versions
 
@@ -7,7 +7,7 @@
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 2.340 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 2.224 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (display on, EEPROM on) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -39,8 +39,6 @@ uint16_t addresses[5];                           // Wordlists addresses array
 char     wordbuffer[20];                         // Buffer for reading words
 
 volatile bool awake = false;                     // Stay wake when button is pressed
-
-Oled     oled;                                   // Set display
 
 int main(void) {                                 
   init(); {                                      // Setup
@@ -86,18 +84,18 @@ int main(void) {
       // Init Display
       PORTB |= (1 << DEVICES);                   // Devices on
       PRR |= (1 << PRTIM0) | (1 << PRTIM1);      // Both timers are not needed anymore | Saves 100 uA when active
-      oled.init();                               // Connect and start OLED via I2C
+      Oled_init();                               // Connect and start OLED via I2C
 
       // Display swearwords until timeout
       while (awake) {                            // Wait 8.5 seconds timeout
-        oled.clear();                            // Clear display buffer
+        Oled_clear();                            // Clear display buffer
 
         // First word
         number = (random(0, addresses[0]));      // Select first word
         get_swearword(number);                   // Read word from EEPROM
         write_swearword(2);                      // Write first word in the first line
         genus = random(0, 3);                    // Set word genus
-        if (genus != 0) oled.printChar(48 + genus); // If male, write "r", if neutrum, write "s"
+        if (genus != 0) Oled_printChar(48 + genus); // If male, write "r", if neutrum, write "s"
 
         // Second word first part
         number = (random(addresses[0], addresses[1])); // Select second word
@@ -116,7 +114,7 @@ int main(void) {
         WDTCR &= ~(1 << WDIE);                   // Stop watchdog interrupt
       } 
       // Go to sleep after 8 seconds if button is not pressed before                           
-      oled.sendCommand(0xAE);                    // Display off and sleep (old boards)
+      Oled_sendCommand(0xAE);                    // Display off and sleep (old boards)
       PORTB &= ~(1 << DEVICES);                  // Devices off   
       sleep();                                   // Sleep until button is pressed
     }
@@ -151,9 +149,9 @@ void write_swearword(uint8_t line) {             // Write centered word
   x = (128 - (chars * 7)) / 2;                   // Calculate centering
   if (chars > 18)  x = (128 - (chars * 6)) / 2;  // Modify for very long words
   if ((genus != 0) && (line == 2)) x -= 4;       // If not female, set first one half block left for genus character
-  oled.cursorTo(x, line);                        // Set cursor to selected line
+  Oled_cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; x ++)                   // Print the characters...
-    oled.printChar(wordbuffer[x]);               // ...from buffer
+    Oled_printChar(wordbuffer[x]);               // ...from buffer
   chars = 0;                                     // Set number of characters back to 0 
 }
 
@@ -161,8 +159,8 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
   TinyI2C.start(0x50, 0);                        // Open connection to I2C-address 0x50 in write mode
   TinyI2C.write(e_address >> 8);                 // Send the MSB (Most Significant Byte) of the memory address
   TinyI2C.write(e_address & 0xFF);               // Send the LSB (Least Significant Byte) of the memory address
-  TinyI2C.restart(0x50, 1);                      // Restart connection for reading one byte
-  return TinyI2C.readLast();                     // Read and return byte
+  TinyI2C.start(0x50, 1);                        // Restart connection for reading one byte
+  return TinyI2C.read();                         // Read and return byte
 }
 
 void sleep() {

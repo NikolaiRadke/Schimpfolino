@@ -45,34 +45,27 @@
 // Schimpfolino: count characters in main sketch, used to shrink font witdh if too long
 extern uint8_t chars;                            
 
-class Oled {
-  public:
     // Call this function once to initialize the display
-    void init();
+    void Oled_init(void);
   
     // Reset clipArea to maximum and clear the display
-    void clear();
-    
-    // Set the clipArea, by default (0, 0, 128, 8)
-    void clipArea(uint8_t col, uint8_t row, uint8_t w, uint8_t h);
+    void Oled_clear(void);
     
     // Move the cursor to a location (similar to clipArea)
-    void cursorTo(uint8_t row, uint8_t col);
+    void Oled_cursorTo(uint8_t row, uint8_t col);
     
     // Print a single character
-    void printChar(char ch);
+    void Oled_printChar(char ch);
 
     // Send a command | Schimpfolino needs to switch off the display (old boards)
-    void sendCommand(uint8_t command);
+    void Oled_sendCommand(uint8_t command);
 
-  private:
     // Set command mode
-    void commandMode();
+    void Oled_commandMode(void);
 
     // Set data mode
-    void dataMode();
+    void Oled_dataMode(void);
 
     // Send data
-    void sendData(uint8_t data);
-};
+    void Oled_sendData(uint8_t data);
 #endif

@@ -32,8 +32,8 @@
     any redistribution.
 */
 
-#include "TinyI2CMaster.h"                       // Arduino and ATtiny I2C library
 #include <util/delay.h>                          // Needs less flash memory than delay()
+#include "TinyI2CMaster.h"                       // Arduino and ATtiny I2C library
 #include "oled.h"
 
 #define InitLength 11                            // Number of init commands
@@ -181,68 +181,62 @@ const uint8_t BasicFont[] PROGMEM = {            // Standard font
 #endif
 
 // Private functions
-void Oled::commandMode() {               
+void Oled_commandMode() {               
   TinyI2C.start(SlaveAddress, 0);                // Begin I2C transmission
   TinyI2C.write(0x80);                           // Command mode
 }
 
-void Oled::dataMode() {
+void Oled_dataMode() {
   TinyI2C.start(SlaveAddress, 0);                // Begin I2C transmission
   TinyI2C.write(0x40);                           // Data mode
 }
 
-void Oled::sendCommand(uint8_t command) { // Public function now to turn off display (old boards)
-  commandMode();                                 // Set command mode
+void Oled_sendCommand(uint8_t command) { // Public function now to turn off display (old boards)
+  Oled_commandMode();                            // Set command mode
   TinyI2C.write(command);                        // Send command
   TinyI2C.stop();    		                         // End I2C transmission
 }
 
-void Oled::sendData(uint8_t data) {
-  dataMode();                                    // Set data mode
+void Oled_sendData(uint8_t data) {
+  Oled_dataMode();                               // Set data mode
   TinyI2C.write(data);                           // Send data
   TinyI2C.stop();                                // Stop I2C transmission
 }
 
 // Public functions
-void Oled::init() {
+void Oled_init() {
   uint8_t i;
   _delay_ms(5);	                                 // Wait for OLED hardware init
-  commandMode();                                 // Set command mode
+  Oled_commandMode();                            // Set command mode
   for (i = 0; i < InitLength; i++)              
     TinyI2C.write(pgm_read_byte(&InitSequence[i])); // Write init sequence from PROGMEM
   TinyI2C.stop();
 }
 
-void Oled::clipArea(uint8_t col, uint8_t row, uint8_t w, uint8_t h) {
-  sendCommand(0xb0 | row);
-  sendCommand(0x00 | (col & 0xf));
-  sendCommand(0x10 | ((col >> 4) & 0xf));
+void Oled_cursorTo(uint8_t col, uint8_t row) {
+  Oled_sendCommand(0xb0 | row);
+  Oled_sendCommand(0x00 | (col & 0xf));
+  Oled_sendCommand(0x10 | ((col >> 4) & 0xf));
 }
 
-void Oled::cursorTo(uint8_t col, uint8_t row) {
-  clipArea(col, row, 128 - col, 8 - row);            
-}
-
-void Oled::clear() {
+void Oled_clear() {
   uint8_t a, b, c;
-  sendCommand(0xae);                             // Display off   
   for (c = 0; c < 8; c++) {
-    sendCommand(0xb0 | c);                       // Page 0 - 7   
-    sendCommand(0x00 | 0x00);                    // Low col = 0
-    sendCommand(0x10 | 0x00);                    // Hi col = 0
+    Oled_sendCommand(0xb0 | c);                  // Page 0 - 7   
+    Oled_sendCommand(0x00 | 0x00);               // Low col = 0
+    Oled_sendCommand(0x10 | 0x00);               // Hi col = 0
     for (a = 0; a <= 16; a++) {
-      dataMode();
+      Oled_dataMode();
       for (b = 0; b < 8;  b++) 
         TinyI2C.write(0x00);
       TinyI2C.stop();
     }
   }
-  sendCommand(0xaf);                             // Display on   
 }
 
-void Oled::printChar(char ch) {          // Reworked for Schimpfolino
+void Oled_printChar(char ch) { // Reworked for Schimpfolino
   uint8_t a;
-  dataMode();                                    // Set data mode
+  Oled_dataMode();                               // Set data mode
   for (a = 0; a < 5; a ++)                       // Write 5 columns for each character
     TinyI2C.write(pgm_read_byte(&BasicFont[ch * 5 + a])); // Write column from PROGMEM
   TinyI2C.write(0x00);                           // One column space for better readabiltiy
