@@ -1,7 +1,8 @@
 # Newsblog
 
 # 2024
-  
+
+* **05.11.2024** Firmware **1.X-051124** with fixed text centering. Finally!      
 * **30.10.2024** Firmware **1.2-391024** with heavy shrunk (and crippled) libraries.    
 * **29.10.2024** Release **V1.2** with enough new features to justify it.   
 * **29.10.2024** **V1.2** with optional bold font. **1.2-291024**  
