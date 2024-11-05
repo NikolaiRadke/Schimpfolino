@@ -39,12 +39,16 @@ const char data4[] PROGMEM = {"busch     fink      nagel     bammel    klopper  
 const char data5[] PROGMEM = {"sekret    balg      blag      monster   gel$t     imitat    skelett   ding      unding    auge      brot      deo       insekt    bier      mus       ende      futter    gew#chs   produkt   ger$ll    bonbon    furunkel  paket     virus     desaster  st%ck     fass      zeug      ferkel    ei        gewitter  hormon    experimentgulasch   schnitzel fell      theater   schauspielbaby      spielzeug gel       donutloch gelee     gelumpe   zeug      schaf     molek%l   gew%rz    gespenst  gespinnst mittel    geschnetz organ     risotto   vieh      ges#*     gez%cht   ekzem     moped     ger%mpel  hirn      gef#*     wachstum  moloch    rinnsaal  gemenge   opossum   frettchen h#hnchen  plankton  untier    unget%m   gebr#u    fondue    beispiel  elend     leid      gift      verderben ungl%ck   drama     trauma    versagen  fiasko    dilemma   debakel   tabu      ger%cht   hindernis dingdong  "};
 
 // Variables
-char     *field;                                 // Pointer to one of the character arrays
+const char *field;                               // Pointer to one of the character arrays
 uint8_t  genus = 0;                              // Genus of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
 uint16_t list;                                   // Variable for parsing word lists
 uint16_t number;                                 // Variable for calculating addresses and selecting words
-uint16_t addresses[5] = {90, 90, 90, 90, 90};    // Wordlists addresses array - overwritten if EEPROM is present
+uint16_t  addresses[5] = {sizeof(data1)/10,      // Wordcount in array for first word (adjective)
+                          sizeof(data2)/10,      // Wordcount in array for second word part 1 noun-
+                          sizeof(data3)/10,      // Wordcount in array for second word part 2 female noun
+                          sizeof(data4)/10,      // Wordcount in array for second word part 2 male noun
+                          sizeof(data5)/10};     // Wordcount in array for second word part 2 neutrum noun
 char     wordbuffer[20];                         // Buffer for read words
 bool     eeprom = false;                         // No EEPROM used -> Auto detect
 
