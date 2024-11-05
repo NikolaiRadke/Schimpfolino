@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.2 30.10.2024 - Nikolai Radke
+    Schimpfolino V1.2 05.11.2024 - Nikolai Radke
     https://www.monstermaker.de
     Next version for new improvements. Compatible with older versions
 
@@ -7,7 +7,7 @@
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 2.224 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 2.216 bytes (IDE 2.3.3 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (display on, EEPROM on) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -93,10 +93,13 @@ int main(void) {
         // First word
         number = (random(0, addresses[0]));      // Select first word
         get_swearword(number);                   // Read word from EEPROM
-        write_swearword(2);                      // Write first word in the first line
         genus = random(0, 3);                    // Set word genus
-        if (genus != 0) Oled_printChar(48 + genus); // If male, write "r", if neutrum, write "s"
-
+        if (genus != 0) {                        // Check if not female
+          wordbuffer[chars] = 48 + genus;        // If male, add "r", if neutrum, add "s" to buffer
+          chars++;                               // Increase number of characters
+        } 
+        write_swearword(2);                      // Write first word in the first line
+        
         // Second word first part
         number = (random(addresses[0], addresses[1])); // Select second word
         get_swearword(number);                   // Read second word from EEPROM
@@ -146,9 +149,8 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
 
 void write_swearword(uint8_t line) {             // Write centered word
   uint8_t x;                                     // Helping variable for the x position on display
-  x = (128 - (chars * 7)) / 2;                   // Calculate centering
-  if (chars > 18)  x = (128 - (chars * 6)) / 2;  // Modify for very long words
-  if ((genus != 0) && (line == 2)) x -= 4;       // If not female, set first one half block left for genus character
+  x = (128 - (chars * 6)) / 2 - 6;               // Calculate centering
+  if (chars > 17) (128 - (chars * 7)) / 2 - 7;   // Modify for very long words
   Oled_cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; x ++)                   // Print the characters...
     Oled_printChar(wordbuffer[x]);               // ...from buffer

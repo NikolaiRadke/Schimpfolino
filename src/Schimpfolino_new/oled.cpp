@@ -244,6 +244,6 @@ void Oled_printChar(char ch) { // Reworked for Schimpfolino
   for (a = 0; a < 5; a ++)                       // Write 5 columns for each character
     TinyI2C.write(pgm_read_byte(&BasicFont[ch * 5 + a])); // Write column from PROGMEM
   TinyI2C.write(0x00);                           // One column space for better readabiltiy
-  if (chars < 19) TinyI2C.write(0x00);           // One more column space when the line has enough room
+  if (chars < 18) TinyI2C.write(0x00);           // One more column space when the line has enough room
   TinyI2C.stop();
 }
