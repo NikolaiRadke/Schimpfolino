@@ -45,11 +45,11 @@ uint8_t  chars = 0;                              // Number of characters in the 
 uint16_t list;                                   // Variable for parsing word lists
 uint16_t number;                                 // Variable for calculating addresses and selecting words
 uint16_t  addresses[5] = {                       // Wordlists addresses array - overwritten if EEPROM is present
-  sizeof(data1)/10,                              // Wordcount in array for first word (adjective)
-  sizeof(data2)/10,                              // Wordcount in array for second word part 1 noun-
-  sizeof(data3)/10,                              // Wordcount in array for second word part 2 female noun
-  sizeof(data4)/10,                              // Wordcount in array for second word part 2 male noun
-  sizeof(data5)/10                               // Wordcount in array for second word part 2 neutrum noun
+  sizeof(data1) / 10,                            // Wordcount in array for first word (adjective)
+  sizeof(data2) / 10,                            // Wordcount in array for second word part 1 noun-
+  sizeof(data3) / 10,                            // Wordcount in array for second word part 2 female noun
+  sizeof(data4) / 10,                            // Wordcount in array for second word part 2 male noun
+  sizeof(data5) / 10                             // Wordcount in array for second word part 2 neutrum noun
 };
 char     wordbuffer[20];                         // Buffer for read words
 bool     eeprom = false;                         // No EEPROM used -> Auto detect
