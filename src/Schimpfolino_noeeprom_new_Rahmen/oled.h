@@ -39,7 +39,8 @@
 #include <Arduino.h>                             // Arduino and ATtiny specific library
 
 // Config display
-#define SlaveAddress 0x3c                        // Display I2C address
+#define SlaveAddress 0x3c                        // SSD1306 I2C address
+//#define OLED_CS_SH1106
 //#define bold                                   // Uncomment to use bold font
 
 // Schimpfolino: count characters in main sketch, used to shrink font witdh if too long
@@ -49,10 +50,11 @@ extern uint8_t chars;
     void Oled_init(void);
   
     // Reset clipArea to maximum and clear the display
-    void Oled_clear(void);
+    void Oled_clear(const uint8_t *buf);
     
     // Move the cursor to a location (similar to clipArea)
     void Oled_cursorTo(uint8_t row, uint8_t col);
+    void clipArea(uint8_t col, uint8_t row, uint8_t w, uint8_t h);
     
     // Print a single character
     void Oled_printChar(char ch);

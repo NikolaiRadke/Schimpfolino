@@ -39,7 +39,7 @@
 #include <Arduino.h>                             // Arduino and ATtiny specific library
 
 // Config display
-#define SlaveAddress 0x3c                        // SSD1306 I2C address
+#define SlaveAddress 0x3c                        // Display I2C address
 //#define bold                                   // Uncomment to use bold font
 
 // Schimpfolino: count characters in main sketch, used to shrink font witdh if too long
