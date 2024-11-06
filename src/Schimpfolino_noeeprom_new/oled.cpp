@@ -213,15 +213,11 @@ void Oled_init() {
   TinyI2C.stop();
 }
 
-void Oled_clipArea(uint8_t col, uint8_t row, uint8_t w, uint8_t h) {
+void Oled_cursorTo(uint8_t col, uint8_t row) {
   Oled_sendCommand(0xb0 | row);
   Oled_sendCommand(0x00 | ( col & 0xf));
   Oled_sendCommand(0x10 | ( (col>>4)& 0xf));
-}
-
-void Oled_cursorTo(uint8_t col, uint8_t row) {
-  Oled_clipArea(col, row, 128 - col, 8 - row);            
-}
+  }
 
 void Oled_clear() {
   uint8_t a, b, c;

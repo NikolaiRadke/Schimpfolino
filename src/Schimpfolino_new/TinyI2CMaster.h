@@ -2,7 +2,8 @@
     TinyI2C v2.0.1
 
     David Johnson-Davies - www.technoblogy.com - 5th June 2022
-    Modified for ATtiny85 8 MHz only by Nikolai Radke - wwwm-monstermaker.de - 27th October 2024
+    Modified for ATtiny85 8 MHz for Schimpfolino by Nikolai Radke 
+                         - www.monstermaker.de - 27th October 2024
   
     CC BY 4.0
     Licensed under a Creative Commons Attribution 4.0 International license: 
