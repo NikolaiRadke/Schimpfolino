@@ -44,7 +44,7 @@ uint8_t  genus = 0;                              // Genus of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
 uint16_t list;                                   // Variable for parsing word lists
 uint16_t number;                                 // Variable for calculating addresses and selecting words
-uint16_t  addresses[5] = {                       // Wordlists addresses array - overwritten if EEPROM is present
+uint16_t addresses[5] = {                        // Wordlists addresses array - overwritten if EEPROM is present
   sizeof(data1) / 10,                            // Wordcount in array for first word (adjective)
   sizeof(data2) / 10,                            // Wordcount in array for second word part 1 noun-
   sizeof(data3) / 10,                            // Wordcount in array for second word part 2 female noun
@@ -111,7 +111,7 @@ int main(void) {
         // First word
         number = (random(0, addresses[0]));      // Select first word
         field = data1;                           // Pointer to first array
-         get_swearword(number);                   // Read word from EEPROM
+         get_swearword(number);                  // Read word from EEPROM
         genus = random(0, 3);                    // Set word genus
         if (genus != 0) {                        // Check if not female
           wordbuffer[chars] = 48 + genus;        // If male, add "r", if neutrum, add "s" to buffer
@@ -195,7 +195,7 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
 
 void sleep() {
   MCUCR |= (1 << SE);                            // Set SE (sleep Enable) bit
-  __asm__ __volatile__ ( "sleep" "\n\t" :: );    // Sleep now!!
+  __asm__ __volatile__ ("sleep" "\n\t" ::);      // Sleep now!!
   MCUCR &= ~(1 << SE);                           // CLear SE bit
 }
 

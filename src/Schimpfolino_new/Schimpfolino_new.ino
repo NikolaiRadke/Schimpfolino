@@ -167,7 +167,7 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
 
 void sleep() {
   MCUCR |= (1 << SE);                            // Set SE (sleep Enable) bit
-  __asm__ __volatile__ ( "sleep" "\n\t" :: );    // Sleep now!!
+  __asm__ __volatile__ ("sleep" "\n\t" ::);      // Sleep now!!
   MCUCR &= ~(1 << SE);                           // Clear SE bit
 }
 
