@@ -215,22 +215,19 @@ void Oled_init() {
 
 void Oled_cursorTo(uint8_t col, uint8_t row) {
   Oled_sendCommand(0xb0 | row);
-  Oled_sendCommand(0x00 | ( col & 0xf));
-  Oled_sendCommand(0x10 | ( (col>>4)& 0xf));
-  }
+  Oled_sendCommand(0x00 | (col & 0xf));
+  Oled_sendCommand(0x10 | ((col>>4)& 0xf));
+}
 
 void Oled_clear() {
-  uint8_t a, b, c;
-  for (c = 0; c < 8; c++) {
-    Oled_sendCommand(0xb0 | c);                  // Page 0 - 7   
+  uint8_t p, x;
+  for (p = 0; p < 8; p++) {
+    Oled_sendCommand(0xb0 | p);                  // Page 0 - 7   
     Oled_sendCommand(0x00 | 0x00);               // Low col = 0
     Oled_sendCommand(0x10 | 0x00);               // Hi col = 0
-    for (a = 0; a <= 16; a++) {
-      Oled_dataMode();
-      for (b = 0; b < 8;  b++) 
-        TinyI2C.write(0x00);
-      TinyI2C.stop();
-    }
+    Oled_dataMode();
+    for (x = 0; x <= 128; x++) TinyI2C.write(0x00); // Clear every column
+    TinyI2C.stop();
   }
 }
 

@@ -62,7 +62,7 @@ const uint8_t BasicFont[] PROGMEM = {            // Bold font
   0xFF, 0xFF, 0x08, 0xFF, 0xFF,  // H 7
   0xC3, 0xC3, 0xFF, 0xFF, 0xC3,  // I 8
   0x42, 0xE3, 0xC3, 0xFF, 0x7E,  // J 9
-  0xFF, 0xFF, 0x08, 0xF7, 0xE3,  // K 10
+  0xFF, 0xFF, 0x18, 0xFF, 0xE7,  // K 10
   0xFF, 0xFF, 0xC0, 0xC0, 0xC0,  // L 11
   0xFF, 0xFE, 0x04, 0xFE, 0xFF,  // M 12
   0xFF, 0xFE, 0x3C, 0x7F, 0xFF,  // N 13
@@ -73,7 +73,7 @@ const uint8_t BasicFont[] PROGMEM = {            // Bold font
   0x46, 0xCF, 0x89, 0xFB, 0x72,  // S 18
   0x03, 0xFF, 0xFF, 0x03, 0x03,  // T 19
   0x7F, 0xFF, 0x80, 0xFF, 0x7F,  // U 20
-  0x3F, 0x7F, 0x80, 0x7F, 0x3F,  // V 21
+  0x3F, 0x7F, 0xE0, 0x7F, 0x3F,  // V 21
   0x7F, 0xFF, 0x78, 0xFF, 0x7F,  // W 22
   0xE3, 0xFF, 0x08, 0xFF, 0xE3,  // X 23
   0x07, 0x0F, 0xF8, 0xFF, 0x07,  // Y 24
@@ -94,7 +94,7 @@ const uint8_t BasicFont[] PROGMEM = {            // Bold font
   0xFF, 0xFF, 0x08, 0xF8, 0xF0,  // h 39
   0x00, 0x84, 0xFD, 0xFD, 0x80,  // i 40
   0x40, 0x84, 0xFD, 0x7D, 0x00,  // j 41
-  0xFF, 0xFF, 0x18, 0xF6, 0xE6,  // k 42
+  0xFF, 0xFF, 0x30, 0xFC, 0xCC,  // k 42
   0x00, 0x83, 0xFF, 0xFF, 0x80,  // l 43
   0xF8, 0xFC, 0x18, 0xFC, 0xF8,  // m 44
   0xFC, 0xF8, 0x04, 0xFC, 0xF8,  // n 45
@@ -105,7 +105,7 @@ const uint8_t BasicFont[] PROGMEM = {            // Bold font
   0x48, 0xDC, 0xB4, 0xEC, 0x48,  // s 50
   0x08, 0x7F, 0xFF, 0x88, 0x48,  // t 51
   0x7C, 0xFC, 0x80, 0x7C, 0xFC,  // u 52
-  0x3C, 0x7C, 0x80, 0x7C, 0x3C,  // v 53
+  0x3C, 0x7C, 0xE0, 0x7C, 0x3C,  // v 53
   0x7C, 0xFC, 0x70, 0xFC, 0x7C,  // w 54
   0xCC, 0xFC, 0x30, 0xFC, 0xCC,  // x 55
   0x9C, 0xBC, 0xA0, 0xFC, 0x7C,  // y 56
@@ -181,6 +181,13 @@ const uint8_t BasicFont[] PROGMEM = {            // Standard font
 #endif
 
 // Private functions
+uint8_t reverse(uint8_t b) {                      // reverse bitorder
+   b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
+   b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
+   b = (b & 0xAA) >> 1 | (b & 0x55) << 1;
+   return b;
+}
+
 void Oled_commandMode() {               
   TinyI2C.start(SlaveAddress, 0);                // Begin I2C transmission
   TinyI2C.write(0x80);                           // Command mode
@@ -214,21 +221,58 @@ void Oled_init() {
 }
 
 void Oled_cursorTo(uint8_t col, uint8_t row) {
+#ifdef OLED_CS_SH1106
+  col += 2;
+#endif
   Oled_sendCommand(0xb0 | row);
   Oled_sendCommand(0x00 | (col & 0xf));
-  Oled_sendCommand(0x10 | ((col>>4)& 0xf));
+  Oled_sendCommand(0x10 | ((col >> 4) & 0xf));          
 }
 
-void Oled_clear() {
-  uint8_t p, x;
+void Oled_clear(const uint8_t *buf) {
+  uint8_t p, x, pxbyte;                          // p = Page | x = Column | pxbyte = Pixel Byte buffer
+  //Oled_sendCommand(0xAE);
   for (p = 0; p < 8; p++) {
     Oled_sendCommand(0xb0 | p);                  // Page 0 - 7   
     Oled_sendCommand(0x00 | 0x00);               // Low col = 0
     Oled_sendCommand(0x10 | 0x00);               // Hi col = 0
     Oled_dataMode();
-    for (x = 0; x <= 128; x++) TinyI2C.write(0x00); // Clear every column
-    TinyI2C.stop();
+    #ifdef OLED_CS_SH1106                           
+      TinyI2C.write(0x00);
+    #endif
+    for (x = 0; x <= 128; x++) {
+      //  0 - 21 | Part 1 - Page 0 und 7, Spalte 0 - 21 und 106 - 127
+      // 22 - 22 | horizontaler Rand - Page 0 und 7, Spalte 22 - 83
+      // 23 - 32 | Part 2 - Page 1 und 6, Spalte 0 - 9 und 118 - 127
+      // 33 - 41 | Part 3  - Page 2 und 5, Spalte 0 - 7 und 120 - 127
+      // 42 - 44 | vertikaler Rand - Page 3 und 4, Spalte 0 - 2 und 125 - 127
+      if (p == 0 || p == 7) {
+        if (x <= 21) pxbyte = 0 + x;
+        if ((x >= 22) && (x <= 105)) pxbyte = 22;
+        if (x >= 106) pxbyte = 127 - x;
+      }
+      if (p == 1 || p == 6) {
+        if (x <= 9) pxbyte = 23 + x; 
+        if ((x >= 10) && (x <= 117)) pxbyte = 0; 
+        if (x >= 118) pxbyte = 150 - x;
+      }
+      if (p == 2 || p == 5) {
+        if (x <= 7) pxbyte = 33 + x; 
+        if ((x >= 8) && (x <= 119)) pxbyte = 0;
+        if (x >= 120) pxbyte = 161 - x;
+      }
+      if (p == 3 || p == 4) {
+        if (x <= 2) pxbyte = 42 + x;
+        if ((x >= 3) && (x <= 124)) pxbyte = 0;
+        if (x >= 125) pxbyte = 169 - x;
+      }
+      if (p < 4) pxbyte = pgm_read_byte(buf + pxbyte);    
+      else pxbyte = reverse(pgm_read_byte(buf + pxbyte));  
+      TinyI2C.write(pxbyte);
+    }
   }
+  //Oled_sendCommand(0xAF);
+  TinyI2C.stop();
 }
 
 void Oled_printChar(char ch) { // Reworked for Schimpfolino
@@ -236,7 +280,7 @@ void Oled_printChar(char ch) { // Reworked for Schimpfolino
   Oled_dataMode();                               // Set data mode
   for (a = 0; a < 5; a ++)                       // Write 5 columns for each character
     TinyI2C.write(pgm_read_byte(&BasicFont[ch * 5 + a])); // Write column from PROGMEM
-  TinyI2C.write(0x00);                           // One column space for better readabiltiy
-  if (chars < 18) TinyI2C.write(0x00);           // One more column space when the line has enough room
+    TinyI2C.write(0x00);                           // One column space for better readabiltiy
+    if (chars < 18) TinyI2C.write(0x00);           // One more column space when the line has enough room
   TinyI2C.stop();
 }
