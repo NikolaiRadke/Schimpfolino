@@ -4,10 +4,10 @@ These people helped me with Schimpfolino:
  - **Elise Lindner** - finding funny words.
  - **Elisabeth Seidl** - graphics. 
  - **Jan Fanslau** - filament and some ideas.
- - **Marcus Hansson** - The great articles in the German Make Magazin.
- - **MDecker** - Spelling corrections.
+ - **Marcus Hansson** - the great articles in the German Make Magazin.
+ - **MDecker** - spelling corrections.
  - **Sebastian Völke** - SH1106 support and bold font.
- - **Birger Töpelmann** - Wordlist ideas.  
+ - **Birger Töpelmann** - wordlist ideas.  
   
 Used ressources:  
   
