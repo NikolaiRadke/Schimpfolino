@@ -6,7 +6,8 @@ These people helped me with Schimpfolino:
  - **Jan Fanslau** - filament and some ideas.
  - **Marcus Hansson** - The great articles in the German Make Magazin.
  - **MDecker** - Spelling corrections.
- - **Sebastian Völke** - SH1106 support and bold font.  
+ - **Sebastian Völke** - SH1106 support and bold font.
+ - **Birger Töpelmann** - Wordlist ideas.  
   
 Used ressources:  
   
