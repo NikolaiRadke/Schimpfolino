@@ -2,6 +2,7 @@
 
 # 2024
 
+* **24.12.2024** Firmware **1.X-241224** Increased OLED init time for more compatibility.   
 * **07.11.2024** Firmware **1.2-071124** with external wordlist for **Schimpfolino_nooeeprom_new.ino**. 
 * **05.11.2024** Firmware **1.X-051124** with fixed text centering. Finally!      
 * **30.10.2024** Firmware **1.2-391024** with heavy shrunk (and crippled) libraries.    
