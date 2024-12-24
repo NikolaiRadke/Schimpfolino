@@ -12,7 +12,7 @@ These people helped me with Schimpfolino:
   
 Used ressources:  
   
-- **Arduino IDE 2.3.2** - [Arduino](http://www.arduino.cc)  
+- **Arduino IDE 2.3.4** - [Arduino](http://www.arduino.cc)  
 - **ATTinyCore** - [GitHub](https://github.com/SpenceKonde/ATTinyCore)
 - **SD1306_nimimal library** - [GitHub](https://github.com/kirknorthrop/SSD1306_minimal)
 - **Tiny-I2C library** (V1.X) - [GitHub](https://github.com/technoblogy/tiny-i2c)  
