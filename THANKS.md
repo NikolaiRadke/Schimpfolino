@@ -7,7 +7,8 @@ These people helped me with Schimpfolino:
  - **Marcus Hansson** - the great articles in the German Make Magazin.
  - **MDecker** - spelling corrections.
  - **Sebastian Völke** - SH1106 support and bold font.
- - **Birger Töpelmann** - wordlist ideas.  
+ - **Birger Töpelmann** - wordlist ideas.
+ - **Michael Kussmaul** - solving an annoying display issue.  
   
 Used ressources:  
   
