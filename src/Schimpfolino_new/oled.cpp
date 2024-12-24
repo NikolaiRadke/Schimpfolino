@@ -206,7 +206,7 @@ void Oled_sendData(uint8_t data) {
 // Public functions
 void Oled_init() {
   uint8_t i;
-  _delay_ms(5);	                                 // Wait for OLED hardware init
+  _delay_ms(50);	                               // Wait for OLED hardware init
   Oled_commandMode();                            // Set command mode
   for (i = 0; i < InitLength; i++)              
     TinyI2C.write(pgm_read_byte(&InitSequence[i])); // Write init sequence from PROGMEM

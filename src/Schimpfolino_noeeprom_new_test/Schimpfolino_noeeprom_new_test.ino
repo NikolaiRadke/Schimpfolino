@@ -23,11 +23,19 @@
                          +----+
 */
 
+// Configuration | Uncomment to select wordlist
+//#define Schimpfolino                           // Original Schimpfolino wordlist
+#define BeatGloor                                // Beat Gloor wordlist
+
 #include <util/delay.h>                          // Needs less flash memory than delay()
 #include "TinyI2CMaster.h"                       // I2C communication with display and EEPROM. Very tight library!
 #include "oled.h"                                // OLED display library for SSD1306 and SH1106
-#include "Schimpfolino_wordlist.h"               // Schimpfolino wordlist
-
+#ifdef Schimpfolino
+  #include "Schimpfolino_wordlist.h"               // Schimpfolino wordlist
+#endif
+#ifdef BeatGloor
+  #include "BeatGloor_wordlist.h"                  // Beat Gloor wordlist
+#endif
 // Hardware
 #define  BUTTON   PB1                            // Button pin
 #define  DEVICES  PB4                            // External devices power pin
@@ -106,6 +114,10 @@ int main(void) {
         number = (random(0, addresses[0]));      // Select first word
         field = data1;                           // Pointer to first array
         get_swearword(number);                   // Read word from EEPROM or wordlist
+        #ifdef BeatGloor
+          wordbuffer[chars] = 36;
+          chars++;
+        #endif
         genus = random(0, 3);                    // Set word genus
         if (genus != 0) {                        // Check if not female
           wordbuffer[chars] = 48 + genus;        // If male, add "r", if neutrum, add "s" to buffer

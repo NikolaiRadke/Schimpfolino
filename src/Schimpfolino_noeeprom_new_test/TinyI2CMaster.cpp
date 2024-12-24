@@ -94,7 +94,7 @@ bool TinyI2CMaster::start(uint8_t address, uint8_t read) {
   TinyI2CMaster::transfer(USISR_8bit);           // Send 8 bits on bus
   
   /* Clock and verify (N)ACK from slave */
-  DDR_USI &= ~(1 << PIN_USI_SDA);                // Enable SDA as input
+  DDR_USI &= ~(1 << PIN_USI_SDA);                // Enable SDA as inp.
   if (TinyI2CMaster::transfer(USISR_1bit) & 1 << TWI_NACK_BIT) return false; // No ACK
   return true;                                   // Start successfully completed
 }

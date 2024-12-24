@@ -1,5 +1,6 @@
 // Wordlist arrays - a single array can hold only 4000 bytes | Used if no EEPROM present | 5 x 110 words = 5.500 bytes
-// Original Schimpfolino word set
+// Umlaute have to be converted (UTF-8): ä -> # | ö -> $ | ü -> % | ß -> * | Ä -> & | Ö -> ' | Ü -> (
+// Original Schimpfolino wordlist
 
 // First word - adjective
 const char data1[] PROGMEM = {"Dumpfe    Staubige  Miefende  Stinkende Gammlige  Hinkende  Winzige   Popelige  Nasse     Furzende  "
