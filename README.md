@@ -52,6 +52,10 @@ Root directory with some explanation files.
 |
 ├── case/
 |   STL files to 3D print a case. Other kinds of hulls will follow.
+|   ├── Boring/
+|   |   Plain but smooth case by Michael Kussmaul.
+|   └── Nokolino/
+|       Standard Nokolino-shaped case.
 |
 ├── schematics/
 |   The circuit diagram, PCB renderings and gerber files.
