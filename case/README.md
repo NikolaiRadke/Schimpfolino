@@ -7,6 +7,9 @@ Schimpfolino is pretty small and handy and works without a hull, fur or case. Bu
 
 A Nokolino-shaped case for 3D printing.  
 * **schimpfolino_case_nokolino.stl** - the case  
-*  **schimpfolino_case_nokolino_cover.stl** - the cover  
+*  **schimpfolino_case_nokolino_cover.stl** - the cover
+
+## Boring
+![Schimpfolino Boring](https://www.nikolairadke.de/schimpfolino/schimpfolino_case_boring_case.png)![Schimpfolino_Boring](https://www.nikolairadke.de/schimpfolino/schimpfolino_case_boring__case_lid.png))![Schimpfolino_Boring](https://www.nikolairadke.de/schimpfolino/schimpfolino_case_boring_display_holder.png)![Schimpfolino_Boring](https://www.nikolairadke.de/schimpfolino/schimpfolino_case_nokolino_inset.png)  
 
 ## More cases and suits will follow. Stay tuned!
