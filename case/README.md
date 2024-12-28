@@ -18,5 +18,5 @@ Needs a 30 mm acrylic glass scrreen protection and a no light, 12 mm flat head, 
 * **Schimpfolino_Case_Boring_Cover.stl** - the cover
 * **Schimpfolino_Case_Boring_Display_Holder.stl** - the display holder  
 * **Schimpfolino_Case_Boring_Inset.stl** - fot the additional screen protection  
-
+  
 ## More cases and suits will follow. Stay tuned!
