@@ -14,8 +14,8 @@ A Nokolino-shaped case for 3D printing.
 
 A plain but smooth 'boring' case by Michael Kussmaul.
 * **Schimpfolino_Case_Boring.stl** - the case  
-* **Schimpfolino_Case_Boring_Cover-stl** - the cover
+* **Schimpfolino_Case_Boring_Cover.stl** - the cover
 * **Schimpfolino_Case_Boring_Display_Holder.stl** - the display holder  
-* **Schimpfolino_Case_Boring_Inset-stl** - fot the additional screen protection  
+* **Schimpfolino_Case_Boring_Inset.stl** - fot the additional screen protection  
 
 ## More cases and suits will follow. Stay tuned!
