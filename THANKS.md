@@ -8,7 +8,7 @@ These people helped me with Schimpfolino:
  - **MDecker** - spelling corrections.
  - **Sebastian Völke** - SH1106 support and bold font.
  - **Birger Töpelmann** - wordlist ideas.
- - **Michael Kussmaul** - solving an annoying display issue.  
+ - **Michael Kussmaul** - solving an annoying display issue and a new case.  
   
 Used ressources:  
   
