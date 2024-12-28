@@ -13,6 +13,7 @@ A Nokolino-shaped case for 3D printing.
 ![Schimpfolino Boring](https://www.nikolairadke.de/schimpfolino/schimpfolino_case_boring_case.png)![Schimpfolino_Boring](https://www.nikolairadke.de/schimpfolino/schimpfolino_case_boring_case_lid.png)![Schimpfolino_Boring](https://www.nikolairadke.de/schimpfolino/schimpfolino_case_boring_display_holder.png)![Schimpfolino_Boring](https://www.nikolairadke.de/schimpfolino/schimpfolino_case_boring_inset.png)  
 
 A plain but smooth 'boring' case by Michael Kussmaul.
+Needs a 30 mm acrylic glass scrreen protection and a no light, 12mm flat head, stainless or black shell button.  
 * **Schimpfolino_Case_Boring.stl** - the case  
 * **Schimpfolino_Case_Boring_Cover.stl** - the cover
 * **Schimpfolino_Case_Boring_Display_Holder.stl** - the display holder  
