@@ -54,7 +54,7 @@ uint16_t addresses[5] = {                        // Wordlists addresses array - 
 char     wordbuffer[20];                         // Buffer for read words
 bool     eeprom = false;                         // No EEPROM used -> Auto detect
 
-volatile bool awake = false;                     // Stay wake when button is pressed
+volatile bool awake = false;                     // Stay awake when button is pressed
 
 SSD1306_Mini  oled;                              // Set display
 

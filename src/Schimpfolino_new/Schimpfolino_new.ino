@@ -38,7 +38,7 @@ uint16_t number;                                 // Variable for calculating add
 uint16_t addresses[5];                           // Wordlists addresses array
 char     wordbuffer[20];                         // Buffer for reading words
 
-volatile bool awake = false;                     // Stay wake when button is pressed
+volatile bool awake = false;                     // Stay awake when button is pressed
 
 int main(void) {                                 
   init(); {                                      // Setup

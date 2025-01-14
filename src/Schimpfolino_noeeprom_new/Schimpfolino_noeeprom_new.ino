@@ -48,7 +48,7 @@ uint16_t addresses[5] = {                        // Wordlists addresses array - 
 char     wordbuffer[20];                         // Buffer for read words
 bool     eeprom = false;                         // No EEPROM used -> auto detect
 
-volatile bool awake = false;                     // Stay wake when button is pressed
+volatile bool awake = false;                     // Stay awake when button is pressed
 
 int main(void) {                                 
   init(); {                                      // Setup
@@ -99,7 +99,7 @@ int main(void) {
       Oled_init();                               // Connect and start OLED via I2C
 
       // Display swearwords until timeout
-      while (awake) {                            // Wait 8.5 seconds timeout
+      while(awake) {                             // Wait 8.5 seconds timeout
         Oled_clear();                            // Clear display buffer
 
         // First word
