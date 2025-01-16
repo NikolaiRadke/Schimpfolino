@@ -1,7 +1,8 @@
 # Newsblog
 
 # 2024
-  
+
+* **16.01.2024** Firmware **1.01-160225** and **v1.22-160125** with, finally, perfect text centering :-)  
 * **28.12.2024** Release **V1.2.1** with the new case and a fix for SH1106 displays.  
 * **28.12.2024** Added new 'boring' but smooth case by Michael Kussmaul.  
 * **24.12.2024** Firmware **1.X-241224** Increased OLED init time for more compatibility.   
