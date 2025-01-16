@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.2 24.12.2024 - Nikolai Radke
+    Schimpfolino V1.22 16.01.2025 - Nikolai Radke
     https://www.monstermaker.de
     Next version for new improvements. Compatible with older versions.
 
@@ -7,7 +7,7 @@
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 7.952 bytes (IDE 2.3.4 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 7.954 bytes (IDE 2.3.4 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.6 mA (display on, no EEPROM) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -171,8 +171,8 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
 
 void write_swearword(uint8_t line) {             // Write centered word
   uint8_t x;                                     // Helping variable for the x position on display
-  x = (128 - (chars * 6)) / 2 - 6;               // Calculate centering
-  if (chars > 17) (128 - (chars * 7)) / 2 - 7;   // Modify for very long words
+  x = (128 - (chars * 7)) / 2;                   // Calculate centering
+  if (chars > 17) (128 - (chars * 6)) / 2;       // Modify for very long words
   Oled_cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; x ++)                   // Print the characters...
     Oled_printChar(wordbuffer[x]);               // ...from buffer
