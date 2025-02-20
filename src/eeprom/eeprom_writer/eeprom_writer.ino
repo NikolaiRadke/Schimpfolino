@@ -1,5 +1,5 @@
 /*
-    Schimpfolino EEPROM writer V1.0 13.09.2024 - Nikolai Radke
+    Schimpfolino EEPROM writer V1.1 20.02.2025 - Nikolai Radke
     EEPROMS bigger than 512 kBit (64 kB) are NOT supported.
     24AAXXX supports page writing, but is unused here.
     Works with 24LCXXX too, if no 24AAXXX are available.
@@ -72,7 +72,10 @@ void loop() {
     Serial.print(address - 10);                  
     Serial.print(" characters in ");             // Print number of characters written
     Serial.print(words);
-    Serial.println(" words written.");           // Print number of words written
+    Serial.println(" words written. Checking last word:"); // Print number of words written
+    for (uint16_t i = address - 10; i < address; i ++)
+      Serial.print(char(read_byte(i)));
+    Serial.println();
     if (file == 8) {                             // After 5 files send, print finish message
       Serial.println("Done. Ready for next EEPROM");
       address = 10;
@@ -93,3 +96,13 @@ void write_byte(uint16_t address, uint8_t data) { // Writes one byte to an addre
   Wire.endTransmission();                        // Close transmission
   delay(1);                                      // Wait. EEPROMs are kind of slow
 }
+
+uint8_t read_byte(uint16_t e_address) {          // Read byte from EEPROM
+  Wire.beginTransmission(EEPROM);                // Open transmission to I2C-address 0x50
+  Wire.write(e_address >> 8);                    // Send the MSB (Most Significant Byte) of the memory address
+  Wire.write(e_address & 0xFF);                  // Send the LSB (Least Significant Byte) of the memory address
+  Wire.endTransmission();                        // Close transmission
+  Wire.requestFrom(0x50, 1);                     // Request one byte
+  return Wire.read();                            // Read and return byte
+}
+
