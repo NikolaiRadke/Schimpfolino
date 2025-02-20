@@ -2,6 +2,7 @@
 
 # 2024
 
+* **20.02.2024** Updated **eeprom_writer** with check for last written word.  
 * **16.01.2024** Release **V1.2.2** with final text centering method.  
 * **16.01.2024** Firmware **1.01-160225** and **v1.22-160125** with, finally, perfect text centering :-)  
 * **28.12.2024** Release **V1.2.1** with the new case and a fix for SH1106 displays.  
