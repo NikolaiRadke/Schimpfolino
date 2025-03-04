@@ -6,7 +6,6 @@
 
 ## In progress
 
-* Third article for the Make Magazine
 * Finding a distributor for the PCB or the hole kit
 
 ## Done
@@ -16,8 +15,9 @@
 * Rewriting Schimpfolino-eeprom
 * HTML-based EEPROM text file editor
 * First release
-* Fist article in the Make Magazine
+* Fist article for the Make Magazine
 * Second article for the Make Magazine
+* Third article for the Make Magazine
 * One additional case design
 * Support for SH1106 display types
    
