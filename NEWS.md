@@ -1,10 +1,14 @@
 # Newsblog
 
+# 2025
+
+* **13.03.2025** Firmware **1.01-130325** with fix for long words and **V1.3-130325** with fix and now full 1.3" support  
+* **20.02.2025** Updated **eeprom_writer** with check for last written word.  
+* **16.01.2025** Release **V1.2.2** with final text centering method.  
+* **16.01.2025** Firmware **1.01-160225** and **v1.22-160125** with, finally, perfect text centering :-)  
+  
 # 2024
 
-* **20.02.2024** Updated **eeprom_writer** with check for last written word.  
-* **16.01.2024** Release **V1.2.2** with final text centering method.  
-* **16.01.2024** Firmware **1.01-160225** and **v1.22-160125** with, finally, perfect text centering :-)  
 * **28.12.2024** Release **V1.2.1** with the new case and a fix for SH1106 displays.  
 * **28.12.2024** Added new 'boring' but smooth case by Michael Kussmaul.  
 * **24.12.2024** Firmware **1.X-241224** Increased OLED init time for more compatibility.   
