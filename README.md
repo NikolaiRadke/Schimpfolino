@@ -13,7 +13,7 @@ Who doesn't like to be insulted? Schimpfolino is an evil gadget that always has 
 Schimpfolino is a random curse word generator with **12.288.000** possible combinations right now. That should be enough for a while. It's suitable for children (but still evil), maintenance-free and the battery lasts for years. And with the right case, it's an evil monster, like the **Nokolino shaped** case below! Just press the button, receive an insult, after eight seconds it turns off again. That's it. Evil. You can print the case in black! Black is an evil color. It is so evil. It is so evil that it hurts many people that are good!
 
 What's new?  
-* **20.02.2024** Updated **eeprom_writer** with check for last written word.  
+* **13.03.2025** Firmware **1.01-130325** with fix for long words and **V1.3-130325** with fix and now full 1.3" support    
   -- More news? See the [newsblog](https://github.com/NikolaiRadke/Schimpfolino/tree/main/NEWS.md).   
   
 
