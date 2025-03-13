@@ -1,12 +1,12 @@
 /*  
-    Schimpfolino V1.01 16.01.2025 - Nikolai Radke
+    Schimpfolino V1.01 13.03.2025 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | Only with additional 24AAXXX EEPROM
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 3.306 bytes (IDE 2.3.4 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.316 bytes (IDE 2.3.4 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (display on, EEPROM on) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -151,8 +151,8 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
 
 void write_swearword(uint8_t line) {             // Write centered word
   uint8_t x;                                     // Helping variable for the x position on display
-  x = (128 - (chars * 6)) / 2;                   // Calculate centering
-  if (chars > 17) (128 - (chars * 6)) / 2;       // Modify for very long words
+  x = (128 - (chars * 7)) / 2;                   // Calculate centering
+  if (chars > 17) x = (128 - (chars * 6)) / 2;   // Modify for very long words
   oled.cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; x ++)                   // Print the characters...
     oled.printChar(wordbuffer[x]);               // ...from buffer

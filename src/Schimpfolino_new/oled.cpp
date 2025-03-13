@@ -226,7 +226,7 @@ void Oled_clear() {
     Oled_sendCommand(0x00 | 0x00);               // Low col = 0
     Oled_sendCommand(0x10 | 0x00);               // Hi col = 0
     Oled_dataMode();
-    for (x = 0; x <= 128; x++) TinyI2C.write(0x00); // Clear every column
+    for (x = 0; x <= 129; x++) TinyI2C.write(0x00); // Clear every column | 129 is enough for 1,3"
     TinyI2C.stop();
   }
 }
