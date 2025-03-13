@@ -2,7 +2,8 @@
 
 # 2025
 
-* **13.03.2025** Firmware **1.01-130325** with fix for long words and **V1.3-130325** with fix and now full 1.3" support  
+* **13.03.2024** Release **V1.3** with a bugfix and improvements.  
+* **13.03.2025** Firmware **1.01-130325** with fix for long words and **V1.3-130325** with fix and now full 1.3" support.   
 * **20.02.2025** Updated **eeprom_writer** with check for last written word.  
 * **16.01.2025** Release **V1.2.2** with final text centering method.  
 * **16.01.2025** Firmware **1.01-160225** and **v1.22-160125** with, finally, perfect text centering :-)  
@@ -16,8 +17,8 @@
 * **05.11.2024** Firmware **1.X-051124** with fixed text centering. Finally!      
 * **30.10.2024** Firmware **1.2-391024** with heavy shrunk (and crippled) libraries.    
 * **29.10.2024** Release **V1.2** with enough new features to justify it.   
-* **29.10.2024** **V1.2** with optional bold font. **1.2-291024**  
-* **26.10.2024** **V1.1** now with full SH1106 support. **1.1-271024**  
+* **29.10.2024** **V1.2** with optional bold font. **1.2-291024**.  
+* **26.10.2024** **V1.1** now with full SH1106 support. **1.1-271024**.    
 * **26.10.2024** **1.03-261024** now supports SH1106 displays. Thanks to Sebastian Völkel.  
 * **21.10.2024** Firmware **1.02-201024**. Switched to Tiny-I2C library and freed 600 bytes. Schimpfolino_new_eeprom now has 5 x 15 more words.  
 * **19.10.2024** Firmware **1.0x-191024**. Fixed the noeeprom bug and removed the workaround. Finally. Pew.  
