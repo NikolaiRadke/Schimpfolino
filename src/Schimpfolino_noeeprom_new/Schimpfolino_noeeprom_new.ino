@@ -3,7 +3,7 @@
     https://www.monstermaker.de
     Next version for new improvements. Compatible with older versions.
 
-    Sketch for the insulting gadget | With or without additional 24LAAXX EEPROM
+    Sketch for the insulting gadget | With or without additional 24AAXXX EEPROM
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
