@@ -52,7 +52,7 @@ Now you can flash your ATtiny with any sketch you want! But this time, we focus 
 ### Flashing and configuring Schimpfolino firmware
   
 1. Open the Schimpfolino sketch.
-2. If you want a bold font, Uncomment ``` #// define bold ``` in **oled.h** by removing ``` // ```.     
+2. If you want a bold font, uncomment ``` #// define bold ``` in **oled.h** by removing ``` // ```.     
 3. Select ``` Sketch > Upload using programmer ``` (IDE 2.X) or press upload button (IDE 1.X and 2.3.3 or newer). 
 4. DONE.  
 
