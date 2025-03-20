@@ -3,7 +3,7 @@
 These people helped me with Schimpfolino:
  - **Elise Lindner** - finding funny words.
  - **Elisabeth Seidl** - graphics. 
- - **Jan Fanslau** - the 'CuteVader' case, filament and some ideas.
+ - **[falsanu](https://github.com/falsanu)** - the 'CuteVader' case, filament and some ideas.
  - **Marcus Hansson** - the great articles in the German Make Magazin.
  - **MDecker** - spelling corrections.
  - **Sebastian Völke** - SH1106 support and bold font.
