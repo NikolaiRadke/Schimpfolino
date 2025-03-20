@@ -17,6 +17,10 @@ Needs a 30 mm acrylic glass scrreen protection and a no light, 12 mm flat head, 
 * **Schimpfolino_Case_Boring.stl** - the case  
 * **Schimpfolino_Case_Boring_Cover.stl** - the cover
 * **Schimpfolino_Case_Boring_Display_Holder.stl** - the display holder  
-* **Schimpfolino_Case_Boring_Inset.stl** - fot the additional screen protection  
+* **Schimpfolino_Case_Boring_Inset.stl** - fot the additional screen protection
+
+## Cute Vader
+![Schimpfolino_Nokolino](https://www.nikolairadke.de/schimpfolino/schimpfolino_case_cutevader_case.png)![Schimpfolino_Nokolino](https://www.nikolairadke.de/schimpfolino/schimpfolino_case_cutevader_cover.png)  
+
   
 ## More cases and suits will follow. Stay tuned!
