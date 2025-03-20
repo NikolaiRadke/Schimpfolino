@@ -22,5 +22,8 @@ Needs a 30 mm acrylic glass scrreen protection and a no light, 12 mm flat head, 
 ## Cute Vader
 ![Schimpfolino_Nokolino](https://www.nikolairadke.de/schimpfolino/schimpfolino_case_cutevader_case.png)![Schimpfolino_Nokolino](https://www.nikolairadke.de/schimpfolino/schimpfolino_case_cutevader_cover.png)  
 
-  
+A small but incredible evil case by Jan Fanslau.  
+* **Schimpfolino_Case_CuteVader.stl** - the case
+* **Schimpfolino_Case_CuteVader_Cover** - the cover
+   
 ## More cases and suits will follow. Stay tuned!
