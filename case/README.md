@@ -1,4 +1,4 @@
-# The case
+# Case
 
 Schimpfolino is pretty small and handy and works without a hull, fur or case. But if you want a special design, you will find some ideas here:
 
@@ -24,6 +24,6 @@ Needs a 30 mm acrylic glass scrreen protection and a no light, 12 mm flat head, 
 
 A small but incredible evil case by Jan Fanslau.  
 * **Schimpfolino_Case_CuteVader.stl** - the case
-* **Schimpfolino_Case_CuteVader_Cover** - the cover
+* **Schimpfolino_Case_CuteVader_Cover.stl** - the cover
    
 ## More cases and suits will follow. Stay tuned!
