@@ -3,12 +3,12 @@
 These people helped me with Schimpfolino:
  - **Elise Lindner** - finding funny words.
  - **Elisabeth Seidl** - graphics. 
- - **Jan Fanslau** - filament and some ideas.
+ - **Jan Fanslau** - the 'CuteVader' case, filament and some ideas.
  - **Marcus Hansson** - the great articles in the German Make Magazin.
  - **MDecker** - spelling corrections.
  - **Sebastian Völke** - SH1106 support and bold font.
  - **Birger Töpelmann** - wordlist ideas.
- - **Michael Kussmaul** - solving an annoying display issue and a new case.  
+ - **Michael Kussmaul** - solving an annoying display issue and the 'Boring' case.  
   
 Used ressources:  
   
