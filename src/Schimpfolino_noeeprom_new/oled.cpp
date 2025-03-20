@@ -40,16 +40,13 @@
 #define InitLength 11                            // Number of init commands
 
 const uint8_t InitSequence[] PROGMEM = {
-  0x20,             	                           // Set addressing mode
-  0x00,                                          // Horizontal mode
+  0x20, 0x00,            	                       // Set horizontal addressing mode
   0xA8, 0x3F,                                    // Set multiplex. Height: 64 - 1
-  0x81,                                          // Set contrast
-  0xff,                                          // Highest level
+  0x81, 0xFF,                                    // Set contrast to maximum
   0x8D, 0x14,                                    // Set charge pump
   0xAF,                                          // Display ON
   0xA1, 0xC8                                     // Flip the screen
 };
-
 // Reworked 5x8 font table with only used characters
 #ifdef bold
 const uint8_t BasicFont[] PROGMEM = {            // Bold font
@@ -226,7 +223,7 @@ void Oled_clear() {
     Oled_sendCommand(0xb0 | p);                  // Page 0 - 7   
     Oled_sendCommand(0x00 | 0x00);               // Low col = 0
     Oled_sendCommand(0x10 | 0x00);               // Hi col = 0
-    Oled_dataMode();
+    Oled_dataMode();                             // Set data mode
     for (x = 0; x <= 129; x++) TinyI2C.write(0x00); // Clear every column | 129 is enough for 1,3"
     TinyI2C.stop();
   }

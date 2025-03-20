@@ -36,11 +36,9 @@
 #define InitLength 11                            // Number of init commands
 
 const uint8_t InitSequence[] PROGMEM = {
-  0x20,             	                           // Set addressing mode
-  0x00,                                          // Horizontal mode
+  0x20, 0x00,            	                       // Set horizontal addressing mode
   0xA8, 0x3F,                                    // Set multiplex. Height: 64 - 1
-  0x81,                                          // Set contrast
-  0xff,                                          // Highest level
+  0x81, 0xFF,                                    // Set contrast to maximum
   0x8D, 0x14,                                    // Set charge pump
   0xAF,                                          // Display ON
   0xA1, 0xC8                                     // Flip the screen

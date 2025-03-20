@@ -6,7 +6,7 @@
     Copyright (c) 2012 GOF Electronics Co. Ltd (http://www.geekonfire.com)
     Copyright (c) 2015 CoPiino Electronics. All rights reserved
     Copyright (c) 2016 Kirk Northrop (github.com/kirknorthrop)
-    Copyright (c) 2024 Nikolai Radke (http://www.monstermaker.de)
+    Copyright (c) 2025 Nikolai Radke (http://www.monstermaker.de)
   
     Original Author: Limor Fried/Ladyada Adafruit Industries
     Modified by: Jimbo.we (www.geekonfire.com)
@@ -17,9 +17,9 @@
                  -- Removed unused code
                  -- Modified for TinyI2C.h instead of TinyWireM.h
                  -- Optimized init sequence and functions
+                 -- 1,3" display support
                  -- SH1106 support by Sebastian Völke
                  -- Bold font by Sebastian Völke
-
 
     What is it?
       This library is derived from GOFi2cOLED library, only for SSD1306 in I2C Mode.
