@@ -3,10 +3,10 @@
 # 2025
 
 * **13.03.2025** Release **V1.3** with a bugfix and improvements.  
-* **13.03.2025** Firmware **1.01-130325** with fix for long words and **V1.3-130325** with fix and now full 1.3" support.   
+* **13.03.2025** Firmware **1.01-130325** with fix for long words and **1.3-130325** with fix and now full 1.3" support.   
 * **20.02.2025** Updated **eeprom_writer** with check for last written word.  
 * **16.01.2025** Release **V1.2.2** with final text centering method.  
-* **16.01.2025** Firmware **1.01-160225** and **v1.22-160125** with, finally, perfect text centering :-)  
+* **16.01.2025** Firmware **1.01-160225** and **1.22-160125** with, finally, perfect text centering :-)  
   
 # 2024
 
