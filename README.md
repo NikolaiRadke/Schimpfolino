@@ -55,7 +55,7 @@ Root directory with some explanation files.
 |   ├── Boring/
 |   |   Plain but smooth case by Michael Kussmaul.
 |   ├── CuteVader/
-|   |  Cute and evil case by falsenau.
+|   |   Cute and evil case by falsenau.
 |   └── Nokolino/
 |       Standard Nokolino-shaped case.
 |
