@@ -54,6 +54,8 @@ Root directory with some explanation files.
 |   STL files to 3D print a case. Other kinds of hulls will follow.
 |   ├── Boring/
 |   |   Plain but smooth case by Michael Kussmaul.
+|   ├── CuteVader/
+|   |  Cute and evil case by Jan Fanslau.
 |   └── Nokolino/
 |       Standard Nokolino-shaped case.
 |
