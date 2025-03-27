@@ -2,6 +2,7 @@
 
 # 2025
 
+* **27.03.2025** Check out Maker Faire Ruhr Dortmund with Schimpfolino-Kits available at the heise shop an **Schimpferator**, the XXL-Schimpfolino!   
 * **30.03.2025** Added new 'CuteVader' case by [falsanu](https://github.com/falsanu)     
 * **13.03.2025** Release **V1.3** with a bugfix and improvements.  
 * **13.03.2025** Firmware **1.01-130325** with fix for long words and **1.3-130325** with fix and now full 1.3" support.   
