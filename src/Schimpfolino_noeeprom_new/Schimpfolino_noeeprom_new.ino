@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.3 13.03.2025 - Nikolai Radke
+    Schimpfolino V1.3 07.04.2025 - Nikolai Radke
     https://www.monstermaker.de
     Next version for new improvements. Compatible with older versions.
 
@@ -7,7 +7,7 @@
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 7.960 bytes (IDE 2.3.4 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 7.914 bytes (IDE 2.3.4 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.6 mA (display on, no EEPROM) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -76,8 +76,7 @@ int main(void) {
     if (TinyI2C.start(0x50, 0)) {                // Look for 24LCXX EEPROM at 0x50
       eeprom = true;                             // if available, set EEPROM flag
       for (list = 0; list < 5; list ++) {        // Read numbers of 5 wordlists
-        number = read_eeprom(0 + genus) * 255;   // Calculate number: 
-        number += read_eeprom(1 + genus);        // First byte = high, second byte = low
+        number = (read_eeprom(0 + genus) * 255) + (read_eeprom(1 + genus)); // First byte = high, second byte = low
         addresses[list] = number;                // Write word numbers to array 
         genus += 2;                              // Change number address
       }  
@@ -103,9 +102,8 @@ int main(void) {
         Oled_clear();                            // Clear display buffer
 
         // First word
-        number = (random(0, addresses[0]));      // Select first word
         field = data1;                           // Pointer to first array
-        get_swearword(number);                   // Read word from EEPROM or wordlist
+        get_swearword(random(0, addresses[0]));  // Read first word from EEPROM or wordlist
         genus = random(0, 3);                    // Set word genus
         if (genus != 0) {                        // Check if not female
           wordbuffer[chars] = 48 + genus;        // If male, add "r", if neutrum, add "s" to buffer
@@ -116,17 +114,15 @@ int main(void) {
         // Second word first part
         list = 0;                                // Set start address for array
         if (eeprom) list = addresses[0];         // Set start address for EEPROM
-        number = (random(list, addresses[1]));   // Select second part of second word
         field = data2;                           // Pointer to second array
-        get_swearword(number);                   // Read first part of second word 
+        get_swearword(random(list, addresses[1]));                   // Read first part of second word 
         
         // Second word second part
         if (eeprom) list = addresses[genus + 1]; //  Set start adress for EEPROM
-        number = (random(list, addresses[genus + 2])); // Select second part of second word
         field = data3;                           // Pointer to female array
         if (genus == 1) field = data4;           // Pointer to male array
         if (genus == 2) field = data5;           // Pointer to neutrum array
-        get_swearword(number);                   // Read second part of second word
+        get_swearword(random(list, addresses[genus + 2]));                   // Read second part of second word
         write_swearword(4);                      // Write second word in second line
         
          // Wait for button and sleep 8s
