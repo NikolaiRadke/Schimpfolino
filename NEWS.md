@@ -2,6 +2,7 @@
 
 # 2025
 
+* **07.04.2025** Firmware **1.X-070425** with code optimizations. One day, it will fit into an ATtiny25... 
 * **27.03.2025** Check out Maker Faire Ruhr Dortmund with Schimpfolino-Kits available at the heise shop an **Schimpferator**, the XXL-Schimpfolino!   
 * **30.03.2025** Added new 'CuteVader' case by [falsanu](https://github.com/falsanu)     
 * **13.03.2025** Release **V1.3** with a bugfix and improvements.  
