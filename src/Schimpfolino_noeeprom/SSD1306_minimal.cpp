@@ -5,7 +5,7 @@
   Copyright (c) 2012 GOF Electronics Co. Ltd (http://www.geekonfire.com)
   Copyright (c) 2015 CoPiino Electronics. All rights reserved
   Copyright (c) 2016 Kirk Northrop (github.com/kirknorthrop)
-  Copytight (c) 2024 Nikolai Radke (http://www.monstermaker.de)
+  Copytight (c) 2025 Nikolai Radke (http://www.monstermaker.de)
   
   Original Author: Limor Fried/Ladyada Adafruit Industries
   Modified by: Jimbo.we (www.geekonfire.com)
@@ -137,7 +137,7 @@ void SSD1306_Mini::init() {
   uint8_t i;
   _delay_ms(50);	                               // Wait for OLED hardware init
   commandMode();                                 // Set command mode
-  for (i = 0; i < InitLength; i++)              
+  for (i = 0; i < InitLength; ++ i)              
     Wire.write(pgm_read_byte(&InitSequence[i])); // Write init sequence from PROGMEM
   Wire.endTransmission();
 }
@@ -167,9 +167,9 @@ void SSD1306_Mini::clear() {
   sendCommand(0x10 | 0x00);                      // Hi col = 0
   sendCommand(0x40 | 0x00);                      // Line #0   
   clipArea(0 , 0, 128, 8);
-  for (a = 0; a <= 64; a ++) {
+  for (a = 0; a <= 64; ++ a) {
     dataMode();
-    for (b = 0; b < 16;  b ++) 
+    for (b = 0; b < 16;  ++ b) 
       Wire.write(0x00);
     Wire.endTransmission();
   }
@@ -178,7 +178,7 @@ void SSD1306_Mini::clear() {
 void SSD1306_Mini::printChar(char ch) {          // Reworked for Schimpfolino
   uint8_t a;
   dataMode();                                    // Set data mode
-  for (a = 0; a < 5; a ++)                       // Write 5 columns for each character
+  for (a = 0; a < 5; ++ a)                       // Write 5 columns for each character
     Wire.write(pgm_read_byte(&BasicFont[ch * 5 + a])); // Write column from PROGMEM
   Wire.write(0x00);                              // One column space for better readabiltiy
   if (chars < 19) Wire.write(0x00);              // One more column space when the line has enough room

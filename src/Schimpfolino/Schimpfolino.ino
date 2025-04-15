@@ -1,12 +1,12 @@
 /*  
-    Schimpfolino V1.01 07.04.2025 - Nikolai Radke
+    Schimpfolino V1.01 15.04.2025 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | Only with additional 24AAXXX EEPROM
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 3.276 bytes (IDE 2.3.4 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.260 bytes (IDE 2.3.6 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (display on, EEPROM on) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -66,11 +66,8 @@ int main(void) {
     Wire.begin();                                // Start I2C
 
     // Read wordlist addresses | genus is a helping variable here
-    for (uint8_t list = 0; list < 5; list ++) {  // Read numbers of 5 wordlists
-      number = (read_eeprom(0 + genus) * 255) + (read_eeprom(1 + genus)); // First byte = high, second byte = low
-      addresses[list] = number;                  // Write word numbers to array 
-      genus += 2;                                // Chance number address
-    }
+    for (uint8_t list = 0; list < 5; ++ list)    // Read numbers of 5 wordlists
+      addresses[list] = (read_eeprom(list * 2) * 255) + (read_eeprom((list * 2) +1)); // Write word numbers to array
 
     // Randomize number generator
     PORTB &= ~(1 << DEVICES);                    // Devices off
@@ -94,7 +91,7 @@ int main(void) {
         genus = random(0, 3);                    // Set word genus
         if (genus != 0) {                        // Check if not female
           wordbuffer[chars] = 48 + genus;        // If male, add "r", if neutrum, add "s" to buffer
-          chars++;                               // Increase number of characters
+          ++ chars;                              // Increase number of characters
         } 
         write_swearword(2);                      // Write first word in the first line
 
@@ -126,7 +123,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
   char c;                                        // Helping variable for fetched character
   uint16_t i;                                    // Helping variable for 10 readings
   address *= 10;                                 // Each address has 10 characters
-  for (i = address; i < address + 10; i ++) {    // Read 10 characters...        
+  for (i = address; i < address + 10; ++ i) {    // Read 10 characters...        
     c = read_eeprom(i + 10);                     // ...from EEPROM with address memory offset
     if (c != 32) {                               // Check for space
       switch (c) {                               // Set German Umlaute   
@@ -139,7 +136,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
         case 42: wordbuffer[chars] = 30; break;  // * -> ß
         default: wordbuffer[chars] = c - 65;     // Set non-empty character
       }
-      chars ++;                                  // Increase number of fetched characters
+      ++ chars;                                  // Increase number of fetched characters
     }
   } 
 }
@@ -149,7 +146,7 @@ void write_swearword(uint8_t line) {             // Write centered word
   x = (128 - (chars * 7)) / 2;                   // Calculate centering
   if (chars > 17) x = (128 - (chars * 6)) / 2;   // Modify for very long words
   oled.cursorTo(x, line);                        // Set cursor to selected line
-  for (x = 0; x < chars; x ++)                   // Print the characters...
+  for (x = 0; x < chars; ++ x)                   // Print the characters...
     oled.printChar(wordbuffer[x]);               // ...from buffer
   chars = 0;                                     // Set number of characters back to 0 
 }

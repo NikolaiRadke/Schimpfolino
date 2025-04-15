@@ -5,7 +5,7 @@
   Copyright (c) 2012 GOF Electronics Co. Ltd (http://www.geekonfire.com)
   Copyright (c) 2015 CoPiino Electronics. All rights reserved
   Copyright (c) 2016 Kirk Northrop (github.com/kirknorthrop)
-  Copytight (c) 2024 Nikolai Radke (http://www.monstermaker.de)
+  Copytight (c) 2025 Nikolai Radke (http://www.monstermaker.de)
   
   Original Author: Limor Fried/Ladyada Adafruit Industries
   Modified by: Jimbo.we (www.geekonfire.com)

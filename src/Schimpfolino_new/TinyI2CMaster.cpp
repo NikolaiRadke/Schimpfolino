@@ -50,7 +50,7 @@ void TinyI2CMaster::init() { // Ports were already defined in main sketch
           1 << USICS1 | 0 << USICS0 | 1 << USICLK | // Software stobe as counter clock source
           0 << USITC;
   USISR = 1 << USISIF | 1 << USIOIF | 1 << USIPF | 1 << USIDC | // Clear flags...
-          0x0 << USICNT0;                        // ...and reset counter
+          0 << USICNT0;                          // ...and reset counter
 }
 
 uint8_t TinyI2CMaster::read(void) {  
