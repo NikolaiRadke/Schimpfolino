@@ -60,6 +60,9 @@ extern uint8_t chars;
     // Send a command | Schimpfolino needs to switch off the display (old boards)
     void Oled_sendCommand(uint8_t command);
 
+    // Set command mode
+    void Oled_commandMode(void);
+
     // Set data mode
     void Oled_dataMode(void);
 

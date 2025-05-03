@@ -1,4 +1,4 @@
-// Wordlist arrays - a single array can hold only 4000 bytes | Used if no EEPROM present | 5 x 116 words = 5.800 bytes
+// Wordlist arrays - a single array can hold only 4000 bytes | Used if no EEPROM present | 5 x 118 words = 5.900 bytes
 // Umlaute have to be converted (UTF-8): ä -> # | ö -> $ | ü -> % | ß -> * | Ä -> & | Ö -> ' | Ü -> (
 // Original Schimpfolino wordlist
 
@@ -14,7 +14,7 @@ const char data1[] PROGMEM = {"Dumpfe    Staubige  Miefende  Stinkende Gammlige 
                               "Harzige   Lahme     Mickrige  Br#sige   Zottelige Gelbliche Knorrige  Salzige   Schrille  Dusselige "
                               "Windige   Grausige  Gr#sslicheGrobe     Spackige  Kauzige   Flachsige Fransige  Motzige   Kahle     "
                               "Niedrige  Keifende  Nichtige  Dr$ge     Fade      Weinende  Sch#bige  N$rgelnde Hibbelige Plockige  "
-                              "Brennende D%rre     Kochende  Knarzende Faltige   Schlammige"};
+                              "Brennende D%rre     Kochende  Knarzende Faltige   SchlammigeBr$ckeligeRissige   "};
 
 // Second word part 1 - noun
 const char data2[] PROGMEM = {"Stampf    Wabbel    Pups      Schmalz   Schmier   Hack      Zement    Spuck     Stachel   Keller    "
@@ -28,7 +28,7 @@ const char data2[] PROGMEM = {"Stampf    Wabbel    Pups      Schmalz   Schmier  
                               "Knatter   Sauf      Pipi      Struller  Gr#ten    Nasen     Pech      Leier     Reier     Bl$d      "
                               "Schorf    Sabbel    Quengel   Bananen   Unsinns   Plunsch   Frust     Lotter    Fummel    Blubber   "
                               "Wobbel    Vollbart  Lack      Klo       Moder     Knirsch   Zitter    Kalt      Schl%rf   Schnief   "
-                              "Klecker   Rumba     Schwurbel Schrabbel Schlauch  Schrumpel "};
+                              "Klecker   Rumba     Schwurbel Schrabbel Schlauch  Schrumpel H%hner    Schlacker "};
 
 // Second word part 2 - female noun
 const char data3[] PROGMEM = {"suppe     socke     bombe     boulette  schwarte  warze     beule     pest      pflaume   r%be      "
@@ -42,7 +42,7 @@ const char data3[] PROGMEM = {"suppe     socke     bombe     boulette  schwarte 
                               "natter    kralle    ziege     gr%tze    s%lze     nulpe     wampe     frikadelleflunder   trulla    "
                               "zichte    uschi     kuh       pappe     hupe      tr$te     schabe    kanallie  scharte   rille     "
                               "amsel     alge      l%cke     bremse    m%cke     b%rste    wanne     pocke     pl$rre    schabracke"
-                              "wuppe     sichel    tante     reuse     ratsche   pauke     "};
+                              "wuppe     sichel    tante     reuse     ratsche   pauke     fluppe    matrone   "};
 
 // Second word part 2 - male noun
 const char data4[] PROGMEM = {"busch     fink      nagel     bammel    klopper   tentakel  br#gen    schlumpf  husten    ersatz    "
@@ -56,7 +56,7 @@ const char data4[] PROGMEM = {"busch     fink      nagel     bammel    klopper  
                               "schmand   klops     gauner    lulli     graupe    pimpf     kasper    spross    teufel    hammel    "
                               "bock      schmodder pr%gel    spie*er   aal       groschen  geist     rochen    knochen   horst     "
                               "quark     keks      zausel    iltis     jeck      honk      spargel   nippel    atze      muffel    "
-                              "greis     pin$kel   gehilfe   halunke   lauch     bazillus  "};
+                              "greis     pin$kel   gehilfe   halunke   lauch     bazillus  onkel     klecks    "};
 
 // Second word part 2 - neutrum noun
 const char data5[] PROGMEM = {"sekret    balg      blag      monster   gel$t     imitat    skelett   ding      unding    auge      "
@@ -70,4 +70,4 @@ const char data5[] PROGMEM = {"sekret    balg      blag      monster   gel$t    
                               "drama     trauma    versagen  fiasko    dilemma   debakel   tabu      ger%cht   hindernis dingdong  "
                               "dingsbums gewicht   abwasser  abbild    modell    gem#lde   brett     geballer  gem#cht   toupet    "
                               "geschw#tz gerippe   pech      leiden    verbrechenfossil    symptom   biest     wrack     geb#ck    "
-                              "unheil    ungemach  objekt    gesicht   konfekt   gebrechen "};
+                              "unheil    ungemach  objekt    gesicht   konfekt   gebrechen m#rchen   ger#t     "};
