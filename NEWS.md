@@ -2,6 +2,7 @@
 
 # 2025
 
+* **03.05.2025** Firmware **1.X-030525** again with even bigger optimizations: 10 more words for both _noeeprom.ino**.  
 * **15.04.2025** Firmware **1.X-150425** with bigger code optimizations: 20 more words for **schimpfolino_noeeprom.ino** and 30 new words for **schimpfolino_noeeprom_new.ino**.  
 * **07.04.2025** Firmware **1.X-070425** with code optimizations. One day, it will fit into an ATtiny25... 
 * **27.03.2025** Check out Maker Faire Ruhr Dortmund with Schimpfolino-Kits available at the heise shop an **Schimpferator**, the XXL-Schimpfolino!   
