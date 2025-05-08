@@ -64,7 +64,7 @@ int main(void) {
   Wire.setClock(400000L);                        // Fast mode (400 kHz)
   Wire.begin();                                  // Start I2C
 
-  // Read wordlist addresses | genus is a helping variable here
+  // Read wordlist addresses
   for (uint8_t list = 0; list < 5; ++ list)      // Read numbers of 5 wordlists
     addresses[list] = (read_eeprom(list * 2) * 255) + (read_eeprom((list * 2) +1)); // Write word numbers to array
 
@@ -118,10 +118,9 @@ int main(void) {
 
 // Functions
 void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
-  char c;
   address *= 10;                                 // Each address has 10 characters
   for (uint8_t i = 0; i < 10; i++) {             // Read 10 characters
-    c = read_eeprom(address + i + 10);           // From EEPROM with offset
+    char c = read_eeprom(address + i + 10);      // From EEPROM with offset
     if (c != 32) {                               // Skip space
       // Set German Umlaute or character
       switch (c) {
@@ -134,7 +133,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
         case 42: c = 30; break;                  // * -> ß
         default: c -= 65;                        // Set non-empty character
       }
-      wordbuffer[chars++] = c;                   // Store and increment counter
+      wordbuffer[chars ++] = c;                  // Store and increment counter
     }
   } 
 }

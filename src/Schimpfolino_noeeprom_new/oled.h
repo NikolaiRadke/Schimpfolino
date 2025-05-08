@@ -17,7 +17,7 @@
                  -- Removed unused code
                  -- Modified for TinyI2C.h instead of TinyWireM.h
                  -- Optimized init sequence and functions
-                 -- 1,3" display support
+                 -- Support for 1,3" displays
                  -- SH1106 support by Sebastian Völke
                  -- Bold font by Sebastian Völke
 
@@ -26,7 +26,7 @@
       As the original library only supports frame buffered mode which requires to have
       at least 1024 bytes of free RAM for a 128 x 64 px display it is too big for smaller devices.
 
-      So this a SSD1306/SH1106 library that works great with ATtiny45/85 devices :)
+      So this a SSD1306/SH1106 library that works great with ATtiny25/45/85 devices :)
 
     It is a free software; you can redistribute it and/or modify it under the terms of 
     BSD license, check LICENSE for more information. All text above must be included in 
@@ -39,7 +39,7 @@
 #include <Arduino.h>                             // Arduino and ATtiny specific library
 
 // Config display
-#define SlaveAddress 0x3c                        // Display I2C address
+#define SlaveAddress 0x3C                        // Display I2C address
 //#define bold                                   // Uncomment to use bold font
 
 // Schimpfolino: count characters in main sketch, used to shrink font witdh if too long
@@ -55,7 +55,7 @@ extern uint8_t chars;
     void Oled_cursorTo(uint8_t row, uint8_t col);
     
     // Print a single character
-    void Oled_printChar(char ch);
+    void Oled_printChar(char c);
 
     // Send a command | Schimpfolino needs to switch off the display (old boards)
     void Oled_sendCommand(uint8_t command);

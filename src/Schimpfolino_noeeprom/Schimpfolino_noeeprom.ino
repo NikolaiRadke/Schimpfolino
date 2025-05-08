@@ -60,98 +60,96 @@ SSD1306_Mini  oled;                              // Set display
 
 int main(void) {                                 
   // Power saving
-  ADCSRA &= ~(1 << ADEN);                      // Switch ADC off | Saves 270 uA
-  set_sleep_mode(SLEEP_MODE_PWR_DOWN);         // Always deepest sleep mode
+  ADCSRA &= ~(1 << ADEN);                        // Switch ADC off | Saves 270 uA
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);           // Always deepest sleep mode
 
   // Port setup
-  DDRB  |= (1 << DEVICES);                     // Set PB4 to OUTPUT to power up display and EEPROM
-  PORTB = 0x3F;                                // Set all ports to INPUT_PULLUP to prevent floating and start devices
+  DDRB  |= (1 << DEVICES);                       // Set PB4 to OUTPUT to power up display and EEPROM
+  PORTB = 0x3F;                                  // Set all ports to INPUT_PULLUP to prevent floating and start devices
 
   // Hardware pin and watchdog interrupt
-  cli();                                       // Stop all interrupts. An interrupt can ruin the timed sequence
-  GIMSK |= (1 << PCIE);                        // Turn on pin change interrupt
-  PCMSK |= (1 << PCINT1);                      // Turn on interrupt on PB1 button
-  MCUSR &= ~(1 << WDRF);                       // No watchdog reset 
-  WDTCR |= (1 << WDCE) | (1 << WDE);           // Watchdog change enable
-  WDTCR = (1 << WDP0) | (1 << WDP3);           // Set prescaler to 8 s
-  sei();                                       // Start interrupts
+  cli();                                         // Stop all interrupts. An interrupt can ruin the timed sequence
+  GIMSK |= (1 << PCIE);                          // Turn on pin change interrupt
+  PCMSK |= (1 << PCINT1);                        // Turn on interrupt on PB1 button
+  MCUSR &= ~(1 << WDRF);                         // No watchdog reset 
+  WDTCR |= (1 << WDCE) | (1 << WDE);             // Watchdog change enable
+  WDTCR = (1 << WDP0) | (1 << WDP3);             // Set prescaler to 8 s
+  sei();                                         // Start interrupts
 
   // Init I2C
-  Wire.setClock(400000L);                      // Fast mode (400 kHz)
-  Wire.begin();                                // Start I2C
+  Wire.setClock(400000L);                        // Fast mode (400 kHz)
+  Wire.begin();                                  // Start I2C
 
   // Look for EEPROM and read wordlist addresses if available | genus is a helping variable here 
-  Wire.beginTransmission(0x50);                // Look for 24LCXX EEPROM at 0x50
-  if (Wire.endTransmission() == 0) {           // 0x00 for available, 0xFF for not found
-    eeprom = true;                             // if available, set EEPROM flag
-    // Read wordlist addresses | genus is a helping variable here
+  Wire.beginTransmission(0x50);                  // Look for 24LCXX EEPROM at 0x50
+  if (Wire.endTransmission() == 0) {             // 0x00 for available, 0xFF for not found
+    eeprom = true;                               // if available, set EEPROM flag
+    // Read wordlist addresses
     for (uint8_t list = 0; list < 5; ++ list)  // Read numbers of 5 wordlists
       addresses[list] = (read_eeprom(list * 2) * 255) + (read_eeprom((list * 2) +1)); // Write word numbers to array  
   }
 
   // Randomize number generator
-  PORTB &= ~(1 << DEVICES);                    // Devices off
-  sleep_mode();                                // Sleep until button is pressed to "turn on"
-  while (!(PINB & (1 << BUTTON)));             // Wait until button is released
-  randomSeed(millis());                        // Time passed is used for random numbers
+  PORTB &= ~(1 << DEVICES);                      // Devices off
+  sleep_mode();                                  // Sleep until button is pressed to "turn on"
+  while (!(PINB & (1 << BUTTON)));               // Wait until button is released
+  randomSeed(millis());                          // Time passed is used for random numbers
 
   // Main routine | Runs after waking up
   while(1) {
-    // Init Display
-    PORTB |= (1 << DEVICES);                   // Devices on
-    PRR |= (1 << PRTIM0) | (1 << PRTIM1);      // Both timers are not needed anymore | Saves 100 uA when active
-    oled.init();                               // Connect and start OLED via I2C
+    // Init Display  
+    PORTB |= (1 << DEVICES);                     // Devices on
+    PRR |= (1 << PRTIM0) | (1 << PRTIM1);        // Both timers are not needed anymore | Saves 100 uA when active
+    oled.init();                                 // Connect and start OLED via I2C
 
     // Display swearwords until timeout
-    while (awake) {                            // Wait 8.5 seconds timeout
-      oled.clear();                            // Clear display buffer
+    while (awake) {                              // Wait 8.5 seconds timeout
+      oled.clear();                              // Clear display buffer
 
       // First word
-      field = data1;                           // Pointer to first array
-      get_swearword(random(0, addresses[0]));  // Read first word from EEPROM
-      genus = random(0, 3);                    // Set word genus
-      if (genus != 0) {                        // Check if not female
-        wordbuffer[chars] = 48 + genus;        // If male, add "r", if neutrum, add "s" to buffer
-        ++ chars;                              // Increase number of characters
+      field = data1;                             // Pointer to first array
+      get_swearword(random(0, addresses[0]));    // Read first word from EEPROM
+      genus = random(0, 3);                      // Set word genus
+      if (genus != 0) {                          // Check if not female
+        wordbuffer[chars] = 48 + genus;          // If male, add "r", if neutrum, add "s" to buffer
+        ++ chars;                                // Increase number of characters
       } 
-      write_swearword(2);                      // Write first word in the first line
+      write_swearword(2);                        // Write first word in the first line
 
       // Second word first part
-      list = 0;                                // Set start address for array
-      if (eeprom) list = addresses[0];         // Set start address for EEPROM
-      field = data2;                           // Pointer to second array
+      list = 0;                                  // Set start address for array
+      if (eeprom) list = addresses[0];           // Set start address for EEPROM
+      field = data2;                             // Pointer to second array
       get_swearword(random(list, addresses[1])); // Read first part of second word 
        
       // Second word second part
-      if (eeprom) list = addresses[genus + 1]; //  Set start adress for EEPROM
-      field = data3;                           // Pointer to female array
-      if (genus == 1) field = data4;           // Pointer to male array
-      if (genus == 2) field = data5;           // Pointer to neutrum array
+      if (eeprom) list = addresses[genus + 1];   //  Set start adress for EEPROM
+      field = data3;                             // Pointer to female array
+      if (genus == 1) field = data4;             // Pointer to male array
+      if (genus == 2) field = data5;             // Pointer to neutrum array
       get_swearword(random(list, addresses[genus + 2])); // Read second part of second word
-      write_swearword(4);                      // Write second word in second line
+      write_swearword(4);                        // Write second word in second line
         
        // Wait for button and sleep 8s
-      _delay_ms(500);                          // Debounce button
-      awake = false;                           // Set to sleep
-      WDTCR |= (1 << WDIE);                    // Set watchdog interrupt
-      sleep_mode();                            // Sleep 8 s or wake when button is pressed
-      WDTCR &= ~(1 << WDIE);                   // Stop watchdog interrupt
-    } 
+      _delay_ms(500);                            // Debounce button
+      awake = false;                             // Set to sleep
+      WDTCR |= (1 << WDIE);                      // Set watchdog interrupt
+      sleep_mode();                              // Sleep 8 s or wake when button is pressed
+      WDTCR &= ~(1 << WDIE);                     // Stop watchdog interrupt
+    }   
 
     // Go to sleep after 8s seconds if button is not pressed before                           
-    oled.sendCommand(0xAE);                    // Display off and sleep (old boards)
-    PORTB &= ~(1 << DEVICES);                  // Devices off
-    sleep_mode();                              // Sleep until button is pressed
+    oled.sendCommand(0xAE);                      // Display off and sleep (old boards)
+    PORTB &= ~(1 << DEVICES);                    // Devices off
+    sleep_mode();                                // Sleep until button is pressed
   }
 }
 
 // Functions
 void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
-  char c;                                        // Helping variable for fetched character
-  uint16_t i;                                    // Helping variable for 10 readings
   address *= 10;                                 // Each address has 10 characters
-  for (i = address; i < address + 10; ++ i) {    // Read 10 characters...        
-    c = pgm_read_byte(&field[i]);                // ...from wordlist...
+  for (uint16_t i = address; i < address + 10; ++ i) { // Read 10 characters...        
+    char c = pgm_read_byte(&field[i]);           // ...from wordlist...
     if (eeprom) c = read_eeprom(i + 10);         // ...or from EEPROM with address memory offset
     if (c != 32) {                               // Skip space
       // Set German Umlaute or character
@@ -165,7 +163,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
         case 42: c = 30; break;                  // * -> ß
         default: c -= 65;                        // Set non-empty character
       }
-      wordbuffer[chars++] = c;                   // Store and increment counter
+      wordbuffer[chars ++] = c;                  // Store and increment counter
     }
   } 
 }

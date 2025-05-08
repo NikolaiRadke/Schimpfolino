@@ -17,8 +17,8 @@
                  -- Removed unused code
                  -- Modified for TinyI2C.h instead of TinyWireM.h
                  -- Optimized init sequence and functions
-                 -- SH1106 support by Sebastian Völke
                  -- Support for 1,3" displays
+                 -- SH1106 support by Sebastian Völke
                  -- Bold font by Sebastian Völke
 
     What is it?
@@ -26,7 +26,7 @@
       As the original library only supports frame buffered mode which requires to have
       at least 1024 bytes of free RAM for a 128 x 64 px display it is too big for smaller devices.
 
-      So this a SDD1306/SH1106 library that works great with ATtiny45/85 devices :)
+      So this a SDD1306/SH1106 library that works great with ATtiny25/45/85 devices :)
 
     It is a free software; you can redistribute it and/or modify it under the terms of 
     BSD license, check LICENSE for more information. All text above must be included in 
@@ -77,8 +77,8 @@ const uint8_t BasicFont[] PROGMEM = {            // Bold font
   0xE3, 0xFF, 0x08, 0xFF, 0xE3,  // X 23
   0x07, 0x0F, 0xF8, 0xFF, 0x07,  // Y 24
   0xE3, 0xF3, 0xDB, 0xCF, 0xC7,  // Z 25
-  0x1C, 0x3E, 0x7C, 0x3E, 0x1C,  // ♥ 26
   0x69, 0xFD, 0x94, 0x7D, 0xFD,  // ä 27
+  0x1C, 0x3E, 0x7C, 0x3E, 0x1C,  // ♥ 26 UTF-8 backspace makes troubles
   0x79, 0xFD, 0x84, 0xFD, 0x79,  // ö 28
   0x7D, 0xFD, 0x80, 0x7D, 0xFD,  // ü 29
   0xFF, 0xFF, 0x49, 0xD6, 0x60,  // ß 30
@@ -204,38 +204,35 @@ void Oled_sendData(uint8_t data) {
 
 // Public functions
 void Oled_init() {
-  uint8_t i;
   _delay_ms(50);	                               // Wait for OLED hardware init
   Oled_commandMode();                            // Set command mode
-  for (i = 0; i < InitLength; ++ i)              
+  for (uint8_t i = 0; i < InitLength; ++ i)              
     TinyI2C.write(pgm_read_byte(&InitSequence[i])); // Write init sequence from PROGMEM
   TinyI2C.stop();
 }
 
 void Oled_cursorTo(uint8_t col, uint8_t row) {
-  Oled_sendCommand(0xb0 | row);
-  Oled_sendCommand(0x00 | (col & 0xf));
-  Oled_sendCommand(0x10 | ((col>>4)& 0xf));
+  Oled_sendCommand(0xB0 | row);
+  Oled_sendCommand(0x00 | (col & 0x0F));
+  Oled_sendCommand(0x10 | ((col >> 4) & 0x0F));
 }
 
 void Oled_clear() {
-  uint8_t p, x;
-  for (p = 0; p < 8; ++ p) {
-    Oled_sendCommand(0xb0 | p);                  // Page 0 - 7   
+  for (uint8_t p = 0; p < 8; ++ p) {
+    Oled_sendCommand(0xB0 | p);                  // Page 0 - 7   
     Oled_sendCommand(0x00 | 0x00);               // Low col = 0
     Oled_sendCommand(0x10 | 0x00);               // Hi col = 0
     Oled_dataMode();                             // Set data mode
-    for (x = 0; x <= 129; ++ x)                  // 129 is enough for 1,3"
+    for (uint8_t x = 0; x <= 129; ++ x)          // 129 is enough for 1,3"
       TinyI2C.write(0x00);                       // Clear every column
     TinyI2C.stop();
   }
 }
 
-void Oled_printChar(char ch) { // Reworked for Schimpfolino
-  uint8_t i;
+void Oled_printChar(char c) { // Reworked for Schimpfolino
   Oled_dataMode();                               // Set data mode
-  for (i = 0; i < 5; ++ i)                       // Write 5 columns for each character
-    TinyI2C.write(pgm_read_byte(&BasicFont[ch * 5 + i])); // Write column from PROGMEM
+  for (uint8_t i = 0; i < 5; ++ i)               // Write 5 columns for each character
+    TinyI2C.write(pgm_read_byte(&BasicFont[c * 5 + i])); // Write column from PROGMEM
   TinyI2C.write(0x00);                           // One column space for better readabiltiy
   if (chars < 18) TinyI2C.write(0x00);           // One more column space when the line has enough room
   TinyI2C.stop();

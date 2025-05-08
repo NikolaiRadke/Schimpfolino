@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schimpfolinos Hirnprogrammierer V1.1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        	padding: 0;
+            height: 100%;
+        	color: #000;
+        }
+        .top {
+            background-color: #00c7c7;
+            height: 30px;
+            padding: 10px;
+            display: block;
+        }
+        .mitte {
+            position: absolute;
+            width: 100%;
+        	top: 50px;
+            bottom: 40px;
+            overflow: auto;
+            text-align: center;
+	    }
+        .links_rahmen {
+            direction: rtl;
+        }
+        .links {
+            direction: ltr; 
+            margin: 10px;
+            margin-top: 0px;
+            width: 45%;
+            height: 100%;
+            float: left;
+            text-align: justify;
+        }
+        .rechts {
+            margin: 10px;
+            margin-top: 0px;
+            width: 45%;
+            height: 100%;
+            float: right;
+            text-align: center;
+            border-left: 1px solid #000;
+            overflow: scroll;           
+        }
+        .unten {
+            position: absolute;
+            width: 100%;
+            font-size: 14px;
+            bottom: 0px;
+            background-color: #00c7c7;
+            height: 30px;
+            padding: 10px;
+        }
+        #container {
+            margin-bottom: 20px;
+        }
+        .textfield {
+            margin-bottom: 5px;
+        }
+        .textfield input {
+            width: 100px;
+        }
+        h3 {
+            text-align:center;
+        }
+        .button {
+	        color: #000;
+        	border: 2px solid #d04040;
+        	background-color: #fff;
+        }
+        .button:hover {
+            background-color: #d0d0d0;
+        }
+        input[type=file]::file-selector-button {
+            color: #000;
+            border: 2px solid #d04040;
+            background-color: #fff;
+        }
+        input[type=file]::file-selector-button:hover {
+            background-color: #d0d0d0;
+        }
+        /* Für mobile Geräte */
+        @media (max-width: 600px) {
+            .rechts {
+                position: relative;
+                top: 0;         /* Nach oben verschieben */
+                float: none;    /* Float deaktivieren, um Flexibilität zu haben */
+                margin-top: 0;  /* Abstand oben */
+                width: 100%;    /* Volle Breite auf mobilen Geräten */
+            }
+
+            .links {
+                float: none;
+                width: 100%;    /* Volle Breite auf mobilen Geräten */
+            }
+        }
+    </style>
+    <script>
+        var elements = 0;
+        function loadFileAsText(){
+            const fileToLoad = document.getElementById("fileToLoad").files[0];
+            const fileReader = new FileReader();
+            var name = document.getElementById('fileToLoad'); 
+            document.getElementById('opened').innerHTML = name.files.item(0).name;
+            document.getElementById('filename').value = name.files.item(0).name;
+            fileReader.onload = function(fileLoadedEvent) {
+                const textLoaded = fileLoadedEvent.target.result;
+                let buffer = '';
+                let counter = 0;
+                for (let i = 0; i < textLoaded.length; i ++ ) {
+                    switch (textLoaded.charAt(i)) {
+                        case '[': buffer += 'ä'; break;
+                        case ']': buffer += 'ö'; break;
+                        case '^': buffer += 'ü'; break;
+                        case '_': buffer += 'ß'; break;
+                        case '{': buffer += 'Ä'; break;         
+                        case '|': buffer += 'Ö'; break;
+                        case '}': buffer += 'Ü'; break;
+                        default: buffer += textLoaded.charAt(i);  
+                    } 
+                    counter ++;                 
+                    if (counter == 10) {
+                        addTextField(buffer);
+                        buffer = '';
+                        counter = 0;
+                    }
+                }
+            }
+            fileReader.readAsText(fileToLoad, "UTF-8");
+        }
+        function addTextField(entry) {
+            elements ++;
+            document.getElementById('words').innerHTML = elements;
+            const container = document.getElementById('container');
+            const div = document.createElement('div');
+            div.className = 'textfield';
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.maxLength = 10;
+            input.value = entry;
+            div.append(input);
+            container.append(div);
+            container.scrollTop = container.scrollHeight;
+        }
+        function saveTextFields() {
+            const container = document.getElementById('container');
+            const inputs = container.getElementsByTagName('input');
+            let content = '';
+            for (let input of inputs) {
+                let length = input.value.length;
+                let text = input.value;
+                for (let i = 0; i < length; i ++) {
+                    text = text.replace('ä', '[');
+                    text = text.replace('ö", "]');
+                    text = text.replace('ü', '^');
+                    text = text.replace('ß', '*');
+                    text = text.replace('Ä', '{');
+                    text = text.replace('Ö', '|');
+                    text = text.replace('Ü', '}');
+                }
+                if (length < 10) 
+                    for (let  i = 0; i < (10 - length); i ++) {               
+                        text += ' ';
+                    }
+                if (text !='          ') content += text;
+            }
+            content += '!';
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename.value;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</head>
+<body>
+    <div class="top">    
+        <input class="button" type="file" id="fileToLoad" />
+        <button class="button" onclick="loadFileAsText()">Datei laden</button><br />
+    </div>
+    <div class="mitte">
+        <h1>Schimpfolinos Hirnprogrammierer</h1>
+        <div class="links">
+            <h3>Anleitung</h3>
+            <b>&quot;Mickriger Luscheniltis&quot;</b><br />
+            <br />
+            Dieses stilvolle Schimpfolino-Beispiel setzt sich aus <b>drei</b> Komponenten zusammen:<br />
+            <ol>
+                <li>Ein Adjektiv &quot;Mickriger&quot;</li>
+                <li>Ein Wortteil &quot;Luschen&quot;-</li>
+                <li>Ein Substantiv -&quot;iltis&quot; (m&auml;nnlich).</li>
+            </ol>
+            Das Adjektiv muss im Femininum, also &quot;Mickrige&quot; geschrieben werden. &quot;r&quot; bei Maskulinum
+            und &quot;s&quot; bei Neutrum werden von Schimpfolino automatisch ergänzt. Das Substantiv muss klein 
+            geschrieben werden.<br />
+            <br />
+            Diese Komponenten werden zu je <b>zehn</b> Zeichen in <b>f&uuml;nf</b> Dateien gespeichert:<br />
+            <ol>
+                <li><b>eeprom1.txt</b>: Adjektiv</li>
+                <li><b>eeprom2.txt</b>: Erster Teil des zweiten Wortes</li>
+                <li><b>eeprom3.txt</b>: Substantiv (weiblich)</li>
+                <li><b>eeprom4.txt</b>: Substantiv (m&auml;nnlich)</li>
+                <li><b>eeprom5.txt</b>: Substantiv (neutrum)</li>
+            </ol>
+            Jede dieser Dateien kann hier erstellt oder bearbeitet werden. <b>Leerzeichen</b> innerhalb eines 
+            Wortes sind nicht erlaubt. <b>Umlaute</b> werden konvertiert, Leerzeilen entfernt, weniger als 
+            zehn Zeichen werden mit Leerzeichen aufgef&uuml;llt.<br />
+            <br />            
+        </div>
+        <div class="rechts" id="container">
+            <h3 id="opened">Datei</h3>
+        </div>
+    </div>
+    <div class="unten">
+        <button class="button" onclick="addTextField('')">Textfeld hinzufügen</button>
+        <select class="button" id="filename">
+            <option value="eeprom1.txt">eeprom1.txt</option>
+            <option value="eeprom2.txt">eeprom2.txt</option>
+            <option value="eeprom3.txt">eeprom3.txt</option>
+            <option value="eeprom4.txt">eeprom4.txt</option>
+            <option value="eeprom5.txt">eeprom5.txt</option>
+        </select>
+        <button class="button" onclick="saveTextFields()">Speichern</button>
+        W&ouml;rter: <b id="words">0</b>
+    </div>
+</body>
+</html>

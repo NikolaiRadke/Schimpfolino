@@ -1,13 +1,13 @@
 /*  
-    Schimpfolino V1.3 03.05.2025 - Nikolai Radke
+    Schimpfolino V1.4 07.05.2025 - Nikolai Radke
     https://www.monstermaker.de
-    Next version for new improvements. Compatible with older versions.
+    Next version for new improvements. Compatible with older boars.
 
     Sketch for the insulting gadget | With or without additional 24AAXXX EEPROM
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 8.136 bytes (IDE 2.3.6 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 8.170 bytes (IDE 2.3.6 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.6 mA (display on, no EEPROM) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -70,7 +70,7 @@ int main(void) {
   // Init I2C
   TinyI2C.init();                                // Start I2C
 
-  // Look for EEPROM and read wordlist addresses if available | genus is a helping variable here 
+  // Look for EEPROM and read wordlist addresses if available
   if (TinyI2C.start(0x50, 0)) {                  // Look for 24LCXX EEPROM at 0x50
     eeprom = true;                               // if available, set EEPROM flag
     for (uint8_t list = 0; list < 5; ++ list)    // Read numbers of 5 wordlists
@@ -137,26 +137,11 @@ int main(void) {
 
 // Functions
 void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
-  char c;                                        // Helping variable for fetched character
-  uint16_t i;                                    // Helping variable for 10 readings
   address *= 10;                                 // Each address has 10 characters
-  for (i = address; i < address + 10; ++ i) {    // Read 10 characters...        
-    c = pgm_read_byte(&field[i]);                // ...from wordlist...
+  for (uint16_t i = address; i < address + 10; ++ i) { // Read 10 characters...        
+    char c = pgm_read_byte(&field[i]);           // ...from wordlist...
     if (eeprom) c = read_eeprom(i + 10);         // ...or from EEPROM with address memory offset
-    if (c != 32) {                               // Skip space
-      // Set German Umlaute or character
-      switch (c) {
-        case 35: c = 27; break;                  // # -> ä
-        case 36: c = 28; break;                  // $ -> ö
-        case 37: c = 29; break;                  // % -> ü
-        case 38: c = 58; break;                  // & -> Ä
-        case 39: c = 59; break;                  // ' -> Ö
-        case 40: c = 60; break;                  // ( -> Ü
-        case 42: c = 30; break;                  // * -> ß
-        default: c -= 65;                        // Set non-empty character
-      }
-      wordbuffer[chars++] = c;                   // Store and increment counter
-    }
+    if (c != 32) wordbuffer[chars ++] = c - 65;  // Convert and store character, increment counter
   } 
 }
 
