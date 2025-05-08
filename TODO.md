@@ -10,6 +10,7 @@
 
 ## Done
 
+* ATtiny25 support  
 * Any code optimization i can find  
 * Update to final V1.0
 * Rewriting Schimpfolino-eeprom
