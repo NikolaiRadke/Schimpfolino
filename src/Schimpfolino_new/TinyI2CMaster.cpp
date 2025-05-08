@@ -1,9 +1,9 @@
 /* 
-    TinyI2C v2.0.1 
+    TinyI2C v2.0.2 
 
     David Johnson-Davies - www.technoblogy.com - 5th June 2022
-    Modified for ATtiny85 8 MHz only for Schimpfolino by Nikolai Radke 
-                         - www.monstermaker.de - 29th October 2024
+    Modified for ATtiny85 8 MHz only for Schimpfolino__new.ino by Nikolai Radke 
+                         - www.monstermaker.de - 07th May 2025
    
     CC BY 4.0
     Licensed under a Creative Commons Attribution 4.0 International license: 
@@ -62,7 +62,7 @@ uint8_t TinyI2CMaster::read(void) {
   return data;                                   // Read successfully completed
 }
 
-bool TinyI2CMaster::write(uint8_t data) {
+void TinyI2CMaster::write(uint8_t data) {
   /* Write a byte */
   PORT_USI_CL &= ~(1 << PIN_USI_SCL);            // Pull SCL LOW
   USIDR = data;                                  // Setup data
@@ -70,12 +70,11 @@ bool TinyI2CMaster::write(uint8_t data) {
   
   /* Clock and verify (N)ACK from slave */
   DDR_USI &= ~(1 << PIN_USI_SDA);                // Enable SDA as input.
-  if (TinyI2CMaster::transfer(USISR_1bit) & 1 << TWI_NACK_BIT) return false;
-  return true;                                   // Write successfully completed
+  TinyI2CMaster::transfer(USISR_1bit);
 }
 
 // Start transmission by sending address
-bool TinyI2CMaster::start(uint8_t address, uint8_t read) {
+void TinyI2CMaster::start(uint8_t address, uint8_t read) {
   /* Release SCL to ensure that (repeated) Start can be performed */
   PORT_USI_CL |= 1 << PIN_USI_SCL;               // Release SCL
   while (!(PIN_USI_CL & 1 << PIN_USI_SCL));      // Verify that SCL becomes high
@@ -86,7 +85,6 @@ bool TinyI2CMaster::start(uint8_t address, uint8_t read) {
   DELAY_T4TWI;
   PORT_USI_CL &= ~(1 << PIN_USI_SCL);            // Pull SCL LOW.
   PORT_USI |= 1 << PIN_USI_SDA;                  // Release SDA
-  if (!(USISR & 1 << USISIF)) return false; 
   
   /*Write address */
   PORT_USI_CL &= ~(1 << PIN_USI_SCL);            // Pull SCL LOW
@@ -95,8 +93,7 @@ bool TinyI2CMaster::start(uint8_t address, uint8_t read) {
   
   /* Clock and verify (N)ACK from slave */
   DDR_USI &= ~(1 << PIN_USI_SDA);                // Enable SDA as input
-  if (TinyI2CMaster::transfer(USISR_1bit) & 1 << TWI_NACK_BIT) return false; // No ACK
-  return true;                                   // Start successfully completed
+  TinyI2CMaster::transfer(USISR_1bit);           
 }
 
 void TinyI2CMaster::stop(void) {

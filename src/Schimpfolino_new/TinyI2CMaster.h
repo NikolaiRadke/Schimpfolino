@@ -1,10 +1,10 @@
 /* 
-    TinyI2C v2.0.1
+    TinyI2C v2.0.2 
 
     David Johnson-Davies - www.technoblogy.com - 5th June 2022
-    Modified for ATtiny85 8 MHz only for Schimpfolino by Nikolai Radke 
-                         - www.monstermaker.de - 29th October 2024
-  
+    Modified for ATtiny85 8 MHz only for Schimpfolino__new.ino by Nikolai Radke 
+                         - www.monstermaker.de - 07th May 2025
+   
     CC BY 4.0
     Licensed under a Creative Commons Attribution 4.0 International license: 
     http://creativecommons.org/licenses/by/4.0/
@@ -23,8 +23,8 @@ class TinyI2CMaster {
 public:
   void init(void);
   uint8_t read(void);
-  bool write(uint8_t data);
-  bool start(uint8_t address, uint8_t readcount);
+  void write(uint8_t data);
+  void start(uint8_t address, uint8_t readcount);
   void stop(void);
 
 private:
