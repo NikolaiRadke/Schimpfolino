@@ -34,7 +34,7 @@ Except for the tools and some time, you need:
   
 And the following hardware:
 * Schimpfolino PCB 
-* ATtiny45/85
+* ATtiny25/45/85 (ATtiny25 only for >= V1.4)
 * 24AA64 or larger EEPROM (up to 24AA512)
 * 0,96" SDD1306 (V1.0) or 0,96"/1,3" SDD1306/SH1106 I2C display (V1.3)  
 * Button 6 x 6 mm, 9,5 mm height
