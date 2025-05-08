@@ -2,6 +2,7 @@
 
 # 2025
 
+* **08.05.2025** Firmware **1.4-070525** with more reduced size. **Schimpfolino_new.ino** finaliy fits into an ATtiny25! New EERPOM files needed!  
 * **03.05.2025** Firmware **1.X-030525** again with even bigger optimizations: 10 more words for both _noeeprom.ino**.  
 * **15.04.2025** Firmware **1.X-150425** with bigger code optimizations: 20 more words for **schimpfolino_noeeprom.ino** and 30 new words for **schimpfolino_noeeprom_new.ino**.  
 * **07.04.2025** Firmware **1.X-070425** with code optimizations. One day, it will fit into an ATtiny25... 
