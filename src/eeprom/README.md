@@ -31,7 +31,7 @@ Each file contains a set of words. Each word has **10** characters, spaces are m
 German **Umlaute** must be converted:  
 **ä** -> **#** | **ö** -> **$** | **ü** -> **%** | **ß** -> * | **Ä** -> & | **Ö** -> ' | **Ü** -> (  
 Versions >= 1.4:  
-**ä** -> **[** | **ö** -> **]** | **^** -> **%** | **ß** -> _ | **Ä** -> { | **Ö** -> | | **Ü** -> }  
+**ä** -> **[** | **ö** -> **]** | **ü** -> **^** | **ß** -> _ | **Ä** -> { | **Ö** -> | | **Ü** -> }  
 
 There is an (beta) offline editor **eeprom.html** in the files and files_new folders. You can easily add new words or generate a new eeprom?.txt. Umlaute will be converted and spaces and the terminating ! added automatically.  
 
