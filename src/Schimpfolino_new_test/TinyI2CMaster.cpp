@@ -2,7 +2,7 @@
     TinyI2C v2.0.2 
 
     David Johnson-Davies - www.technoblogy.com - 5th June 2022
-    Modified for ATtiny85 8 MHz only for Schimpfolino_noeeprom_new.ino by Nikolai Radke 
+    Modified for ATtiny85 8 MHz only for Schimpfolino__new.ino by Nikolai Radke 
                          - www.monstermaker.de - 07th May 2025
    
     CC BY 4.0
@@ -74,7 +74,7 @@ void TinyI2CMaster::write(uint8_t data) {
 }
 
 // Start transmission by sending address
-bool TinyI2CMaster::start(uint8_t address, uint8_t read) {
+void TinyI2CMaster::start(uint8_t address, uint8_t read) {
   /* Release SCL to ensure that (repeated) Start can be performed */
   PORT_USI_CL |= 1 << PIN_USI_SCL;               // Release SCL
   while (!(PIN_USI_CL & 1 << PIN_USI_SCL));      // Verify that SCL becomes high
@@ -93,10 +93,7 @@ bool TinyI2CMaster::start(uint8_t address, uint8_t read) {
   
   /* Clock and verify (N)ACK from slave */
   DDR_USI &= ~(1 << PIN_USI_SDA);                // Enable SDA as input
-  
-  /* Return true if EEPROM present */
-  if (TinyI2CMaster::transfer(USISR_1bit) & 1 << TWI_NACK_BIT) return false; // No ACK
-  return true;                                   // Start successfully completed
+  TinyI2CMaster::transfer(USISR_1bit);           
 }
 
 void TinyI2CMaster::stop(void) {
