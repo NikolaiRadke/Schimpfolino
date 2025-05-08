@@ -43,7 +43,7 @@ Technically, this process will flash no bootloader, the IDE just sets the fuses.
 3. Select ``` Tools > Board > ATTinyCore > ATtiny25/45/85 (No bootloader) ```.
 4. Select ``` Tools > Port ``` for the matching port.  
 5. Select ``` Tools > B.O.D. Level [...] > B.O.D. Disabled (saves power) ```.
-6. Select ``` Tools > Chip > ATtiny85 ``` or ``` Tools > Chip > ATtiny45 ```.
+6. Select ``` Tools > Chip > ATtiny85 ``` or ``` Tools > Chip > ATtiny45 ``` or ``` Tools > Chip > ATtiny25 ```.
 7. **For V1.X**: Select ``` Tools > millis()/micros() > Disabled (saves flash) ```.
 8. Start burning process with ``` Tools > Burn bootloader ```.  
 
