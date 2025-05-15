@@ -2,6 +2,7 @@
 
 # 2025
 
+* **15.05.2025** Firmware **1.X-150525** once again with smaller flash size. The **noeeprom** variants got 5 more words.  
 * **08.05.2025** Release **V1.4** with reduced flash size and ATtiny25 support or more words in internal wordlists.  
 * **08.05.2025** Firmware **1.4-070525** with more reduced size. **Schimpfolino_new.ino** finaliy fits into an ATtiny25! New EERPOM files needed!  
 * **03.05.2025** Firmware **1.X-030525** again with even bigger optimizations: 10 more words for both _noeeprom.ino**.  
