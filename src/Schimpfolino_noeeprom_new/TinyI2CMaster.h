@@ -13,7 +13,6 @@
 #ifndef TinyI2CMaster_h
 #define TinyI2CMaster_h
 
-#include <stdint.h>
 #include <Arduino.h>
 #include <avr/io.h>
 #include <util/delay.h>

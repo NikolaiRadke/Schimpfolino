@@ -1,12 +1,12 @@
 /*  
-    Schimpfolino V1.01 03.05.2025 - Nikolai Radke
+    Schimpfolino V1.01 15.05.2025 - Nikolai Radke
     https://www.monstermaker.de
 
     Sketch for the insulting gadget | Only with additional 24AAXXX EEPROM
     For ATtiny45/85 - set to 8 MHz | B.O.D disabled | No bootloader
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 3.176 bytes (IDE 2.3.6 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 3.170 bytes (IDE 2.3.6 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (display on, EEPROM on) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -32,9 +32,7 @@
 #define  DEVICES  PB4                            // External devices power pin
 
 // Variables
-uint8_t  genus;                                  // Genus of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
-uint16_t number;                                 // Variable for calculating addresses and selecting words
 uint16_t addresses[5];                           // Wordlists addresses array
 char     wordbuffer[20];                         // Buffer for reading words
 
@@ -87,7 +85,7 @@ int main(void) {
 
       // First word
       get_swearword(random(0, addresses[0]));    // Read first word from EEPROM
-      genus = random(0, 3);                      // Set word genus
+      uint8_t genus = random(0, 3);              // Set word genus
       if (genus != 0) {                          // Check if not female
         wordbuffer[chars] = 48 + genus;          // If male, add "r", if neutrum, add "s" to buffer
         ++ chars;                                // Increase number of characters
@@ -139,8 +137,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
 }
 
 void write_swearword(uint8_t line) {             // Write centered word
-  uint8_t x;                                     // Helping variable for the x position on display
-  x = (128 - (chars * 7)) / 2;                   // Calculate centering
+  uint8_t x = (128 - (chars * 7)) / 2;           // Calculate centering
   if (chars > 17) x = (128 - (chars * 6)) / 2;   // Modify for very long words
   oled.cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; ++ x)                   // Print the characters...

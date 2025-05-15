@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.4 07.05.2025 - Nikolai Radke
+    Schimpfolino V1.4 15.05.2025 - Nikolai Radke
     https://www.monstermaker.de
     Next version for new improvements. Compatible with older boars.
 
@@ -34,9 +34,7 @@
 
 // Variables
 const char *field;                               // Pointer to one of the character arrays
-uint8_t  genus;                                  // Genus of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
-uint16_t list;                                   // Variable for parsing word lists
 uint16_t addresses[5] = {                        // Wordlists addresses array - overwritten if EEPROM is present
   sizeof(data1) / 10,                            // Wordcount in array for first word - adjective
   sizeof(data2) / 10,                            // Wordcount in array for second word part 1 - noun
@@ -73,8 +71,8 @@ int main(void) {
   // Look for EEPROM and read wordlist addresses if available
   if (TinyI2C.start(0x50, 0)) {                  // Look for 24LCXX EEPROM at 0x50
     eeprom = true;                               // if available, set EEPROM flag
-    for (uint8_t list = 0; list < 5; ++ list)    // Read numbers of 5 wordlists
-    addresses[list] = (read_eeprom(list * 2) * 255) + (read_eeprom((list * 2) +1)); // Write word numbers to array
+    for (uint8_t wlist = 0; wlist < 5; ++ wlist) // Read numbers of 5 wordlists
+    addresses[wlist] = (read_eeprom(wlist * 2) * 255) + (read_eeprom((wlist * 2) +1)); // Write word numbers to array
   }
 
   // Randomize number generator
@@ -99,7 +97,7 @@ int main(void) {
       // First word
       field = data1;                             // Pointer to first array
       get_swearword(random(0, addresses[0]));    // Read first word from EEPROM or wordlist
-      genus = random(0, 3);                      // Set word genus
+      uint8_t genus = random(0, 3);              // Set word genus
       if (genus != 0) {                          // Check if not female
         wordbuffer[chars] = 48 + genus;          // If male, add "r", if neutrum, add "s" to buffer
         ++ chars;                                // Increase number of characters
@@ -107,7 +105,7 @@ int main(void) {
       write_swearword(2);                        // Write first word in the first line
 
       // Second word first part
-      list = 0;                                  // Set start address for array
+      uint16_t list = 0;                         // Set start address for array
       if (eeprom) list = addresses[0];           // Set start address for EEPROM
       field = data2;                             // Pointer to second array
       get_swearword(random(list, addresses[1])); // Read first part of second word 
@@ -146,8 +144,7 @@ void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
 }
 
 void write_swearword(uint8_t line) {             // Write centered word
-  uint8_t x;                                     // Helping variable for the x position on display
-  x = (128 - (chars * 7)) / 2;                   // Calculate centering
+  uint8_t x = (128 - (chars * 7)) / 2;           // Calculate centering
   if (chars > 17) x = (128 - (chars * 6)) / 2;   // Modify for very long words
   Oled_cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; ++ x)                   // Print the characters...

@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.4 07.05.2025 - Nikolai Radke
+    Schimpfolino V1.4 15.05.2025 - Nikolai Radke
     https://www.monstermaker.de
     Next version for new improvements. Compatible with older boards
 
@@ -7,7 +7,7 @@
     For ATtiny25/45/85 - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 1.996 bytes (IDE 2.3.6 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 1.994 bytes (IDE 2.3.6 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (display on, EEPROM on) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -32,14 +32,13 @@
 #define  DEVICES  PB4                            // External devices power pin
 
 // Variables
-uint8_t  genus;                                  // Genus of the swearword
 uint8_t  chars = 0;                              // Number of characters in the word | Gobal
 uint16_t addresses[5];                           // Wordlists addresses array
 char     wordbuffer[20];                         // Buffer for reading words
 
 volatile bool awake = false;                     // Stay awake when button is pressed
 
-int main(void) {                                 
+int main(void) {                
   // Power saving
   ADCSRA &= ~(1 << ADEN);                        // Switch ADC off | Saves 270 uA
   MCUCR = (1 << SM1) | (0 << SM0);               // Always deepest sleep mode (Power-down)
@@ -85,7 +84,7 @@ int main(void) {
   
       // First word
       get_swearword(random(0, addresses[0]));    // first Read word from EEPROM
-      genus = random(0, 3);                      // Set word genus
+      uint8_t genus = random(0, 3);              // Set word genus
       if (genus) {                               // Check if not female
         wordbuffer[chars] = 48 + genus;          // If male, add "r", if neutrum, add "s" to buffer
         ++ chars;                                // Increase number of characters
@@ -127,7 +126,7 @@ void write_swearword(uint8_t line) {             // Write centered word
   uint8_t x = (128 - (chars * 7)) / 2;           // Calculate centering
   if (chars > 17) x = (128 - (chars * 6)) / 2;   // Modify for very long words
   Oled_cursorTo(x, line);                        // Set cursor to selected line
-  for (x = 0; x < chars; ++ x )                   // Print the characters...
+  for (x = 0; x < chars; ++ x )                  // Print the characters...
     Oled_printChar(wordbuffer[x]);               // ...from buffer
   chars = 0;                                     // Set number of characters back to 0 
 }

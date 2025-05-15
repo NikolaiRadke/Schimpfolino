@@ -2,7 +2,7 @@
     TinyI2C v2.0.2 
 
     David Johnson-Davies - www.technoblogy.com - 5th June 2022
-    Modified for ATtiny85 8 MHz only for Schimpfolino__new.ino by Nikolai Radke 
+    Modified for ATtiny25/45/85 8 MHz only for Schimpfolino__new.ino by Nikolai Radke 
                          - www.monstermaker.de - 07th May 2025
    
     CC BY 4.0
@@ -13,7 +13,6 @@
 #ifndef TinyI2CMaster_h
 #define TinyI2CMaster_h
 
-#include <stdint.h>
 #include <Arduino.h>
 #include <avr/io.h>
 #include <util/delay.h>
