@@ -1,6 +1,7 @@
 # Thanks
 
-These people helped me with Schimpfolino:
+These people helped me with Schimpfolino:  
+  
  - **Elise Lindner** - finding funny words.
  - **Elisabeth Seidl** - graphics. 
  - **[falsanu](https://github.com/falsanu)** - the 'CuteVader' case, filament and some ideas.
@@ -11,6 +12,7 @@ These people helped me with Schimpfolino:
  - **Michael Kussmaul** - solving an annoying display issue and the 'Boring' case.  
   
 Used ressources:  
+  
 - **Arduino IDE 2.3.4** - [Arduino](http://www.arduino.cc)  
 - **ATTinyCore** - [GitHub](https://github.com/SpenceKonde/ATTinyCore)
 - **SD1306_nimimal library** - [GitHub](https://github.com/kirknorthrop/SSD1306_minimal)
