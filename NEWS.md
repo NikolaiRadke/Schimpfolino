@@ -1,6 +1,6 @@
 # Newsblog
 
-# 2025
+## 2025
 
 * **15.05.2025** Firmware **1.X-150525** once again with smaller flash size. The **noeeprom** variants got 5 more words.  
 * **08.05.2025** Release **V1.4** with reduced flash size and ATtiny25 support or more words in internal wordlists.  
@@ -16,7 +16,7 @@
 * **16.01.2025** Release **V1.2.2** with final text centering method.  
 * **16.01.2025** Firmware **1.01-160225** and **1.22-160125** with, finally, perfect text centering :-)  
   
-# 2024
+## 2024
 
 * **28.12.2024** Release **V1.2.1** with the new case and a fix for SH1106 displays.  
 * **28.12.2024** Added new 'boring' but smooth case by [Michael Kussmaul](https://github.com/kusmi).  
