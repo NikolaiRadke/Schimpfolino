@@ -9,7 +9,8 @@ These people helped me with Schimpfolino:
  - **[MDecker](https://github.com/MDecker-MobileComputing)** - spelling corrections.
  - **Sebastian Völke** - SH1106 support and bold font.
  - **Birger Töpelmann** - wordlist ideas.
- - **Michael Kussmaul** - solving an annoying display issue and the 'Boring' case.  
+ - **Michael Kussmaul** - solving an annoying display issue and the 'Boring' case.
+ - **Make Magazine** - for publishing three articles.  
   
 Used ressources:  
   
