@@ -40,7 +40,7 @@ Technically, this process will flash no bootloader, the IDE just sets the fuses.
   
 1. Connect your Arduino to your system again.  
 2. Select ``` Tools > Programmer > Arduino as ISP ```.
-   For the **UNO R4** choose `` Tools > Programmer > Arduino Leo/Micro as ISP (ATmega32U4) ```. 
+   For the **UNO R4** choose ``` Tools > Programmer > Arduino Leo/Micro as ISP (ATmega32U4) ```. 
 4. Select ``` Tools > Board > ATTinyCore > ATtiny25/45/85 (No bootloader) ```.
 5. Select ``` Tools > Port ``` for the matching port.  
 6. Select ``` Tools > B.O.D. Level [...] > B.O.D. Disabled (saves power) ```.
