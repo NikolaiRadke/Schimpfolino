@@ -10,6 +10,7 @@ These people helped me with Schimpfolino:
  - **Sebastian Völke** - SH1106 support and bold font.
  - **Birger Töpelmann** - wordlist ideas.
  - **Michael Kussmaul** - solving an annoying display issue and the 'Boring' case.
+ - **Tilman Beck** - hints für using the UNO R4.
  - **Make Magazin** - publishing three articles.  
   
 Used ressources:  
