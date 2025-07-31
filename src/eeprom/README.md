@@ -15,7 +15,7 @@ You need:
 **Wait!** Where is the **pull up resistor**?  
 Yes indeed, I2C needs a pull up resistor, **2 kOhm** between **SDA** and **VCC**. But: The Arduino has an internal **20 kOhm** pull up resistor at every I/O pin. These are pulled up with every I2C connections when the standard library **Wire.h** is used. This is not the correct value but works reliable with slow connections. This is a very slow connection. But if you are unsure, add an externel pull up resistor. Schimpfolino's display finally has the missing resistors on board. 
   
-For the R4, the **pull up resistor** is mandatory!
+For the **UNO R4** (Wifi), the pull up resistor is mandatory!
 
 ### Flashing the content
 
