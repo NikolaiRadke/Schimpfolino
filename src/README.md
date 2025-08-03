@@ -40,12 +40,13 @@ Technically, this process will flash no bootloader, the IDE just sets the fuses.
   
 1. Connect your Arduino to your system again.  
 2. Select ``` Tools > Programmer > Arduino as ISP ```.  
-3. Select ``` Tools > Board > ATTinyCore > ATtiny25/45/85 (No bootloader) ```.
-4. Select ``` Tools > Port ``` for the matching port.  
-5. Select ``` Tools > B.O.D. Level [...] > B.O.D. Disabled (saves power) ```.
-6. Select ``` Tools > Chip > ATtiny85 ``` or ``` Tools > Chip > ATtiny45 ``` or ``` Tools > Chip > ATtiny25 ```.
-7. **For V1.X**: Select ``` Tools > millis()/micros() > Disabled (saves flash) ```.
-8. Start burning process with ``` Tools > Burn bootloader ```.  
+   For the **UNO R4** choose ``` Tools > Programmer > Arduino Leo/Micro as ISP (ATmega32U4) ```. 
+4. Select ``` Tools > Board > ATTinyCore > ATtiny25/45/85 (No bootloader) ```.
+5. Select ``` Tools > Port ``` for the matching port.  
+6. Select ``` Tools > B.O.D. Level [...] > B.O.D. Disabled (saves power) ```.
+7. Select ``` Tools > Chip > ATtiny85 ``` or ``` Tools > Chip > ATtiny45 ``` or ``` Tools > Chip > ATtiny25 ```.
+8. **For V1.X**: Select ``` Tools > millis()/micros() > Disabled (saves flash) ```.
+9. Start burning process with ``` Tools > Burn bootloader ```.  
 
 Now you can flash your ATtiny with any sketch you want! But this time, we focus on Schimpfolino.   
 
