@@ -58,6 +58,9 @@ Root directory with some explanation files.
 |   └── Nokolino/
 |       Standard Nokolino-shaped case.
 |
+├── python/
+|   Schimpfolino as python script.
+|
 ├── schematics/
 |   The circuit diagram, PCB renderings and gerber files.
 |
