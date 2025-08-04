@@ -2,6 +2,7 @@
 
 ## 2025
 
+* **04.08.2025** Schimpfolino python script added.
 * **31.07.2025** Added hints for using the **UNO R4**.  
 * **15.05.2025** Firmware **1.X-150525** once again with smaller flash size. The **noeeprom** variants got 5 more words.  
 * **08.05.2025** Release **V1.4** with reduced flash size and ATtiny25 support or more words in internal wordlists.  
