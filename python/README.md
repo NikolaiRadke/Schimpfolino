@@ -1,9 +1,11 @@
-# Schimpfolino als Python-Script
+# Schimpfolino as Python script
 
-Ideal für (junge) Einsteiger*innen in Python, leicht zu verstehen, leicht zu erweitern und spaßig während der Ausführung.
+Perfect für (young) beginners in Python, easy to understand, easy to extend and fun to run.
+No external libraries are needed.
 
-Aufruf (es werden keine externen Bibliotheken benötigt):
+Run
 ```shell
 python3 Schimpfolino.py
 ```
-*Von Marcus Foellling*
+  
+*Von Marcus Föllling*
