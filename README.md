@@ -13,7 +13,6 @@ Schimpfolino is a random curse word generator with **12.288.000** possible combi
 
 What's new?  
 * **04.08.2025** Schimpfolino python script added.
-  
     -- More news? See the [newsblog](https://github.com/NikolaiRadke/Schimpfolino/tree/main/NEWS.md).   
   
 
