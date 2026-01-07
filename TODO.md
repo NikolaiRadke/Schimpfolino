@@ -10,16 +10,15 @@
 ## Done
 
 * ATtiny25 support
-* The hole word list fits now into the no-eeprom version
+* Fitting the complete word list the no-eeprom version
 * Any code optimization i can find 
-* Update to final V1.0 
-* Rewriting Schimpfolino-eeprom
+* Update to final V1.0
 * HTML-based EEPROM text file editor
 * First release
 * Fist article for the Make Magazine
 * Second article for the Make Magazine
 * Third article for the Make Magazine
-* One additional case design
+* At least one additional case design
 * Support for SH1106 display types
    
 ## One day
