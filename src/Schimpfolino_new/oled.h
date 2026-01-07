@@ -6,7 +6,7 @@
     Copyright (c) 2012 GOF Electronics Co. Ltd (http://www.geekonfire.com)
     Copyright (c) 2015 CoPiino Electronics. All rights reserved
     Copyright (c) 2016 Kirk Northrop (github.com/kirknorthrop)
-    Copyright (c) 2025 Nikolai Radke (http://www.monstermaker.de)
+    Copyright (c) 2026 Nikolai Radke (http://www.monstermaker.de)
   
     Original Author: Limor Fried/Ladyada Adafruit Industries
     Modified by: Jimbo.we (www.geekonfire.com)
@@ -15,6 +15,7 @@
     Modified by: Nikolai Radke (www.monstermaker.de)
                  -- Reworked formatting and spelling
                  -- Removed unused code
+                 -- Removed unused OR conditions
                  -- Modified for TinyI2C.h instead of TinyWireM.h
                  -- Optimized init sequence and functions
                  -- Support for 1,3" displays

@@ -1,18 +1,17 @@
 /*  
-    Schimpfolino V1.4 15.05.2025 - Nikolai Radke
+    Schimpfolino V1.5 07.01.2026 - Nikolai Radke
     https://www.monstermaker.de
-    Next version for new improvements. Compatible with older boars.
+    Optimized version with point-terminated strings and complete word list
 
     Sketch for the insulting gadget | With or without additional 24AAXXX EEPROM
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 8.156 bytes (IDE 2.3.6 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 8.040 bytes (IDE 2.3.7 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.6 mA (display on, no EEPROM) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
-    ä -> # | ö -> $ | ü -> % | ß -> * | Ä -> & | Ö -> ' | Ü -> (
-    Last character of a wordlist is "!" 
+    ä -> [ | ö -> ] | ü -> ^ | ß -> _ | Ä -> { | Ö -> | | Ü -> }
 
     Wiring:
                          +-\/-+
@@ -26,7 +25,7 @@
 #include <util/delay.h>                          // Needs less flash memory than delay()
 #include "TinyI2CMaster.h"                       // I2C communication with display and EEPROM. Very tight library!
 #include "oled.h"                                // OLED display library for SSD1306 and SH1106
-#include "Schimpfolino_wordlist.h"               // Schimpfolino wordlist
+#include "Schimpfolino_wordlist.h"               // Optimized wordlist with backslash-terminated strings
 
 // Hardware
 #define  BUTTON   PB1                            // Button pin
@@ -34,14 +33,8 @@
 
 // Variables
 const char *field;                               // Pointer to one of the character arrays
-uint8_t  chars = 0;                              // Number of characters in the word | Gobal
-uint16_t addresses[5] = {                        // Wordlists addresses array - overwritten if EEPROM is present
-  sizeof(data1) / 10,                            // Wordcount in array for first word - adjective
-  sizeof(data2) / 10,                            // Wordcount in array for second word part 1 - noun
-  sizeof(data3) / 10,                            // Wordcount in array for second word part 2 - female noun
-  sizeof(data4) / 10,                            // Wordcount in array for second word part 2 - male noun
-  sizeof(data5) / 10                             // Wordcount in array for second word part 2 - neutrum noun
-};
+uint8_t  chars = 0;                              // Number of characters in the word | Global
+uint16_t addresses[5] = {160, 160, 160, 160, 160}; // Each list has 160 words - overwritten if EEPROM present
 char     wordbuffer[20];                         // Buffer for read words
 bool     eeprom = false;                         // No EEPROM used -> auto detect
 
@@ -52,7 +45,7 @@ int main(void) {
   ADCSRA &= ~(1 << ADEN);                        // Switch ADC off | Saves 270 uA
   MCUCR = (1 << SM1) | (0 << SM0);               // Always deepest sleep mode (Power-down)
 
-    // Port setup
+  // Port setup
   DDRB = (1 << DEVICES) | (1 << SDA) | (1 << SCL); // Set PB4 to OUTPUT to power up display and EEPROM | SDA and SCL for I2C
   PORTB = 0x3F;                                  // Set output ports to HIGH and input ports to INPUT_PULLUP to prevent floating
 
@@ -72,7 +65,7 @@ int main(void) {
   if (TinyI2C.start(0x50, 0)) {                  // Look for 24LCXX EEPROM at 0x50
     eeprom = true;                               // if available, set EEPROM flag
     for (uint8_t wlist = 0; wlist < 5; ++ wlist) // Read numbers of 5 wordlists
-    addresses[wlist] = (read_eeprom(wlist * 2) * 255) + (read_eeprom((wlist * 2) +1)); // Write word numbers to array
+      addresses[wlist] = (read_eeprom(wlist << 1) << 8) | read_eeprom((wlist << 1) + 1); // Write word numbers to array
   }
 
   // Randomize number generator
@@ -98,7 +91,7 @@ int main(void) {
       field = data1;                             // Pointer to first array
       get_swearword(random(0, addresses[0]));    // Read first word from EEPROM or wordlist
       uint8_t genus = random(0, 3);              // Set word genus
-      if (genus != 0) {                          // Check if not female
+      if (genus) {                               // Check if not female
         wordbuffer[chars] = 48 + genus;          // If male, add "r", if neutrum, add "s" to buffer
         ++ chars;                                // Increase number of characters
       } 
@@ -111,14 +104,14 @@ int main(void) {
       get_swearword(random(list, addresses[1])); // Read first part of second word 
         
       // Second word second part
-      if (eeprom) list = addresses[genus + 1];   //  Set start adress for EEPROM
+      if (eeprom) list = addresses[genus + 1];   // Set start address for EEPROM
       field = data3;                             // Pointer to female array
       if (genus == 1) field = data4;             // Pointer to male array
       if (genus == 2) field = data5;             // Pointer to neutrum array
       get_swearword(random(list, addresses[genus + 2])); // Read second part of second word
       write_swearword(4);                        // Write second word in second line
         
-       // Wait for button and sleep 8s
+      // Wait for button and sleep 8s
       _delay_ms(500);                            // Debounce button
       awake = false;                             // Set to sleep
       WDTCR |= (1 << WDIE);                      // Set watchdog interrupt
@@ -134,18 +127,27 @@ int main(void) {
 }
 
 // Functions
-void get_swearword(uint16_t address) {           // Fetch characters from EEPROM
-  address *= 10;                                 // Each address has 10 characters
-  for (uint16_t i = address; i < address + 10; ++ i) { // Read 10 characters...        
-    char c = pgm_read_byte(&field[i]);           // ...from wordlist...
-    if (eeprom) c = read_eeprom(i + 10);         // ...or from EEPROM with address memory offset
-    if (c != 32) wordbuffer[chars ++] = c - 65;  // Convert and store character, increment counter
-  } 
+void get_swearword(uint16_t address) {           // Fetch characters from Flash or EEPROM
+  if (eeprom) {                                  // EEPROM mode: 10-byte fixed-length words
+    address *= 10;                               // Adjust address
+    for (uint8_t i = 0; i < 10; ++ i) {          // Read 10 characters
+      char c = read_eeprom(address + i + 10);    // Mit Offset 10
+      if (c != 32) wordbuffer[chars ++] = c - 65; // 32=Space, 65=A 
+    }
+  } else {                                       // Flash mode: point-terminated strings 
+    uint16_t pos = 0;                            // Start beginning
+    while (address) {                            // Find word position in array
+      if (pgm_read_byte(&field[pos++]) == 46) address--; // Look for point
+    }
+    char c;
+    while ((c = pgm_read_byte(&field[pos++])) != 46) // Look for next point
+      wordbuffer[chars ++] = c - 65;             // Store character
+  }
 }
 
 void write_swearword(uint8_t line) {             // Write centered word
-  uint8_t x = (128 - (chars * 7)) / 2;           // Calculate centering
-  if (chars > 17) x = (128 - (chars * 6)) / 2;   // Modify for very long words
+  uint8_t x = (128 - (chars * 7)) >> 1;          // Calculate centering
+  if (chars > 17) x = (128 - (chars * 6)) >> 1;  // Modify for very long words
   Oled_cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; ++ x)                   // Print the characters...
     Oled_printChar(wordbuffer[x]);               // ...from buffer
@@ -163,11 +165,11 @@ uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
 void sleep() {
   MCUCR |= (1 << SE);                            // Set SE (Sleep Enable) bit
   __asm__ __volatile__ ("sleep" "\n\t" ::);      // Sleep now!!
-  MCUCR &= ~(1 << SE);                           // CLear SE bit
+  MCUCR &= ~(1 << SE);                           // Clear SE bit
 }
 
 ISR(PCINT0_vect) {                               // Interrupt routine for pin change 
   awake = true;                                  // Set awake flag when button is pressed
 }
 
-ISR(WDT_vect) {}                                 // Interrupt routine for watchdog. Unused but mandatory                               
+ISR(WDT_vect) {}                                 // Interrupt routine for watchdog. Unused but mandatory

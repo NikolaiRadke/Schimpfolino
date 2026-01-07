@@ -59,33 +59,37 @@ void loop() {
   }
 
   // End of file found?
-  if (c == 33) {                                 // "!" marks end of file
-    words = (address - 10) / 10;                 // Count words of 10 Bytes
-    delay(10);
-    write_byte(0 + file, words / 255);           // Write high byte of batch number
-    delay(10);
-    write_byte(1 + file, words % 255);           // Write low byte of batch number
-    delay(10);
-    Serial.print("File ");                       // Print number of file
-    Serial.print(1 + file / 2);
-    Serial.print("/5: ");                        // Number of 5 (eeprom1.txt to eeprom5.txt)
-    Serial.print(address - 10);                  
-    Serial.print(" characters in ");             // Print number of characters written
+  if (c == 33) {                                 // "!" markiert Dateiende
+    words = (address - 10) / 10;                // Wörter zu je 10 Bytes zählen
+    
+    // Batch-Nummer schreiben (ohne blocking delays)
+    write_byte(file, words >> 8);               // High-Byte (effizienter als /255)
+    write_byte(file + 1, words & 0xFF);         // Low-Byte (effizienter als %255)
+    
+    // Ausgabe optimiert (weniger Serial.print Aufrufe)
+    Serial.print(F("File "));                   // Druckt einen String aus dem Flash-Speicher (RAM-sparender Ansatz)
+    Serial.print((file >> 1) + 1);              // Bitweise-Shift-Verschiebung um 1 Stelle nach rechts und Addieren von 1 - Division durch 2
+    Serial.print(F("/5: "));
+    Serial.print(address - 10);
+    Serial.print(F(" chars, "));
     Serial.print(words);
-    Serial.println(" words written. Checking last word:"); // Print number of words written
-    for (uint16_t i = address - 10; i < address; i ++)
-      Serial.print(char(read_byte(i)));
+    Serial.print(F(" words. Last: "));
+    
+    // Ausgabe des letzten Wortes (kompakter Ansatz)
+    for (uint16_t i = address - 10; i < address; i++)
+        Serial.print(char(read_byte(i)));
     Serial.println();
-    if (file == 8) {                             // After 5 files send, print finish message
-      Serial.println("Done. Ready for next EEPROM");
-      address = 10;
-      file = 0;                                  // Reset counter variables for new writing process
+    
+    // Dateizähler und Reset-Logik
+    if (file == 8) {                             // Nach 5 Dateien fertig
+        Serial.println(F("Done. Ready for next EEPROM"));
+        address = 10;
+        file = 0;
+    } else {
+        Serial.println(F("Waiting for next file."));
+        file += 2;
     }
-    else {
-      Serial.println("Waiting for next file.");  // Ready for next file
-      file += 2;                                 // Increase file counter
-    }
-  }
+}
 }
 
 void write_byte(uint16_t address, uint8_t data) { // Writes one byte to an address

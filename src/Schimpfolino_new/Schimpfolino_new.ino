@@ -1,5 +1,5 @@
 /*  
-    Schimpfolino V1.4 15.05.2025 - Nikolai Radke
+    Schimpfolino V1.5 07.01.2026 - Nikolai Radke
     https://www.monstermaker.de
     Next version for new improvements. Compatible with older boards
 
@@ -7,7 +7,7 @@
     For ATtiny25/45/85 - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 1.994 bytes (IDE 2.3.6 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Flash usage: 1.980 bytes (IDE 2.3.7 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
     Power:       1.7 mA (display on, EEPROM on) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
@@ -61,8 +61,7 @@ int main(void) {
 
   // Read wordlist addresses | genus is a helping variable here
   for (uint8_t list = 0; list < 5; ++ list)      // Read numbers of 5 wordlists
-    addresses[list] = (read_eeprom(list * 2) * 255) + (read_eeprom((list * 2) +1)); // Write word numbers to array
-
+    addresses[list] = (read_eeprom(list << 1) << 8) | read_eeprom((list << 1) + 1);
    // Randomize number generator
   PORTB &= ~(1 << DEVICES);                      // Devices off
   sleep();                                       // Sleep until button is pressed to "turn on"

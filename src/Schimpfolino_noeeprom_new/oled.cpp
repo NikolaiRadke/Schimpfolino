@@ -6,7 +6,7 @@
     Copyright (c) 2012 GOF Electronics Co. Ltd (http://www.geekonfire.com)
     Copyright (c) 2015 CoPiino Electronics. All rights reserved
     Copyright (c) 2016 Kirk Northrop (github.com/kirknorthrop)
-    Copyright (c) 2025 Nikolai Radke (http://www.monstermaker.de)
+    Copyright (c) 2026 Nikolai Radke (http://www.monstermaker.de)
   
     Original Author: Limor Fried/Ladyada Adafruit Industries
     Modified by: Jimbo.we (www.geekonfire.com)
@@ -15,6 +15,7 @@
     Modified by: Nikolai Radke (www.monstermaker.de)
                  -- Reworked formatting and spelling
                  -- Removed unused code
+                 -- Removed unused OR conditions
                  -- Modified for TinyI2C.h instead of TinyWireM.h
                  -- Optimized init sequence and functions
                  -- Support for 1,3" displays
@@ -178,7 +179,6 @@ const uint8_t BasicFont[] PROGMEM = {            // Standard font
 };
 #endif
 
-// Private functions
 void Oled_commandMode() {               
   TinyI2C.start(SlaveAddress, 0);                // Begin I2C transmission
   TinyI2C.write(0x80);                           // Command mode
@@ -189,7 +189,7 @@ void Oled_dataMode() {
   TinyI2C.write(0x40);                           // Data mode
 }
 
-void Oled_sendCommand(uint8_t command) { // Public function now to turn off display (old boards)
+void Oled_sendCommand(uint8_t command) { 
   Oled_commandMode();                            // Set command mode
   TinyI2C.write(command);                        // Send command
   TinyI2C.stop();    		                         // End I2C transmission
@@ -201,7 +201,6 @@ void Oled_sendData(uint8_t data) {
   TinyI2C.stop();                                // Stop I2C transmission
 }
 
-// Public functions
 void Oled_init() {
   _delay_ms(50);	                               // Wait for OLED hardware init
   Oled_commandMode();                            // Set command mode
@@ -212,15 +211,15 @@ void Oled_init() {
 
 void Oled_cursorTo(uint8_t col, uint8_t row) {
   Oled_sendCommand(0xB0 | row);
-  Oled_sendCommand(0x00 | (col & 0x0F));
+  Oled_sendCommand(col & 0x0F);
   Oled_sendCommand(0x10 | ((col >> 4 ) & 0x0F));
 }
 
 void Oled_clear() {
   for (uint8_t p = 0; p < 8; ++ p) {
     Oled_sendCommand(0xB0 | p);                  // Page 0 - 7   
-    Oled_sendCommand(0x00 | 0x00);               // Low col = 0
-    Oled_sendCommand(0x10 | 0x00);               // Hi col = 0
+    Oled_sendCommand(0x00);                      // Low col = 0
+    Oled_sendCommand(0x10);                      // Hi col = 0
     Oled_dataMode();                             // Set data mode
     for (uint8_t x = 0; x <= 129; ++ x)          // 129 is enough for 1,3"
       TinyI2C.write(0x00);                       // Clear every column 
@@ -228,7 +227,7 @@ void Oled_clear() {
   }
 }
 
-void Oled_printChar(char c) { // Reworked for Schimpfolino
+void Oled_printChar(char c) {                    // Reworked for Schimpfolino
   Oled_dataMode();                               // Set data mode
   for (uint8_t i = 0; i < 5; ++ i)               // Write 5 columns for each character
     TinyI2C.write(pgm_read_byte(&BasicFont[c * 5 + i])); // Write column from PROGMEM
