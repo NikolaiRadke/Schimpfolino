@@ -1,5 +1,9 @@
 # Newsblog
 
+## 2026
+
+* **07.01.2026** Release v1.5 with better text editor and much improved noeeprom version.  
+
 ## 2025
 
 * **04.08.2025** Schimpfolino python script added.
