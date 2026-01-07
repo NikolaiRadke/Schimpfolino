@@ -11,6 +11,7 @@ These people helped me with Schimpfolino:
  - **Birger Töpelmann** - wordlist ideas.
  - **Michael Kussmaul** - solving an annoying display issue and the 'Boring' case.
  - **Tilman Beck** - hints für using the UNO R4.
+ - **Markus Fölling** - better EEPROM files editor.  
  - **Make Magazin** - publishing three articles.  
   
 Used ressources:  
