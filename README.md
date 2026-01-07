@@ -33,8 +33,8 @@ Except for the tools and some time, you need:
   
 And the following hardware:
 * Schimpfolino PCB 
-* ATtiny25/45/85 (ATtiny25 only for >= V1.4)
-* 24AA64 or larger EEPROM (up to 24AA512)
+* ATtiny25/45/85 (ATtiny25 for V1.4)
+* 24AA64 or larger EEPROM (up to 24AA512) - with an ATtiny85, no EERPOM is needed (V1.5).
 * 0,96" SDD1306 (V1.0) or 0,96"/1,3" SDD1306/SH1106 I2C display (V1.3)  
 * Button 6 x 6 mm, 9,5 mm height
 * 2 DIP-8 sockets
@@ -73,7 +73,7 @@ Root directory with some explanation files.
     |   ├── files/
     |   |   The EEPROM content word lists and the editor.
     |   └── files_new/
-    |       EEPROM content vor new version (>= 1.4)
+    |       EEPROM content vor new version (1.4)
     |
     ├── Schimpfolino/
     |   Standard sketch with libraries used in the Make article.
