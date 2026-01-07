@@ -2,7 +2,6 @@
 
 * More case design files
 * Other kind of suits
-* Better text file editor
 
 ## In progress
 
@@ -10,9 +9,10 @@
 
 ## Done
 
-* ATtiny25 support  
-* Any code optimization i can find  
-* Update to final V1.0
+* ATtiny25 support
+* The hole word list fits now into the no-eeprom version
+* Any code optimization i can find 
+* Update to final V1.0 
 * Rewriting Schimpfolino-eeprom
 * HTML-based EEPROM text file editor
 * First release

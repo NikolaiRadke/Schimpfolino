@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schimpfolinos Hirnprogrammierer V1.2</title>
+    <title>Schimpfolinos Hirnprogrammierer V1.1</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -80,10 +80,6 @@
             max-width: 80px;
             font-size: 12px;
         }
-        .textfield.duplicate input {
-            background-color: #ffcccc;
-            border: 2px solid #ff0000;
-        }
         h2 {
             color: #000;
             margin: 5px 0;
@@ -119,25 +115,6 @@
         }
         input[type=file]::file-selector-button:hover {
             background-color: #d0d0d0;
-        }
-        #duplicateResults {
-            margin: 10px;
-            padding: 10px;
-            background-color: #fff3cd;
-            border: 2px solid #ffc107;
-            border-radius: 5px;
-            display: none;
-            text-align: left;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        #duplicateResults h4 {
-            margin-top: 0;
-            color: #856404;
-        }
-        #duplicateResults ul {
-            margin: 5px 0;
-            padding-left: 20px;
         }
         /* Für mobile Geräte */
         @media (max-width: 600px) {
@@ -309,81 +286,6 @@
             document.getElementById('words').innerHTML = total;
         }
         
-        function findDuplicates() {
-            // Sammle alle Wörter aus allen Containern
-            const wordMap = new Map(); // lowercase -> [{container, index, originalWord}]
-            const duplicates = [];
-            
-            for (let containerIndex = 0; containerIndex < 5; containerIndex++) {
-                const container = document.getElementById(`container${containerIndex + 1}`);
-                const inputs = container.getElementsByTagName('input');
-                
-                for (let i = 0; i < inputs.length; i++) {
-                    const word = inputs[i].value.trim();
-                    if (word === '') continue;
-                    
-                    const wordLower = word.toLowerCase();
-                    
-                    if (!wordMap.has(wordLower)) {
-                        wordMap.set(wordLower, []);
-                    }
-                    wordMap.set(wordLower, [...wordMap.get(wordLower), {
-                        container: containerIndex,
-                        index: i,
-                        originalWord: word,
-                        element: inputs[i].parentElement
-                    }]);
-                }
-            }
-            
-            // Finde Duplikate (Wörter die mehr als einmal vorkommen)
-            wordMap.forEach((occurrences, wordLower) => {
-                if (occurrences.length > 1) {
-                    duplicates.push({
-                        word: wordLower,
-                        occurrences: occurrences
-                    });
-                }
-            });
-            
-            // Entferne alte Markierungen
-            for (let containerIndex = 0; containerIndex < 5; containerIndex++) {
-                const container = document.getElementById(`container${containerIndex + 1}`);
-                const textfields = container.getElementsByClassName('textfield');
-                for (let tf of textfields) {
-                    tf.classList.remove('duplicate');
-                }
-            }
-            
-            // Zeige Ergebnisse
-            const resultsDiv = document.getElementById('duplicateResults');
-            
-            if (duplicates.length === 0) {
-                resultsDiv.innerHTML = '<h4>✓ Keine Duplikate gefunden!</h4><p>Alle Wörter sind einzigartig.</p>';
-                resultsDiv.style.display = 'block';
-                resultsDiv.style.backgroundColor = '#d4edda';
-                resultsDiv.style.borderColor = '#28a745';
-            } else {
-                let html = `<h4>⚠ ${duplicates.length} Duplikat(e) gefunden:</h4><ul>`;
-                
-                duplicates.forEach(dup => {
-                    html += `<li><b>${dup.word}</b> (${dup.occurrences.length}x): `;
-                    const locations = dup.occurrences.map(occ => {
-                        // Markiere als Duplikat
-                        occ.element.classList.add('duplicate');
-                        return `Datei ${occ.container + 1} Zeile ${occ.index + 1}`;
-                    });
-                    html += locations.join(', ') + '</li>';
-                });
-                
-                html += '</ul><p><i>Duplikate sind rot markiert.</i></p>';
-                resultsDiv.innerHTML = html;
-                resultsDiv.style.display = 'block';
-                resultsDiv.style.backgroundColor = '#fff3cd';
-                resultsDiv.style.borderColor = '#ffc107';
-            }
-        }
-        
         function saveTextFields() {
             const containerIndex = document.getElementById('filename').selectedIndex;
             const container = document.getElementById(`container${containerIndex + 1}`);
@@ -427,11 +329,10 @@
 </head>
 <body>
     <div class="top">    
-        <h2>Schimpfolinos Hirnprogrammierer V1.2</h2>
+        <h2>Schimpfolinos Hirnprogrammierer V1.1</h2>
     </div>
     <div class="mitte">
         <h1>Schimpfolinos Hirnprogrammierer</h1>
-        <div id="duplicateResults"></div>
         <div class="links">
             <h3>Anleitung</h3>
             <b>&quot;Mickriger Luscheniltis&quot;</b><br />
@@ -457,9 +358,6 @@
             Jede dieser Dateien kann hier erstellt oder bearbeitet werden. <b>Leerzeichen</b> innerhalb eines 
             Wortes sind nicht erlaubt. <b>Umlaute</b> werden konvertiert, Leerzeilen entfernt, weniger als 
             zehn Zeichen werden mit Leerzeichen aufgef&uuml;llt.<br />
-            <br />
-            <b>NEU:</b> Der <b>Duplikatfinder</b> findet Wörter, die mehrfach vorkommen (ignoriert Groß-/Kleinschreibung)
-            und markiert sie rot.<br />
             <br />
             <i>Danke an Marcus Foelling</i><br />
             <br />
@@ -507,7 +405,6 @@
             <option value="eeprom5.txt">eeprom5.txt</option>
         </select>
         <button class="button" onclick="saveTextFields()">Speichern</button>
-        <button class="button" onclick="findDuplicates()">Duplikate finden</button>
         Gesamt: <b id="words">0</b>
     </div>
 </body>
