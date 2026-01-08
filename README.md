@@ -76,12 +76,12 @@ Root directory with some explanation files.
     |       EEPROM content vor new version (1.4)
     |
     ├── Schimpfolino/
-    |   Standard sketch with libraries used in the Make article.
-    ├── Schimpfolino_new/
+    |   Standard sketch with libraries used in the Make article. (1.0)
+    ├── Schimpfolino_new/ (1.5)
     |   Version for new improvments. Compatible to old version.
-    ├── Schimpfolino_nopeeprom/
+    ├── Schimpfolino_nopeeprom/ (1.0)
     |   Sketch for Schimpfolino without EEPROM.
-    └── Schimpfolino_nopeeprom_new/
+    └── Schimpfolino_nopeeprom_new/ (1.5)
         New version. Compatible to old version.
 ```
 
