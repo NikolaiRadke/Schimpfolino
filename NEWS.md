@@ -2,6 +2,7 @@
 
 ## 2026
 
+* **12.04.2026** Updaed ATTinyCore URL.  
 * **07.01.2026** Release v1.5 with better text editor and much improved noeeprom version.  
 
 ## 2025
