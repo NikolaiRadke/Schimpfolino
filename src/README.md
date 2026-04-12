@@ -14,7 +14,7 @@ In order to flash your ATtiny with the Schimpfolino sketch, you need the **Ardui
  
 1. Open ``` File > Preferences ```.  
 2. Find the field ``` Additional Boards Manager URLs ```.  
-3. Enter ``` http://drazzy.com/package_drazzy.com_index.json ```.  
+3. Enter ``` https://drazzy.com/package_drazzy.com_index.json ```.  
 4. Press ``` OK ```.  
 5. Open ``` Tools > Board > Boards Manager ```.  
 6. Select ``` ATTinyCore by Spence Konde ```.  
