@@ -22,7 +22,7 @@ In order to flash your ATtiny with the Schimpfolino sketch, you need the **Ardui
 
 > [!NOTE]
 > The installation of ATTinyCore often results in an error.  
-> The [This Page](https://github.com/SpenceKonde/ATTinyCore/blob/v2.0.0-devThis-is-the-head-submit-PRs-against-this/Installation.md) for manual installation Instructions.
+> See [ATTinyCore GitHub](https://github.com/SpenceKonde/ATTinyCore/blob/v2.0.0-devThis-is-the-head-submit-PRs-against-this/Installation.md) for manual installation Instructions.
 
 ### Peparing your Arduino  
 
