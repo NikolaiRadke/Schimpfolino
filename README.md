@@ -24,6 +24,7 @@ The building wiki and the curse words are in German. You need English words? **C
 
 Except for the tools and some time, you need:
 * Arduino IDE 1.6.6 or higher
+* ATTinyCore from Spence Konde  
 * Serial terminal software like *CuteCom* (Linux) or *CoolTerm* (Linux/Windows/Mac).  
 * Arduino UNO/Nano/Whatever with USB cable
 * A breadboard
