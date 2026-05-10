@@ -90,3 +90,12 @@ Root directory with some explanation files.
 
 Ready? Great! Let's start here: [German wiki](https://github.com/NikolaiRadke/Schimpfolino/wiki).  
 
+## 💙 Support Schimpfolino
+
+Schimpfolino is free and open source. If he saved your day, consider buying me a coffee! ☕
+
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/NikolaiRadke?style=for-the-badge&logo=github&color=ea4aaa)](https://github.com/sponsors/NikolaiRadke)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Buy%20me%20a%20coffee-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/nikolairadke)
+
+Every contribution helps keep this project alive! 🚀
+
