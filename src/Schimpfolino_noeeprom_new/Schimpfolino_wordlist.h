@@ -1,88 +1,102 @@
 /*
   Optimized Schimpfolino wordlist - point-terminated strings
 
-  Wordlist arrays - a single array can hold only 4000 bytes | Used if no EEPROM present | 5 x 160 words
+  Wordlist arrays - 5 lists with WORDS (185) words each | Every word ends with a point, also the last one!
   Umlaute have to be converted (UTF-8): 
   ä -> [ | ö -> ] | ü -> ^ | ß -> _ | Ä -> { | Ö -> | | Ü -> }*/
 
+// Number of words in each wordlist
+#define  WORDS                185 
+
 // First word - adjective 
-const char data1[] PROGMEM = {"Dumpfe.Staubige.Miefende.Stinkende.Gammlige.Hinkende.Winzige.Popelige.Nasse.Furzende."
+const char data1[] PROGMEM = {"Dumpfe.Staubige.Miefende.Stinkende.Dreckige.Hinkende.Winzige.Popelige.Nasse.Furzende."
                               "Rostige.Hohle.Siffige.Miese.Krumme.Klapprige.Trockene.Haarige.Uralte.Grunzende."
-                              "Schreiende.Meckernde.Nervende.Sabbernde.Triefende.Modrige.Lumpige.Lausige.Sinnlose.Olle."
-                              "Unn]tige.Dampfende.Ledrige.Einarmige.Leere.L[stige.Heulende.Pickelige.Faule.Ranzige."
+                              "Schreiende.Meckernde.Nervende.Sabbernde.Triefende.Modrige.Verfilzte.Lausige.Sinnlose.Olle."
+                              "Unn]tige.Dampfende.Ledrige.Einarmige.Leere.L[stige.Heulende.Hutzelige.Faule.Ranzige."
                               "Tr^be.Dralle.Blanke.Gierige.Tranige.Wackelnde.Torkelnde.W^ste.Fischige.Beknackte."
                               "Rasende.Verkorkste.Heimliche.L]chrige.Brockige.Plumpe.Tattrige.Ratternde.Schmutzige."
-                              "Liderliche.D]sige.Prollige.Fiese.Dr]ge.Muffige.M^ffelnde.Peinliche.N]rgelnde.Fettige."
-                              "Zahnlose.Freche.Sch[bige.Piefige.Gummige.Labbrige.Patzige.Pelzige.Reudige.Pekige.M^rbe."
+                              "Liederliche.D]sige.Prollige.Fiese.Dr]ge.Muffige.M^ffelnde.Peinliche.N]rgelnde.Fettige."
+                              "Zahnlose.Freche.Sch[bige.Piefige.Gummige.Tapsige.Patzige.Pelzige.R[udige.Pekige.M^rbe."
                               "Harzige.Lahme.Mickrige.Br[sige.Zottelige.Gelbliche.Knorrige.Salzige.Schrille.Dusselige."
                               "Windige.Grausige.Gr[ssliche.Grobe.Spackige.Kauzige.Flachsige.Fransige.Motzige.Kahle."
                               "Niedrige.Keifende.Nichtige.Graue.Fade.Weinende.Schrottige.Nagende.Hibbelige.Plockige."
                               "Brennende.D^rre.Kochende.Knarzende.Faltige.Schlammige.Br]ckelige.Rissige.Verkeimte."
-                              "Kantige.Geklaute.Quieckende.Faselnde.Bei_ende.Geh]rnte.Vergessene.Bleiche.Zweickende."
-                              "Frostige.Nackige.Gruselige.Mindere.Hagere.Magere.Schuppige.Belegte.St[nkernde.B]sartige."
+                              "Kantige.Geklaute.Quiekende.Faselnde.Bei_ende.Geh]rnte.Vergessene.Bleiche.Zwickende."
+                              "Frostige.Verpeilte.Gruselige.Mindere.Hagere.Magere.Schuppige.Belegte.St[nkernde.B]sartige."
                               "Rollende.Scheckige.Rubbelnde.Schielende.Tratschige.Morbide.Groteske.Absurde.Mehlige."
                               "Platte.M^de.Totale.Bekloppte.Schaurige.Taube.Bet[ubte.Beh[mmerte.Belanglose.Beleidigte."
-                              "Betrunkene.Bizarre.Diffuse"};
+                              "Betrunkene.Bizarre.Diffuse.Krasse.Schludrige.Klebrige.Schiefe.Schlaffe.|lige.Sperrige."
+                              "Ruppige.Knittrige.P]belnde.Kl[ffende.Garstige.Klamme.Kr[chzende.Quakende.Glitschige."
+                              "D[mliche.Lallende.Gr]lende.Keuchende.Wirre.Prustende.Spr]de.Kl[gliche.Krakelige."};
 
 // Second word part 1 - noun 
 const char data2[] PROGMEM = {"Stampf.Wabbel.Pups.Schmalz.Schmier.Hack.Zement.Spuck.Stachel.Keller.Laber.Stock.Runzel."
                               "Schrumpf.Ekel.Schnodder.Matsch.Wurm.Eiter.Speck.Mist.Klotz.W^rg.Lumpen.Schleim.Wurst."
-                              "Doof.Brat.Schwamm.Kratz.Grotten.Kriech.Pieks.Schlabber.Reier.G]bel.Knatter.Kleb."
+                              "Doof.Brat.Schwamm.Kratz.Grotten.Kriech.Pieks.Schlabber.Reier.G]bel.Knatter.Gacker."
                               "Schmadder.Grind.Labber.Luft.Massen.Schimmel.Mini.Ochsen.Problem.Quassel.Schnaps.Saft."
                               "Fummel.Friemel.Zappel.Tropf.Pluntsch.Sumpf.Hecken.Grab.Schwitz.Schnarch.Schleich."
                               "Schluff.Fl]ten.Holz.Kreisch.Dulli.Luschen.Gammel.Alt]l.R]chel.Glibber.Lach.Krach.Knick."
-                              "Quetsch.Quatsch.Quietsch.Knautsch.T^mpel.Teich.Ratz.Sauf.Pipi.Struller.Gr[ten.Nasen."
-                              "Pech.Leier.Welt.Bl]d.Schorf.Sabbel.Quengel.Bananen.Unsinns.Plunsch.Frust.Lotter.Bimmel."
-                              "Blubber.Wobbel.Vollbart.Lack.Klo.Moder.Knirsch.Zitter.Kalt.Schl^rf.Schnief.Klecker."
+                              "Quetsch.Quatsch.Quietsch.Knautsch.T^mpel.Teich.Ratz.Sauf.Pipi.Struller.Gr[ten.R^lps."
+                              "Pech.Leier.Welt.Bl]d.Schorf.Kicher.Quengel.Bananen.Unsinns.Punsch.Frust.Lotter.Bimmel."
+                              "Blubber.Wobbel.Vollbart.Lack.Klo.W^hl.Knirsch.Zitter.Kalt.Schl^rf.Schnief.Klecker."
                               "Rumba.Schwurbel.Schrabbel.Schlauch.Schrumpel.H^hner.Schlacker.Brabbel.Krampf.Schmal."
                               "Rappel.Zuppel.Plunder.Donner.Riesen.Butter.Wischwasch.Polter.Trampel.Sauer.Hampel."
                               "Bitter.Massel.Flitz.Warm.Schling.Plumps.Qu[l.Strampel.Schleck.Recycling.Egal.Blech."
                               "Horror.Rumpel.Schnuller.Scherz.Nackt.Pampel.Morast.Flach.Angst.Spei.Pumpel.Ausschlag."
-                              "Qualm.Rambazamba.Klein.Sprudel"};
+                              "Qualm.Rambazamba.Klein.Sprudel.Po.Moor.Pfusch.Gurgel.Kleister.Br]sel.Murks."
+                              "T^ddel.R^pel.Mumpitz.Knutsch.Zank.Mampf.Schmatz.Klimper.Schepper.Plapper.Stolper."
+                              "Nuschel.Wusel.Knatsch.G[hn.Gnatz.Schnauf.Hick."};
 
 // Second word part 2 - female noun 
 const char data3[] PROGMEM = {"suppe.socke.bombe.boulette.schwarte.warze.beule.pest.pflaume.r^be.geige.ratte.krankheit."
                               "wunde.oma.knolle.stulle.liese.brut.henne.zwiebel.bude.kiste.braut.leuchte.kr]te.nuss."
-                              "spinne.grube.toilette.krake.pf^tze.backe.bratsche.klatsche.nudel.verlust.t^te.nase.made."
+                              "spinne.grube.toilette.krake.pf^tze.backe.bratsche.klatsche.nudel.t^te.nase.made."
                               "tonne.krampe.b^rste.windel.semmel.haxe.gr[fin.schleuder.zierde.kr[he.latte.niete.rassel."
-                              "assel.torte.galle.latsche.schrulle.kanone.blase.pelle.trine.queen.zecke.praline.magt."
+                              "assel.torte.galle.latsche.schrulle.kanone.blase.pelle.trine.queen.zecke.praline.magd."
                               "pracht.fritte.so_e.larve.murmel.hexe.pampe.sirene.dr^se.klette.petze.brumme.glatze."
                               "qualle.natter.kralle.ziege.gr^tze.s^lze.nulpe.wampe.frikadelle.flunder.trulla.zichte."
-                              "uschi.kuh.pappe.hupe.tr]te.schabe.kanallie.scharte.rille.amsel.alge.l^cke.bremse.m^cke."
+                              "uschi.kuh.pappe.hupe.tr]te.schabe.kanaille.scharte.rille.amsel.alge.l^cke.bremse.m^cke."
                               "schande.wanne.pocke.pl]rre.schabracke.wuppe.sichel.tante.reuse.ratsche.pauke.fluppe."
-                              "matrone.hummel.parade.attrappe.l^ge.flosse.funzel.gurke.piepe.g]re.kolben.sammlung."
+                              "matrone.hummel.parade.attrappe.l^ge.flosse.funzel.gurke.piepe.g]re.sammlung."
                               "primel.omme.lotte.unke.strippe.seife.pl]tze.wespe.lawine.tablette.kr^cke.grazie.diva."
                               "pulle.nessel.kakerlake.distel.am]be.fackel.h^fte.ruine.wachtel.seuche.kippe.schippe."
-                              "gestalt.wolke.mumie.spur.creme.motte"};
+                              "gestalt.wolke.mumie.spur.creme.motte.verpackung.leiche.graupe.schnecke.pfeife.flasche."
+                              "schnepfe.mimose.pute.gans.memme.wanze.m]hre.birne.schraube.posaune.zicke.waffel.ente."
+                              "kartoffel.tuba.eule.m]we.melone.dattel.zwetschge.kiwi."};
 
 // Second word part 2 - male noun 
 const char data4[] PROGMEM = {"busch.fink.nagel.bammel.klopper.tentakel.br[gen.schlumpf.husten.ersatz.haufen.beutel."
                               "kn]del.r^ssel.hintern.eimer.pickel.stumpf.k[se.molch.kohl.gnubbel.sack.hansel.puller."
                               "alptraum.kasten.kopf.darm.bewohner.kuchen.freund.nascher.opa.rotz.klumpen.peter."
                               "hupsi.bengel.kollege.fleck.l]ffel.lurch.hobel.spaten.pudel.rettich.rinnstein.unfall."
-                              "lappen.k^bel.mops.pfosten.zwerg.pudding.nuckel.putzer.l^mmel.baron.mop.besen.feudel."
+                              "lappen.k^bel.mops.pfosten.zwerg.pudding.nuckel.putzer.l^mmel.baron.mopp.besen.feudel."
                               "fratz.bolzen.pilz.stiefel.k]ter.gulli.pfropf.schrank.k]nig.pott.hubbel.bauch."
-                              "zinken.haken.witz.buckel.knecht.fan.schmand.klops.gauner.lulli.graupe.pimpf.kasper."
+                              "zinken.haken.witz.buckel.knecht.fan.schmand.klops.gauner.lulli.pimpf.kasper."
                               "spross.teufel.hammel.bock.schmodder.pr^gel.spie_er.aal.groschen.geist.rochen.knochen."
-                              "horst.quark.keks.zausel.iltis.jeck.honk.spargel.nippel.atze.muffel.greis.pin]kel."
+                              "horst.quark.keks.zausel.iltis.jeck.honk.spargel.nippel.atze.simpel.greis.pin]kel."
                               "gehilfe.halunke.lauch.bazillus.onkel.klecks.schaden.auswurf.herpes.unrat.abklatsch."
                               "flegel.glotzer.st]psel.rest.versuch.kompost.fluch.jogurt.p]mpel.stiel.fetzen.duscher."
                               "gnom.schluck.schnupfen.infekt.infarkt.geruch.rambo.dackel.schwingel.dieb.fladen."
                               "flatschen.fussel.knilch.frosch.wombat.anfall.hohlsaum.bimbam.wodka.duft.kadaver.befall."
-                              "egel.f[nger"};
+                              "egel.f[nger.schlonz.untergang.verlust.kolben.moloch.follikel.trottel.depp.t]lpel."
+                              "schn]sel.fatzke.esel.pavian.maulwurf.stoffel.k^rbis.igel.uhu.krapfen.b^ffel.gimpel."
+                              "dachs.pinsel.pinguin.papagei.kater."};
 
 // Second word part 2 - neutrum noun 
 const char data5[] PROGMEM = {"sekret.balg.blag.monster.gel]t.imitat.skelett.ding.unding.auge.brot.deo.insekt.bier.mus."
                               "ende.futter.gew[chs.produkt.ger]ll.bonbon.furunkel.paket.virus.desaster.st^ck.fass.zeug."
                               "ferkel.ei.gewitter.hormon.experiment.gulasch.schnitzel.fell.theater.schauspiel.baby."
-                              "spielzeug.gel.donutloch.gelee.gelumpe.geschimpfe.schaf.molek^l.gew^rz.gespenst.gespinnst."
+                              "spielzeug.gel.gekr]se.gelee.gelumpe.geschimpfe.schaf.molek^l.gew^rz.gespenst.gespinst."
                               "mittel.geschnetz.organ.risotto.vieh.ges[_.gez^cht.ekzem.moped.ger^mpel.hirn.gef[_."
-                              "wachstum.moloch.rinnsaal.gemenge.opossum.frettchen.h[hnchen.plankton.untier.unget^m."
+                              "wachstum.rinnsal.gemenge.opossum.frettchen.h[hnchen.plankton.untier.unget^m."
                               "gebr[u.fondue.beispiel.elend.leid.gift.verderben.ungl^ck.drama.trauma.versagen.fiasko."
                               "dilemma.debakel.tabu.ger^cht.hindernis.dingdong.dingsbums.gewicht.abwasser.abbild."
                               "modell.gem[lde.brett.geballer.gem[cht.toupet.geschw[tz.gerippe.gepansche.leiden.verbrechen."
                               "fossil.symptom.biest.wrack.geb[ck.unheil.ungemach.objekt.gesicht.konfekt.gebrechen."
-                              "m[rchen.ger[t.leben.syndrom.synonym.wasser.tier.follikel.unkraut.ungeziefer.get]se."
-                              "geschmei_.gebrodel.gejodel.inferno.gericht.mahl.kamel.gebiss.reptil.verlie_.paddel."
+                              "m[rchen.ger[t.leben.syndrom.synonym.wasser.tier.unkraut.ungeziefer.get]se."
+                              "geschmei_.gebrodel.gejodel.inferno.gericht.mahl.kamel.gebiss.reptil.verlies.paddel."
                               "gebot.lager.gemisch.sausen.angebot.zimmer.m]bel.parf^m.podest.ungeheuer.zeichen."
-                              "versteck.^bel.scrotum.eisen.ballett.lego.gesetz.format.buffet.granulat.derivat"};
+                              "versteck.^bel.scrotum.eisen.ballett.lego.gesetz.format.buffet.granulat.derivat.gebrabbel."
+                              "unwissen.geschw^r.gem^se.pflaster.w^rstchen.kissen.schwein.nilpferd.gezeter.walross."
+                              "gejammer.lama.gnu.wiesel.krokodil.nashorn.kompott.zebra.k[nguru.kaninchen.sofa.getue.pony."
+                              "rentier.okapi.mammut."};

@@ -43,7 +43,7 @@
 const uint8_t InitSequence[] PROGMEM = {
   0x20, 0x00,            	                       // Set horizontal addressing mode
   0xA8, 0x3F,                                    // Set multiplex. Height: 64 - 1
-  0x81, 0xFF,                                    // Set contrast to maximum
+  0x81, CONTRAST,                                // Set contrast (brightness) | Value is set in oled.h
   0x8D, 0x14,                                    // Set charge pump
   0xAF,                                          // Display ON
   0xA1, 0xC8                                     // Flip the screen
@@ -189,13 +189,13 @@ void Oled_dataMode() {
   TinyI2C.write(0x40);                           // Data mode
 }
 
-void Oled_sendCommand(uint8_t command) { 
+void Oled_sendCommand(const uint8_t command) { 
   Oled_commandMode();                            // Set command mode
   TinyI2C.write(command);                        // Send command
   TinyI2C.stop();    		                         // End I2C transmission
 }
 
-void Oled_sendData(uint8_t data) {
+void Oled_sendData(const uint8_t data) {
   Oled_dataMode();                               // Set data mode
   TinyI2C.write(data);                           // Send data
   TinyI2C.stop();                                // Stop I2C transmission
@@ -209,7 +209,7 @@ void Oled_init() {
   TinyI2C.stop();
 }
 
-void Oled_cursorTo(uint8_t col, uint8_t row) {
+void Oled_cursorTo(const uint8_t col, const uint8_t row) {
   Oled_sendCommand(0xB0 | row);
   Oled_sendCommand(col & 0x0F);
   Oled_sendCommand(0x10 | ((col >> 4 ) & 0x0F));
@@ -227,11 +227,13 @@ void Oled_clear() {
   }
 }
 
-void Oled_printChar(char c) {                    // Reworked for Schimpfolino
+void Oled_printChar(const char c) {                    // Reworked for Schimpfolino
   Oled_dataMode();                               // Set data mode
+  // Start of the character in the font: c * 5, written as (c << 2) + c (no slow multiplication)
+  const uint8_t *glyph = &BasicFont[((uint16_t)(uint8_t)c << 2) + (uint8_t)c];
   for (uint8_t i = 0; i < 5; ++ i)               // Write 5 columns for each character
-    TinyI2C.write(pgm_read_byte(&BasicFont[c * 5 + i])); // Write column from PROGMEM
+    TinyI2C.write(pgm_read_byte(glyph + i));     // Write column from PROGMEM
   TinyI2C.write(0x00);                           // One column space for better readabiltiy
-  if (chars < 19) TinyI2C.write(0x00);           // One more column space when the line has enough room
+  if (chars < 18) TinyI2C.write(0x00);           // One more column space up to 17 characters | Must match LONG_WORD in the sketch!
   TinyI2C.stop();
 }

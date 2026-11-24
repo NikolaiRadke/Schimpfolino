@@ -14,7 +14,6 @@
 
 #define DELAY_T2TWI _delay_us(2)                 // > 1.3 us
 #define DELAY_T4TWI _delay_us(1)                 // > 0.6 us
-#define TWI_NACK_BIT 0                           // Bit position for (N)ACK bit
 
 // Constants
 // Prepare register value to: Clear flags, and set USI to shift 8 bits i.e. count 16 clock edges
@@ -53,15 +52,6 @@ void TinyI2CMaster::init() { // Ports were already defined in main sketch
           0 << USICNT0;                          // ...and reset counter
 }
 
-uint8_t TinyI2CMaster::read(void) {  
-  DDR_USI &= ~(1 << PIN_USI_SDA);                // Enable SDA as input
-  uint8_t data = TinyI2CMaster::transfer(USISR_8bit);
-  
-  /* Prepare to generate ACK (or NACK in case of End Of Transmission) */
-  TinyI2CMaster::transfer(0xFF);                 // Generate ACK
-  return data;                                   // Read successfully completed
-}
-
 void TinyI2CMaster::write(uint8_t data) {
   /* Write a byte */
   PORT_USI_CL &= ~(1 << PIN_USI_SCL);            // Pull SCL LOW
@@ -74,7 +64,7 @@ void TinyI2CMaster::write(uint8_t data) {
 }
 
 // Start transmission by sending address
-bool TinyI2CMaster::start(uint8_t address, uint8_t read) {
+void TinyI2CMaster::start(uint8_t address, uint8_t read) {
   /* Release SCL to ensure that (repeated) Start can be performed */
   PORT_USI_CL |= 1 << PIN_USI_SCL;               // Release SCL
   while (!(PIN_USI_CL & 1 << PIN_USI_SCL));      // Verify that SCL becomes high
@@ -86,17 +76,8 @@ bool TinyI2CMaster::start(uint8_t address, uint8_t read) {
   PORT_USI_CL &= ~(1 << PIN_USI_SCL);            // Pull SCL LOW.
   PORT_USI |= 1 << PIN_USI_SDA;                  // Release SDA
   
-  /*Write address */
-  PORT_USI_CL &= ~(1 << PIN_USI_SCL);            // Pull SCL LOW
-  USIDR = address << 1 | read;                   // Setup data
-  TinyI2CMaster::transfer(USISR_8bit);           // Send 8 bits on bus
-  
-  /* Clock and verify (N)ACK from slave */
-  DDR_USI &= ~(1 << PIN_USI_SDA);                // Enable SDA as input
-  
-  /* Return true if EEPROM present */
-  if (TinyI2CMaster::transfer(USISR_1bit) & 1 << TWI_NACK_BIT) return false; // No ACK
-  return true;                                   // Start successfully completed
+  /* Write address | Same as writing a data byte */
+  write(address << 1 | read);                    // Send address with read/write bit
 }
 
 void TinyI2CMaster::stop(void) {

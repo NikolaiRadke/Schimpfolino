@@ -1,14 +1,14 @@
-/*  
-    Schimpfolino V1.5 07.01.2026 - Nikolai Radke
+/*
+    Schimpfolino V1.6 24.11.2026 - Nikolai Radke
     https://www.monstermaker.de
     Optimized version with point-terminated strings and complete word list
 
-    Sketch for the insulting gadget | With or without additional 24AAXXX EEPROM
+    Sketch for the insulting gadget | Wordlist in flash only (no EEPROM support)
     For ATtiny85 only - set to 8 MHz | B.O.D disabled | No bootloader | No millis()
     Remember to burn the "bootloader" (IDE is setting fuses) first!
 
-    Flash usage: 8.040 bytes (IDE 2.3.7 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
-    Power:       1.6 mA (display on, no EEPROM) | ~ 200 nA (sleep)
+    Flash usage: 8.072 bytes (IDE 2.3.11 | ATTinyCore 1.5.2 | Linux X86_64 | ATtiny85)
+    Power:       1.2 mA (display on, 50% contrast) | ~ 200 nA (sleep)
 
     Umlaute have to be converted (UTF-8):
     ä -> [ | ö -> ] | ü -> ^ | ß -> _ | Ä -> { | Ö -> | | Ü -> }
@@ -17,43 +17,52 @@
                          +-\/-+
     RST          - PB5  1|    |8  VCC - Battery
     Free         - PB3  2|    |7  PB2 - SCL
-    Devices VCC  - PB4  3|    |6  PB1 - Button -> GND
+    Display VCC  - PB4  3|    |6  PB1 - Button -> GND
     GND          - GND  4|    |5  PB0 - SDA
                          +----+
 */
 
 #include <util/delay.h>                          // Needs less flash memory than delay()
-#include "TinyI2CMaster.h"                       // I2C communication with display and EEPROM. Very tight library!
+#include "TinyI2CMaster.h"                       // I2C communication with the display. Very tight library!
 #include "oled.h"                                // OLED display library for SSD1306 and SH1106
-#include "Schimpfolino_wordlist.h"               // Optimized wordlist with backslash-terminated strings
+#include "Schimpfolino_wordlist.h"               // Wordlist with point-terminated strings
 
 // Hardware
-#define  BUTTON   PB1                            // Button pin
-#define  DEVICES  PB4                            // External devices power pin
+#define  BUTTON         PB1                      // Button pin
+#define  DEVICES        PB4                      // Display power pin
+
+// Wordlist and display
+#define  GENUS          3                        // Number of genera: female, male, neutrum
+#define  TERMINATOR     '.'                      // Character marking the end of a word
+#define  CHAR_OFFSET    'A'                      // Wordlist character minus offset = font index
+#define  DIGIT_ZERO     '0'                      // '0' + 1 = font index of "r", '0' + 2 = "s"
+#define  DISPLAY_WIDTH  128                      // Display width in pixels
+#define  LONG_WORD      17                       // Longer words are drawn narrower | Must match "chars < 18" in oled.cpp!
+
+// Timing
+#define  DEBOUNCE_MS    500                      // Wait time against button bouncing
+#define  AWAKE_BIT      0                        // Bit 0 in GPIOR0: stay awake when button is pressed
 
 // Variables
 const char *field;                               // Pointer to one of the character arrays
-uint8_t  chars = 0;                              // Number of characters in the word | Global
-uint16_t addresses[5] = {160, 160, 160, 160, 160}; // Each list has 160 words - overwritten if EEPROM present
+uint8_t  chars = 0;                              // Number of characters in the word | Global, used by oled.cpp
 char     wordbuffer[20];                         // Buffer for read words
-bool     eeprom = false;                         // No EEPROM used -> auto detect
+uint16_t rng_state;                              // State of the random number generator | Seeded from timer, no start value needed
 
-volatile bool awake = false;                     // Stay awake when button is pressed
-
-int main(void) {                                 
+int main(void) {
   // Power saving
   ADCSRA &= ~(1 << ADEN);                        // Switch ADC off | Saves 270 uA
   MCUCR = (1 << SM1) | (0 << SM0);               // Always deepest sleep mode (Power-down)
 
   // Port setup
-  DDRB = (1 << DEVICES) | (1 << SDA) | (1 << SCL); // Set PB4 to OUTPUT to power up display and EEPROM | SDA and SCL for I2C
+  DDRB = (1 << DEVICES) | (1 << SDA) | (1 << SCL); // Set PB4 to OUTPUT to power up the display | SDA and SCL for I2C
   PORTB = 0x3F;                                  // Set output ports to HIGH and input ports to INPUT_PULLUP to prevent floating
 
   // Hardware pin and watchdog interrupt
   cli();                                         // Stop all interrupts. An interrupt can ruin the timed sequence
   GIMSK |= (1 << PCIE);                          // Turn on pin change interrupt
   PCMSK |= (1 << PCINT1);                        // Turn on interrupt on PB1 button
-  MCUSR &= ~(1 << WDRF);                         // No watchdog reset 
+  MCUSR &= ~(1 << WDRF);                         // No watchdog reset
   WDTCR |= (1 << WDCE) | (1 << WDE);             // Watchdog change enable
   WDTCR = (1 << WDP0) | (1 << WDP3);             // Set prescaler to 8 s
   sei();                                         // Start interrupts
@@ -61,105 +70,87 @@ int main(void) {
   // Init I2C
   TinyI2C.init();                                // Start I2C
 
-  // Look for EEPROM and read wordlist addresses if available
-  if (TinyI2C.start(0x50, 0)) {                  // Look for 24LCXX EEPROM at 0x50
-    eeprom = true;                               // if available, set EEPROM flag
-    for (uint8_t wlist = 0; wlist < 5; ++ wlist) // Read numbers of 5 wordlists
-      addresses[wlist] = (read_eeprom(wlist << 1) << 8) | read_eeprom((wlist << 1) + 1); // Write word numbers to array
-  }
-
   // Randomize number generator
-  PORTB &= ~(1 << DEVICES);                      // Devices off
+  PORTB &= ~(1 << DEVICES);                      // Display off
   sleep();                                       // Sleep until button is pressed to "turn on"
   TCCR0A = 0x00;                                 // Set timer 0 to normal mode
   TCCR0B = (1 << CS00);                          // Set prescaler to 1 to start the timer
   while (!(PINB & (1 << BUTTON)));               // Wait until button is released
-  randomSeed(TCNT0);                             // Get a time count as seed
+  rng_state = TCNT0 + 1;                         // Get a time count as seed (+1: must never be 0)
 
   // Main routine | Runs after waking up
   for(;;) {
     // Init Display
-    PORTB |= (1 << DEVICES);                     // Devices on
+    PORTB |= (1 << DEVICES);                     // Display on
     PRR |= (1 << PRTIM0) | (1 << PRTIM1);        // Both timers are not needed anymore | Saves 100 uA when active
     Oled_init();                                 // Connect and start OLED via I2C
 
     // Display swearwords until timeout
-    while(awake) {                               // Wait 8.5 seconds timeout
-      Oled_clear();                              // Clear display buffer
+    while (GPIOR0 & (1 << AWAKE_BIT)) {          // Stay awake as long as the button was pressed
+      Oled_clear();                              // Clear display
 
       // First word
       field = data1;                             // Pointer to first array
-      get_swearword(random(0, addresses[0]));    // Read first word from EEPROM or wordlist
-      uint8_t genus = random(0, 3);              // Set word genus
+      get_swearword(random16(WORDS));            // Read first word from wordlist
+      uint8_t genus = random16(GENUS);           // Set word genus
       if (genus) {                               // Check if not female
-        wordbuffer[chars] = 48 + genus;          // If male, add "r", if neutrum, add "s" to buffer
+        wordbuffer[chars] = DIGIT_ZERO + genus;  // If male, add "r", if neutrum, add "s" to buffer
         ++ chars;                                // Increase number of characters
-      } 
+      }
       write_swearword(2);                        // Write first word in the first line
 
       // Second word first part
-      uint16_t list = 0;                         // Set start address for array
-      if (eeprom) list = addresses[0];           // Set start address for EEPROM
       field = data2;                             // Pointer to second array
-      get_swearword(random(list, addresses[1])); // Read first part of second word 
-        
+      get_swearword(random16(WORDS));            // Read first part of second word
+
       // Second word second part
-      if (eeprom) list = addresses[genus + 1];   // Set start address for EEPROM
       field = data3;                             // Pointer to female array
       if (genus == 1) field = data4;             // Pointer to male array
       if (genus == 2) field = data5;             // Pointer to neutrum array
-      get_swearword(random(list, addresses[genus + 2])); // Read second part of second word
+      get_swearword(random16(WORDS));            // Read second part of second word
       write_swearword(4);                        // Write second word in second line
-        
+
       // Wait for button and sleep 8s
-      _delay_ms(500);                            // Debounce button
-      awake = false;                             // Set to sleep
+      _delay_ms(DEBOUNCE_MS);                    // Debounce button
+      GPIOR0 = 0;                                // Clear awake flag -> go to sleep
       WDTCR |= (1 << WDIE);                      // Set watchdog interrupt
       sleep();                                   // Sleep 8 s or wake when button is pressed
       WDTCR &= ~(1 << WDIE);                     // Stop watchdog interrupt
-    } 
+    }
 
-    // Go to sleep after 8s seconds if button is not pressed before                           
+    // Go to sleep after 8s seconds if button is not pressed before
     Oled_sendCommand(0xAE);                      // Display off and sleep (old boards)
-    PORTB &= ~(1 << DEVICES);                    // Devices off
+    PORTB &= ~(1 << DEVICES);                    // Display power off
     sleep();                                     // Sleep until button is pressed
   }
 }
 
 // Functions
-void get_swearword(uint16_t address) {           // Fetch characters from Flash or EEPROM
-  if (eeprom) {                                  // EEPROM mode: 10-byte fixed-length words
-    address *= 10;                               // Adjust address
-    for (uint8_t i = 0; i < 10; ++ i) {          // Read 10 characters
-      char c = read_eeprom(address + i + 10);    // Mit Offset 10
-      if (c != 32) wordbuffer[chars ++] = c - 65; // 32=Space, 65=A 
-    }
-  } else {                                       // Flash mode: point-terminated strings 
-    uint16_t pos = 0;                            // Start beginning
-    while (address) {                            // Find word position in array
-      if (pgm_read_byte(&field[pos++]) == 46) address--; // Look for point
-    }
-    char c;
-    while ((c = pgm_read_byte(&field[pos++])) != 46) // Look for next point
-      wordbuffer[chars ++] = c - 65;             // Store character
+void get_swearword(uint16_t address) {           // Fetch characters from the wordlist in flash
+  uint16_t pos = 0;                              // Start at the beginning of the array
+  while (address) {                              // Skip words until the wanted one is reached
+    if (pgm_read_byte(&field[pos++]) == TERMINATOR) address--; // Every point ends one word
   }
+  char c;
+  while ((c = pgm_read_byte(&field[pos++])) != TERMINATOR) // Copy characters until the next point
+    wordbuffer[chars ++] = c - CHAR_OFFSET;      // Store font index of the character
 }
 
-void write_swearword(uint8_t line) {             // Write centered word
-  uint8_t x = (128 - (chars * 7)) >> 1;          // Calculate centering
-  if (chars > 17) x = (128 - (chars * 6)) >> 1;  // Modify for very long words
+void write_swearword(const uint8_t line) {       // Write centered word
+  uint8_t x = (uint8_t)(DISPLAY_WIDTH - (uint8_t)((chars << 3) - chars)) >> 1; // Centering with 7 pixels per character
+  if (chars > LONG_WORD)                         // Very long word: only 6 pixels per character
+    x = (uint8_t)(DISPLAY_WIDTH - (uint8_t)((chars << 2) + (chars << 1))) >> 1;
   Oled_cursorTo(x, line);                        // Set cursor to selected line
   for (x = 0; x < chars; ++ x)                   // Print the characters...
     Oled_printChar(wordbuffer[x]);               // ...from buffer
-  chars = 0;                                     // Set number of characters back to 0 
+  chars = 0;                                     // Set number of characters back to 0
 }
 
-uint8_t read_eeprom(uint16_t e_address) {        // Read from EEPROM
-  TinyI2C.start(0x50, 0);                        // Open connection to I2C-address 0x50 in write mode
-  TinyI2C.write(e_address >> 8);                 // Send the MSB (Most Significant Byte) of the memory address
-  TinyI2C.write(e_address & 0xFF);               // Send the LSB (Least Significant Byte) of the memory address
-  TinyI2C.start(0x50, 1);                        // Restart connection for reading one byte
-  return TinyI2C.read();                         // Read and return byte
+uint8_t random16(const uint8_t high) {           // Small replacement for random() | Returns 0 to high - 1
+  rng_state ^= rng_state << 7;                   // 16 bit xorshift: mix the bits...
+  rng_state ^= rng_state >> 9;
+  rng_state ^= rng_state << 8;
+  return rng_state % high;                       // ...and limit the result to the wanted range
 }
 
 void sleep() {
@@ -168,8 +159,9 @@ void sleep() {
   MCUCR &= ~(1 << SE);                           // Clear SE bit
 }
 
-ISR(PCINT0_vect) {                               // Interrupt routine for pin change 
-  awake = true;                                  // Set awake flag when button is pressed
+ISR(PCINT0_vect, ISR_NAKED) {
+  GPIOR0 |= (1 << AWAKE_BIT);                    // Set awake flag when button is pressed
+  reti();                                        // Return from interrupt (must be written by hand in naked ISRs)
 }
 
-ISR(WDT_vect) {}                                 // Interrupt routine for watchdog. Unused but mandatory
+EMPTY_INTERRUPT(WDT_vect);                       // Watchdog interrupt only wakes the ATtiny up. Just a "reti" instruction

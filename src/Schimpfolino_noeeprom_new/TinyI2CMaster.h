@@ -21,9 +21,8 @@ class TinyI2CMaster {
 
 public:
   void init(void);
-  uint8_t read(void);
   void write(uint8_t data);
-  bool start(uint8_t address, uint8_t readcount);
+  void start(uint8_t address, uint8_t readcount);
   void stop(void);
 
 private:

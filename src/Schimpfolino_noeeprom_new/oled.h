@@ -40,6 +40,7 @@
 
 // Config display
 #define SlaveAddress 0x3C                        // Display I2C address
+#define CONTRAST     0x7F                        // Display brightness 0x00 - 0xFF | Lower = less current. 0x7F (half), 0x3F (quarter)
 //#define bold                                   // Uncomment to use bold font
 
 // Schimpfolino: count characters in main sketch, used to shrink font witdh if too long
@@ -62,7 +63,4 @@ extern uint8_t chars;
 
     // Set data mode
     void Oled_dataMode(void);
-
-    // Send data
-    void Oled_sendData(uint8_t data);
 #endif
