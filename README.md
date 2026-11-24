@@ -3,13 +3,13 @@
   
 ### "Klappriger Blubberfetzen" "Nervendes Riesenungemach" "Windige Pupswindel"  
     
-Who doesn't like to be insulted? Schimpfolino is an evil gadget that always has a saying ready. Small, handy, power saving. And completely useless. You need a PCB and some parts listed below. It's easy to build and long lasting for everyday use. Insert battery, press the button and recieve your daily insult!        
+Who doesn't like to be insulted? Schimpfolino is an evil gadget that always has a saying ready. Small, handy, power saving. And completely useless. You need a PCB and some parts listed below. It's easy to build and long lasting for everyday use. Insert battery, press the button and receive your daily insult!        
 
 *Huch, Englisch? Kann ich nicht. Schnell [hier hin](https://github.com/NikolaiRadke/Schimpfolino/wiki)*.  
 
 ![Schimpfolino](https://www.nikolairadke.de/schimpfolino/schimpfolino_case.png)
   
-Schimpfolino is a random curse word generator with **12.288.000** possible combinations right now. That should be enough for a while. It's suitable for children (but still evil), maintenance-free and the battery lasts for years. And with the right case, it's an evil monster, like the **Nokolino shaped** case below! Just press the button, receive an insult, after eight seconds it turns off again. That's it. Evil. You can print the case in black! Black is an evil color. It is so evil. It is so evil that it hurts many people that are good!
+Schimpfolino is a random curse word generator with **12.288.000** possible combinations right now. (**18.994.875** in nooeprom-version for ATtiny85) That should be enough for a while. It's suitable for children (but still evil), maintenance-free and the battery lasts for years. And with the right case, it's an evil monster, like the **Nokolino shaped** case below! Just press the button, receive an insult, after eight seconds it turns off again. That's it. Evil. You can print the case in black! Black is an evil color. It is so evil. It is so evil that it hurts many people that are good!
 
 What's new?  
 * **24.11.2026** Release v1.6 with less >500 Bytes less flash and enhanced noeeprom-wordlist.  
@@ -24,7 +24,7 @@ The building wiki and the curse words are in German. You need English words? **C
 
 Except for the tools and some time, you need:
 * Arduino IDE 1.6.6 or higher
-* Serial terminal software like *CuteCom* (Linux) or *CoolTerm* (Linux/Windows/Mac).  
+* Serial terminal software like *CuteCom* (Linux) or *CoolTerm* (Linux/Windows/Mac) for the eeprom.  
 * Arduino UNO/Nano/Whatever with USB cable
 * A breadboard
 * Some Dupont wires
@@ -34,7 +34,7 @@ Except for the tools and some time, you need:
 And the following hardware:
 * Schimpfolino PCB 
 * ATtiny25/45/85 (ATtiny25 for V1.4)
-* 24AA64 or larger EEPROM (up to 24AA512) - with an ATtiny85, no EERPOM is needed (V1.5).
+* 24AA64 or larger EEPROM (up to 24AA512) - with an ATtiny85, no EERPOM is needed (>= V1.5).
 * 0,96" SDD1306 (V1.0) or 0,96"/1,3" SDD1306/SH1106 I2C display (V1.3)  
 * Button 6 x 6 mm, 9,5 mm height
 * 2 DIP-8 sockets
