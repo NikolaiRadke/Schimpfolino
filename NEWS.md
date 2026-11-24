@@ -2,6 +2,7 @@
 
 ## 2026
 
+* **24.11.2026** Release v1.6 with less >500 Bytes less flash and enhanced noeeprom-wordlist.  
 * **07.01.2026** Release v1.5 with better text editor and much improved noeeprom version.  
 
 ## 2025
